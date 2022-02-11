@@ -1,0 +1,61 @@
+@import "../../styles/variables";
+
+.BreadcrumbWrapper {
+  border-top: 2px solid $black;
+  border-bottom: 2px solid $black;
+  background-color: $background;
+  height: 40px;
+}
+
+.BreadcrumbInverseWrapper {
+  border-top: 2px solid $background;
+  border-bottom: 2px solid $background;
+  background-color: $black;
+  height: 40px;
+
+  .BreadcrumbContent {
+    color: $white;
+  }
+}
+
+.BreadcrumbContent {
+  font-family: 'Suisse Intl Condensed', serif;
+  font-weight: 500;
+  margin: 0 auto;
+  height: 100%;
+  max-width: $max-width;
+  display: flex;
+  align-items: center;
+}
+
+.Navigation {
+  display: inline-flex;
+  font-size: 12px;
+  width: $left-width + 2px;
+
+  span {
+    margin-right: 3px;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.SearchText {
+  display: inline-flex;
+  font-size: 12px;
+  flex: 1;
+
+  span {
+    margin-right: 2px;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+

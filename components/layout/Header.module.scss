@@ -1,0 +1,42 @@
+@import "../../styles/variables";
+
+.Header {
+  width: 100%;
+  height: 57px;
+  background-color: rgba(0, 0, 0, 1);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  /* -webkit-backdrop-filter: saturate(200%) blur(10px); */
+  /* backdrop-filter: saturate(200%) blur(10px); */
+}
+
+.HeaderContent {
+  font-family: 'Suisse Intl Condensed', serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 auto;
+  height: 100%;
+  max-width: $max-width;
+  display: flex;
+  align-items: center;
+}
+
+.Logo {
+  width: $left-width + 1px;
+
+  img {
+    margin-top: 5px;
+    max-width: 100%;
+    width: 104px;
+  }
+}
+
+.SearchBar {
+  flex: 1;
+}
+
+.Menu {
+  flex: 1;
+}

@@ -1,0 +1,8 @@
+@import "../../styles/variables";
+
+.Content {
+  margin: 0 auto;
+  max-width: $max-width;
+  min-height: 500px;
+  border-left: 2px solid $black;
+}

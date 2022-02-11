@@ -1,0 +1,81 @@
+@import "../../styles/variables";
+
+.FacetValues {
+  color: $white;
+  width: $left-width;
+  font-family: "Suisse Intl Condensed", serif;
+  font-weight: 400;
+  font-size: 18px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    color: $white;
+    height: 35px;
+    border-bottom: 2px solid $white;
+    font-size: 16px;
+    line-height: 35px;
+
+    span {
+      padding-left: 10px;
+    }
+
+    div {
+      float: right;
+    }
+
+    .Button {
+      position: relative;
+      top: 17px;
+      right: -10px;
+      width: 30px;
+      height: 30px;
+      transform: translate(-50%, -50%) rotate(0deg);
+      cursor: pointer;
+      z-index: 100;
+      transition: 0.8s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 1px;
+        width: 50%;
+        background: $white;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 50%;
+        width: 1px;
+        background: $white;
+      }
+    }
+  }
+
+  li:hover {
+    cursor: pointer;
+    color: $black;
+    background-color: $white;
+
+    .Button{
+      &:after {
+        background: $black;
+      }
+
+      &:before {
+        background: $black;
+      }
+    }
+  }
+}

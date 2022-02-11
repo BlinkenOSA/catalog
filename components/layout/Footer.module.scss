@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.Footer {
+  width: 100%;
+  height: 116px;
+  background-color: $black;
+}
+
+.FooterContent {
+  font-family: 'Suisse Intl Condensed', serif;
+  font-weight: 400;
+  font-size: 17px;
+  max-width: $max-width;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.FooterContent ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  align-items: center;
+  height: 100%;
+
+  li {
+    color: $white;
+  }
+}

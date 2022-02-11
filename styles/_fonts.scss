@@ -1,0 +1,62 @@
+$suisse-font-path: "/fonts";
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntl-Light-WebM.woff2") format("woff2");
+  font-family: "Suisse Intl";
+  font-weight: 300;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntl-Regular-WebM.woff2") format("woff2");
+  font-family: "Suisse Intl";
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntl-Thin-WebS.woff2") format("woff2");
+  font-family: "Suisse Intl";
+  font-weight: 100;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntlCond-Medium-WebXL.woff2") format("woff2");
+  font-family: "Suisse Intl Condensed";
+  font-weight: 500;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntlCond-Regular-WebXL.woff2") format("woff2");
+  font-family: "Suisse Intl Condensed";
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntlCond-Light-WebXL.woff2") format("woff2");
+  font-family: "Suisse Intl Condensed";
+  font-weight: 300;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseIntlMono-Regular-WebXL.woff2") format("woff2");
+  font-family: "Suisse Intl Mono";
+  font-weight: 400;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseWorks-Bold-WebXL.woff2") format("woff2");
+  font-family: "Suisse Works";
+  font-weight: 700;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseWorks-Medium-WebXL.woff2") format("woff2");
+  font-family: "Suisse Works";
+  font-weight: 500;
+}
+
+@font-face {
+  src: url("#{$suisse-font-path}/SuisseWorks-Regular-WebXL.woff2") format("woff2");
+  font-family: "Suisse Works";
+  font-weight: 400;
+}
+

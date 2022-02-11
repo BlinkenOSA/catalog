@@ -1,0 +1,19 @@
+@import "_variables.scss";
+@import "_fonts.scss";
+
+body {
+  font-family: 'Suisse Works', serif;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  background-color: $background;
+  color: $black;
+  -webkit-font-smoothing: antialiased;
+}
+
+p {
+  margin-block-start: 15px;
+  margin-block-end: 15px;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+}

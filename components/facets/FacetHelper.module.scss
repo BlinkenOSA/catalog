@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+
+.FacetHelper {
+  font-family: "Suisse Intl", serif;
+  font-weight: 400;
+  font-size: 12px;
+  color: $white;
+  padding: 15px;
+
+  .Title {
+    margin: 0;
+    padding: 0;
+  }
+}

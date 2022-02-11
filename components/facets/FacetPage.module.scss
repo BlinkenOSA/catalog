@@ -1,0 +1,28 @@
+@import "../../styles/variables";
+
+.FacetPageWrapper {
+  position: absolute;
+  width: 100%;
+  background-color: $black;
+}
+
+.FacetPage {
+  margin: 0 auto;
+  max-width: $max-width;
+  min-height: calc(100vh - 101px);
+  border-left: 2px solid $background;
+  display: flex;
+}
+
+.FacetSelection {
+  width: $left-width;
+  border-right: 2px solid $background;
+}
+
+.FacetDescription {
+  flex: 1;
+}
+
+.ResultCounter {
+  width: 200px;
+}
