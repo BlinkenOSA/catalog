@@ -42,4 +42,9 @@
   background-color: $white;
   font-family: "Suisse Intl", serif;
   width: 170px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $yellow;
+  }
 }

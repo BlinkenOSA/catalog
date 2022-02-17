@@ -2,9 +2,13 @@ import React from "react";
 import style from "./ContentSearch.module.scss";
 import FacetMenu from "../facets/FacetMenu";
 
-const ContentSearch = ({onSelectFacetGroup}: {
-    onSelectFacetGroup: (facetName: string) => void
-    }) => {
+/**
+ * Page responsible for displaying the search results
+ *
+ * @param {Object} params
+ * @param {func} params.onSelectFacetGroup Handling of selecting a particular group.
+ */
+const ContentSearch = ({onSelectFacetGroup}) => {
 
     return (
         <div className={style.ContentSearch}>

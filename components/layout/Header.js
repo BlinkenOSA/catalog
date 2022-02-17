@@ -3,6 +3,9 @@ import style from "./Header.module.scss";
 import SearchBar from "./SearchBar";
 import Menu from "./Menu";
 
+/**
+ * Header of the page.
+ */
 const Header = () => {
     return (
         <div className={style.Header}>

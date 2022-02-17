@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import Layout from "../components/layout/Layout";
 import BreadcrumbSearch from "../components/breadcrumbs/BreadcrumbSearch";
@@ -6,10 +5,10 @@ import ContentSearch from "../components/content/ContentSearch";
 import React, {useState} from "react";
 import FacetPage from "../components/facets/FacetPage";
 
-const Home: NextPage = () => {
+const Home = () => {
   const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
 
-  const onSelectFacetGroup = (facetGroup: string) => {
+  const onSelectFacetGroup = (facetGroup) => {
     if (selectedFacetGroup === facetGroup) {
         setSelectedFacetGroup('')
     } else {

@@ -1,13 +1,4 @@
-type facetValue = {
-  value: string,
-  count: number
-}
-
-type facetValuesOptions = {
-  [key: string]: facetValue[]
-}
-
-export const facetValues: facetValuesOptions = {
+export const facetValues = {
   record_origin: [{
     value: 'Archive',
     count: 13

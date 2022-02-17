@@ -1,5 +1,8 @@
 import React from "react";
 
+/**
+ * Description of the Record Origin facet.
+ */
 const RecordOrigin = () => (
     <React.Fragment>
         <p>

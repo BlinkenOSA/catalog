@@ -4,11 +4,19 @@ import Facets from "./FacetMenu";
 import FacetValues from "./FacetValues";
 import FacetHelper from "./FacetHelper";
 import ResultCounter from "./ResultCounter";
+import {useRouter} from "next/router";
 
-const FacetPage = ({selectedFacetGroup, onSelectFacetGroup}: {
-        selectedFacetGroup: string,
-        onSelectFacetGroup: (facetName: string) => void
-    }) => {
+/**
+ * The facet management page. Displays when a user clicks on a facet group.
+ *
+ * @param {Object} params
+ * @param {string} params.selectedFacetGroup The name of the selected facet group.
+ * @param {function} params.onSelectFacetGroup Handling of selecting a particular group.
+ */
+const FacetPage = ({selectedFacetGroup, onSelectFacetGroup}) => {
+
+    const router = useRouter();
+    const params = router.query;
 
     return (
         <div className={style.FacetPageWrapper}>

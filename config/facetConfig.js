@@ -1,12 +1,8 @@
-type facetOptions = {
-    [key: string]: {
-        title: string,
-        search: boolean,
-        help?: string
-    }
-}
-
-export const facetConfig: facetOptions = {
+/**
+ * Config object for the facets.
+ * @type {title: string, search: boolean, help: string}
+ */
+export const facetConfig = {
     record_origin: { title: 'Record Origin', search: true, help: 'record_origin.md' },
     record_type: { title: 'Record Type', search: false },
     description_level: { title: 'Archival Description Level', search: true },

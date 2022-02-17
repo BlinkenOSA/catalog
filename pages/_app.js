@@ -1,8 +1,7 @@
 import '../styles/main.scss'
-import type { AppProps } from 'next/app'
 import * as React from "react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
 }
 

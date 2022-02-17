@@ -2,6 +2,9 @@ import {AiOutlineSearch, AiOutlineCloseCircle} from "react-icons/ai";
 import React, {useState} from "react";
 import style from "./FacetSearch.module.scss"
 
+/**
+ * Displays a search box on top of the FacetValues list.
+ */
 const FacetSearch = () => {
     const [value, setValue] = useState('');
 
@@ -19,7 +22,7 @@ const FacetSearch = () => {
                         <AiOutlineSearch/>
                     </div>
                     :
-                    <div className={style.ClearButton}>
+                    <div className={style.ClearButton} onClick={() => setValue('')}>
                         <AiOutlineCloseCircle/>
                     </div>
                 }

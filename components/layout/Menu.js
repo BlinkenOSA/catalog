@@ -1,6 +1,9 @@
 import React from "react";
 import style from "./Menu.module.scss";
 
+/**
+ * Top right static menu
+ */
 const Menu = () => {
     return (
         <ul className={style.MenuList}>

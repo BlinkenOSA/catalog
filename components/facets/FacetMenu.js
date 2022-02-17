@@ -2,15 +2,22 @@ import style from "./FacetMenu.module.scss";
 import React from "react";
 import {facetConfig} from "../../config/facetConfig";
 
-const FacetMenu = ({inverse, selectedFacetGroup, onSelectFacetGroup}: {
-        inverse?: boolean,
-        selectedFacetGroup?: string,
-        onSelectFacetGroup: (facetName: string) => void
-    }) => {
+/**
+ * Displaying the main facet selector menu. Either the basic (light) or the inverted (dark) version
+ *
+ * @param {Object} params
+ * @param {boolean} params.inverse Define if the menu is in inverse (dark) display mode.
+ * @param {string} params.selectedFacetGroup The name of the selected facet group.
+ * @param {func} params.onSelectFacetGroup Handling of selecting a particular group.
+ */
+const FacetMenu = ({inverse, selectedFacetGroup, onSelectFacetGroup}) => {
 
-    const renderFacetButtons = () => {
+  /**
+   * Rendering the facetGroup buttons.
+   */
+  const renderFacetButtons = () => {
         return (
-            Object.keys(facetConfig).map((key, value) => (
+            Object.keys(facetConfig).map((key) => (
                 <li
                     className={inverse && selectedFacetGroup === key ? style.FacetSelected : undefined}
                     key={key}

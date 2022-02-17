@@ -1,9 +1,13 @@
 import React from "react";
 import style from "./FacetHelper.module.scss";
 
-const FacetHelper = ({selectedFacetGroup}: {
-        selectedFacetGroup: string,
-    }) => {
+/**
+ * Displaying the helper text upon facet selection
+ *
+ * @param {Object} params
+ * @param {string} params.selectedFacetGroup
+ */
+const FacetHelper = ({selectedFacetGroup}) => {
 
     return (
         <div className={style.FacetHelper}>

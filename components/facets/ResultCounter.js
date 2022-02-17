@@ -1,8 +1,17 @@
 import React from "react";
 import style from "./ResultCounter.module.scss";
 
+/**
+ * Displays the number of the results based on the selected facets.
+ */
 const ResultCounter = () => {
-    const numberWithCommas = (x: number) => {
+  /**
+   * Displays a number separating thousands with a comma.
+   *
+   * @param {number} x The number to be displayed.
+   * @returns {string} The number where thousands are separated with comma.
+   */
+    const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
