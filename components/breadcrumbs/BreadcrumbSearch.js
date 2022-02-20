@@ -18,6 +18,35 @@ const BreadcrumbSearch = ({module, inverse}) => {
     const {query, limit, offset, ...selectedFacets} = router.query;
 
     /**
+     * Removing the facet from the url and from the selectedFacets.
+     *
+     * @param {string} facetGroup The facet group which is affected by the remove.
+     * @param {string} facetValue The actual facet value.
+     */
+    const onFacetRemove = (facetGroup, facetValue) => {
+        let newFacets;
+
+        if (selectedFacets.hasOwnProperty(facetGroup)) {
+            if (Array.isArray(selectedFacets[facetGroup])) {
+                newFacets = {...selectedFacets}
+                newFacets[facetGroup] = selectedFacets[facetGroup].filter(facet => facet !== facetValue)
+            } else {
+                newFacets = {...selectedFacets}
+                delete newFacets[facetGroup]
+            }
+        } else {
+            newFacets = {...selectedFacets}
+        }
+
+        const params = {...query, ...limit, ...offset, ...newFacets}
+
+        router.replace({
+            pathname: '/search',
+            query: params
+        }, undefined, {shallow: true})
+    }
+
+    /**
      * Rendering one selected facet button.
      *
      * @param {number} key Key for rendering multiple elements.
@@ -29,7 +58,7 @@ const BreadcrumbSearch = ({module, inverse}) => {
             <span>{facetGroup}</span>
             <AiOutlineRight size={14} />
             {facetValue}
-            <div className={style.SelectedFacetRemove} onClick={() => onFacetRemove()}>
+            <div className={style.SelectedFacetRemove} onClick={() => onFacetRemove(facetGroup, facetValue)}>
                 <AiOutlineClose size={14} />
             </div>
         </div>

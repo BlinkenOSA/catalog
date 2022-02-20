@@ -25,7 +25,7 @@ const FacetValues = ({selectedFacetGroup}) => {
             if (Array.isArray(selectedFacets[selectedFacetGroup])) {
                 selectedFacets[selectedFacetGroup].push(value)
             } else {
-                selectedFacets[selectedFacetGroup] = [value, selectedFacets[selectedFacetGroup]]
+                selectedFacets[selectedFacetGroup] = [selectedFacets[selectedFacetGroup], value]
             }
         } else {
             selectedFacets[selectedFacetGroup] = value

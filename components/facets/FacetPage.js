@@ -14,10 +14,6 @@ import {useRouter} from "next/router";
  * @param {function} params.onSelectFacetGroup Handling of selecting a particular group.
  */
 const FacetPage = ({selectedFacetGroup, onSelectFacetGroup}) => {
-
-    const router = useRouter();
-    const params = router.query;
-
     return (
         <div className={style.FacetPageWrapper}>
             <div className={style.FacetPage}>
