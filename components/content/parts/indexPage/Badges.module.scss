@@ -1,0 +1,36 @@
+@import "../../../../styles/variables";
+
+.BadgeWrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+.Badge {
+    flex: 1 0 auto;
+    align-self: stretch;
+    display: flex;
+    align-items:center;
+    font-family: "Suisse Intl", serif;
+    font-weight: 300;
+    padding: 0 20px;
+    color: $white;
+    text-align: center;
+    background-color: $black;
+    border-radius: 200px;
+    transition: 0.1s;
+
+    &:hover {
+        cursor: pointer;
+        color: $black;
+        background-color: $yellow;
+    }
+
+    span {
+        width: 100%;
+        text-align: center;
+    }
+}

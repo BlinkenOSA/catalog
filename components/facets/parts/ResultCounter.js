@@ -3,8 +3,11 @@ import style from "./ResultCounter.module.scss";
 
 /**
  * Displays the number of the results based on the selected facets.
+ *
+ * @param {Object} params
+ * @param {func} params.onFilterClick Handling clicking the Filter button.
  */
-const ResultCounter = () => {
+const ResultCounter = ({onFilterClick}) => {
   /**
    * Displays a number separating thousands with a comma.
    *
@@ -15,6 +18,10 @@ const ResultCounter = () => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    const handleFilterClick = () => {
+        onFilterClick()
+    }
+
     return (
         <React.Fragment>
             <div className={style.ResultCounter}>
@@ -22,7 +29,7 @@ const ResultCounter = () => {
                 <div className={style.CountText}>records<br/>found</div>
             </div>
             <div className={style.FilterButtonWrapper}>
-                <div className={style.FilterButton}>Filter</div>
+                <div className={style.FilterButton} onClick={() => handleFilterClick()}>Filter</div>
             </div>
         </React.Fragment>
     )

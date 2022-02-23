@@ -1,7 +1,7 @@
 import style from "./FacetValues.module.scss";
 import FacetSearch from "./FacetSearch";
-import {facetValues} from "../../utils/facetValues";
-import {facetConfig} from "../../config/facetConfig";
+import {facetValues} from "../../../utils/facetValues";
+import {facetConfig} from "../../../config/facetConfig";
 import {useRouter} from "next/router";
 
 /**
@@ -36,7 +36,7 @@ const FacetValues = ({selectedFacetGroup}) => {
         router.replace({
             pathname: '/search',
             query: params
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: true});
     };
 
     /**
