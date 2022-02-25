@@ -1,0 +1,53 @@
+@import "../styles/variables";
+
+.Page {
+  margin: 0 auto;
+  max-width: $max-width;
+  border-left: 2px solid $black;
+  border-right: 2px solid $black;
+
+  .PageTitle {
+    width: 100%;
+    border-bottom: 2px solid $black;
+  }
+
+  h1 {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 50px;
+    font-weight: 400;
+    margin: 0;
+    padding: 15px 20px;
+  }
+
+  .PageContent {
+    display: flex;
+    padding-bottom: 30px;
+
+    div {
+      flex: 1;
+      padding: 20px;
+    }
+
+    p {
+      font-family: "Suisse Intl", serif;
+      font-weight: 400;
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-family: "Suisse Works", serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    a {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      color: $black;
+    }
+  }
+}
