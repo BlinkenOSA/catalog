@@ -10,9 +10,9 @@
     font-size: 14px;
     border: 0;
     border-radius: 0;
-    padding: 0 10px;
+    padding: 0 30px 0 10px;
     height: 32px;
-    width: 320px;
+    width: 290px;
   }
 
   .SearchInput:focus-visible {
@@ -35,5 +35,20 @@
       color: $black;
       background-color: $yellow;
     }
+  }
+
+  .ClearButton {
+    position: relative;
+    right: 70px;
+    color: $black;
+    display: block;
+    height: 32px;
+    line-height: 38px;
+    text-align: center;
+    width: 31px;
+  }
+
+  .ClearButton:hover {
+    cursor: pointer;
   }
 }

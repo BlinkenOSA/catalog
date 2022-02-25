@@ -5,7 +5,7 @@ import IndexPage from "../components/content/IndexPage";
 import React, {useState} from "react";
 import FacetPage from "../components/facets/FacetPage";
 
-const Search = () => {
+const Index = () => {
     const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
 
     const onSelectFacetGroup = (facetGroup) => {
@@ -52,4 +52,4 @@ const Search = () => {
     )
 }
 
-export default Search
+export default Index

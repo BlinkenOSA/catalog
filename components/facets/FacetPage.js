@@ -23,14 +23,10 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onFilterClick}) => {
                     onSelectFacetGroup={onSelectFacetGroup}
                 />
                 <div className={style.FacetSelection}>
-                    <FacetValues
-                        selectedFacetGroup={selectedFacetGroup}
-                    />
+                    <FacetValues selectedFacetGroup={selectedFacetGroup} />
                 </div>
                 <div className={style.FacetDescription}>
-                    <FacetHelper
-                        selectedFacetGroup={selectedFacetGroup}
-                    />
+                    <FacetHelper selectedFacetGroup={selectedFacetGroup} />
                 </div>
                 <div className={style.ResultCounter}>
                     <ResultCounter onFilterClick={onFilterClick} />

@@ -3,6 +3,7 @@ import style from "./BreadcrumbSearch.module.scss";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import {useRouter} from "next/router";
 import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
+import createParams from "../../utils/createParams";
 
 /**
  * Breadcrumb component.
@@ -38,11 +39,9 @@ const BreadcrumbSearch = ({module, inverse}) => {
             newFacets = {...selectedFacets}
         }
 
-        const params = {...query, ...limit, ...offset, ...newFacets}
-
         router.replace({
             pathname: '/search',
-            query: params
+            query: createParams(query, limit, offset, newFacets),
         }, undefined, {shallow: true})
     }
 
@@ -81,21 +80,47 @@ const BreadcrumbSearch = ({module, inverse}) => {
         })
     )
 
+    const onQueryRemove = () => {
+        router.replace({
+            pathname: '/search',
+            query: createParams('', limit, offset, selectedFacets),
+        }, undefined, {shallow: true})
+    }
+
+    /**
+     * Rendering the button for the query facet.
+     */
+    const renderQueryButton = () => {
+        if (query && query !== '') {
+            return (
+                <div className={style.SelectedFacetButton}>
+                    <span>Search (All Fields)</span>
+                    <AiOutlineRight size={14} />
+                    {query}
+                    <div className={style.SelectedFacetRemove} onClick={() => onQueryRemove()}>
+                        <AiOutlineClose size={14} />
+                    </div>
+                </div>
+            )
+        }
+    }
+
     /**
      * Rendering the right side content part of the breadcrumb.
      */
     const renderRightSideContent = () => {
-        if (Object.keys(selectedFacets).length > 0) {
-            return (
-                <div className={style.SelectedFacets}>
-                    {renderSelectedFacets()}
-                </div>
-            )
-        } else {
+        if (Object.keys(selectedFacets).length === 0 && query === '') {
             return (
                 <div className={style.SearchText}>
                     <span>Search the catalog</span> <BiUpArrowAlt />
                     <span>or browse our most frequent queries</span> <BiDownArrowAlt/>
+                </div>
+            )
+        } else {
+            return (
+                <div className={style.SelectedFacets}>
+                    {renderQueryButton()}
+                    {renderSelectedFacets()}
                 </div>
             )
         }
