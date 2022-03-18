@@ -12,9 +12,11 @@ const Header = () => {
     return (
         <div className={style.Header}>
             <div className={style.HeaderContent}>
-                <div className={style.Logo}>
-                    <img src={"/images/osa-logo.png"} alt={"Vera and Donald Blinken Open Society Archives"}/>
-                </div>
+                <a href={'/'}>
+                    <div className={style.Logo}>
+                        <img src={"/images/osa-logo.png"} alt={"Vera and Donald Blinken Open Society Archives"}/>
+                    </div>
+                </a>
                 <div className={style.SearchBar}>
                     <SearchBar />
                 </div>

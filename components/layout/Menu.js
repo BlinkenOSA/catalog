@@ -8,7 +8,7 @@ const Menu = () => {
     return (
         <ul className={style.MenuList}>
             <li>
-                <a href={'/collections'}>OSA Collection</a>
+                <a href={'/archival-collections'}>OSA Collection</a>
             </li>
             <li>
                 <a href={'/cart'}>Cart</a>

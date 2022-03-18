@@ -2,7 +2,7 @@ import React from "react";
 import style from "./BreadcrumbSearch.module.scss";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import {useRouter} from "next/router";
-import { AiOutlineClose, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
 import createParams from "../../utils/createParams";
 
 /**
@@ -126,12 +126,28 @@ const BreadcrumbSearch = ({module, inverse}) => {
         }
     }
 
+    const renderLeftSideContent = () => {
+        if (module === 'staticPage' || module === 'collections') {
+            return (
+                <div className={style.Navigation}>
+                    <a href={'/search'}>
+                        <AiOutlineLeft /> <span>Back to Catalog</span>
+                    </a>
+                </div>
+            )
+        }
+
+        return (
+            <div className={style.Navigation}>
+                <span>Filter your search</span> <BiDownArrowAlt />
+            </div>
+        )
+    }
+
     return (
         <div className={inverse ? style.BreadcrumbInverseWrapper : style.BreadcrumbWrapper}>
             <div className={style.BreadcrumbContent}>
-                <div className={style.Navigation}>
-                    <span>Filter your search</span> <BiDownArrowAlt />
-                </div>
+                {renderLeftSideContent()}
                 {renderRightSideContent()}
             </div>
         </div>
