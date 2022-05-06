@@ -5,6 +5,7 @@
   max-width: $max-width;
   border-left: 2px solid $black;
   border-right: 2px solid $black;
+  min-height: calc(100vh - (116px + 57px + 42px));
 
   .PageTitle {
     width: 100%;

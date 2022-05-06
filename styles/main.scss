@@ -1,6 +1,10 @@
 @import "_variables.scss";
 @import "_fonts.scss";
 
+html {
+  height: 100vh;
+}
+
 body {
   font-family: 'Suisse Works', serif;
   font-size: 14px;
@@ -9,6 +13,8 @@ body {
   background-color: $background;
   color: $black;
   -webkit-font-smoothing: antialiased;
+  min-height: 100% !important;
+  height: 100vh;
 }
 
 p {

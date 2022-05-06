@@ -1,0 +1,7 @@
+.LoaderWrapper {
+    width: 100%;
+    min-height: calc(100vh - (116px + 57px + 42px + 95px));
+    display: flex;
+    flex-direction: row;
+}
+

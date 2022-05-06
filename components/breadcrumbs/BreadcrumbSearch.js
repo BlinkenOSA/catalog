@@ -80,6 +80,9 @@ const BreadcrumbSearch = ({module, inverse}) => {
         })
     )
 
+    /**
+     * Event fires when query is removed.
+     */
     const onQueryRemove = () => {
         router.replace({
             pathname: '/search',
@@ -126,6 +129,9 @@ const BreadcrumbSearch = ({module, inverse}) => {
         }
     }
 
+    /**
+     * Rendering the left side buttons.
+     */
     const renderLeftSideContent = () => {
         if (module === 'staticPage' || module === 'collections') {
             return (
