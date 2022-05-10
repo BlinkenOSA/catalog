@@ -20,43 +20,66 @@ const CollectionPage = () => {
     }
 
     const getLeaves = (archivalUnit, isLast) => {
-        switch (archivalUnit['level']) {
-            case 'F':
-                return (
-                    <div key={archivalUnit['key']} className={style.Fonds}>
-                        <TreeNode
-                            archivalUnit={archivalUnit}
-                            open={openNodes.includes(archivalUnit['key'])}
-                            onOpenClose={onOpenClose}
-                            hasChildren={archivalUnit.hasOwnProperty('children')}
-                            isLast={isLast}
-                        />
-                    </div>
-                )
-            case 'SF':
-                return (
-                    <div key={archivalUnit['key']} className={style.Subfonds}>
-                        <TreeNode
-                            archivalUnit={archivalUnit}
-                            open={openNodes.includes(archivalUnit['key'])}
-                            onOpenClose={onOpenClose}
-                            hasChildren={archivalUnit.hasOwnProperty('children')}
-                            isLast={isLast}
-                        />
-                    </div>
-                )
-            case 'S':
-                return (
-                    <div key={archivalUnit['key']} className={style.Series}>
-                        <TreeNode
-                            archivalUnit={archivalUnit}
-                            open={openNodes.includes(archivalUnit['key'])}
-                            onOpenClose={onOpenClose}
-                            hasChildren={false}
-                            isLast={isLast}
-                        />
-                    </div>
-                )
+        const detectVisible = () => {
+            const key = archivalUnit['key'];
+            switch (archivalUnit['level']) {
+                case 'F':
+                    return true;
+                case 'SF':
+                    const fondsKey = key.slice(0, key.indexOf('-'))
+                    return openNodes.includes(fondsKey);
+                case 'S':
+                    if (archivalUnit['subfonds']) {
+                        const subfondsKey = key.slice(0, key.lastIndexOf('-'))
+                        return openNodes.includes(subfondsKey);
+                    } else {
+                        const fondsKey = key.slice(0, key.indexOf('-'))
+                        return openNodes.includes(fondsKey);
+                    }
+            }
+        }
+
+        if (detectVisible()) {
+            switch (archivalUnit['level']) {
+                case 'F':
+                    return (
+                        <div key={archivalUnit['key']} className={style.Fonds}>
+                            <TreeNode
+                                archivalUnit={archivalUnit}
+                                open={openNodes.includes(archivalUnit['key'])}
+                                onOpenClose={onOpenClose}
+                                hasChildren={archivalUnit.hasOwnProperty('children')}
+                                isLast={isLast}
+                            />
+                        </div>
+                    )
+                case 'SF':
+                    return (
+                        <div key={archivalUnit['key']} className={style.Subfonds}>
+                            <TreeNode
+                                archivalUnit={archivalUnit}
+                                open={openNodes.includes(archivalUnit['key'])}
+                                onOpenClose={onOpenClose}
+                                hasChildren={archivalUnit.hasOwnProperty('children')}
+                                isLast={isLast}
+                            />
+                        </div>
+                    )
+                case 'S':
+                    return (
+                        <div key={archivalUnit['key']} className={style.Series}>
+                            <TreeNode
+                                archivalUnit={archivalUnit}
+                                open={openNodes.includes(archivalUnit['key'])}
+                                onOpenClose={onOpenClose}
+                                hasChildren={false}
+                                isLast={isLast}
+                            />
+                        </div>
+                    )
+            }
+        } else {
+            return ''
         }
     }
 
