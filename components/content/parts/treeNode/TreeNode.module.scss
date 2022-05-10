@@ -1,0 +1,68 @@
+.Opener {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+
+  :hover {
+    cursor:pointer;
+  }
+}
+
+.OpenerLast {
+  width: 30px;
+  flex-shrink: 0;
+
+  :hover {
+    cursor:pointer;
+  }
+}
+
+.Line {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+}
+
+.LineLast {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.Spacer {
+  flex-shrink: 0;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+}
+
+.FondsIconOpen, .SubFondsIconOpen {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeBoxOpen.svg");
+  background-repeat: no-repeat;
+}
+
+.FondsIconClosed, .SubFondsIconClosed {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeBoxClosed.svg");
+  background-repeat: no-repeat;
+}
+
+.SeriesIcon {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeFolder.svg");
+  background-repeat: no-repeat;
+}
+
+.ReferenceCode {
+  flex-shrink: 0;
+  line-height: 30px;
+  margin: 0 5px;
+}
+
+.Title {
+  line-height: 30px;
+}

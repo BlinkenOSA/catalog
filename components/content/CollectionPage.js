@@ -1,100 +1,95 @@
 import style from "./CollectionPage.module.scss";
-import Tree, {TreeNode} from "rc-tree";
-import "rc-tree/assets/index.css"
 import useSWR from 'swr'
 import {fetcher} from "../../utils/fetcher";
 import Loader from "./parts/loader/Loader";
+import {useState} from "react";
+import TreeNode from "./parts/treeNode/TreeNode";
 
 const CollectionPage = () => {
-    const { data, error } = useSWR('/archival_units', fetcher)
+    const [openNodes, setOpenNodes] = useState([]);
+    const { data, error } = useSWR('/archival_units', fetcher);
 
-    const renderTreeNodes = () => {
-        const treeData = []
-
-        const getTitle = (referenceCode, title) => {
-            return (
-                <div className={style.TreeNodeValue}>
-                    <span className={style.TreeNodeReferenceCode}>{referenceCode}</span>
-                    <span className={style.TreeNodeTitle}>{title}</span>
-                </div>
-            )
+    const onOpenClose = (key) => {
+        if (openNodes.includes(key)) {
+            const nodes = [...openNodes];
+            nodes.splice(openNodes.indexOf(key), 1);
+            setOpenNodes(nodes);
+        } else {
+            setOpenNodes(oldArray => [...oldArray, key]);
         }
+    }
 
-        const getLeaves = (archivalUnit) => {
-            switch (archivalUnit['level']) {
-                case 'F':
-                    if (archivalUnit.hasOwnProperty('children')) {
-                        return (
-                            <TreeNode
-                                title={() => getTitle(archivalUnit['reference_code'], archivalUnit['title'])}
-                                key={archivalUnit['reference_code']}
-                                isLeaf={!archivalUnit.hasOwnProperty('children')}
-                                className={style.TreeNodeFonds}
-                            >
-                                {archivalUnit['children'].map(au => getLeaves(au))}
-                            </TreeNode>
-                        )
-                    } else {
-                        return (
-                            <TreeNode
-                                title={() => getTitle(archivalUnit['reference_code'], archivalUnit['title'])}
-                                key={archivalUnit['reference_code']}
-                                isLeaf={false}
-                                className={style.TreeNodeFonds}
-                            />
-                        )
-                    }
-                case 'SF':
-                    if (archivalUnit.hasOwnProperty('children')) {
-                        return (
-                            <TreeNode
-                                title={() => getTitle(archivalUnit['reference_code'], archivalUnit['title'])}
-                                key={archivalUnit['reference_code']}
-                                isLeaf={!archivalUnit.hasOwnProperty('children')}
-                                className={style.TreeNodeSubfonds}
-                            >
-                                {archivalUnit['children'].map(au => getLeaves(au))}
-                            </TreeNode>
-                        )
-                    } else {
-                        return (
-                            <TreeNode
-                                title={() => getTitle(archivalUnit['reference_code'], archivalUnit['title'])}
-                                key={archivalUnit['reference_code']}
-                                isLeaf={!archivalUnit.hasOwnProperty('children')}
-                                className={style.TreeNodeSubfonds}
-                            />
-                        )
-                    }
-                case 'S':
-                    return (
+    const getLeaves = (archivalUnit, isLast) => {
+        switch (archivalUnit['level']) {
+            case 'F':
+                return (
+                    <div key={archivalUnit['key']} className={style.Fonds}>
                         <TreeNode
-                            title={() => getTitle(archivalUnit['reference_code'], archivalUnit['title'])}
-                            key={archivalUnit['reference_code']}
-                            isLeaf={true}
-                            className={archivalUnit['subfonds'] ? style.TreeNodeSeries : style.TreeNodeSeriesWithoutSubfonds}
+                            archivalUnit={archivalUnit}
+                            open={openNodes.includes(archivalUnit['key'])}
+                            onOpenClose={onOpenClose}
+                            hasChildren={archivalUnit.hasOwnProperty('children')}
+                            isLast={isLast}
                         />
-                    )
-            }
+                    </div>
+                )
+            case 'SF':
+                return (
+                    <div key={archivalUnit['key']} className={style.Subfonds}>
+                        <TreeNode
+                            archivalUnit={archivalUnit}
+                            open={openNodes.includes(archivalUnit['key'])}
+                            onOpenClose={onOpenClose}
+                            hasChildren={archivalUnit.hasOwnProperty('children')}
+                            isLast={isLast}
+                        />
+                    </div>
+                )
+            case 'S':
+                return (
+                    <div key={archivalUnit['key']} className={style.Series}>
+                        <TreeNode
+                            archivalUnit={archivalUnit}
+                            open={openNodes.includes(archivalUnit['key'])}
+                            onOpenClose={onOpenClose}
+                            hasChildren={false}
+                            isLast={isLast}
+                        />
+                    </div>
+                )
         }
+    }
 
-        data.forEach(fonds => {
-            treeData.push(getLeaves(fonds))
+    const renderTree = () => {
+        const treeData = [];
+
+        data.forEach((fonds, index) => {
+            treeData.push(
+                getLeaves(fonds, index === data.length - 1)
+            )
+            if (fonds.hasOwnProperty('children')) {
+                fonds['children'].forEach((subfonds, index) => {
+                    treeData.push(
+                        getLeaves(subfonds, index === fonds['children'].length - 1)
+                    )
+                    if (subfonds.hasOwnProperty('children')) {
+                        subfonds['children'].forEach((series, index) => {
+                            treeData.push(
+                                getLeaves(series, index === subfonds['children'].length - 1)
+                            )
+                        })
+                    }
+                })
+            }
         });
 
-        return treeData
+        return treeData;
     }
 
     if (data) {
         return (
             <div className={style.Tree}>
-                <Tree
-                    showLine
-                    clickable
-                    defaultExpandAll
-                >
-                    {renderTreeNodes()}
-                </Tree>
+                {renderTree()}
             </div>
         )
     } else {

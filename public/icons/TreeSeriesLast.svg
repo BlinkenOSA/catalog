@@ -1,8 +1,8 @@
-<svg width="20" height="30" xmlns="http://www.w3.org/2000/svg">
+<svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
  <g>
   <title>Layer 1</title>
-  <line transform="rotate(90 15.2812 15)" stroke="#000000" fill="none" x1="15.28118" y1="4.93743" x2="15.28118" y2="25.06257" id="svg_9" stroke-width="2"/>
-  <line stroke="#000000" fill="none" x1="5" y1="-0.375" x2="5" y2="16.00019" id="svg_11" stroke-width="2"/>
+  <line transform="rotate(90 25 15)" stroke-width="2" id="svg_9" y2="25.06257" x2="25" y1="4.93743" x1="25" fill="none" stroke="#000000"/>
+  <line stroke-width="2" id="svg_11" y2="16.00019" x2="15" y1="-0.375" x1="15" fill="none" stroke="#000000"/>
  </g>
 
 </svg>
