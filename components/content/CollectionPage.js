@@ -19,65 +19,77 @@ const CollectionPage = () => {
         }
     }
 
-    const getLeaves = (archivalUnit, isLast) => {
+    const getLeaves = (archivalUnit, fondsLast=false, subfondsLast=false, seriesLast=false) => {
         const detectVisible = () => {
+            let fondsKey, subfondsKey;
             const key = archivalUnit['key'];
             switch (archivalUnit['level']) {
                 case 'F':
                     return true;
                 case 'SF':
-                    const fondsKey = key.slice(0, key.indexOf('-'))
+                    fondsKey = key.slice(0, key.indexOf('-'))
                     return openNodes.includes(fondsKey);
                 case 'S':
                     if (archivalUnit['subfonds']) {
-                        const subfondsKey = key.slice(0, key.lastIndexOf('-'))
-                        return openNodes.includes(subfondsKey);
+                        fondsKey = key.slice(0, key.indexOf('-'))
+                        subfondsKey = key.slice(0, key.lastIndexOf('-'))
+                        return openNodes.includes(fondsKey) && openNodes.includes(subfondsKey);
                     } else {
-                        const fondsKey = key.slice(0, key.indexOf('-'))
+                        fondsKey = key.slice(0, key.indexOf('-'))
                         return openNodes.includes(fondsKey);
                     }
             }
         }
 
-        if (detectVisible()) {
+        const getClassType = () => {
             switch (archivalUnit['level']) {
                 case 'F':
-                    return (
-                        <div key={archivalUnit['key']} className={style.Fonds}>
-                            <TreeNode
-                                archivalUnit={archivalUnit}
-                                open={openNodes.includes(archivalUnit['key'])}
-                                onOpenClose={onOpenClose}
-                                hasChildren={archivalUnit.hasOwnProperty('children')}
-                                isLast={isLast}
-                            />
-                        </div>
-                    )
+                    return fondsLast ? 'FondsLast' : 'Fonds'
                 case 'SF':
-                    return (
-                        <div key={archivalUnit['key']} className={style.Subfonds}>
-                            <TreeNode
-                                archivalUnit={archivalUnit}
-                                open={openNodes.includes(archivalUnit['key'])}
-                                onOpenClose={onOpenClose}
-                                hasChildren={archivalUnit.hasOwnProperty('children')}
-                                isLast={isLast}
-                            />
-                        </div>
-                    )
+                    if (fondsLast) {
+                        return subfondsLast ? 'FondsLastSubfondsLast' : 'FondsLastSubfonds'
+                    } else {
+                        return subfondsLast ? 'FondsSubfondsLast' : 'FondsSubfonds'
+                    }
                 case 'S':
-                    return (
-                        <div key={archivalUnit['key']} className={style.Series}>
-                            <TreeNode
-                                archivalUnit={archivalUnit}
-                                open={openNodes.includes(archivalUnit['key'])}
-                                onOpenClose={onOpenClose}
-                                hasChildren={false}
-                                isLast={isLast}
-                            />
-                        </div>
-                    )
+                    if (fondsLast) {
+                        // Subfonds exists
+                        if (archivalUnit['subfonds']) {
+                            if (subfondsLast) {
+                                return seriesLast ? 'FondsLastSubfondsLastSeriesLast' : 'FondsLastSubfondsLastSeries'
+                            } else {
+                                return seriesLast ? 'FondsLastSubfondsSeriesLast' : 'FondsLastSubfondsSeries'
+                            }
+                        // Subfonds doesn't exist
+                        } else {
+                            return subfondsLast ? 'FondsLastSeriesLast' : 'FondsLastSeries'
+                        }
+                    } else {
+                        // Subfonds exists
+                        if (archivalUnit['subfonds']) {
+                            if (subfondsLast) {
+                                return seriesLast ? 'FondsSubfondsLastSeriesLast' : 'FondsSubfondsLastSeries'
+                            } else {
+                                return seriesLast ? 'FondsSubfondsSeriesLast' : 'FondsSubfondsSeries'
+                            }
+                        // Subfonds doesn't exist
+                        } else {
+                            return subfondsLast ? 'FondsSeriesLast' : 'FondsSeries'
+                        }
+                    }
             }
+        }
+
+        if (detectVisible()) {
+            return (
+                <TreeNode
+                    archivalUnit={archivalUnit}
+                    classType={getClassType()}
+                    open={openNodes.includes(archivalUnit['key'])}
+                    onOpenClose={onOpenClose}
+                    hasChildren={archivalUnit.hasOwnProperty('children')}
+                />
+            )
         } else {
             return ''
         }
@@ -91,14 +103,19 @@ const CollectionPage = () => {
                 getLeaves(fonds, index === data.length - 1)
             )
             if (fonds.hasOwnProperty('children')) {
-                fonds['children'].forEach((subfonds, index) => {
+                fonds['children'].forEach((subfonds, index2) => {
                     treeData.push(
-                        getLeaves(subfonds, index === fonds['children'].length - 1)
+                        getLeaves(subfonds, index === data.length - 1, index2 === fonds['children'].length - 1)
                     )
                     if (subfonds.hasOwnProperty('children')) {
-                        subfonds['children'].forEach((series, index) => {
+                        subfonds['children'].forEach((series, index3) => {
                             treeData.push(
-                                getLeaves(series, index === subfonds['children'].length - 1)
+                                getLeaves(
+                                    series,
+                                    index === data.length - 1,
+                                    index2 === fonds['children'].length - 1,
+                                    index3 === subfonds['children'].length - 1,
+                                )
                             )
                         })
                     }

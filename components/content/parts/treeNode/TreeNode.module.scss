@@ -1,49 +1,166 @@
-.Opener {
-  width: 30px;
-  flex-shrink: 0;
-  background-image: url("/icons/TreeLineBg.svg");
-  background-repeat: repeat-y;
+.Fonds {
+  display: flex;
+  min-height: 30px;
 
-  :hover {
-    cursor:pointer;
+  .Spacer {
+    display: none;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
   }
 }
 
-.OpenerLast {
-  width: 30px;
-  flex-shrink: 0;
+.FondsLast {
+  display: flex;
+  min-height: 30px;
 
-  :hover {
-    cursor:pointer;
+  .Spacer {
+    display: none;
   }
 }
 
-.Line {
-  width: 30px;
-  flex-shrink: 0;
-  background-image: url("/icons/TreeLineBg.svg");
-  background-repeat: repeat-y;
+.FondsSubfonds {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
 }
 
-.LineLast {
-  width: 30px;
-  flex-shrink: 0;
+.FondsSubfondsLast {
+  display: flex;
+}
+
+.FondsLastSubfonds {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsLastSubfondsLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+  }
+}
+
+.FondsSeries {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSeriesLast {
+  display: flex;
+}
+
+.FondsLastSeries {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsLastSeriesLast {
+  display: flex;
+}
+
+.FondsSubfondsSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeSeriesBg.svg");
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSubfondsSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeSeriesBg.svg");
+  }
+}
+
+.FondsSubfondsLastSeries {
+  display: flex;
+
+  .Spacer {
+    flex-shrink: 0;
+    width: 60px;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSubfondsLastSeriesLast {
+  display: flex;
+
+  .Spacer {
+    flex-shrink: 0;
+    width: 60px;
+  }
+}
+
+.FondsLastSubfondsLastSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeSeriesBg.svg");
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsLastSubfondsLastSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeSeriesBg.svg");
+  }
 }
 
 .Spacer {
   flex-shrink: 0;
   background-image: url("/icons/TreeLineBg.svg");
   background-repeat: repeat-y;
+  width: 30px;
 }
 
-.FondsIconOpen, .SubFondsIconOpen {
+.IconOpen {
   width: 30px;
   flex-shrink: 0;
   background-image: url("/icons/TreeBoxOpen.svg");
   background-repeat: no-repeat;
 }
 
-.FondsIconClosed, .SubFondsIconClosed {
+.IconClosed {
   width: 30px;
   flex-shrink: 0;
   background-image: url("/icons/TreeBoxClosed.svg");
@@ -55,6 +172,20 @@
   flex-shrink: 0;
   background-image: url("/icons/TreeFolder.svg");
   background-repeat: no-repeat;
+}
+
+.Line {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.Opener {
+  width: 30px;
+  flex-shrink: 0;
+
+  :hover {
+    cursor:pointer;
+  }
 }
 
 .ReferenceCode {
