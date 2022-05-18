@@ -6,7 +6,15 @@ const badgeText = [
     'USSR', 'CIA'
 ]
 
+/**
+ * Display badges on the front page.
+ */
 const Badges = () => {
+    /**
+     *
+     * @param {string} badgeText The text that should be displayed
+     * @param {string} key Key string
+     */
     const renderBadge = (badgeText, key) => {
         return (
             <div

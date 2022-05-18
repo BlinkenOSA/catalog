@@ -2,6 +2,9 @@ import { css } from "@emotion/react";
 import ClockLoader from "react-spinners/ClockLoader";
 import style from "./Loader.module.css"
 
+/**
+ * Displays a loading spinner while loading.
+ */
 const Loader = () => {
     const override = css`
       display: block;

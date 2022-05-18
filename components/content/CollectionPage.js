@@ -5,10 +5,18 @@ import Loader from "./parts/loader/Loader";
 import {useState} from "react";
 import TreeNode from "./parts/treeNode/TreeNode";
 
+/**
+ * Page responsible for displaying the hierarchical list of archival collections.
+ */
 const CollectionPage = () => {
     const [openNodes, setOpenNodes] = useState([]);
     const { data, error } = useSWR('/archival_units', fetcher);
 
+    /**
+     * Handling the open/close event.
+     *
+     * @param {String} key The key of the element should be opened/closed
+     */
     const onOpenClose = (key) => {
         if (openNodes.includes(key)) {
             const nodes = [...openNodes];
@@ -19,7 +27,19 @@ const CollectionPage = () => {
         }
     }
 
+    /**
+     *
+     * @param {Object} archivalUnit Object of the Archival Unit data
+     * @param {boolean} fondsLast Is Fonds the last one in the hierarchy?
+     * @param {boolean} subfondsLast Is Subfonds the last one in the hierarchy?
+     * @param {boolean} seriesLast Is Series the last one in the hierarchy?
+     */
     const getLeaves = (archivalUnit, fondsLast=false, subfondsLast=false, seriesLast=false) => {
+        /**
+         * Detects if the actual node should be visible in the tree.
+         *
+         * @returns {boolean} Node is visible or not?
+         */
         const detectVisible = () => {
             let fondsKey, subfondsKey;
             const key = archivalUnit['key'];
@@ -41,6 +61,12 @@ const CollectionPage = () => {
             }
         }
 
+        /**
+         * Selects the className according to the nodes place in the hierarchy.
+         * A node can be last in the list, a subfonds can exists or not, etc.
+         *
+         * @returns {string} Name of the class
+         */
         const getClassType = () => {
             switch (archivalUnit['level']) {
                 case 'F':
@@ -95,6 +121,11 @@ const CollectionPage = () => {
         }
     }
 
+    /**
+     * Renders the tree from the data from the API.
+     *
+     * @returns {[]} The array containing the Tree Nodes.
+     */
     const renderTree = () => {
         const treeData = [];
 
