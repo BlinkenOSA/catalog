@@ -1,0 +1,80 @@
+@import "../../../../styles/variables";
+
+/* The switch - the box around the slider */
+.Switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  input:checked + .Slider {
+    background-color: $button-background;
+  }
+
+  input:focus + .Slider {
+    box-shadow: 0 0 1px $button-background;
+  }
+
+  input:checked + .Slider:before {
+    -webkit-transform: translateX(25px);
+    -ms-transform: translateX(25px);
+    transform: translateX(25px);
+  }
+
+  /* The slider */
+  .Slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $button-background;
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    .Label {
+      display: flex;
+      width: 100%;
+
+      div {
+        color: $white;
+        font-family: 'Suisse Intl', serif;
+        font-size: 10px;
+        flex-grow: 1;
+        text-align: center;
+        line-height: 25px;
+        z-index: 999;
+      }
+    }
+  }
+
+  .Slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 0;
+    bottom: 0;
+    background-color: $black;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  /* Rounded sliders */
+  .Slider.Round {
+    border-radius: 14px;
+  }
+
+  .Slider.Round:before {
+    border-radius: 50%;
+  }
+}
+
+

@@ -1,9 +1,11 @@
+import React from 'react';
 import style from "./CollectionPage.module.scss";
 import useSWR from 'swr'
 import {fetcher} from "../../utils/fetcher";
 import Loader from "./parts/loader/Loader";
 import {useState} from "react";
 import TreeNode from "./parts/treeNode/TreeNode";
+import ArchivalUnitDrawer from "./parts/archivalUnitDrawer/ArchivalUnitDrawer";
 
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
@@ -11,6 +13,12 @@ import TreeNode from "./parts/treeNode/TreeNode";
 const CollectionPage = () => {
     const [openNodes, setOpenNodes] = useState([]);
     const { data, error } = useSWR('/archival_units', fetcher);
+
+    const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
+
+    const onSelectArchivalUnit = (key) => {
+        setSelectedArchivalUnit(selectedArchivalUnit === key ? 0 : key)
+    }
 
     /**
      * Handling the open/close event.
@@ -111,8 +119,10 @@ const CollectionPage = () => {
                 <TreeNode
                     archivalUnit={archivalUnit}
                     classType={getClassType()}
+                    selected={archivalUnit['id'] === selectedArchivalUnit}
                     open={openNodes.includes(archivalUnit['key'])}
                     onOpenClose={onOpenClose}
+                    onTreeNodeClick={onSelectArchivalUnit}
                     hasChildren={archivalUnit.hasOwnProperty('children')}
                 />
             )
@@ -159,8 +169,15 @@ const CollectionPage = () => {
 
     if (data) {
         return (
-            <div className={style.Tree}>
-                {renderTree()}
+            <div style={{display: 'flex'}}>
+                <div className={selectedArchivalUnit !== 0 ? style.TreeOpen : style.Tree}>
+                    {renderTree()}
+                </div>
+                <ArchivalUnitDrawer
+                    archivalUnitID={selectedArchivalUnit}
+                    open={selectedArchivalUnit !== 0}
+                    onClose={onSelectArchivalUnit}
+                />
             </div>
         )
     } else {

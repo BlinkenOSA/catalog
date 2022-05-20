@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import style from "./TreeNode.module.scss";
+import ArchivalUnitDrawer from "../archivalUnitDrawer/ArchivalUnitDrawer";
 
 /**
  * @param {Object} params
  * @param {boolean} params.open TreeNode should be open or not
+ * @param {boolean} params.selected TreeNode is selected or not
  * @param {Object} params.archivalUnit Archival Unit object
  * @param {function} params.onOpenClose Function to be called when open/close action is clicked
+ * @param {function} params.onTreeNodeClick Function to be called when TreeNode is clicked
  * @param {string} params.classType The type of class should be used to display
  * @param {boolean} params.hasChildren Node has children?
  */
-const TreeNode = ({open, archivalUnit, onOpenClose, classType, hasChildren=false}) => {
+const TreeNode = ({open, selected=false, archivalUnit, onOpenClose, onTreeNodeClick, classType, hasChildren=false}) => {
     const key = archivalUnit['key'];
 
     /**
@@ -70,13 +73,17 @@ const TreeNode = ({open, archivalUnit, onOpenClose, classType, hasChildren=false
     }
 
     return (
-        <div key={archivalUnit['key']} className={style[classType]}>
-            <div className={style.Spacer} />
-            {renderOpenClosePart()}
-            {renderIcon()}
-            <div className={style.ReferenceCode}>{archivalUnit['reference_code']}</div>
-            <div className={style.Title}>{archivalUnit['title']}</div>
-        </div>
+        <React.Fragment>
+            <div key={archivalUnit['key']} className={selected ? `${style[classType]} ${style.Selected}` : style[classType]}>
+                <div className={style.Spacer} />
+                {renderOpenClosePart()}
+                {renderIcon()}
+                <div className={style.Title} onClick={() => onTreeNodeClick(archivalUnit['id'])}>
+                    <span className={style.ReferenceCode}>{archivalUnit['reference_code']}</span>
+                    <span className={style.ArchivalUnitTitle}>{archivalUnit['title']}</span>
+                </div>
+            </div>
+        </React.Fragment>
     )
 }
 

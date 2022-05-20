@@ -1,3 +1,5 @@
+@import "../../../../styles/variables";
+
 .Fonds {
   display: flex;
   min-height: 30px;
@@ -188,12 +190,28 @@
   }
 }
 
-.ReferenceCode {
-  flex-shrink: 0;
-  line-height: 30px;
-  margin: 0 5px;
-}
-
 .Title {
   line-height: 30px;
+  padding: 0 5px;
+
+  .ReferenceCode {
+    flex-shrink: 0;
+    line-height: 30px;
+  }
+
+  .ArchivalUnitTitle {
+    padding: 0 5px;
+  }
+}
+
+.Title:hover {
+  cursor: pointer;
+}
+
+.Selected .Title {
+  cursor: pointer;
+  background-color: $yellow;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }

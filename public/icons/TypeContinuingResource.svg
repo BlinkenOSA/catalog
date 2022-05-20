@@ -1,0 +1,13 @@
+<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1">
+
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <rect id="svg_2" fill="#FFFFFF" height="0.89" width="5.03" class="st0" y="6.605" x="9.435"/>
+   <rect id="svg_3" fill="#FFFFFF" height="0.89" width="5.03" class="st0" y="8.895" x="9.435"/>
+   <rect id="svg_4" fill="#FFFFFF" height="0.89" width="5.03" class="st0" y="11.115" x="9.435"/>
+   <path id="svg_5" fill="#FFFFFF" d="m17.915,3.195l0,12.72l-0.94,0l0,-12.28l-0.44,-0.44l-14.89,0l-0.44,0.44l0,12.72l0.44,0.44l14.44,0l0,0.01l2.27,0l0.44,-0.44l0,-13.17l-0.88,0zm-1.83,12.71l-13.99,0l0,-11.83l13.99,0l0,11.83z" class="st0"/>
+   <path id="svg_6" fill="#FFFFFF" d="m7.715,13.655l0.44,-0.44l0,-6.18l-0.44,-0.45l-3.88,0l-0.45,0.45l0,6.18l0.44,0.44l3.89,0zm-3.44,-6.18l3,0l0,5.29l-3,0l0,-5.29z" class="st0"/>
+  </g>
+ </g>
+</svg>
