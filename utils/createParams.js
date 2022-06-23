@@ -5,6 +5,8 @@ const createParams = (query, limit, offset, selectedFacets) => {
 
     if (query && query !== '') {
         params['query'] = query
+    } else {
+        params['query'] = '*'
     }
 
     if (limit) {

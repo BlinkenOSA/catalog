@@ -1,0 +1,32 @@
+@import "../../styles/variables";
+
+.FacetHelperText {
+  .FacetGroup {
+    padding: 15px 15px 0 15px;
+  }
+
+  .FacetExplanation {
+    padding: 10px 10px 10px 15px;
+  }
+
+  p {
+    margin: 0 0 10px 0;
+  }
+
+  h3, h2 {
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+  }
+
+  h3 {
+    font-size: 14px;
+    padding: 15px 0 5px 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0;
+  }
+}

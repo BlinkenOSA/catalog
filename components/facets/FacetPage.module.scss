@@ -1,7 +1,6 @@
 @import "../../styles/variables";
 
 .FacetPageWrapper {
-  position: absolute;
   width: 100%;
   background-color: $black;
 }
@@ -9,14 +8,15 @@
 .FacetPage {
   margin: 0 auto;
   max-width: $max-width;
-  min-height: calc(100vh - 101px);
-  border-left: 2px solid $background;
+  min-height: calc(100vh - 57px - 44px);
+  border-left: 2px solid $white;
   display: flex;
 }
 
 .FacetSelection {
   width: $left-width;
-  border-right: 2px solid $background;
+  border-right: 2px solid $white;
+  border-left: 2px solid $white;
 }
 
 .FacetDescription {

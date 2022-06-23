@@ -11,6 +11,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeArchivalUnit.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Archival Unit</span>
                 </div>
             )
         case 'Book':
@@ -22,6 +23,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeBook.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Book</span>
                 </div>
             );
         case 'Continuing Resource':
@@ -33,6 +35,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeContinuingResource.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Continuing Resource</span>
                 </div>
             );
         case 'Folder / Item':
@@ -44,6 +47,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeFolderItem.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Folder / Item</span>
                 </div>
             );
         case 'Moving Image':
@@ -55,6 +59,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeMovingImage.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Moving Image</span>
                 </div>
             );
         case 'Textual':
@@ -66,6 +71,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeTextual.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Textual</span>
                 </div>
             );
         case 'Still Image':
@@ -77,6 +83,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeImage.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Still Image</span>
                 </div>
             );
         case 'Audio':
@@ -88,6 +95,7 @@ const PrimaryTypeButton = ({primaryType}) => {
                         src={'/icons/TypeAudio.svg'}
                         style={{display: 'block'}}
                     />
+                    <span className={style.Text}>Audio</span>
                 </div>
             );
     }

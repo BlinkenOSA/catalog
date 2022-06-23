@@ -1,8 +1,6 @@
 @import "../../styles/variables";
 
-.Content {
-  margin: 0 auto;
-  max-width: $max-width;
-  min-height: 600px;
-  border-left: 2px solid $black;
+.ContentWrap {
+  padding-top: 57px;
+  height: 100%;
 }

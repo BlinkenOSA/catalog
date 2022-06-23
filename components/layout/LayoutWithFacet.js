@@ -9,16 +9,15 @@ import style from "./Layout.module.scss";
  * @param {Object} params
  * @param {React.ReactChildren} params.children
  */
-const Layout = ({children}) => {
+const LayoutWithFacet = ({children}) => {
     return (
         <React.Fragment>
             <Header />
             <div className={style.ContentWrap}>
                 {children}
             </div>
-            <Footer />
         </React.Fragment>
     )
 }
 
-export default Layout;
+export default LayoutWithFacet;

@@ -14,12 +14,13 @@ const SearchBar = () => {
     const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
-        setSearchValue(query)
+        if (query !== '*') {
+            setSearchValue(query)
+        }
     }, [query])
 
     const handleSearch = () => {
         router.replace({
-            pathname: '/search',
             query: createParams(searchValue, limit, offset, selectedFacets),
         }, undefined, {shallow: true});
     }

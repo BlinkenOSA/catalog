@@ -1,6 +1,10 @@
 @import "_variables.scss";
 @import "_fonts.scss";
 
+#__next {
+  // height: 100%;
+}
+
 html {
   height: 100vh;
 }
@@ -13,6 +17,8 @@ body {
   background-color: $background;
   color: $black;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   min-height: 100% !important;
   height: 100vh;
 }

@@ -1,5 +1,11 @@
 @import "../../../styles/variables";
 
+.ResultCounterWrapper {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  align-self: flex-start;
+}
+
 .ResultCounter {
   color: $white;
   font-family: "Suisse Intl", serif;
@@ -29,6 +35,8 @@
 .FilterButtonWrapper {
   margin-top: 5px;
   width: 100%;
+  display: inline-flex;
+  justify-content: center;
 }
 
 .FilterButton {
@@ -42,6 +50,7 @@
   background-color: $white;
   font-family: "Suisse Intl", serif;
   width: 170px;
+
 
   &:hover {
     cursor: pointer;

@@ -96,10 +96,13 @@
   }
 }
 
-
 .FacetsInverse {
   color: $white;
-  border-right: 2px solid $white;
+  border-right: none  ;
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 101px;
+  align-self: flex-start;
 
   li {
     border-bottom: 2px solid $white;

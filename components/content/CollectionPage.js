@@ -12,7 +12,7 @@ import ArchivalUnitDrawer from "./parts/archivalUnitDrawer/ArchivalUnitDrawer";
  */
 const CollectionPage = () => {
     const [openNodes, setOpenNodes] = useState([]);
-    const { data, error } = useSWR('/archival_units', fetcher);
+    const { data, error } = useSWR('archival_units', fetcher);
 
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
 
