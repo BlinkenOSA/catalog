@@ -4,7 +4,7 @@ const Button = ({link, text}) => {
     if (link) {
         return (
             <a href={link} className={style.Link}>
-                <div className={style.Button}>
+                <div className={style.ButtonWithLink}>
                     <span>{text}</span>
                 </div>
             </a>

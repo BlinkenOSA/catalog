@@ -1,0 +1,12 @@
+.Description {
+  flex: 1;
+  display: flex;
+
+  .Label {
+    width: 130px;
+  }
+
+  .Value {
+    flex: 1;
+  }
+}

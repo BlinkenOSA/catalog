@@ -45,8 +45,11 @@ const Index = () => {
                 />
                 {
                     Object.entries(router.query).length === 0 ?
-                        <IndexPage onSelectFacetGroup={onSelectFacetGroup} /> :
+                        <IndexPage
+                            onSelectFacetGroup={onSelectFacetGroup}
+                        /> :
                         <SearchPage
+                            data={data}
                             onSelectFacetGroup={onSelectFacetGroup}
                         />
                 }

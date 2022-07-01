@@ -1,0 +1,55 @@
+@import "../../styles/variables";
+
+.ResultItemWrapper {
+  display: flex;
+  min-height: 50px;
+  border-bottom: 2px solid $black;
+}
+
+.ResultItemWrapperLast {
+  display: flex;
+  min-height: 50px;
+}
+
+.ResultItemInfo {
+  flex: 1;
+  padding: 15px;
+
+  .Sequence {
+    font-family: "Suisse Intl", serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .Title {
+    font-family: "Suisse Works", "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding-top: 5px;
+  }
+
+  .Subtitle {
+    font-family: "Suisse Works", "Times New Roman", serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding-top: 2px;
+  }
+
+  .DescriptionWrap {
+    padding-top: 17px;
+    font-family: "Suisse Intl", serif;
+    font-weight: 400;
+    font-size: 14px;
+    gap: 16px;
+  }
+
+  .Buttons {
+    display: inline-flex;
+    gap: 6px;
+    margin-top: 20px;
+  }
+}
+
+.ResultItemThumbnail {
+  width: 264px;
+}

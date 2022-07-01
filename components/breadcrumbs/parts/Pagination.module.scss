@@ -1,0 +1,87 @@
+@import "../../../styles/variables";
+
+.Pagination {
+  justify-content: right;
+  align-items: center;
+  height: 22px;
+  display: flex;
+  font-size: 12px;
+  margin-top: 8px;
+  margin-left: 20px;
+
+  .Counters {
+    line-height: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .Previous {
+    line-height: 22px;
+    padding-right: 10px;
+    border-right: 1px solid $black;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+    }
+  }
+
+  .PreviousDisabled {
+    color: $button-background;
+    line-height: 22px;
+    padding-right: 10px;
+    border-right: 1px solid $black;
+
+    span {
+      border: solid $button-background;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(135deg);
+      -webkit-transform: rotate(135deg);
+    }
+  }
+
+  .Next {
+    line-height: 22px;
+    padding-left: 10px;
+    border-left: 1px solid $black;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    span {
+      border: solid black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+  }
+
+  .NextDisabled {
+    color: $button-background;
+    line-height: 22px;
+    padding-left: 10px;
+    border-left: 1px solid $black;
+
+    span {
+      border: solid $button-background;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+    }
+  }
+}

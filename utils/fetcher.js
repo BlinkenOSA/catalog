@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {processParams} from "./processParams";
-import {base} from "next/dist/build/webpack/config/blocks/base";
 import {facetConfig} from "../config/facetConfig";
 export const API = process.env.NEXT_PUBLIC_CATALOG_API;
 
@@ -61,6 +60,10 @@ export const solrFetcher = (params) => {
 
     if (limit) {
         baseParams.append('rows', limit)
+    }
+
+    if (offset) {
+        baseParams.append('start', offset)
     }
 
     return axios.get(

@@ -53,7 +53,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
         const sf = addFacet(selectedFacets, selectedFacetGroup, value);
 
         router.replace({
-            query: createParams(query, limit, offset, sf),
+            query: createParams(query, limit, 0, sf),
         }, undefined, {shallow: true});
     };
 
@@ -66,7 +66,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
         const newFacets = removeFacet(selectedFacets, selectedFacetGroup, value)
 
         router.replace({
-            query: createParams(query, limit, offset, newFacets),
+            query: createParams(query, limit, 0, newFacets),
         }, undefined, {shallow: true})
     }
 

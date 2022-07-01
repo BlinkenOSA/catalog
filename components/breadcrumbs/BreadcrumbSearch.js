@@ -8,6 +8,7 @@ import {facetConfig} from "../../config/facetConfig";
 import {removeFacet} from "../../utils/facetActions";
 import {processParams} from "../../utils/processParams";
 import DropDown from "./parts/DropDown";
+import Pagination from "./parts/Pagination";
 
 /**
  * Breadcrumb component.
@@ -17,7 +18,7 @@ import DropDown from "./parts/DropDown";
  *                        detail one.
  * @param {boolean} params.inverse Define if the menu is in inverse (dark) display mode.
  */
-const BreadcrumbSearch = ({reference, module, inverse}) => {
+const BreadcrumbSearch = ({reference, module, inverse, total}) => {
     const router = useRouter();
     const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(router.query)
 
@@ -31,7 +32,7 @@ const BreadcrumbSearch = ({reference, module, inverse}) => {
         const newFacets = removeFacet(selectedFacets, facetGroup, facetValue)
 
         router.replace({
-            query: createParams(query, limit, offset, newFacets),
+            query: createParams(query, limit, 0, newFacets),
         }, undefined, {shallow: true})
     }
 
@@ -75,7 +76,7 @@ const BreadcrumbSearch = ({reference, module, inverse}) => {
      */
     const onQueryRemove = () => {
         router.replace({
-            query: createParams('', limit, offset, selectedFacets),
+            query: createParams('', limit, 0, selectedFacets),
         }, undefined, {shallow: true})
     }
 
@@ -97,21 +98,27 @@ const BreadcrumbSearch = ({reference, module, inverse}) => {
         }
     }
 
-    const onPerPageChange = (value) => {
+    const onPerPageChange = (limit) => {
         router.replace({
-            query: createParams(query, value, offset, selectedFacets),
+            query: createParams(query, limit, 0, selectedFacets),
+        }, undefined, {shallow: true})
+    };
+
+    const onChangePage = (offset) => {
+        router.replace({
+            query: createParams(query, limit, offset, selectedFacets),
         }, undefined, {shallow: true})
     };
 
     const renderPerPageModifier = () => {
         const recordsPerPageOptions = [
-            {value: 10, label: '10 per page'},
-            {value: 20, label: '20 per page'},
-            {value: 50, label: '50 per page'},
-            {value: 100, label: '100 per page'}
+            {value: '10', label: '10 per page'},
+            {value: '20', label: '20 per page'},
+            {value: '50', label: '50 per page'},
+            {value: '100', label: '100 per page'}
         ];
 
-        return <DropDown onSelect={onPerPageChange} options={recordsPerPageOptions} defaultValue={10}/>;
+        return <DropDown onSelect={onPerPageChange} options={recordsPerPageOptions} defaultValue={limit ? limit : '10'}/>;
     }
 
     const renderSortingModifier = () => {
@@ -144,10 +151,17 @@ const BreadcrumbSearch = ({reference, module, inverse}) => {
                     </div>
                     {
                         !inverse &&
-                        <div className={style.ResultModifiersWrapper}>
-                            {renderPerPageModifier()}
-                            {renderSortingModifier()}
-                        </div>
+                        <React.Fragment>
+                            <div className={style.ResultModifiersWrapper}>
+                                {renderPerPageModifier()}
+                            </div>
+                                <Pagination
+                                    limit={limit}
+                                    offset={offset}
+                                    total={total}
+                                    onChangePage={onChangePage}
+                                />
+                        </React.Fragment>
                     }
                 </React.Fragment>
             )

@@ -1,0 +1,14 @@
+@import "../../../../styles/variables";
+
+.Button {
+  .DigitalVersion {
+    .Label {
+      padding-right: 10px;
+    }
+
+    .Barcode {
+      padding-left: 10px;
+      border-left: 1px solid $white;
+    }
+  }
+}

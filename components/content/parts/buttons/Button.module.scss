@@ -4,7 +4,7 @@
   text-decoration: none;
 }
 
-.Button {
+.Button, .ButtonWithLink {
   height: 25px;
   background-color: $button-background;
   border-radius: 13px;
@@ -15,8 +15,9 @@
   line-height: 25px;
   padding: 0 10px;
   text-transform: uppercase;
+  display: inline-block;
 }
 
-.Button:hover {
+.ButtonWithLink:hover {
   background-color: $black;
 }

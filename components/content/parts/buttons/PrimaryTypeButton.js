@@ -98,6 +98,8 @@ const PrimaryTypeButton = ({primaryType}) => {
                     <span className={style.Text}>Audio</span>
                 </div>
             );
+        default:
+            return ''
     }
 }
 
