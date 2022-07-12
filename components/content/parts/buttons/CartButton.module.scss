@@ -38,7 +38,6 @@
     background-color: $button-background;
     -webkit-transition: .4s;
     transition: .4s;
-    z-index: 999;
 
     .Label {
       display: flex;
@@ -127,7 +126,7 @@
     background-color: $black;
     -webkit-transition: .4s;
     transition: .4s;
-    z-index: 999;
+    z-index: 199;
   }
 
   /* Rounded sliders */
@@ -139,5 +138,3 @@
     border-radius: 50%;
   }
 }
-
-

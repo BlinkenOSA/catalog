@@ -8,14 +8,40 @@ import CallNumber from "./parts/metadata/CallNumber";
 import AvailabilityButton from "./parts/buttons/AvailabilityButton";
 import PrimaryTypeButton from "../content/parts/buttons/PrimaryTypeButton";
 import CartButton from "../content/parts/buttons/CartButton";
+import {useCart} from "react-use-cart";
+import countObjectsByProperty from "../../utils/countObjectsByProperty";
+import { useAlert } from 'react-alert'
 
-const ResultItem = ({result, limit, offset, index, inCart, onCartAction}) => {
+const ResultItem = ({result, limit, offset, index}) => {
+    const { addItem, removeItem, items, inCart } = useCart();
+    const alert = useAlert()
+
     const renderThumbnail = () => {
         return (
             <div className={style.ResultItemThumbnail}>
 
             </div>
         )
+    }
+
+    const onCheckedChange = (checked) => {
+        if (checked) {
+            const count = countObjectsByProperty(items, 'origin', result['record_origin']);
+
+            const item = {
+                id: result['id'],
+                origin: result['record_origin'],
+                price: 0
+            }
+
+            if (count >= 10) {
+                alert.show(`You have reached the maximum amount of '${result['record_origin']}' items allowed to be requested!`);
+            } else {
+                addItem(item, 1);
+            }
+        } else {
+            removeItem(result['id'])
+        }
     }
 
     const renderCartButton = () => {
@@ -27,7 +53,39 @@ const ResultItem = ({result, limit, offset, index, inCart, onCartAction}) => {
             return ''
         }
 
-        return <CartButton inCart={inCart} name={result['id']} onCheckedChange={onCartAction} />
+        return (
+            <CartButton
+                inCart={inCart(result['id'])}
+                name={result['id']}
+                onCheckedChange={onCheckedChange}
+            />
+        )
+
+        /*
+        const count = countObjectsByProperty(items, 'origin', result['record_origin']);
+
+        if (count >= 10) {
+            if (inCart(result['id']) || result['digital_version_exists']) {
+                return (
+                    <CartButton
+                        inCart={inCart(result['id'])}
+                        name={result['id']}
+                        onCheckedChange={onCheckedChange}
+                    />
+                )
+            } else {
+                return ''
+            }
+        } else {
+            return (
+                <CartButton
+                    inCart={inCart(result['id'])}
+                    name={result['id']}
+                    onCheckedChange={onCheckedChange}
+                />
+            )
+        }
+        */
     }
 
     return (

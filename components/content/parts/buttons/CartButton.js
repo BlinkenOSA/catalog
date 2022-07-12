@@ -1,25 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import style from './CartButton.module.scss';
 
-const CartButton = ({name, inCart, onCheckedChange}) => {
-    const [checked, setChecked] = useState(false);
-
-    useEffect(() => {
-        setChecked(inCart)
-    }, [inCart])
-
+const CartButton = ({name, disabled, inCart, onCheckedChange}) => {
     const onChange = (checked) => {
-        setChecked(checked)
-        onCheckedChange(name, checked)
+        onCheckedChange(checked)
     }
 
     return (
-        <label className={style.Switch} htmlFor={name}>
+        <label className={disabled ? style.SwitchDisabled : style.Switch} htmlFor={name}>
             <input
                 type="checkbox"
                 id={name}
                 name={name}
-                checked={checked}
+                checked={inCart}
                 onChange={e => onChange(e.target.checked)}
             />
             <span className={`${style.Slider} ${style.Round}`}>

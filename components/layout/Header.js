@@ -1,7 +1,11 @@
 import React from "react";
 import style from "./Header.module.scss";
 import SearchBar from "./SearchBar";
-import Menu from "./Menu";
+import dynamic from "next/dynamic";
+
+const Menu = dynamic(() => import('./Menu'), {
+    ssr: false,
+})
 
 /**
  * Header of the page.
