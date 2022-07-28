@@ -16,7 +16,7 @@ const PrivacyPolicy = () => {
                 <div className={style.PageTitle}>
                     <h1>Privacy Policy</h1>
                 </div>
-                <div className={style.PageContent}>
+                <div className={style.StaticContent}>
                     <div>
                         <p>
                             The website Blinken OSA Catalog is operated by the Vera and Donald Blinken Open Society

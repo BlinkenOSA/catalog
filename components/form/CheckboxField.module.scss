@@ -1,0 +1,67 @@
+@import "../../styles/variables";
+
+.Field {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 25px;
+
+  .CheckboxLabel {
+    flex: 1;
+    display: flex;
+    font-family: 'Suisse Intl', serif;
+    font-weight: 400;
+    cursor: pointer;
+
+    .Checkbox {
+      position: relative;
+      margin: 3px 35px 0 0;
+      width: 33px;
+      -webkit-appearance: none;
+      appearance: none;
+      background-color: unset;
+      cursor: pointer;
+
+      &:before {
+        transition: transform .4s cubic-bezier(.45, 1.8, .5, .75);
+        transform: scale(0, 0);
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 9px;
+        left: 9px;
+        width: 15px;
+        height: 15px;
+        background: $black;
+      }
+
+      &:checked {
+        &:before {
+          transform: scale(1, 1);
+        }
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 33px;
+        height: 33px;
+        background: $form-background;
+      }
+    }
+
+    a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      color: $black;
+    }
+  }
+
+  .Error {
+    flex: 1;
+    margin-top: 5px;
+    font-family: "Suisse Intl Mono", serif;
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+

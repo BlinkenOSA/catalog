@@ -118,6 +118,7 @@
 
   .Slider:before {
     position: absolute;
+    text-align: left;
     content: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg' xml:space='preserve' version='1.1'%3E%3Cg%3E%3Ctitle%3ELayer 1%3C/title%3E%3Cg stroke='null' id='svg_1'%3E%3Cg stroke='null' id='svg_2'%3E%3Cpath stroke='null' id='svg_3' fill='%23FFFFFF' d='m19.02399,9.62423l-12.97266,0l-0.34441,0.42504l1.65315,8.13082l0.33675,0.28336l9.65105,0l0.33675,-0.28336l1.67611,-8.13082l-0.33675,-0.42504l0.00001,0zm-8.14331,4.06147l0,-3.35308l3.26038,0l0,3.35308c-0.00765,0 -3.26038,0 -3.26038,0zm3.25273,0.70839l0,3.35308l-3.25273,0l0,-3.35308l3.25273,0zm-3.9492,-4.06147l0,3.35308l-3.02312,0l-0.68116,-3.35308l3.70429,0l-0.00001,0zm-2.87771,4.06147l2.88536,0l0,3.35308l-2.2042,0l-0.68116,-3.35308zm9.75819,3.35308l-2.24247,0l0,-3.35308l2.93129,0l-0.68882,3.35308zm0.84189,-4.06147l-3.08436,0l0,-3.35308l3.77317,0l-0.68882,3.35308l0.00001,0z' class='st0'/%3E%3C/g%3E%3Cg stroke='null' id='svg_4'%3E%3Crect stroke='null' id='svg_5' fill='%23FFFFFF' height='6.45' width='0.91' class='st0' transform='matrix(0.612279 -0.472265 0.459209 0.629686 1.06947 4.00202)' y='10.2752' x='11.33044'/%3E%3C/g%3E%3Cg stroke='null' id='svg_6'%3E%3Crect stroke='null' id='svg_7' fill='%23FFFFFF' height='0.91' width='6.45' class='st0' transform='matrix(0.458904 -0.629923 0.612508 0.47195 0.832223 3.6933)' y='12.15537' x='1.08194'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     height: 25px;
     width: 25px;

@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.Field {
+  width: 100%;
+  padding: 0;
+  margin-bottom: 25px;
+
+  .Label {
+    font-family: 'Suisse Intl Condensed', serif;
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 8px;
+
+    .SubLabel {
+      font-family: 'Suisse Intl', serif;
+      font-weight: 400;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+
+    .Required {
+      margin-left: 5px;
+      color: red;
+    }
+  }
+
+  .Disabled {
+    color: $disabled-label;
+  }
+
+  textarea {
+    width: 100%;
+    border-radius: unset;
+    border: unset;
+    background-color: $form-background;
+    font-family: "Suisse Intl Mono", serif;
+    font-size: 12px;
+    padding: 10px;
+    resize: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    &:focus-visible {
+      outline: none;
+    }
+
+    &:disabled:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  .Error {
+    font-family: "Suisse Intl Mono", serif;
+    font-size: 12px;
+  }
+}

@@ -12,9 +12,17 @@ const RecordType = ({label, result}) => {
                     case 'Series':
                         return `Archival Series description`
                     case 'Folder':
-                        return `Folder in ${result['container_type']}`
+                        if (result['primary_type'] === 'Textual') {
+                            return `Folder in ${result['container_type']}`
+                        } else {
+                            return result['container_type']
+                        }
                     case `Item`:
-                        return `Item in a folder in ${result['container_type']}`
+                        if (result['primary_type'] === 'Textual') {
+                            return `Item in a folder in ${result['container_type']}`
+                        } else {
+                            return result['container_type']
+                        }
                     default:
                         return ''
                 }

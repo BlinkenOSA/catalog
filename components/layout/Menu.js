@@ -14,7 +14,7 @@ const Menu = () => {
                 <a href={'/archival-collections'}>OSA Collection</a>
             </li>
             <li>
-                <a href={'/cart'}>{totalUniqueItems > 0 ? `Cart (${totalUniqueItems})` : 'Cart'}</a>
+                <a href={'/requests'}>{totalUniqueItems > 0 ? `Requests (${totalUniqueItems})` : 'Requests'}</a>
             </li>
             <li>
                 <a href={'/info'}>Infos</a>

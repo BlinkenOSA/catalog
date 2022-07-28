@@ -5,7 +5,7 @@
   max-width: $max-width;
   border-left: 2px solid $black;
   border-right: 2px solid $black;
-  min-height: calc(100vh - (116px + 57px + 42px));
+  min-height: calc(100vh - (116px + 57px + 44px));
 
   .PageTitle {
     width: 100%;
@@ -20,7 +20,11 @@
     padding: 15px 20px;
   }
 
-  .PageContent {
+  .FormContent {
+    display: flex;
+  }
+
+  .StaticContent {
     display: flex;
     padding-bottom: 30px;
 
@@ -49,6 +53,23 @@
       text-decoration: underline;
       text-decoration-thickness: 2px;
       color: $black;
+    }
+
+    ol {
+
+      li {
+        font-family: "Suisse Intl", serif;
+        font-weight: 600;
+        font-size: 16px;
+        margin-top: 0;
+        margin-bottom: 20px;
+
+        ol {
+          li {
+            font-weight: 400;
+          }
+        }
+      }
     }
   }
 }

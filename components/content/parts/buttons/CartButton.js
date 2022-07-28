@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import style from './CartButton.module.scss';
 
 const CartButton = ({name, disabled, inCart, onCheckedChange}) => {

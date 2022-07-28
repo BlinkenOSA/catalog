@@ -134,6 +134,10 @@ const BreadcrumbSearch = ({reference, module, inverse, total}) => {
      * Rendering the right side content part of the breadcrumb.
      */
     const renderRightSideContent = () => {
+        if (module === 'staticPage' || module === 'collections') {
+            return ''
+        }
+
         if (Object.keys(selectedFacets).length === 0 && query === '') {
             return (
                 <div className={style.SearchText}>
@@ -175,7 +179,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total}) => {
         if (module === 'staticPage' || module === 'collections') {
             return (
                 <div className={style.Navigation}>
-                    <a href={'/search'}>
+                    <a href={'/'}>
                         <AiOutlineLeft /> <span>Back to Catalog</span>
                     </a>
                 </div>

@@ -14,6 +14,10 @@ const ParentUnits = ({label, result}) => {
                         <DescriptionValue label={label} value={'HU OSA 1-1 Records of the Open Society Foundation for Albania:Executive Office'} />
                     </React.Fragment>
                 )
+            case 'Folder':
+                return <DescriptionValue label={label} value={result['series_name']} />
+            case 'Item':
+                return <DescriptionValue label={label} value={result['series_name']} />
             default:
                 return ''
         }

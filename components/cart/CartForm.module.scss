@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.CartFormWrapper {
+  min-height: 400px;
+  width: 470px;
+  margin-bottom: 50px;
+
+  .Form {
+    padding: 25px 70px 25px 70px;
+  }
+
+  .SubmitButtonWrapper {
+    margin-top: 40px;
+  }
+
+  .FormButton {
+    width: 200px;
+    height: 36px;
+    background-color: $black;
+    border-radius: 18px;
+    font-family: "Suisse Intl", serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $white;
+    border: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $yellow;
+      color: $black;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      color: $disabled-label;
+      background-color: $form-background;
+    }
+  }
+
+  .Registration {
+    width: 250px;
+    margin-top: 40px;
+
+    span {
+      font-family: "Suisse Intl", serif;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .FormButton {
+      margin-top: 20px;
+    }
+  }
+
+
+}

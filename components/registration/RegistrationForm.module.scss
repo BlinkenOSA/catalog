@@ -1,0 +1,47 @@
+@import "../../styles/variables";
+
+.RegistrationFormWrapper {
+  min-height: 400px;
+
+  .Form {
+    padding: 25px 70px 25px 70px;
+
+    form {
+      display: flex;
+      gap: 70px;
+    }
+  }
+
+  .Column {
+    flex: 1
+  }
+
+  .SubmitButtonWrapper {
+    margin-top: 40px;
+
+    button {
+      width: 100%;
+      height: 46px;
+      background-color: $black;
+      border-radius: 23px;
+      font-family: "Suisse Intl", serif;
+      font-weight: 300;
+      font-size: 30px;
+      text-transform: uppercase;
+      color: $white;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $yellow;
+        color: $black;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        color: $disabled-label;
+        background-color: $form-background;
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+@import "../../styles/variables";
+
+.CartListWrapper {
+  flex: 1;
+  border-left: 2px solid $black;
+
+  .OriginRow {
+    width: 100%;
+    border-bottom: 2px solid $black;
+    height: 30px;
+    background-color: $form-background;
+
+    span {
+      padding-left: 10px;
+      font-family: "Suisse Intl Mono", serif;
+      font-size: 14px;
+      line-height: 30px;
+    }
+  }
+
+  .CartItem {
+    display: flex;
+    min-height: 60px;
+    align-items: center;
+    border-bottom: 2px solid $black;
+    padding: 10px 25px 10px 25px;
+    font-family: "Suisse Works", serif;
+    font-weight: 400;
+    font-size: 12px;
+
+    .CartButton {
+      width: 70px;
+    }
+
+    .Title {
+      flex: 1;
+
+      span {
+        font-weight: 600;
+      }
+
+    }
+
+    .CallNumber {
+      width: 170px;
+    }
+  }
+}
+
+.CartListEmptyWrapper {
+  flex: 1;
+  border-left: 2px solid $black;
+
+  .IconWrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    .Content {
+      flex: 1;
+      text-align: center;
+
+      .Icon {
+        font-size: 100px;
+        color: $form-background;
+      }
+
+      .MainText {
+        font-family: "Suisse Intl Mono", serif;
+        font-weight: 400;
+        font-size: 36px;
+      }
+
+      .Text {
+        margin-top: 30px;
+        font-family: "Suisse Intl", serif;
+        font-weight: 400;
+        font-size: 14px;
+      }
+
+      .CartIcon {
+        margin-top: 30px;
+      }
+    }
+  }
+}

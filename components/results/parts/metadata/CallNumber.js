@@ -6,6 +6,8 @@ const CallNumber = ({label, result}) => {
         switch (result['description_level']) {
             case 'Folder':
                 return <DescriptionValue label={label} value={result['call_number']} />
+            case 'Item':
+                return <DescriptionValue label={label} value={result['call_number']} />
             default:
                 return ''
         }
