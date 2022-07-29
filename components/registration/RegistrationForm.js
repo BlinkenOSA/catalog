@@ -10,6 +10,7 @@ import {countries} from "./options/countries";
 import RadioGroupField from "../form/RadioGroupField";
 import {publishOptions} from "./options/publish";
 import CheckboxField from "../form/CheckboxField";
+import CaptchaField from "../form/CaptchaField";
 
 const RegistrationForm = () => {
     const validationSchema = Yup.object().shape({
@@ -21,7 +22,8 @@ const RegistrationForm = () => {
         occupation: Yup.string().required('Required'),
         occupation_type: Yup.string().required('Please select one occupation type'),
         agree_archival_materials_usage: Yup.boolean().oneOf([true], 'You should accept the conditions'),
-        agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement")
+        agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement"),
+        captcha: Yup.string().required('Required!')
     })
 
     const initialValues = {
@@ -32,6 +34,7 @@ const RegistrationForm = () => {
         citizenship: '',
         occupation: '',
         occupation_type: '',
+        degree: '',
         publish: 'false',
         agree_archival_materials_usage: false,
         agree_researcher_statement: false
@@ -44,7 +47,6 @@ const RegistrationForm = () => {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={(values, actions) => {
-                        console.log(values)
                         setTimeout(() => {
                             alert(JSON.stringify(values, null, 2));
                             actions.setSubmitting(false);
@@ -131,7 +133,6 @@ const RegistrationForm = () => {
                                 <SelectField
                                     name="occupation"
                                     label="Occupation"
-                                    defaultValue={''}
                                     required={true}
                                     selectOptions={occupationOptions}
                                 />
@@ -153,7 +154,6 @@ const RegistrationForm = () => {
                                 <SelectField
                                     name="degree"
                                     label="Degree"
-                                    defaultValue={''}
                                     selectOptions={degreeOptions}
                                 />
                             </div>
@@ -195,6 +195,7 @@ const RegistrationForm = () => {
                                 <div className={style.SubmitButtonWrapper}>
                                     <button type="submit">Register</button>
                                 </div>
+                                <CaptchaField />
                             </div>
                         </Form>
                     )}

@@ -40,6 +40,9 @@
       font-family: "Suisse Intl Mono", serif;
       font-size: 12px;
       padding: 0 10px;
+      -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+      -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+      box-sizing: border-box;
 
       &:focus-visible {
         outline: none;

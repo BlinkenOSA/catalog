@@ -4,6 +4,7 @@ import InputField from "../form/InputField";
 import DatePickerField from "../form/DatePickerField";
 import * as Yup from 'yup';
 import {useCart} from "react-use-cart";
+import CaptchaField from "../form/CaptchaField";
 
 const CartForm = () => {
     const { isEmpty } = useCart();
@@ -22,6 +23,7 @@ const CartForm = () => {
         card_number: Yup.string().required('Required'),
         email: Yup.string().email('Invalid email address').required('Required'),
         request_date: Yup.date().required('Required'),
+        captcha: Yup.date().required('Required')
     })
 
     return (
@@ -63,6 +65,7 @@ const CartForm = () => {
                                 minDate={new Date()}
                                 maxDate={getMaxDate()}
                             />
+                            {!isEmpty && <CaptchaField />}
                             <div className={style.SubmitButtonWrapper}>
                                 <button className={style.FormButton} type="submit" disabled={isEmpty}>
                                     Send Request

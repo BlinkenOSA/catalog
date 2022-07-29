@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hcaptcha/react-hcaptcha": "^1.4.4",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
     "next": "12.0.10",
