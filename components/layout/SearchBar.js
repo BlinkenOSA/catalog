@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import style from "./SearchBar.module.scss";
-import {AiOutlineCloseCircle, AiOutlineSearch} from "react-icons/ai";
+import {AiOutlineSearch} from "react-icons/ai";
 import {useRouter} from "next/router";
-import createParams from "../../utils/createParams";
+import {createParams} from "../../utils/urlParamFunctions";
 
 /**
  * Search bar in the header.

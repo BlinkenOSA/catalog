@@ -6,98 +6,40 @@ import Publisher from "./parts/metadata/Publisher";
 import ParentUnits from "./parts/metadata/ParentUnits";
 import CallNumber from "./parts/metadata/CallNumber";
 import AvailabilityButton from "./parts/buttons/AvailabilityButton";
-import PrimaryTypeButton from "../content/parts/buttons/PrimaryTypeButton";
-import CartButton from "../content/parts/buttons/CartButton";
-import {useCart} from "react-use-cart";
-import { useAlert } from 'react-alert'
-import countObjectsByProperties from "../../utils/countObjectsByProperty";
+import PrimaryTypeButton from "../pages/parts/buttons/PrimaryTypeButton";
+import CartButton from "../cart/CartButton";
+import { useCart } from "react-use-cart";
 
 const ResultItem = ({result, limit, offset, index}) => {
-    const { addItem, removeItem, items, inCart } = useCart();
-    const alert = useAlert()
+    const { inCart } = useCart();
 
     const renderThumbnail = () => {
-        return (
-            <div className={style.ResultItemThumbnail}>
-
-            </div>
-        )
-    }
-
-    const isFolderItem = () => {
-        if (result.hasOwnProperty('archival_level')) {
-            if (result['archival_level'] === 'Folder/Item') {
-                return true
-            }
-        }
-        return false;
-    }
-
-    const countContainers = () => {
-        const uniqueSet = [...new Set(items.map(item => item['container_code']))]
-        return uniqueSet.length - 1;
-    }
-
-    const onCheckedChange = (checked) => {
-        const getSortingCode = () => {
-            if (isFolderItem()) {
-                const [fonds, subfonds, series] = result['series_reference_code'].trim().split('-')
-                const container = result['container_number'].toString()
-                const folder = result['folder_number'].toString()
-                const sequence = result['sequence_number'].toString()
-                return `${fonds.padStart(4, 0)}-${subfonds.padStart(4, 0)}-${series.padStart(4, 0)}-${container.padStart(4, 0)}-${folder.padStart(4, 0)}-${sequence.padStart(4, 0)}`
-            } else {
-                return result['title']
-            }
-        }
-
-        const getType = () => {
-            if (isFolderItem()) {
-                return `${result['container_type']} #${result['container_number']}`
-            } else {
-                return `${result['primary_type']}${result['extent'] ? `, ${result['extent'].join(', ')}` : ''}`
-            }
-        }
-
-        if (checked) {
-            let count;
-
-            if (isFolderItem()) {
-                count = countContainers()
-            } else {
-                count = countObjectsByProperties(items, 'origin', result['record_origin']);
-            }
-
-            const item = {
-                id: result['id'],
-                origin: result['record_origin'],
-                title: result['title'],
-                title_original: result.hasOwnProperty('title_original') ? result['title_original'] : '',
-                call_number: result.hasOwnProperty('call_number') ? result['call_number'][0] : '',
-                sorting_code: getSortingCode(),
-                digital_version: result.hasOwnProperty('digital_version_barcode') ? result['digital_version_barcode'] : '',
-                type: getType(),
-                series_name: result.hasOwnProperty('series_name') ? result['series_name'] : '',
-                price: 0
-            }
-
-            if (count >= 10) {
-                if (isFolderItem()) {
-                    alert.show(`You have reached the maximum amount of boxes allowed to be requested!`);
-                } else {
-                    alert.show(`You have reached the maximum amount of '${result['record_origin']}' items allowed to be requested!`);
-                }
-            } else {
-                addItem(item, 1);
-            }
+        if (result['record_origin'] === 'Library') {
+            return (
+                <div className={style.ResultItemThumbnail}>
+                    <a href={`/catalog/${result['id']}`}>
+                        <div>
+                            <img
+                                alt={`Book cover of ${result['title']}`}
+                                style={{maxHeight: '250px'}}
+                                src={`api/library/book-cover/${result['id']}`}
+                            />
+                        </div>
+                    </a>
+                </div>
+            )
         } else {
-            removeItem(result['id'])
+            return (
+                <div className={style.ResultItemThumbnail}>
+
+                </div>
+            )
         }
     }
 
     const renderAvailabilityButton = () => {
         if (result['primary_type'] !== 'Archival Unit') {
-            return <AvailabilityButton result={result} />
+            return <AvailabilityButton record={result} />
         } else {
             return ''
         }
@@ -116,7 +58,7 @@ const ResultItem = ({result, limit, offset, index}) => {
             <CartButton
                 inCart={inCart(result['id'])}
                 name={result['id']}
-                onCheckedChange={onCheckedChange}
+                record={result}
             />
         )
     }
@@ -128,7 +70,9 @@ const ResultItem = ({result, limit, offset, index}) => {
                     {offset + index + 1}.
                 </div>
                 <div className={style.Title}>
-                    <Title result={result} />
+                    <a href={`/catalog/${result['id']}`}>
+                        <Title result={result} />
+                    </a>
                 </div>
                 <div className={style.Subtitle}>
                     <Subtitle result={result} />
@@ -141,7 +85,7 @@ const ResultItem = ({result, limit, offset, index}) => {
                 </div>
                 <div className={style.Buttons} >
                     {renderCartButton()}
-                    <PrimaryTypeButton primaryType={result['primary_type']} />
+                    <PrimaryTypeButton origin={result['record_origin']} primaryType={result['primary_type']} />
                     {renderAvailabilityButton()}
                 </div>
             </div>

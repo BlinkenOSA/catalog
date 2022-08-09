@@ -1,7 +1,7 @@
 import style from "./CartList.module.scss";
 import {useCart} from "react-use-cart";
 import React, {useState} from 'react';
-import CartButton from "../content/parts/buttons/CartButton";
+import CartButton from "../cart/CartButton";
 import { FiMeh } from 'react-icons/fi';
 
 const CartList = () => {
@@ -34,7 +34,7 @@ const CartList = () => {
                     <CartButton
                         inCart={inCart(item['id'])}
                         name={item['id']}
-                        onCheckedChange={(checked) => removeItem(item['id'])}
+                        onCheckedChange={() => removeItem(item['id'])}
                     />
                 </div>
                 <div className={style.CallNumber}>{item['call_number']}</div>

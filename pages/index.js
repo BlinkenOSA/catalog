@@ -1,13 +1,13 @@
 import Head from 'next/head'
 import Layout from "../components/layout/Layout";
 import BreadcrumbSearch from "../components/breadcrumbs/BreadcrumbSearch";
-import IndexPage from "../components/content/IndexPage";
+import IndexPage from "../components/pages/IndexPage";
 import React, {useState} from "react";
 import FacetPage from "../components/facets/FacetPage";
 import useSWR from "swr";
-import {solrFetcher} from "../utils/fetcher";
+import {solrFetcher} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
-import SearchPage from "../components/content/SearchPage";
+import SearchPage from "../components/pages/SearchPage";
 import LayoutWithFacet from "../components/layout/LayoutWithFacet";
 import {useMeasure} from "react-use";
 

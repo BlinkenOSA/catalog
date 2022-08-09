@@ -3,10 +3,9 @@ import style from "./BreadcrumbSearch.module.scss";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import {useRouter} from "next/router";
 import { AiOutlineClose, AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
-import createParams from "../../utils/createParams";
+import {createParams, processParams} from "../../utils/urlParamFunctions";
 import {facetConfig} from "../../config/facetConfig";
-import {removeFacet} from "../../utils/facetActions";
-import {processParams} from "../../utils/processParams";
+import {removeFacet} from "../../utils/facetFunctions";
 import DropDown from "./parts/DropDown";
 import Pagination from "./parts/Pagination";
 

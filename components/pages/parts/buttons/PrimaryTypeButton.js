@@ -1,6 +1,20 @@
 import style from "./PrimaryTypeButton.module.scss";
 
-const PrimaryTypeButton = ({primaryType}) => {
+const PrimaryTypeButton = ({origin, primaryType}) => {
+    if (origin === 'Film Library') {
+        return (
+            <div className={style.Button}>
+                <img
+                    alt="MovingImageIcon"
+                    title={'Moving Image'}
+                    src={'/icons/TypeMovingImage.svg'}
+                    style={{display: 'block'}}
+                />
+                <span className={style.Text}>Moving Image</span>
+            </div>
+        )
+    }
+
     switch (primaryType) {
         case 'Archival Unit':
             return(

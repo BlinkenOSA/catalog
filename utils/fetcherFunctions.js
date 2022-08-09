@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {processParams} from "./processParams";
+import {processParams} from "./urlParamFunctions";
 import {facetConfig} from "../config/facetConfig";
 export const API = process.env.NEXT_PUBLIC_CATALOG_API;
 
@@ -9,6 +9,13 @@ export const fetcher = (url, params) => {
         {params: params}
     ).then(res => res.data);
 };
+
+export const nextAPIFetcher = (url, params) => {
+    return axios.get(
+        `${url}`,
+        {params: params}
+    ).then(res => res.data);
+}
 
 export const solrFetcher = (params) => {
     const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(params)

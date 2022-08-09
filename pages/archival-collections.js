@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 
 
 const ArchivalCollections = () => {
-    const CollectionPage = dynamic(() => import('../components/content/CollectionPage'), {
+    const CollectionPage = dynamic(() => import('../components/pages/CollectionPage'), {
         ssr: false
     })
 

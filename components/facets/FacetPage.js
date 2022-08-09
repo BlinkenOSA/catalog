@@ -5,8 +5,8 @@ import FacetValues from "./parts/FacetValues";
 import FacetHelper from "./parts/FacetHelper";
 import ResultCounter from "./parts/ResultCounter";
 import {useRouter} from "next/router";
-import {addFacet, removeFacet} from "../../utils/facetActions";
-import createParams from "../../utils/createParams";
+import {addFacet, removeFacet} from "../../utils/facetFunctions";
+import {createParams} from "../../utils/urlParamFunctions";
 import {facetConfig} from "../../config/facetConfig";
 import FacetDateRange from "./parts/FacetDateRange";
 
