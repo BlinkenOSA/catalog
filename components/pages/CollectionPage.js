@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from "./CollectionPage.module.scss";
 import useSWR from 'swr'
 import {fetcher} from "../../utils/fetcherFunctions";
@@ -10,14 +10,37 @@ import ArchivalUnitDrawer from "./parts/archivalUnitDrawer/ArchivalUnitDrawer";
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
  */
-const CollectionPage = () => {
+const CollectionPage = ({fondsID, activeUnit, activeUnitID, showArchiveUnitDrawer = false}) => {
     const [openNodes, setOpenNodes] = useState([]);
-    const { data, error } = useSWR('archival_units', fetcher);
+    const { data, error } = useSWR(fondsID ? `archival_units_list/${fondsID}` : 'archival_units_list', fetcher);
 
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
 
+    useEffect(() => {
+        if (activeUnit && activeUnitID) {
+            let nodes = []
+            const units = activeUnit.split('-')
+            switch (units.length) {
+                case 1:
+                    nodes.push(units[0]);
+                    break;
+                case 2:
+                    nodes.push(units[0])
+                    nodes.push(units.join('-'))
+                    break;
+                case 3:
+                    nodes.push(units[0])
+                    nodes.push(`${units[0]}-${units[1]}`)
+                    nodes.push(`${units[0]}-${units[1]}-${units[2]}`)
+                    break;
+            }
+            setOpenNodes(nodes);
+            setSelectedArchivalUnit(Number(activeUnitID))
+        }
+    }, [activeUnit, activeUnitID])
+
     const onSelectArchivalUnit = (key) => {
-        setSelectedArchivalUnit(selectedArchivalUnit === key ? 0 : key)
+        showArchiveUnitDrawer && setSelectedArchivalUnit(selectedArchivalUnit === key ? 0 : key)
     }
 
     /**
@@ -117,6 +140,7 @@ const CollectionPage = () => {
         if (detectVisible()) {
             return (
                 <TreeNode
+                    key={archivalUnit['key']}
                     archivalUnit={archivalUnit}
                     classType={getClassType()}
                     selected={archivalUnit['id'] === selectedArchivalUnit}
@@ -170,14 +194,17 @@ const CollectionPage = () => {
     if (data) {
         return (
             <div style={{display: 'flex'}}>
-                <div className={selectedArchivalUnit !== 0 ? style.TreeOpen : style.Tree}>
+                <div className={showArchiveUnitDrawer && selectedArchivalUnit !== 0 ? style.TreeOpen : style.Tree}>
                     {renderTree()}
                 </div>
-                <ArchivalUnitDrawer
-                    archivalUnitID={selectedArchivalUnit}
-                    open={selectedArchivalUnit !== 0}
-                    onClose={onSelectArchivalUnit}
-                />
+                {
+                    showArchiveUnitDrawer &&
+                    <ArchivalUnitDrawer
+                        archivalUnitID={selectedArchivalUnit}
+                        open={selectedArchivalUnit !== 0}
+                        onClose={onSelectArchivalUnit}
+                    />
+                }
             </div>
         )
     } else {

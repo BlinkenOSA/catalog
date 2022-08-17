@@ -21,7 +21,9 @@ const ArchivalCollections = () => {
                 <div className={style.PageTitle}>
                     <h1>List of Fonds</h1>
                 </div>
-                <CollectionPage/>
+                <CollectionPage
+                    showArchiveUnitDrawer={true}
+                />
             </div>
         </Layout>
     )

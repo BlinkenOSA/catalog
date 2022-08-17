@@ -3,6 +3,8 @@ import {Marc} from "marcjs";
 
 export default async function handler(req, res) {
     const {id} = req.query;
+    let fa = {};
+    let isad = {};
     let marc;
 
     const getData = () => {
@@ -24,6 +26,18 @@ export default async function handler(req, res) {
             case 'Film Library':
                 marc = Marc.parse(record['marcxml'], 'Marcxml');
                 return res.status(200).json(marc.mij())
+            case 'Archives':
+                if (record['primary_type'] === 'Archival Unit') {
+                    const data = JSON.parse(record['isad_json'])
+                    isad['isad-eng'] = JSON.parse(data['isad_json_eng'])
+                    if (data.hasOwnProperty('isad_json_2nd')) {
+                        isad['isad-translation'] = JSON.parse(data['isad_json_2nd'])
+                    }
+                    return res.status(200).json(isad)
+                } else {
+                    const data = JSON.parse(record['item_json'])
+                    return res.status(200).json(data)
+                }
             default:
                 return res.status(200).json({})
         }

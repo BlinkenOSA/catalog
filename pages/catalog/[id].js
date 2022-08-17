@@ -9,6 +9,7 @@ import {useMeasure} from "react-use";
 import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
 import FilmLibraryPage from "../../components/catalog/film-library/FilmLibraryPage";
+import IsadPage from "../../components/catalog/isad/IsadPage";
 
 const CatalogPage = () => {
     const [ref, {height}] = useMeasure();
@@ -26,6 +27,12 @@ const CatalogPage = () => {
                     return <LibraryPage record={record} />
                 case 'Film Library':
                     return <FilmLibraryPage record={record} />
+                case 'Archives':
+                    if (record['primary_type'] === 'Archival Unit') {
+                        return <IsadPage record={record} />
+                    } else {
+                        return ''
+                    }
                 default:
                     return '';
             }

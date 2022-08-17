@@ -73,10 +73,18 @@
     background-image: url("/icons/TreeLineBg.svg");
     background-repeat: repeat-y;
   }
+
+  .Spacer {
+    background-image: none;
+  }
 }
 
 .FondsLastSeriesLast {
   display: flex;
+
+  .Spacer {
+    background-image: none;
+  }
 }
 
 .FondsSubfondsSeries {
