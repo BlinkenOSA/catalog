@@ -4,6 +4,8 @@ import FacetMenu from "../facets/FacetMenu";
 import Loader from "./parts/loader/Loader";
 import ResultItem from "../results/ResultItem";
 import {useRouter} from "next/router";
+import NotFound from "../results/NotFound";
+import {defaultLimit, defaultOffset} from "../../config/appConfig";
 
 /**
  * Page responsible for displaying the search results
@@ -17,15 +19,21 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
 
     const renderResults = () => {
         const results = data['response']['docs']
-        return results.map((result, index) => (
-            <ResultItem
-                key={result['id']}
-                result={result}
-                limit={limit ? Number(limit) : 10}
-                offset={offset ? Number(offset) : 0}
-                index={index}
-            />
-        ))
+
+        if (results.length > 0) {
+            return results.map((result, index) => (
+                <ResultItem
+                    key={result['id']}
+                    result={result}
+                    limit={limit ? Number(limit) : defaultLimit}
+                    offset={offset ? Number(offset) : defaultOffset}
+                    index={index}
+                />
+            ))
+        } else {
+            return <NotFound />
+        }
+
     }
 
     return (

@@ -1,11 +1,22 @@
 import axios from 'axios';
 import {processParams} from "./urlParamFunctions";
 import {facetConfig} from "../config/facetConfig";
-export const API = process.env.NEXT_PUBLIC_CATALOG_API;
+export const API = process.env.NEXT_PUBLIC_AMS_API;
+export const MOCK_API = process.env.NEXT_PUBLIC_CATALOG_API;
+export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
 export const fetcher = (url, params) => {
     return axios.get(
         `${API}${url}`,
+        {
+            params: params,
+        }
+    ).then(res => res.data);
+};
+
+export const mockFetcher = (url, params) => {
+    return axios.get(
+        `${MOCK_API}${url}`,
         {params: params}
     ).then(res => res.data);
 };
@@ -18,7 +29,7 @@ export const nextAPIFetcher = (url, params) => {
 }
 
 export const solrFetcher = (params) => {
-    const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(params)
+    const {query, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params)
 
     let baseParams = new URLSearchParams();
     baseParams.append('facet.field', 'record_origin_facet')
@@ -73,8 +84,12 @@ export const solrFetcher = (params) => {
         baseParams.append('start', offset)
     }
 
+    if (sort) {
+        baseParams.append('sort', sort)
+    }
+
     return axios.get(
-        `http://localhost:8983/solr/osacatalog/select`,
+        SOLR_API,
         {params: baseParams}
     ).then(res => res.data);
 }

@@ -8,7 +8,7 @@
 .FacetPage {
   margin: 0 auto;
   max-width: $max-width;
-  min-height: calc(100vh - 57px - 44px);
+  min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height});
   border-left: 2px solid $white;
   display: flex;
 }

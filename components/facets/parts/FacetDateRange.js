@@ -17,8 +17,6 @@ const FacetDateRange = ({facetValues, selectedFacetGroup, selectedFacetValues, o
     const [values, setValues] = useState([1900, 1990])
     const [limits, setLimits] = useState([1950, 2000])
 
-    console.log(selectedFacetValues);
-
     useDeepCompareEffect(() => {
         setLimits([facetValues[0] === '0' ? Number(facetValues[2]) : Number(facetValues[0]), Number(facetValues[facetValues.length-2])])
     }, [facetValues, selectedFacetGroup]);

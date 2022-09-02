@@ -1,0 +1,110 @@
+@import "../../../../styles/variables";
+
+.RecordsWrapper {
+
+}
+
+.Record:first-child {
+  border-top: none;
+}
+
+.Record {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid $black;
+  font-family: "Suisse Intl", serif;
+  font-size: 16px;
+  box-sizing: border-box;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .CartButton {
+    width: 80px;
+    padding: 10px 0 10px 20px;
+  }
+
+  .ContainerType {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 14px;
+    width: 150px;
+    text-align: left;
+    align-self: flex-start;
+    border-bottom: 2px solid $black;
+    border-left: 2px solid $black;
+
+    span {
+      padding-left: 10px;
+      line-height: 22px;
+      width: 100%;
+      color: $black;
+    }
+  }
+
+  .CallNumber {
+    width: 200px;
+  }
+
+  .Data {
+    flex: 1;
+    padding: 10px 10px 10px 0;
+
+    .Title {
+      font-family: "Suisse Works", serif;
+      font-size: 16px;
+      font-weight: 500;
+
+      span {
+        font-weight: 400;
+      }
+    }
+
+    .Description:not(:empty) {
+      margin-top: 5px;
+    }
+
+    .Info:not(:empty) {
+      margin-top: 5px;
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 14px;
+    }
+
+    .Buttons:not(:empty) {
+      display: flex;
+      gap: 5px;
+      margin-top: 5px;
+    }
+  }
+}
+
+.InContainer {
+  border-top: 2px solid $form-background;
+}
+
+.MoreButtonWrapper {
+  text-align: center;
+  padding-bottom: 20px;
+
+  .MoreButton {
+    margin: 5px auto 0 auto;
+    width: 150px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 18px;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+    color: $white;
+    background-color: $black;
+    font-family: "Suisse Intl", serif;
+
+    &:hover {
+      color: $black;
+      cursor: pointer;
+      background-color: $yellow;
+    }
+  }
+}

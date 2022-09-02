@@ -8,6 +8,7 @@ import {facetConfig} from "../../config/facetConfig";
 import {removeFacet} from "../../utils/facetFunctions";
 import DropDown from "./parts/DropDown";
 import Pagination from "./parts/Pagination";
+import {defaultLimit} from "../../config/appConfig";
 
 /**
  * Breadcrumb component.
@@ -111,13 +112,13 @@ const BreadcrumbSearch = ({reference, module, inverse, total}) => {
 
     const renderPerPageModifier = () => {
         const recordsPerPageOptions = [
-            {value: '10', label: '10 per page'},
-            {value: '20', label: '20 per page'},
-            {value: '50', label: '50 per page'},
-            {value: '100', label: '100 per page'}
+            {value: 10, label: '10 per page'},
+            {value: 20, label: '20 per page'},
+            {value: 50, label: '50 per page'},
+            {value: 100, label: '100 per page'}
         ];
 
-        return <DropDown onSelect={onPerPageChange} options={recordsPerPageOptions} defaultValue={limit ? limit : '10'}/>;
+        return <DropDown onSelect={onPerPageChange} options={recordsPerPageOptions} defaultValue={limit ? limit : defaultLimit}/>;
     }
 
     const renderSortingModifier = () => {

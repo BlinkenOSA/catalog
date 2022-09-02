@@ -5,8 +5,9 @@ import {nextAPIFetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
 import React, {useState} from "react";
 import LanguageButton from "../../pages/parts/buttons/LanguageButton";
-import IsadMetadataPage from "./IsadMetadataPage";
+import IsadMetadataPage from "./tabs/IsadMetadataPage";
 import CollectionPage from "../../pages/CollectionPage";
+import IsadContentPage from "./tabs/IsadContentPage";
 
 
 const IsadPage = ({record}) => {
@@ -32,9 +33,11 @@ const IsadPage = ({record}) => {
     const renderContent = () => {
         switch (selectedView) {
             case 'context':
-                return <IsadMetadataPage data={data} language={language} />
+                return <IsadMetadataPage id={id} data={data} language={language} />
             case 'hierarchy':
-                return <CollectionPage fondsID={'23'} activeUnitID={'25'} activeUnit={getActiveUnit()}/>
+                return <CollectionPage activeUnitID={record['ams_id']} activeUnit={getActiveUnit()}/>
+            case 'folders':
+                return <IsadContentPage seriesID={id} language={language} />
             default:
                 return ''
         }
@@ -76,10 +79,18 @@ const IsadPage = ({record}) => {
                         Hierarchy
                     </div>
                     <div
-                        onClick={() => setSelectedView('folders')}
-                        className={selectedView === 'folders' ? style.Active : ''}>
-                        Folders / Items in this series
+                        onClick={() => setSelectedView('keywords')}
+                        className={selectedView === 'keywords' ? style.Active : ''}>
+                        Keywords
                     </div>
+                    {
+                        record['description_level'] === 'Series' &&
+                        <div
+                            onClick={() => setSelectedView('folders')}
+                            className={selectedView === 'folders' ? style.Active : ''}>
+                            Folders / Items in this series
+                        </div>
+                    }
                     <div className={style.TabPlaceholder}> </div>
                 </div>
                 { renderContent() }

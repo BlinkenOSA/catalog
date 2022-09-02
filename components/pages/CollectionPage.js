@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import style from "./CollectionPage.module.scss";
 import useSWR from 'swr'
-import {fetcher} from "../../utils/fetcherFunctions";
+import {fetcher, mockFetcher} from "../../utils/fetcherFunctions";
 import Loader from "./parts/loader/Loader";
 import {useState} from "react";
 import TreeNode from "./parts/treeNode/TreeNode";
@@ -10,13 +10,14 @@ import ArchivalUnitDrawer from "./parts/archivalUnitDrawer/ArchivalUnitDrawer";
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
  */
-const CollectionPage = ({fondsID, activeUnit, activeUnitID, showArchiveUnitDrawer = false}) => {
+const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false}) => {
     const [openNodes, setOpenNodes] = useState([]);
-    const { data, error } = useSWR(fondsID ? `archival_units_list/${fondsID}` : 'archival_units_list', fetcher);
+    const { data, error } = useSWR(activeUnitID ? `archival-units-tree/${activeUnitID}/` : 'archival-units-tree/all/', fetcher);
 
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
 
     useEffect(() => {
+        console.log(activeUnit)
         if (activeUnit && activeUnitID) {
             let nodes = []
             const units = activeUnit.split('-')
@@ -147,7 +148,7 @@ const CollectionPage = ({fondsID, activeUnit, activeUnitID, showArchiveUnitDrawe
                     open={openNodes.includes(archivalUnit['key'])}
                     onOpenClose={onOpenClose}
                     onTreeNodeClick={onSelectArchivalUnit}
-                    hasChildren={archivalUnit.hasOwnProperty('children')}
+                    hasChildren={archivalUnit['children'].length > 0}
                 />
             )
         } else {
@@ -194,7 +195,7 @@ const CollectionPage = ({fondsID, activeUnit, activeUnitID, showArchiveUnitDrawe
     if (data) {
         return (
             <div style={{display: 'flex'}}>
-                <div className={showArchiveUnitDrawer && selectedArchivalUnit !== 0 ? style.TreeOpen : style.Tree}>
+                <div className={showArchiveUnitDrawer ? style.TreeOpen : style.Tree}>
                     {renderTree()}
                 </div>
                 {

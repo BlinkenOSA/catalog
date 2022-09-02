@@ -1,10 +1,10 @@
-import style from "./IsadPage.module.scss";
+import style from "../IsadPage.module.scss";
 import React from "react";
-import {isadFieldConfig} from "./isadFieldConfig";
-import IsadItem from "./IsadItem";
+import {isadFieldConfig} from "../isadFieldConfig";
+import IsadItem from "../IsadItem";
 
 
-const IsadMetadataPage = ({data, language}) => {
+const IsadMetadataPage = ({id, data, language}) => {
     if (data) {
         return (
             <div>
@@ -14,6 +14,7 @@ const IsadMetadataPage = ({data, language}) => {
                             {
                                 ifc['fields'].map((field, index) => (
                                     <IsadItem
+                                        id={id}
                                         language={language}
                                         key={index}
                                         record={data}

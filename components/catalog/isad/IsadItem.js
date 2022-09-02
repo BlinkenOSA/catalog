@@ -2,7 +2,7 @@ import style from "./IsadItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
 
-const IsadItem = ({record, language, group, label, field, links={}, display='sameRow'}) => {
+const IsadItem = ({id, record, language, group, label, field, links={}, display='sameRow'}) => {
     const getData = () => {
         if (language === 'EN') {
             return record['isad-eng'];
@@ -34,10 +34,12 @@ const IsadItem = ({record, language, group, label, field, links={}, display='sam
         switch (field) {
             case 'dateFrom':
                 return (
-                    <div>
-                        {isadData['dateFrom']} - {isadData.hasOwnProperty('dateTo') ? isadData['dateTo'] : ''}
-                        {isadData.hasOwnProperty('datePredominant') ? ` (predominant ${isadData['datePredominant']})` : ''}
-                    </div>
+                    <React.Fragment>
+                        <div>
+                            {isadData['dateFrom']} - {isadData.hasOwnProperty('dateTo') ? isadData['dateTo'] : ''}
+                            {isadData.hasOwnProperty('datePredominant') ? ` (predominant ${isadData['datePredominant']})` : ''}
+                        </div>
+                    </React.Fragment>
                 )
             case 'scopeAndContentAbstract':
             case 'scopeAndContentNarrative':

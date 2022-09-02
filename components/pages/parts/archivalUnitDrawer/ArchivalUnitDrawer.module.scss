@@ -2,11 +2,20 @@
 
 .DrawerOpen {
   width: 50%;
-  border-left: 2px solid $black;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 100px;
+  align-self: flex-start;
 }
 
 .DrawerClosed {
   display: none;
+}
+
+.Window {
+  margin-bottom: 20px;
+  max-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height}));
+  overflow: scroll;
 }
 
 .ArchivalUnitData {
@@ -35,11 +44,12 @@
     border-bottom: 2px solid $data-line;
   }
 
-  .RowLast {
+  .Row:last-child {
     padding: 10px 20px;
     margin-bottom: 20px;
     display: flex;
     gap: 10px;
+    border-bottom: 2px solid $black;
   }
 
   .Category {
@@ -67,3 +77,32 @@
     vertical-align: top;
   }
 }
+
+.Info {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 100%;
+
+  .InfoFace {
+    font-family: 'Suisse Intl Mono', serif;
+    font-weight: 400;
+    font-size: 40px;
+    text-align: center;
+  }
+
+  .InfoMainText {
+    font-family: 'Suisse Intl Mono', serif;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .InfoText {
+    margin-top: 30px;
+    font-family: 'Suisse Intl', serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+

@@ -43,6 +43,10 @@
     background-image: url("/icons/TreeLineBg.svg");
     background-repeat: repeat-y;
   }
+
+  .Spacer {
+    background-image: none;
+  }
 }
 
 .FondsLastSubfondsLast {
@@ -50,6 +54,47 @@
 
   .Spacer {
     background-image: none;
+  }
+}
+
+.FondsLastSubfondsLastSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: none;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsLastSubfondsLastSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: none;
+  }
+}
+
+.FondsLastSubfondsSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeFondsLastSeriesBg.svg");
+  }
+}
+
+.FondsLastSubfondsSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeFondsLastSeriesBg.svg");
   }
 }
 
@@ -130,29 +175,6 @@
   .Spacer {
     flex-shrink: 0;
     width: 60px;
-  }
-}
-
-.FondsLastSubfondsLastSeries {
-  display: flex;
-
-  .Spacer {
-    width: 60px;
-    background-image: url("/icons/TreeSeriesBg.svg");
-  }
-
-  .Opener, .Line {
-    background-image: url("/icons/TreeLineBg.svg");
-    background-repeat: repeat-y;
-  }
-}
-
-.FondsLastSubfondsLastSeriesLast {
-  display: flex;
-
-  .Spacer {
-    width: 60px;
-    background-image: url("/icons/TreeSeriesBg.svg");
   }
 }
 
