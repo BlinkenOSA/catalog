@@ -36,7 +36,11 @@ export default async function handler(req, res) {
                     return res.status(200).json(isad)
                 } else {
                     const data = JSON.parse(record['item_json'])
-                    return res.status(200).json(data)
+                    fa['fa-eng'] = data['item_json_eng']
+                    if (data.hasOwnProperty('item_json_2nd')) {
+                        fa['fa-translation'] = JSON.parse(data['item_json_2nd'])
+                    }
+                    return res.status(200).json(fa)
                 }
             default:
                 return res.status(200).json({})

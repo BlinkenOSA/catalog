@@ -20,6 +20,7 @@ const IsadMetadataPage = ({id, data, language}) => {
                                         record={data}
                                         group={ifc['group']}
                                         label={field['label']}
+                                        bilingual={field.hasOwnProperty('bilingual') ? field['bilingual'] : false}
                                         links={ifc['link']}
                                         field={field['field']}
                                         display={field.hasOwnProperty('display') ? field['display'] : 'sameRow'}

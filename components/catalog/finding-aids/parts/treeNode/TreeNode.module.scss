@@ -1,0 +1,321 @@
+@import "../../../../../styles/variables";
+
+.Fonds {
+  display: flex;
+  min-height: 30px;
+
+  .Spacer {
+    display: none;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsLast {
+  display: flex;
+  min-height: 30px;
+
+  .Spacer {
+    display: none;
+  }
+}
+
+.FondsSubfonds {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSubfondsLast {
+  display: flex;
+}
+
+.FondsLastSubfonds {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+
+  .Spacer {
+    background-image: none;
+  }
+}
+
+.FondsLastSubfondsLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+  }
+}
+
+.FondsLastSubfondsLastSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: none;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsLastSubfondsLastSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: none;
+  }
+}
+
+.FondsLastSubfondsSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeFondsLastSeriesBg.svg");
+  }
+}
+
+.FondsLastSubfondsSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeFondsLastSeriesBg.svg");
+  }
+}
+
+.FondsSeries {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSeriesLast {
+  display: flex;
+}
+
+.FondsLastSeries {
+  display: flex;
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+
+  .Spacer {
+    background-image: none;
+  }
+}
+
+.FondsLastSeriesLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+  }
+}
+
+.FondsSubfondsSeries {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeSeriesBg.svg");
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSubfondsSeriesLast {
+  display: flex;
+
+  .Spacer {
+    width: 60px;
+    background-image: url("/icons/TreeSeriesBg.svg");
+  }
+}
+
+.FondsSubfondsLastSeries {
+  display: flex;
+
+  .Spacer {
+    flex-shrink: 0;
+    width: 60px;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FondsSubfondsLastSeriesLast {
+  display: flex;
+
+  .Spacer {
+    flex-shrink: 0;
+    width: 60px;
+  }
+}
+
+.ContainerLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 90px;
+  }
+}
+
+.Folder {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 120px;
+  }
+}
+
+.FolderLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 120px;
+  }
+}
+
+.FolderPlaceholder {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 120px;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreePlaceholder.svg");
+    background-repeat: repeat-y;
+
+    img {
+      display: none !important;
+    }
+  }
+
+  .FolderIcon {
+    display: none;
+  }
+}
+
+.Spacer {
+  flex-shrink: 0;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+  width: 30px;
+}
+
+.IconOpen {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeBoxOpen.svg");
+  background-repeat: no-repeat;
+}
+
+.IconClosed {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeBoxClosed.svg");
+  background-repeat: no-repeat;
+}
+
+.SeriesIcon {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeFolder.svg");
+  background-repeat: no-repeat;
+}
+
+.SeriesIconOpen {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeFolderOpen.svg");
+  background-repeat: no-repeat;
+}
+
+.FolderIcon {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeFolder.svg");
+  background-repeat: no-repeat;
+}
+
+.FolderIconOpen {
+  width: 30px;
+  flex-shrink: 0;
+  background-image: url("/icons/TreeFolderOpen.svg");
+  background-repeat: no-repeat;
+}
+
+.Line {
+  width: 30px;
+  flex-shrink: 0;
+}
+
+.Opener {
+  width: 30px;
+  flex-shrink: 0;
+
+  :hover {
+    cursor:pointer;
+  }
+}
+
+.Title {
+  line-height: 30px;
+  padding: 0 5px;
+
+  .ReferenceCode {
+    flex-shrink: 0;
+    line-height: 30px;
+  }
+
+  .ArchivalUnitTitle {
+    padding: 0 5px;
+  }
+}
+
+.Title:hover {
+  cursor: pointer;
+}
+
+.Selected .Title {
+  cursor: pointer;
+  background-color: $yellow;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}

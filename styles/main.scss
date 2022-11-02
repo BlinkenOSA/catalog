@@ -1,5 +1,6 @@
 @import "_variables.scss";
 @import "_fonts.scss";
+@import "_openseadragon.scss";
 
 #__next {
   // height: 100%;
@@ -28,4 +29,8 @@ p {
   margin-block-end: 15px;
   margin-inline-start: 0;
   margin-inline-end: 0;
+}
+
+.ReactCollapse--collapse {
+  transition: height 500ms;
 }

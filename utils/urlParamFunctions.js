@@ -25,9 +25,10 @@ export const createParams = (query, limit, offset, selectedFacets) => {
 
 export const processParams = (params) => {
     let newParams = {};
-    const { query, limit, offset, sort, ...rest } = params;
+    const { query, filterQuery, limit, offset, sort, ...rest } = params;
 
     newParams['query'] = query ? query : ''
+    newParams['filterQuery'] = filterQuery
     newParams['limit'] = limit
     newParams['offset'] = offset
     newParams['sort'] = sort

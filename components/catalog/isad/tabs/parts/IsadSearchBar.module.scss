@@ -1,0 +1,68 @@
+@import "../../../../../styles/variables";
+
+.SearchBox {
+  height: 32px;
+  display: inline-flex;
+
+  .SearchInputWrapper {
+    width: 300px;
+    border-left: 2px solid $black;
+    border-top: 2px solid $black;
+    border-bottom: 2px solid $black;
+    border-right: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 32px;
+
+    .SearchInput {
+      font-family: "Suisse Intl Mono", serif;
+      font-weight: 400;
+      font-size: 14px;
+      height: 28px;
+      width: 100%;
+      margin: 0;
+      padding: 0 30px 0 10px;
+      background-color: $background;
+      border: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    .SearchInput:focus-visible {
+      outline: 0;
+    }
+
+    .ClearButton {
+      position: absolute;
+      margin-left: -28px;
+      height: 28px;
+      width: 28px;
+      font-size: 20px;
+      line-height: 34px;
+      text-align: center;
+    }
+
+    .ClearButton:hover {
+      cursor: pointer;
+    }
+  }
+
+  .SearchButton {
+    border: 2px solid $black;
+    border-radius: 0;
+    background-color: $background;
+    height: 32px;
+    width: 40px;
+    font-size: 24px;
+    padding-top: 2px;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
+      color: $black;
+      background-color: $yellow;
+    }
+  }
+}

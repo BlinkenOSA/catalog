@@ -16,6 +16,8 @@ const SearchBar = () => {
     useEffect(() => {
         if (query !== '*') {
             setSearchValue(query)
+        } else {
+            setSearchValue('')
         }
     }, [query])
 

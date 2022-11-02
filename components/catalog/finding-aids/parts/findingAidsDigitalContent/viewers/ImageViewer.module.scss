@@ -1,0 +1,21 @@
+@import "../../../../../../styles/variables";
+
+// IIIF Viewer in a window
+.IIIFViewer {
+  border-top: 2px solid $black;
+  height: 500px;
+
+  :global .osrv-top-row-wrapper {
+    display: none;
+  }
+
+  :global div[data-testid="toolbar-container"] {
+    top: 0;
+  }
+
+  :global div[data-testid="toolbar-wrapper"] {
+    position: relative;
+  }
+}
+
+

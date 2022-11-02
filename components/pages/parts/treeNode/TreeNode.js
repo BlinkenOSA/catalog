@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import style from "./TreeNode.module.scss";
-import ArchivalUnitDrawer from "../archivalUnitDrawer/ArchivalUnitDrawer";
 
 /**
  * @param {Object} params
@@ -78,7 +77,7 @@ const TreeNode = ({open, selected=false, archivalUnit, onOpenClose, onTreeNodeCl
                 <div className={style.Spacer} />
                 {renderOpenClosePart()}
                 {renderIcon()}
-                <div className={style.Title} onClick={() => onTreeNodeClick(archivalUnit['id'])}>
+                <div className={style.Title} onClick={() => onTreeNodeClick(archivalUnit['id'], archivalUnit['catalog_id'])}>
                     <span className={style.ReferenceCode}>{archivalUnit['reference_code']}</span>
                     <span className={style.ArchivalUnitTitle}>{archivalUnit['title']}</span>
                 </div>

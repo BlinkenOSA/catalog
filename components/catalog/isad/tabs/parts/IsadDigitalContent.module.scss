@@ -1,0 +1,73 @@
+@import "../../../../../styles/variables";
+
+// IIIF Viewer in a window
+.IIIFViewer {
+  :global .osrv-work-title {
+    display: none;
+  }
+
+  :global .osrv-top-row-wrapper {
+    position: static;
+    background-color: $black;
+    opacity: 1;
+  }
+
+  :global div[data-testid="select-component-wrapper"] {
+    flex: 1;
+    align-items: flex-end;
+
+    :global .osrv-tilesource-select-wrapper {
+      :global .react-select__control--is-focused {
+        box-shadow: none;
+      }
+
+      :global .react-select__control {
+        background: transparent;
+        border: 1px solid $white;
+
+        :global .react-select__value-container {
+          :global .react-select__single-value {
+            color: $white;
+          }
+        }
+
+        :global .react-select__indicator-separator {
+          background-color: $white;
+        }
+
+        :global .react-select__indicator {
+          svg {
+            fill: $white;
+          }
+        }
+      }
+
+      :global .react-select__menu {
+        background-color: $black;
+      }
+
+      :global .react-select__option--is-focused {
+        color: $black;
+        background-color: $form-background;
+      }
+
+      :global .react-select__option--is-selected {
+        color: $black;
+        background-color: $yellow;
+      }
+    }
+  }
+
+  :global div[data-testid="react-select-wrapper"] {
+    width: 50%;
+    margin-left: 15px;
+    font-family: 'Suisse Intl Condensed', serif;
+    color: $background;
+  }
+
+  :global div[data-testid="instance-container"] {
+    border-bottom: 2px solid $black;
+  }
+}
+
+

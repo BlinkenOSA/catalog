@@ -67,6 +67,7 @@
   position: absolute;
   background: $black;
   color: $white;
+  z-index: 999;
 
   :global .rc-select-item {
     line-height: 1.5;

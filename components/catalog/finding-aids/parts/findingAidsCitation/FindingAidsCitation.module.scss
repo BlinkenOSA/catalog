@@ -1,0 +1,30 @@
+@import "../../../../../styles/variables";
+
+.Citation {
+  display: flex;
+  padding: 10px 20px;
+  border-top: 2px solid $black;
+
+  .Category {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 18px;
+    width: 250px;
+    box-sizing: border-box;
+  }
+
+  .Label {
+    font-family: "Suisse Works", serif;
+    font-size: 16px;
+    font-weight: 500;
+    width: 250px;
+    padding-right: 20px;
+    box-sizing: border-box;
+  }
+
+  .Value {
+    font-family: "Suisse Intl", serif;
+    font-size: 16px;
+    flex: 1 1;
+    box-sizing: border-box;
+  }
+}

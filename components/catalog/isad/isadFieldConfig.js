@@ -1,7 +1,7 @@
 const IdentityStatementArea = {
     group: {
         'EN': 'Identity Statement',
-            'HU': 'Azonosítás'
+        'HU': 'Azonosítás'
     },
     fields: [
         {
@@ -17,27 +17,28 @@ const IdentityStatementArea = {
                 'HU': 'Cím'
             },
             field: 'title',
+            bilingual: true,
             link: {}
         }, {
             label: {
                 'EN': 'Date(s)',
                 'HU': 'Időkör'
             },
-            field: 'dateFrom',
+            field: 'year_from',
             link: {}
         }, {
             label: {
                 'EN': 'Description Level',
                 'HU': 'Leírás szintje'
             },
-            field: 'descriptionLevel',
+            field: 'description_level',
             link: {}
         }, {
             label: {
                 'EN': 'Extent and medium (estimated)',
                 'HU': 'Terjedelem és adathordozók (becsült)'
             },
-            field: 'extent_estimated',
+            field: 'carrier_estimated',
             link: {},
             display: 'vertical'
         }, {
@@ -45,7 +46,8 @@ const IdentityStatementArea = {
                 'EN': 'Extent and medium (processed)',
                 'HU': 'Terjedelem és adathordozók (feldolgozott)'
             },
-            field: 'extent',
+            field: 'extent_processed',
+            bilingual: true,
             link: {},
             display: 'vertical'
         }
@@ -67,17 +69,26 @@ const ContextArea = {
             link: {}
         }, {
             label: {
+                'EN': 'Name of creator(s)',
+                'HU': 'Az iratképző(k) neve'
+            },
+            field: 'isaar',
+            link: '/isaar/{id}'
+        }, {
+            label: {
                 'EN': 'Administrative / Biographical history',
                 'HU': 'Szervtörténet / Életrajz'
             },
-            field: 'administrativeHistory',
+            field: 'administrative_history',
+            bilingual: true,
             link: {}
         }, {
             label: {
                 'EN': 'Archival history',
                 'HU': 'A megőrzés története'
             },
-            field: 'archivalHistory',
+            field: 'archival_history',
+            bilingual: true,
             link: {}
         }, {
             label: {
@@ -101,14 +112,16 @@ const ContentAndStructureArea = {
                 'EN': 'Scope and content (abstract)',
                 'HU': 'Tárgy és tartalom (összefoglalás)'
             },
-            field: 'scopeAndContentAbstract',
+            field: 'scope_and_content_abstract',
+            bilingual: true,
             link: {}
         }, {
             label: {
                 'EN': 'Scope and content (narrative)',
                 'HU': 'Tárgy és tartalom (kifejtés)'
             },
-            field: 'scopeAndContentNarrative',
+            field: 'scope_and_content_narrative',
+            bilingual: true,
             link: {}
         }, {
             label: {
@@ -129,7 +142,8 @@ const ContentAndStructureArea = {
                 'EN': 'System of arrangement',
                 'HU': 'A leírási egység szerkezete'
             },
-            field: 'systemOfArrangement',
+            field: 'system_of_arrangement_information',
+            bilingual: true,
             link: {}
         }
     ]
@@ -146,14 +160,14 @@ const ConditionsOfAccessAndUseArea = {
                 'EN': 'Conditions governing access',
                 'HU': 'Jogi helyzet'
             },
-            field: 'rightsAccess',
+            field: 'access_rights',
             link: {}
         }, {
             label: {
                 'EN': 'Conditions governing reproduction',
                 'HU': ' Reprodukciós korlátozások'
             },
-            field: 'rightsReproduction',
+            field: 'reproduction_rights',
             link: {}
         }, {
             label: {
@@ -167,7 +181,8 @@ const ConditionsOfAccessAndUseArea = {
                 'EN': 'Physical characteristics and technical requirements',
                 'HU': 'Fizikai jellemzők, technikai követelmények'
             },
-            field: 'physicalCharacteristics',
+            field: 'physical_characteristics',
+            bilingual: true,
             link: {}
         }
     ]
@@ -184,28 +199,29 @@ const AlliedMaterialsArea = {
                 'EN': 'Existence and location of originals',
                 'HU': 'Eredeti példányok léte és őrzőhelye'
             },
-            field: 'locationOfOriginals',
+            field: 'location_of_originals',
             link: {}
         }, {
             label: {
                 'EN': 'Existence and location of copies',
                 'HU': ' Másolatok léte és őrzőhelye'
             },
-            field: 'loctionOfCopies',
+            field: 'location_of_copies',
             link: {}
         }, {
             label: {
                 'EN': 'Related units of description',
                 'HU': 'Kapcsolódó leírási egységek'
             },
-            field: 'relatedUnits',
+            field: 'related_units',
             link: {}
         }, {
             label: {
                 'EN': 'Publication note',
                 'HU': 'Publikációk'
             },
-            field: 'publicationNote',
+            field: 'publication_note',
+            bilingual: true,
             link: {}
         }
     ]
@@ -223,6 +239,7 @@ const NotesArea = {
                 'HU': ''
             },
             field: 'note',
+            bilingual: true,
             link: {}
         }
     ]
@@ -239,21 +256,22 @@ const DescriptionControlArea = {
                 'EN': 'Archivist\'s note',
                 'HU': 'A leírás készítése és készítője'
             },
-            field: 'archivistsNote',
+            field: 'archivists_note',
+            bilingual: true,
             link: {}
         }, {
             label: {
                 'EN': 'Rules or Conventions',
                 'HU': 'Szabványok és szabályok'
             },
-            field: 'rulesOrConventions',
+            field: 'rules_conventions',
             link: {}
         }, {
             label: {
                 'EN': 'Date(s) of descriptions',
                 'HU': 'A leírás készítésének ideje'
             },
-            field: 'dateOfDescription',
+            field: 'date_of_description',
             link: {}
         }
     ]

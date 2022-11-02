@@ -10,6 +10,11 @@ import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
 import FilmLibraryPage from "../../components/catalog/film-library/FilmLibraryPage";
 import IsadPage from "../../components/catalog/isad/IsadPage";
+import dynamic from "next/dynamic";
+
+const FindingAidsPage = dynamic(() => import("../../components/catalog/finding-aids/FindingAidsPage"), {
+    ssr: false,
+});
 
 const CatalogPage = () => {
     const [ref, {height}] = useMeasure();
@@ -31,7 +36,7 @@ const CatalogPage = () => {
                     if (record['primary_type'] === 'Archival Unit') {
                         return <IsadPage record={record} />
                     } else {
-                        return ''
+                        return <FindingAidsPage record={record} />
                     }
                 default:
                     return '';

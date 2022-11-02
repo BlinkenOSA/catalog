@@ -1,29 +1,40 @@
 import style from "./IsadPage.module.scss";
 import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
 import useSWR from "swr";
-import {nextAPIFetcher} from "../../../utils/fetcherFunctions";
+import {fetcher, nextAPIFetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
 import React, {useState} from "react";
 import LanguageButton from "../../pages/parts/buttons/LanguageButton";
 import IsadMetadataPage from "./tabs/IsadMetadataPage";
 import CollectionPage from "../../pages/CollectionPage";
 import IsadContentPage from "./tabs/IsadContentPage";
+import dynamic from "next/dynamic";
 
+const IsadDigitalContent = dynamic(() => import("./tabs/parts/IsadDigitalContent"), {
+    ssr: false,
+});
 
 const IsadPage = ({record}) => {
-    const { id } = record;
-    const { data, error } = useSWR(`/api/record/${id}`, nextAPIFetcher)
+    const { id, ams_id } = record;
+    const { data, error } = useSWR(`archival-units/${ams_id}/`, fetcher)
 
     const [language, setLanguage] = useState('EN');
     const [selectedView, setSelectedView] = useState('context')
 
     const getTitle = () => {
-        return (
-            <div className={style.Title}>
-                {record['reference_code']} {record['title']}
-                {record['title_original'] && <span> ({record['title_original']})</span>}
-            </div>
-        )
+        if (language === 'EN') {
+            return (
+                <div className={style.Title}>
+                    {data['reference_code']} {data['title']}
+                </div>
+            )
+        } else {
+            return (
+                <div className={style.Title}>
+                    {data['reference_code']} {data['title_original'] ? data['title_original'] : data['title']}
+                </div>
+            )
+        }
     }
 
     const getActiveUnit = () => {
@@ -35,7 +46,7 @@ const IsadPage = ({record}) => {
             case 'context':
                 return <IsadMetadataPage id={id} data={data} language={language} />
             case 'hierarchy':
-                return <CollectionPage activeUnitID={record['ams_id']} activeUnit={getActiveUnit()}/>
+                return <CollectionPage activeUnitID={record['ams_id']} activeUnit={getActiveUnit()} />
             case 'folders':
                 return <IsadContentPage seriesID={id} language={language} />
             default:
@@ -48,22 +59,13 @@ const IsadPage = ({record}) => {
             <div className={style.Page}>
                 <div className={style.Header}>
                     <div className={style.HeaderData}>
-                        { getTitle(data) }
+                        { getTitle() }
                         <div className={style.Buttons}>
                             {
-                                data.hasOwnProperty('isad-translation') &&
+                                data.hasOwnProperty('original_locale') &&
                                 <LanguageButton onLanguageChange={setLanguage} />
                             }
                             <PrimaryTypeButton primaryType={record['primary_type']} />
-                        </div>
-                    </div>
-                    <div className={style.Thumbnail}>
-                        <div>
-                            <img
-                                alt={`Cover`}
-                                style={{maxHeight: '300px'}}
-                                src={``}
-                            />
                         </div>
                     </div>
                 </div>
@@ -77,11 +79,6 @@ const IsadPage = ({record}) => {
                         onClick={() => setSelectedView('hierarchy')}
                         className={selectedView === 'hierarchy' ? style.Active : ''}>
                         Hierarchy
-                    </div>
-                    <div
-                        onClick={() => setSelectedView('keywords')}
-                        className={selectedView === 'keywords' ? style.Active : ''}>
-                        Keywords
                     </div>
                     {
                         record['description_level'] === 'Series' &&

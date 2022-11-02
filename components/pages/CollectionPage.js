@@ -6,6 +6,7 @@ import Loader from "./parts/loader/Loader";
 import {useState} from "react";
 import TreeNode from "./parts/treeNode/TreeNode";
 import ArchivalUnitDrawer from "./parts/archivalUnitDrawer/ArchivalUnitDrawer";
+import {useRouter} from "next/router";
 
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
@@ -14,10 +15,11 @@ const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false
     const [openNodes, setOpenNodes] = useState([]);
     const { data, error } = useSWR(activeUnitID ? `archival-units-tree/${activeUnitID}/` : 'archival-units-tree/all/', fetcher);
 
+    const router = useRouter();
+
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
 
     useEffect(() => {
-        console.log(activeUnit)
         if (activeUnit && activeUnitID) {
             let nodes = []
             const units = activeUnit.split('-')
@@ -40,8 +42,20 @@ const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false
         }
     }, [activeUnit, activeUnitID])
 
-    const onSelectArchivalUnit = (key) => {
+    /**
+     * Handling when an archival unit is selected / clicked. If it's displayed on the Collections menu, it only
+     * adds it to the component state, if on the ISAD page, it will redirect to the clicked series page.
+     *
+     * @param {Number} key The key of the element which was selected
+     * @param {String} catalogID The id of the catalog record
+     */
+    const onSelectArchivalUnit = (key, catalogID = '') => {
         showArchiveUnitDrawer && setSelectedArchivalUnit(selectedArchivalUnit === key ? 0 : key)
+        if (activeUnit && activeUnitID) {
+            router.replace({
+                pathname: `/catalog/${catalogID}`
+            });
+        }
     }
 
     /**

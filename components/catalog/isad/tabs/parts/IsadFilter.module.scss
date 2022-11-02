@@ -1,0 +1,140 @@
+@import "../../../../../styles/variables";
+
+.SelectWrapper {
+  flex: 1;
+}
+
+.Select:hover {
+  cursor: pointer;
+}
+
+.Select:global.rc-select-focused {
+  :global .rc-select-selection-item {
+    opacity: 0.5;
+  }
+
+  :global .rc-select-selection-search {
+    opacity: 0.7;
+  }
+}
+
+.Select {
+  font-size: 14px;
+  width: 100%;
+  position: relative;
+
+  :global .rc-select-selector {
+    color: $black;
+    font-family: "Suisse Intl Mono", serif;
+    font-size: 14px;
+    min-height: 32px;
+    line-height: 28px;
+    background-color: $background;
+    border: 2px solid $black;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    :global .rc-select-selection-placeholder {
+      color: $disabled-label;
+      font-size: 14px;
+    }
+  }
+
+  :global .rc-select-selection-search {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    :global .rc-select-selection-search-input {
+      padding-left: 10px;
+      width: 90%;
+      cursor: pointer;
+    }
+
+    input {
+      border: 0;
+      height: 100%;
+      background-color: $form-background;
+
+      &:focus-visible {
+        outline: none;
+      }
+    }
+  }
+
+  :global .rc-select-selection-item,
+  :global .rc-select-selection-placeholder {
+    display: block;
+    padding-right: 40px;
+    padding-left: 10px;
+  }
+
+  :global .rc-select-arrow {
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 4px;
+
+    :global .rc-select-arrow-icon::after {
+      content: '';
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+
+  :global .rc-select-clear {
+    position: absolute;
+    line-height: 32px;
+    font-weight: 200;
+    top: -1px;
+    right: 25px;
+    font-size: 20px;
+  }
+}
+
+.DropDown {
+  position: absolute;
+  background: $form-background;
+  color: $black;
+  z-index: 10;
+
+  :global .rc-select-item,
+  :global .rc-select-item-empty {
+    padding-left: 10px;
+    line-height: 32px;
+    min-height: 32px;
+    text-overflow: ellipsis;
+    font-family: "Suisse Intl Mono", serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  :global .rc-select-item-option {
+    position: relative;
+  }
+
+  :global .rc-select-item-option-state {
+    position: absolute;
+    font-size: 18px;
+    right: 10px;
+    top: 1px;
+    pointer-events: none;
+  }
+
+  :global .rc-select-item-option-active {
+    color: $black;
+    background-color: $yellow;
+  }
+}
+
+.DropDown:global.rc-select-dropdown-hidden {
+  display: none;
+}

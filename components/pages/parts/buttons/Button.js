@@ -1,6 +1,6 @@
 import style from "./Button.module.scss";
 
-const Button = ({link, text}) => {
+const Button = ({link, text, onClick=false, disabled}) => {
     if (link) {
         return (
             <a href={link} className={style.Link}>
@@ -10,11 +10,19 @@ const Button = ({link, text}) => {
             </a>
         )
     } else {
-        return (
-            <div className={style.Button}>
-                <span>{text}</span>
-            </div>
-        )
+        if (onClick) {
+            return (
+                <div className={disabled ? `${style.ButtonWithAction} ${style.Disabled}` : style.ButtonWithAction} onClick={onClick}>
+                    <span>{text}</span>
+                </div>
+            )
+        } else {
+            return (
+                <div className={style.Button}>
+                    <span>{text}</span>
+                </div>
+            )
+        }
     }
 
 }

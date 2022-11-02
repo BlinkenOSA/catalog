@@ -29,7 +29,7 @@ export const nextAPIFetcher = (url, params) => {
 }
 
 export const solrFetcher = (params) => {
-    const {query, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params)
+    const {query, filterQuery, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params)
 
     let baseParams = new URLSearchParams();
     baseParams.append('facet.field', 'record_origin_facet')
@@ -38,11 +38,17 @@ export const solrFetcher = (params) => {
     baseParams.append('facet.field', 'language_facet')
     baseParams.append('facet.field', 'date_created_facet')
     baseParams.append('facet.field', 'subject_person_facet')
+    baseParams.append('facet.field', 'availability_facet')
     baseParams.append('facet.limit', '-1')
+    baseParams.append('hl', 'true')
+    baseParams.append('hl.fl', 'title')
     baseParams.append('wt', 'json')
 
     // Add query
     baseParams.append('q', query ? query : '*')
+
+    // Add filterQuery
+    filterQuery && baseParams.append('fq', filterQuery)
 
     // Process facet filters
     Object.keys(facetConfig).forEach(key => {
@@ -61,6 +67,9 @@ export const solrFetcher = (params) => {
                     if (Number.isInteger(yearFrom) && Number.isInteger(yearTo)) {
                         baseParams.append('fq', `date_created_facet:[${yearFrom} TO ${yearTo}]`)
                     }
+                } else {
+                    const yearFrom = Number(years[0])
+                    baseParams.append('fq', `date_created_facet:${yearFrom}`)
                 }
             }
         } else {

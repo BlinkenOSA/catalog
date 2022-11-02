@@ -20,10 +20,14 @@ const AvailabilityButton = ({record}) => {
                     return 'In Research Room'
                 }
             case 'Archives':
-                if (record['digital_version_exists']) {
-                    return renderDigitalVersionButton()
+                if (record['digital_version_online']) {
+                    return 'Online'
                 } else {
-                    return 'In Research Room'
+                    if (record['digital_version_exists']) {
+                        return renderDigitalVersionButton()
+                    } else {
+                        return 'In Research Room'
+                    }
                 }
             case 'Digital Repository':
                 return 'Online'

@@ -1,31 +1,42 @@
 import useSWRInfinite from 'swr/infinite'
 import {solrFetcher} from "../../../../utils/fetcherFunctions";
 import Loader from "../../../pages/parts/loader/Loader";
-import IsadContentNotFound from "./parts/IsadContentNotFound";
 import style from "./IsadContentPage.module.scss";
 import CartButton from "../../../cart/CartButton";
 import {useCart} from "react-use-cart";
-import React, {useEffect, useState} from "react";
+import React from "react";
 import AvailabilityButton from "../../../results/parts/buttons/AvailabilityButton";
 import parse from "html-react-parser";
 import PrimaryTypeButton from "../../../pages/parts/buttons/PrimaryTypeButton";
+import IsadSearchBar from "./parts/IsadSearchBar";
+import IsadFilter from "./parts/IsadFilter";
+import {useRouter} from "next/router";
+import IsadThumbnail from "./parts/IsadThumbnail";
 
 const IsadContentPage = ({seriesID, language}) => {
     const { inCart } = useCart();
+
+    const router = useRouter();
+    const {id, seriesQuery, ...selectedSeriesFacets} = router.query;
+
     const PER_PAGE = 50;
 
     const getKey = (index) => {
         return {
-            query: `series_id:${seriesID}`,
+            query: seriesQuery,
+            filterQuery: `series_id:${seriesID}`,
             offset: index * PER_PAGE,
             limit: PER_PAGE,
-            sort: 'fonds_sort asc, subfonds_sort asc, series_sort asc, container_number_sort asc, folder_number_sort asc'
+            sort: 'fonds_sort asc, subfonds_sort asc, series_sort asc, container_number_sort asc, folder_number_sort asc',
+            ...selectedSeriesFacets
         }
     }
 
     const { data, size, setSize } = useSWRInfinite(getKey, solrFetcher, {initialSize: 1})
     const isEmpty = data?.[0]?.['response']['docs'].length === 0;
     const isReachingEnd = isEmpty || (data && data[data.length - 1]?.['response']['docs'].length < PER_PAGE);
+    const numFound = data?.[0]?.['response']['numFound']
+    const facets = data?.[0]?.['facet_counts']['facet_fields']
 
     const renderData = (rec, lang='EN') => {
         const getContentFromJson = (key, lang, array=false) => {
@@ -98,6 +109,19 @@ const IsadContentPage = ({seriesID, language}) => {
         )
     }
 
+    const onFilter = (filter, value) => {
+        if (value !== '') {
+            router.replace({
+                query: {...router.query, [filter]: value}
+            }, undefined, {shallow: true})
+        } else {
+            delete router.query[filter]
+            router.replace({
+                query: {...router.query}
+            }, undefined, {shallow: true})
+        }
+    }
+
     const renderDocs = (records) => {
         const isBoxRow = (rec, index) => {
             return index === 0 || (index > 0 && rec['container_number'] !== records[index - 1]['container_number']);
@@ -117,6 +141,14 @@ const IsadContentPage = ({seriesID, language}) => {
             }
         }
 
+        const renderThumbnail = (rec) => {
+            if (rec['digital_version_online']) {
+                return <IsadThumbnail record={rec} />
+            } else {
+                return ''
+            }
+        }
+
         return records.map((rec, index) => {
             return (
                 <div className={isBoxRow(rec, index) ? style.Record : `${style.Record} ${style.InContainer}`} key={index}>
@@ -125,6 +157,7 @@ const IsadContentPage = ({seriesID, language}) => {
                     </div>
                     <a href={`/catalog/${rec['id']}`}>
                         <div className={style.CallNumber}>
+                            {renderThumbnail(rec)}
                             {rec['call_number'][0]}
                         </div>
                     </a>
@@ -140,13 +173,43 @@ const IsadContentPage = ({seriesID, language}) => {
     if (data) {
         return (
             <React.Fragment>
+                {
+                    (numFound > 10 || seriesQuery !== '' || Object.keys(selectedSeriesFacets).length > 0) &&
+                    <div className={style.SeriesSearch}>
+                        <IsadSearchBar
+                            placeholder={'Search in this series...'}
+                            seriesQuery={seriesQuery}
+                            onSearch={(value) => onFilter('seriesQuery', value)}
+                        />
+                        <IsadFilter
+                            facetName={'date_created'}
+                            onSelect={onFilter}
+                            facets={facets}
+                            placeholder={'Select creation date...'}
+                            value={selectedSeriesFacets.hasOwnProperty('date_created') ? selectedSeriesFacets['date_created'] : undefined}
+                        />
+                        <IsadFilter
+                            facetName={'genre'}
+                            onSelect={onFilter}
+                            facets={facets}
+                            placeholder={'Select genre...'}
+                            value={selectedSeriesFacets.hasOwnProperty('genre') ? selectedSeriesFacets['genre'] : undefined}
+                        />
+                        <IsadFilter
+                            facetName={'availability_facet'}
+                            onSelect={onFilter}
+                            facets={facets}
+                            placeholder={'Select availability...'}
+                            value={selectedSeriesFacets.hasOwnProperty('availability_facet') ? selectedSeriesFacets['availability_facet'] : undefined}
+                        />
+                    </div>
+                }
                 <div className={style.RecordsWrapper}>
                     {
                         data.map((response, index) => {
                             return renderDocs(response['response']['docs'])
                         })
                     }
-
                 </div>
                 {
                     !isReachingEnd &&

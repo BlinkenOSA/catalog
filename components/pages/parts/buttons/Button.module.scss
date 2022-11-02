@@ -21,3 +21,32 @@
 .ButtonWithLink:hover {
   background-color: $black;
 }
+
+.ButtonWithAction {
+  cursor: pointer;
+  height: 25px;
+  background-color: $black;
+  border-radius: 13px;
+  text-align: center;
+  color: $white;
+  font-family: 'Suisse Intl', serif;
+  font-size: 10px;
+  line-height: 25px;
+  padding: 0 10px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.ButtonWithAction:hover {
+  background-color: $yellow;
+  color: $black;
+}
+
+.Disabled {
+  cursor: not-allowed;
+  background-color: $button-background;
+  pointer-events: none;
+}
+
+
+

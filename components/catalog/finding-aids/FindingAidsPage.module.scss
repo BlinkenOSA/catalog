@@ -1,0 +1,102 @@
+@import "../../../styles/variables";
+
+.Page {
+  margin: 0 auto;
+
+  .Header {
+    display: flex;
+    height: 200px;
+
+    .HeaderData {
+      flex: 1;
+      padding: 20px;
+
+      .Title {
+        font-family: "Suisse Works", serif;
+        font-weight: 400;
+        font-size: 28px;
+        margin-top: 10px;
+      }
+
+      .Buttons {
+        display: inline-flex;
+        gap: 6px;
+        margin-top: 20px;
+      }
+    }
+
+    .Thumbnail {
+      justify-content: right;
+      align-items: center;
+      position: relative;
+
+      img {
+        opacity: .8;
+      }
+
+      .Button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+      }
+    }
+
+    .Thumbnail:hover {
+      cursor: pointer;
+
+      img {
+        opacity: 1;
+      }
+    }
+  }
+
+  .MetadataWrapper {
+    border-top: 2px solid $black;
+  }
+
+  .MetadataGroup {
+    border-bottom: 2px solid $black;
+  }
+
+  .MetadataGroup:empty {
+    display: none;
+  }
+
+  .MetadataGroup:last-child {
+    border-bottom: none;
+  }
+
+  .Tabs {
+    display: flex;
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 500;
+    font-size: 20px;
+
+    div {
+      color: $black;
+      background-color: unset;
+      border-top: 2px solid $black;
+      border-right: 2px solid $black;
+      border-bottom: 2px solid $black;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    div.Active {
+      color: $white;
+      background-color: $black;
+      border-top: 2px solid $black;
+      border-bottom: none;
+    }
+
+    .TabPlaceholder {
+      background-color: unset;
+      flex: 1;
+      border-top: none;
+      border-right: none;
+    }
+  }
+}
+

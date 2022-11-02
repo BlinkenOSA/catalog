@@ -1,5 +1,15 @@
 @import "../../../../styles/variables";
 
+.SeriesSearch {
+  padding: 0 10px;
+  height: 50px;
+  background-color: $form-background;
+  border-bottom: 2px solid $black;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .RecordsWrapper {
 
 }
@@ -23,7 +33,7 @@
 
   .CartButton {
     width: 80px;
-    padding: 10px 0 10px 20px;
+    text-align: center;
   }
 
   .ContainerType {
@@ -44,7 +54,9 @@
   }
 
   .CallNumber {
-    width: 200px;
+    min-width: 170px;
+    padding: 10px 20px 10px 0;
+    text-align: center;
   }
 
   .Data {

@@ -3,10 +3,13 @@
 .Facets {
   width: $left-width;
   flex-shrink: 0;
-  border-right: 2px solid $black;
   font-family: "Suisse Intl Condensed", serif;
   font-weight: 400;
   font-size: 18px;
+  position: sticky;
+  position: -webkit-sticky;
+  top: calc(#{$header-height} + #{$breadcrumb-height});
+  align-self: flex-start;
 
   ul {
     margin: 0;
