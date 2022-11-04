@@ -9,7 +9,7 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/full-screen/lib/styles/index.css';
 
 
-const PDFViewer = ({id}) => {
+const PDFViewer = ({archivalReferenceCode, id}) => {
     const [fullScreen, setFullScreen] = useState(false)
 
     const toolbarPluginInstance = toolbarPlugin({
@@ -125,7 +125,7 @@ const PDFViewer = ({id}) => {
             </div>
             <div className={fullScreen ? `${style.PDFViewerFullScreen}`: style.PDFViewer}>
                 <Viewer
-                    fileUrl={getURL(id, 'Textual')}
+                    fileUrl={getURL(archivalReferenceCode, id, 'Textual')}
                     plugins={[
                         toolbarPluginInstance
                     ]}

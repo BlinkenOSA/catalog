@@ -2,13 +2,7 @@ const generateSeriesCodeFromReferenceCode = (referenceCode) => {
     return referenceCode.substring(0, referenceCode.indexOf(':'))
 }
 
-const generateFileNameFromReferenceCode = (referenceCode) => {
-    const seriesCode = generateSeriesCodeFromReferenceCode(referenceCode).replace(' ', '_')
-    const elements = referenceCode.substring(seriesCode.length + 1).split('/')
-    return `${seriesCode}_${elements.map(e => e.padStart(3, "0")).join('-')}`
-}
-
-const getURL = (referenceCode, type, isThumbnail = false) => {
+const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) => {
     let storageURL = '';
     let extension = '';
     switch (type) {
@@ -33,18 +27,17 @@ const getURL = (referenceCode, type, isThumbnail = false) => {
         extension = 'jpg'
     }
 
-    const seriesCode = generateSeriesCodeFromReferenceCode(referenceCode).replaceAll(' ', '_')
-    const fileName = generateFileNameFromReferenceCode(referenceCode).replaceAll(' ', '_')
+    const seriesCode = generateSeriesCodeFromReferenceCode(archivalID).replaceAll(' ', '_')
 
     if (type === 'Still Image') {
         if (isThumbnail) {
-            const urlComponent = encodeURIComponent(`catalog/${seriesCode}/${fileName}.${extension}`);
+            const urlComponent = encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`);
             return `${storageURL}/${urlComponent}/full/150,/0/default.jpg`
         } else {
-            return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${fileName}.${extension}`)}`
+            return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
         }
     } else {
-        return `${storageURL}/${seriesCode}/${fileName}.${extension}`
+        return `${storageURL}/${seriesCode}/${digitalVersionID}.${extension}`
     }
 }
 

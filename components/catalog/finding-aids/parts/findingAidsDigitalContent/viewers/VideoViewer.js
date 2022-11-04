@@ -1,14 +1,58 @@
-import style from "./ImageViewer.module.scss"; // import css
+import getURL from "../../../../../../utils/digitalObjectFunctions";
+import '@vime/core/themes/default.css';
+import {
+    Player,
+    Hls,
+    ViewType,
+    PlaybackControl,
+    Controls,
+    Ui,
+    VolumeControl,
+    ControlGroup,
+    ScrubberControl,
+    ControlSpacer,
+    FullscreenControl,
+    PipControl,
+    TimeProgress, Control
+} from '@vime/react';
+import style from "./VideoViewer.module.scss"
 
-
-const VideoViewer = ({id}) => {
+const VideoViewer = ({archivalReferenceCode, id}) => {
     return (
         <div className={style.VideoViewer}>
-            <Player
-                playsInline
-                poster="/assets/poster.png"
-                src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"
-            />
+            <div className={style.VideoPlayer}>
+                <Player
+                    viewType={ViewType.Video}
+                    theme={'osa'}
+                >
+                    <Hls version="latest">
+                        <source
+                            data-src={getURL(archivalReferenceCode, id, "Moving Image")}
+                            type="application/x-mpegURL"
+                        />
+                    </Hls>
+                    <Ui>
+                        <Controls>
+                            <ControlGroup>
+                                <ScrubberControl />
+                            </ControlGroup>
+
+                            <ControlGroup space="top">
+                                <PlaybackControl tooltipDirection={'right'} />
+                                <VolumeControl />
+
+                                <ControlSpacer />
+
+                                <TimeProgress separator="/" />
+                                <PipControl />
+                                <FullscreenControl tooltipDirection={'left'} />
+                            </ControlGroup>
+                        </Controls>
+                    </Ui>
+                </Player>
+            </div>
         </div>
     )
 }
+
+export default VideoViewer;
