@@ -3,13 +3,15 @@ import Layout from "../components/layout/Layout";
 import BreadcrumbSearch from "../components/breadcrumbs/BreadcrumbSearch";
 import IndexPage from "../components/pages/IndexPage";
 import React, {useState} from "react";
-import FacetPage from "../components/facets/FacetPage";
+import FacetPage from "../components/facets/desktop/FacetPage";
 import useSWR from "swr";
 import {solrFetcher} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
 import SearchPage from "../components/pages/SearchPage";
 import LayoutWithFacet from "../components/layout/LayoutWithFacet";
 import {useMeasure} from "react-use";
+import { Media } from "../utils/media";
+import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 
 const Index = () => {
     const [ref, {height}] = useMeasure();
@@ -37,12 +39,35 @@ const Index = () => {
                 <Head>
                     <title>Blinken OSA Archivum - Catalog</title>
                 </Head>
-                <BreadcrumbSearch
-                    total={data ? data['response']['numFound'] : 0}
-                    reference={ref}
-                    inverse={false}
-                    module={''}
-                />
+                <Media lessThan="md">
+                    {
+                        (className, renderChildren) => {
+                            return renderChildren ?
+                                <BreadcrumbSearch
+                                    total={data ? data['response']['numFound'] : 0}
+                                    reference={ref}
+                                    inverse={false}
+                                    module={''}
+                                    onSelectFacetGroup={onSelectFacetGroup}
+                                    isMobile={true}
+                                /> : '';
+                        }
+                    }
+                </Media>
+                <Media greaterThanOrEqual="md">
+                    {
+                        (className, renderChildren) => {
+                            return renderChildren ?
+                                <BreadcrumbSearch
+                                    total={data ? data['response']['numFound'] : 0}
+                                    reference={ref}
+                                    inverse={false}
+                                    module={''}
+                                    isMobile={false}
+                                /> : '';
+                        }
+                    }
+                </Media>
                 {
                     Object.entries(router.query).length === 0 ?
                         <IndexPage
@@ -61,19 +86,43 @@ const Index = () => {
                 <Head>
                     <title>Blinken OSA Archivum - Catalog</title>
                 </Head>
-                <BreadcrumbSearch
-                    reference={ref}
-                    inverse={true}
-                    module={''}
-                />
-                <FacetPage
-                    breadcrumbHeight={height}
-                    facets={data ? data['facet_counts']['facet_fields'] : {}}
-                    total={data ? data['response']['numFound'] : 0}
-                    selectedFacetGroup={selectedFacetGroup}
-                    onSelectFacetGroup={onSelectFacetGroup}
-                    onShowButtonClick={onShowButtonClick}
-                />
+                <Media lessThan="md">
+                    {
+                        (className, renderChildren) => {
+                            return renderChildren ?
+                                <React.Fragment>
+                                    <BreadcrumbSearch
+                                        reference={ref}
+                                        inverse={true}
+                                        module={''}
+                                        onSelectFacetGroup={onSelectFacetGroup}
+                                        isMobile={true}
+                                    />
+                                    <FacetPageMobile
+                                        breadcrumbHeight={height}
+                                        facets={data ? data['facet_counts']['facet_fields'] : {}}
+                                        total={data ? data['response']['numFound'] : 0}
+                                        onShowButtonClick={onShowButtonClick}
+                                    />
+                                </React.Fragment> : '';
+                        }
+                    }
+                </Media>
+                <Media greaterThanOrEqual="md">
+                    <BreadcrumbSearch
+                        reference={ref}
+                        inverse={true}
+                        module={''}
+                    />
+                    <FacetPage
+                        breadcrumbHeight={height}
+                        facets={data ? data['facet_counts']['facet_fields'] : {}}
+                        total={data ? data['response']['numFound'] : 0}
+                        selectedFacetGroup={selectedFacetGroup}
+                        onSelectFacetGroup={onSelectFacetGroup}
+                        onShowButtonClick={onShowButtonClick}
+                    />
+                </Media>
             </LayoutWithFacet>
         )
     }

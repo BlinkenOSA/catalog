@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./SearchPage.module.scss";
-import FacetMenu from "../facets/FacetMenu";
+import FacetMenu from "../facets/desktop/FacetMenu";
 import Loader from "./parts/loader/Loader";
 import ResultItem from "../results/ResultItem";
 import {useRouter} from "next/router";

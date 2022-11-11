@@ -4,3 +4,8 @@
   padding-top: $header-height;
   height: 100%;
 }
+
+.ContentWrapMobile {
+  min-height: calc(100vh - #{$header-height-mobile} - #{$breadcrumb-height} - #{$footer-height-mobile});
+  padding-top: $header-height-mobile;
+}

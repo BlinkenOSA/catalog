@@ -1,8 +1,8 @@
 import React from "react";
 import style from "./IndexPage.module.scss";
-import FacetMenu from "../facets/FacetMenu";
+import FacetMenu from "../facets/desktop/FacetMenu";
 import Badges from "./parts/indexPage/Badges";
-
+import {Media} from "../../utils/media"
 
 /**
  * Page responsible for displaying the search results
@@ -12,14 +12,23 @@ import Badges from "./parts/indexPage/Badges";
  */
 const IndexPage = ({onSelectFacetGroup}) => {
     return (
-        <div className={style.ContentIndex}>
-            <FacetMenu
-                onSelectFacetGroup={onSelectFacetGroup}
-            />
-            <div className={style.Content}>
-                <Badges />
-            </div>
-        </div>
+        <React.Fragment>
+            <Media lessThan="md">
+                <div className={style.ContentMobile}>
+                    <Badges isMobile={true} />
+                </div>
+            </Media>
+            <Media greaterThanOrEqual="md">
+                <div className={style.ContentIndex}>
+                    <FacetMenu
+                        onSelectFacetGroup={onSelectFacetGroup}
+                    />
+                    <div className={style.Content}>
+                        <Badges />
+                    </div>
+                </div>
+            </Media>
+        </React.Fragment>
     )
 }
 

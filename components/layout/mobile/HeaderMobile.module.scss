@@ -1,0 +1,85 @@
+@import "../../../styles/variables";
+
+.Header {
+  width: 100%;
+  height: $header-height-mobile;
+  background-color: $black;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  /* -webkit-backdrop-filter: saturate(200%) blur(10px); */
+  /* backdrop-filter: saturate(200%) blur(10px); */
+}
+
+.HeaderContent {
+  font-family: 'Suisse Intl Condensed', serif;
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50%;
+
+  .Logo {
+    width: 78px;
+    height: 25px;
+    padding: 0 10px;
+
+    img {
+      width: 78px;
+    }
+  }
+
+  .Menu {
+    flex: 1;
+    display: flex;
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 500;
+    font-size: 14px;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 40px 0 10px;
+    gap: 10px;
+
+    .RequestItems {
+      top: -4px;
+      left: 10px;
+      text-align: center;
+      min-width: 14px;
+      height: 14px;
+      position: absolute;
+      font-size: 10px;
+      color: $black;
+      background-color: $form-background;
+      border-radius: 7px;
+    }
+
+    a {
+      text-decoration: none;
+      color: $white;
+      transition: 0.5s;
+      will-change: transform;
+    }
+
+    a:after {
+      display:block;
+      content: '';
+      border-bottom: solid 1px $white;
+      transform: scaleX(0);
+      transition: transform 250ms ease-in-out;
+    }
+
+    a:hover:after {
+      transform: scaleX(1);
+    }
+
+    img {
+      filter: invert(100%) sepia(1%) saturate(4370%) hue-rotate(41deg) brightness(132%) contrast(89%);
+    }
+  }
+}
+
+.SearchBar {
+  display: block;
+}

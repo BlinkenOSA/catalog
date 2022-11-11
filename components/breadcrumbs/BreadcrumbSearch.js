@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./BreadcrumbSearch.module.scss";
-import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
+import {BiDownArrowAlt, BiLeftArrowAlt, BiRightArrowAlt, BiUpArrowAlt} from "react-icons/bi";
 import {useRouter} from "next/router";
 import { AiOutlineClose, AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
+import { BiSlider } from "react-icons/bi";
 import {createParams, processParams} from "../../utils/urlParamFunctions";
 import {facetConfig} from "../../config/facetConfig";
 import {removeFacet} from "../../utils/facetFunctions";
@@ -18,9 +19,11 @@ import {defaultLimit} from "../../config/appConfig";
  *                        detail one.
  * @param {boolean} params.inverse Define if the menu is in inverse (dark) display mode.
  */
-const BreadcrumbSearch = ({reference, module, inverse, total}) => {
+const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup, isMobile=false}) => {
     const router = useRouter();
     const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(router.query)
+
+    const [selectedFacetsOpen, setSelectedFacetsOpen] = useState(true);
 
     /**
      * Removing the facet from the url and from the selectedFacets.
@@ -121,15 +124,6 @@ const BreadcrumbSearch = ({reference, module, inverse, total}) => {
         return <DropDown onSelect={onPerPageChange} options={recordsPerPageOptions} defaultValue={limit ? limit : defaultLimit}/>;
     }
 
-    const renderSortingModifier = () => {
-        const sortingOptions = [
-            {value: 'relevance', label: 'Sort by relevance'},
-            {value: 'title', label: 'Sort by title'},
-        ];
-
-        return <DropDown options={sortingOptions} defaultValue={'relevance'}/>;
-    }
-
     /**
      * Rendering the right side content part of the breadcrumb.
      */
@@ -172,6 +166,26 @@ const BreadcrumbSearch = ({reference, module, inverse, total}) => {
         }
     }
 
+    const renderRightSideContentMobile = () => {
+        if (module === 'staticPage' || module === 'collections') {
+            return ''
+        }
+
+        if (inverse) {
+            return (
+                <div className={style.FilterButtonInverse} onClick={() => onSelectFacetGroup('')}>
+                    <BiSlider />
+                </div>
+            )
+        } else {
+            return (
+                <div className={style.FilterButton} onClick={() => onSelectFacetGroup('record_origin')}>
+                    <BiSlider />
+                </div>
+            )
+        }
+    }
+
     /**
      * Rendering the left side buttons.
      */
@@ -193,14 +207,82 @@ const BreadcrumbSearch = ({reference, module, inverse, total}) => {
         )
     }
 
-    return (
-        <div ref={reference} className={inverse ? style.BreadcrumbInverseWrapper : style.BreadcrumbWrapper}>
-            <div className={style.BreadcrumbContent}>
-                {renderLeftSideContent()}
-                {renderRightSideContent()}
+    /**
+     * Rendering the left side buttons for mobile.
+     */
+    const renderLeftSideContentMobile = () => {
+        if (module === 'staticPage' || module === 'collections') {
+            return (
+                <div className={style.Navigation}>
+                    <a href={'/'}>
+                        <AiOutlineLeft /> <span>Back to Catalog</span>
+                    </a>
+                </div>
+            )
+        }
+
+        if (inverse) {
+            return (
+                <div className={`${style.Navigation} ${style.Inverse}`}> </div>
+            )
+        } else {
+            return (
+                <div className={style.Navigation}>
+                    <span>Filter your search</span> <BiRightArrowAlt />
+                </div>
+            )
+        }
+    }
+
+    const renderSelectedFacetsContentMobile = () => {
+        if (Object.keys(selectedFacets).length === 0 && query === '') {
+            return ''
+        } else {
+            return (
+                <div className={inverse ? `${style.SelectedFacetsInverseMobileWrapper}` : `${style.SelectedFacetsMobileWrapper}`}>
+                    <div className={selectedFacetsOpen ? style.SelectedFacets : `${style.SelectedFacets} ${style.Closed}`}>
+                        {renderQueryButton()}
+                        {renderSelectedFacets(selectedFacetsDates)}
+                        {renderSelectedFacets(selectedFacets)}
+                        {
+                            Object.keys(selectedFacets).length > 1 &&
+                            <div className={style.Opener} onClick={() => setSelectedFacetsOpen(!selectedFacetsOpen)}>
+                                <i className={selectedFacetsOpen ? style.UpArrow : style.DownArrow}/>
+                            </div>
+                        }
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    /**
+     * Render
+     */
+    if (isMobile) {
+        return (
+            <React.Fragment>
+                <div
+                    ref={reference}
+                    className={inverse ? `${style.BreadcrumbInverseWrapper} ${style.Mobile}` : `${style.BreadcrumbWrapper} ${style.Mobile}`}>
+                    <div className={style.BreadcrumbContentMobile}>
+                        {renderLeftSideContentMobile()}
+                        {renderRightSideContentMobile()}
+                    </div>
+                </div>
+                {renderSelectedFacetsContentMobile()}
+            </React.Fragment>
+        )
+    } else {
+        return (
+            <div ref={reference} className={inverse ? style.BreadcrumbInverseWrapper : style.BreadcrumbWrapper}>
+                <div className={style.BreadcrumbContent}>
+                    {renderLeftSideContent()}
+                    {renderRightSideContent()}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 export default BreadcrumbSearch;

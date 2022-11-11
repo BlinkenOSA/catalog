@@ -1,6 +1,6 @@
 import style from "./FacetMenu.module.scss";
 import React from "react";
-import {facetConfig} from "../../config/facetConfig";
+import {facetConfig} from "../../../config/facetConfig";
 
 /**
  * Displaying the main facet selector menu. Either the basic (light) or the inverted (dark) version

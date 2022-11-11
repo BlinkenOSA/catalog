@@ -4,6 +4,8 @@ import { Provider as AlertProvider } from 'react-alert'
 import {CartProvider} from "react-use-cart";
 import AlertTemplate from "../components/layout/AlertTemplate";
 import { Worker } from '@react-pdf-viewer/core';
+import {MediaContextProvider, mediaStyles} from "../utils/media";
+import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
     const options = {
@@ -17,13 +19,24 @@ function MyApp({ Component, pageProps }) {
     }
 
     return (
-        <CartProvider id={'osa-catalog-requests'}>
-            <AlertProvider template={AlertTemplate} {...options}>
-                <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.js">
-                    <Component {...pageProps} />
-                </Worker>
-            </AlertProvider>
-        </CartProvider>
+        <React.Fragment>
+            <Head>
+                <style
+                    type="text/css"
+                    dangerouslySetInnerHTML={{ __html: mediaStyles }}
+                />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+            </Head>
+            <CartProvider id={'osa-catalog-requests'}>
+                <AlertProvider template={AlertTemplate} {...options}>
+                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.js">
+                        <MediaContextProvider disableDynamicMediaQueries>
+                            <Component {...pageProps} />
+                        </MediaContextProvider>
+                    </Worker>
+                </AlertProvider>
+            </CartProvider>
+        </React.Fragment>
     )
 }
 

@@ -1,14 +1,14 @@
 import style from "./FacetPage.module.scss";
 import React, {useEffect, useState} from "react";
 import FacetMenu from "./FacetMenu";
-import FacetValues from "./parts/FacetValues";
-import FacetHelper from "./parts/FacetHelper";
-import ResultCounter from "./parts/ResultCounter";
+import FacetValues from "./FacetValues";
+import FacetHelper from "./FacetHelper";
+import ResultCounter from "./ResultCounter";
 import {useRouter} from "next/router";
-import {addFacet, removeFacet} from "../../utils/facetFunctions";
-import {createParams} from "../../utils/urlParamFunctions";
-import {facetConfig} from "../../config/facetConfig";
-import FacetDateRange from "./parts/FacetDateRange";
+import {addFacet, removeFacet} from "../../../utils/facetFunctions";
+import {createParams} from "../../../utils/urlParamFunctions";
+import {facetConfig} from "../../../config/facetConfig";
+import FacetDateRange from "./FacetDateRange";
 
 /**
  * The facet management page. Displays when a user clicks on a facet group.
@@ -88,50 +88,52 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
     };
 
     return (
-        <div className={style.FacetPageWrapper}>
-            <div className={style.FacetPage}>
-                <FacetMenu
-                    inverse={true}
-                    selectedFacetGroup={selectedFacetGroup}
-                    onSelectFacetGroup={onSelectFacetGroup}
-                />
-                <div className={style.FacetSelection}>
-                    {
-                        facetConfig[selectedFacetGroup]['type'] === 'list' ?
-                            <FacetValues
-                                breadcrumbHeight={breadcrumbHeight}
-                                facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
-                                onFacetActionClick={onFacetActionClick}
-                                selectedFacetGroup={selectedFacetGroup}
-                                selectedFacetValues={getSelectedFacetValues()}
-                                onSelectFacetValue={onSelectFacetValue}
-                            /> :
-                            <FacetDateRange
-                                facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
-                                onFacetActionClick={onFacetActionClick}
-                                selectedFacetGroup={selectedFacetGroup}
-                                selectedFacetValues={getSelectedFacetValues()}
-                            />
-                    }
-                </div>
-                <div className={style.FacetDescription}>
-                    <FacetHelper
-                        facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
-                        onFacetActionClick={onFacetActionClick}
+        <React.Fragment>
+            <div className={style.FacetPageWrapper}>
+                <div className={style.FacetPage}>
+                    <FacetMenu
+                        inverse={true}
                         selectedFacetGroup={selectedFacetGroup}
-                        selectedFacetValue={selectedFacetValue}
-                        selectedFacetValues={getSelectedFacetValues()}
+                        onSelectFacetGroup={onSelectFacetGroup}
                     />
-                </div>
-                <div className={style.ResultCounter}>
-                    <ResultCounter
-                        total={total}
-                        breadcrumbHeight={breadcrumbHeight}
-                        onShowButtonClick={onShowButtonClick}
-                    />
+                    <div className={style.FacetSelection}>
+                        {
+                            facetConfig[selectedFacetGroup]['type'] === 'list' ?
+                                <FacetValues
+                                    breadcrumbHeight={breadcrumbHeight}
+                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                                    onFacetActionClick={onFacetActionClick}
+                                    selectedFacetGroup={selectedFacetGroup}
+                                    selectedFacetValues={getSelectedFacetValues()}
+                                    onSelectFacetValue={onSelectFacetValue}
+                                /> :
+                                <FacetDateRange
+                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                                    onFacetActionClick={onFacetActionClick}
+                                    selectedFacetGroup={selectedFacetGroup}
+                                    selectedFacetValues={getSelectedFacetValues()}
+                                />
+                        }
+                    </div>
+                    <div className={style.FacetDescription}>
+                        <FacetHelper
+                            facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                            onFacetActionClick={onFacetActionClick}
+                            selectedFacetGroup={selectedFacetGroup}
+                            selectedFacetValue={selectedFacetValue}
+                            selectedFacetValues={getSelectedFacetValues()}
+                        />
+                    </div>
+                    <div className={style.ResultCounter}>
+                        <ResultCounter
+                            total={total}
+                            breadcrumbHeight={breadcrumbHeight}
+                            onShowButtonClick={onShowButtonClick}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </React.Fragment>
     )
 }
 

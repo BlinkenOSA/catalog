@@ -1,5 +1,14 @@
 @import "../../styles/variables";
 
+.Mobile {
+  top: $header-height-mobile !important;
+  z-index: 10 !important;
+}
+
+.Inverse {
+  color: $white;
+}
+
 .BreadcrumbWrapper {
   border-top: 2px solid #EEE;
   border-bottom: 2px solid $black;
@@ -19,6 +28,35 @@
   max-width: $max-width;
   display: flex;
   min-height: 40px;
+}
+
+.BreadcrumbContentMobile {
+  font-family: 'Suisse Intl Condensed', serif;
+  font-weight: 500;
+  margin: 0 auto;
+  padding: 0 10px;
+  height: 100%;
+  max-width: $max-width;
+  display: flex;
+  min-height: 40px;
+
+  .FilterButton {
+    font-size: 20px;
+    align-self: center;
+  }
+
+  .FilterButtonInverse {
+    font-size: 20px;
+    align-self: center;
+
+    svg {
+      fill: $white;
+    }
+  }
+
+  .Navigation {
+    width: 100%;
+  }
 }
 
 .Navigation {
@@ -67,7 +105,7 @@
 
   .SelectedFacetButton {
     border-radius: 11px;
-    color: $white;
+    color: $background;
     background-color: $black;
     font-family: "Suisse Intl", serif;
     font-size: 12px;
@@ -107,13 +145,13 @@
 }
 
 .BreadcrumbInverseWrapper {
-  border-top: 2px solid $white;
-  border-bottom: 2px solid $white;
+  border-top: 2px solid $background;
+  border-bottom: 2px solid $background;
   background-color: $black;
   position: -webkit-sticky;
   position: sticky;
   width: 100%;
-  top: 57px;
+  top: $header-height;
   z-index: 200;
 
   .BreadcrumbContent {
@@ -123,12 +161,131 @@
 
       .SelectedFacetButton {
         color: $black;
-        background-color: $white;
+        background-color: $background;
       }
     }
   }
 }
 
+.SelectedFacetsMobileWrapper {
+  position: relative;
+  width: 100%;
+  background-color: $background;
+  padding: 0 10px;
+  border-bottom: 2px solid $black;
+
+  .SelectedFacets {
+    max-height: 300px;
+    margin: 0;
+    padding-top: 8px;
+    overflow: hidden;
+    -webkit-transition: max-height .2s ease-in-out;
+    -moz-transition: max-height .2s ease-in-out;
+    -o-transition: max-height .2s ease-in-out;
+    transition: max-height .2s ease-in-out;
+
+    .SelectedFacetButton {
+      color: $white;
+      background-color: $black;
+    }
+
+    &.Closed {
+      max-height: 30px;
+    }
+  }
+
+  .Opener {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    height: 22px;
+    width: 22px;
+    background-color: $button-background;
+    border-radius: 11px;
+
+    .UpArrow {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-top: 8px;
+      margin-left: 6px;
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+
+    .DownArrow {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-left: 6px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+}
+
+.SelectedFacetsInverseMobileWrapper {
+  position: relative;
+  width: 100%;
+  background-color: $black;
+  border-bottom: 2px solid $white;
+
+  .SelectedFacets {
+    max-height: 300px;
+    margin: 0;
+    padding: 8px 10px 0 10px;
+    overflow: hidden;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    transition: .2s ease-in-out;
+
+    .SelectedFacetButton {
+      color: $black;
+      background-color: $white;
+    }
+
+    &.Closed {
+      max-height: 30px;
+    }
+  }
+
+  .Opener {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    height: 22px;
+    width: 22px;
+    background-color: $button-background;
+    border-radius: 11px;
+
+    .UpArrow {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-top: 8px;
+      margin-left: 6px;
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+
+    .DownArrow {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-left: 6px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+
+}
 
 
 

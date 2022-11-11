@@ -1,0 +1,109 @@
+@import "../../../styles/variables";
+
+.FacetPageWrapper {
+  width: 100%;
+  background-color: $black;
+}
+
+.FacetPage {
+  margin: 0 auto;
+  max-width: $max-width;
+  min-height: calc(100vh - #{$header-height-mobile} - #{$breadcrumb-height});
+  display: flex;
+
+  .Facets {
+    width: 100%;
+    flex-shrink: 0;
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: $white;
+    border-right: none  ;
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 101px;
+    align-self: flex-start;
+
+    .FacetGroup {
+      height: 40px;
+      border-bottom: 2px solid $white;
+      font-size: 16px;
+      line-height: 35px;
+      box-sizing: border-box;
+
+      span {
+        padding-left: 10px;
+      }
+
+      div {
+        float: right;
+      }
+
+      .Button {
+        position: relative;
+        top: 17px;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+        transform: translate(-50%, -50%) rotate(0deg);
+        cursor: pointer;
+        z-index: 100;
+        transition: 0.8s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 1px;
+          width: 50%;
+          background: $white;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 50%;
+          width: 1px;
+          background: $white;
+        }
+      }
+
+      &.Selected {
+        color: $white;
+        background-color: $black;
+        border-bottom: 2px solid $white;
+
+        .Button {
+          &:after {
+            background: $white;
+          }
+
+          &:before {
+            width: 0;
+            background: $white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.FacetSelection {
+  width: $left-width;
+  border-right: 2px solid $white;
+  border-left: 2px solid $white;
+}
+
+.FacetDescription {
+  flex: 1;
+}
+
+.ResultCounter {
+  width: 200px;
+}
+

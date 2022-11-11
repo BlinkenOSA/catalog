@@ -9,7 +9,7 @@ const badgeText = [
 /**
  * Display badges on the front page.
  */
-const Badges = () => {
+const Badges = ({isMobile = false}) => {
     /**
      *
      * @param {string} badgeText The text that should be displayed
@@ -19,7 +19,7 @@ const Badges = () => {
         return (
             <div
                 style={{
-                    fontSize: 120 - (badgeText.length * 2.5)
+                    fontSize: isMobile ? 60 - (badgeText.length * 1.5) : 120 - (badgeText.length * 2.5)
                 }}
                 key={key}
                 className={style.Badge}
