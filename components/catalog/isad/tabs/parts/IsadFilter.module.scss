@@ -2,6 +2,14 @@
 
 .SelectWrapper {
   flex: 1;
+
+  &.Mobile {
+    width: calc(100vw - 20px)
+  }
+
+  &.Mobile:last-child {
+    padding-bottom: 10px;
+  }
 }
 
 .Select:hover {

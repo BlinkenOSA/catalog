@@ -6,6 +6,7 @@ import ResultItem from "../results/ResultItem";
 import {useRouter} from "next/router";
 import NotFound from "../results/NotFound";
 import {defaultLimit, defaultOffset} from "../../config/appConfig";
+import {Media} from "../../utils/media"
 
 /**
  * Page responsible for displaying the search results
@@ -17,13 +18,14 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
     const router = useRouter();
     const {limit, offset} = router.query;
 
-    const renderResults = () => {
+    const renderResults = (isMobile=false) => {
         const results = data['response']['docs']
 
         if (results.length > 0) {
             return results.map((result, index) => (
                 <ResultItem
                     key={result['id']}
+                    isMobile={isMobile}
                     result={result}
                     limit={limit ? Number(limit) : defaultLimit}
                     offset={offset ? Number(offset) : defaultOffset}
@@ -33,18 +35,26 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
         } else {
             return <NotFound />
         }
-
     }
 
     return (
-        <div className={style.ContentSearch}>
-            <FacetMenu
-                onSelectFacetGroup={onSelectFacetGroup}
-            />
-            <div className={style.Content}>
-                {data ? renderResults() : <Loader/>}
-            </div>
-        </div>
+        <React.Fragment>
+            <Media lessThan="md">
+                <div className={style.ContentMobile}>
+                    {data ? renderResults(true) : <Loader/>}
+                </div>
+            </Media>
+            <Media greaterThanOrEqual="md">
+                <div className={style.ContentSearch}>
+                    <FacetMenu
+                        onSelectFacetGroup={onSelectFacetGroup}
+                    />
+                    <div className={style.Content}>
+                        {data ? renderResults() : <Loader/>}
+                    </div>
+                </div>
+            </Media>
+        </React.Fragment>
     )
 }
 

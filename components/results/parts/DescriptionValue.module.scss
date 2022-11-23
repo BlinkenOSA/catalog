@@ -3,7 +3,17 @@
   display: flex;
 
   .Label {
+    font-family: 'Suisse Works', serif;
+    font-weight: 500;
     width: 130px;
+  }
+
+  @media (max-width: 1000px) {
+    .Label {
+      font-family: 'Suisse Works', serif;
+      font-weight: 500;
+      width: 110px;
+    }
   }
 
   .Value {

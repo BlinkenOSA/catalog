@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Layout from "../components/layout/Layout";
-import BreadcrumbSearch from "../components/breadcrumbs/BreadcrumbSearch";
+import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import IndexPage from "../components/pages/IndexPage";
 import React, {useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
@@ -12,6 +12,7 @@ import LayoutWithFacet from "../components/layout/LayoutWithFacet";
 import {useMeasure} from "react-use";
 import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
+import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 
 const Index = () => {
     const [ref, {height}] = useMeasure();
@@ -43,7 +44,7 @@ const Index = () => {
                     {
                         (className, renderChildren) => {
                             return renderChildren ?
-                                <BreadcrumbSearch
+                                <BreadcrumbSearchMobile
                                     total={data ? data['response']['numFound'] : 0}
                                     reference={ref}
                                     inverse={false}
@@ -91,8 +92,9 @@ const Index = () => {
                         (className, renderChildren) => {
                             return renderChildren ?
                                 <React.Fragment>
-                                    <BreadcrumbSearch
+                                    <BreadcrumbSearchMobile
                                         reference={ref}
+                                        total={data ? data['response']['numFound'] : 0}
                                         inverse={true}
                                         module={''}
                                         onSelectFacetGroup={onSelectFacetGroup}

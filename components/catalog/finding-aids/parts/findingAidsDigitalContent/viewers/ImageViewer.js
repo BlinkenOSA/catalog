@@ -1,7 +1,7 @@
 import style from "./ImageViewer.module.scss";
 import {OpenSeadragonViewer} from "openseadragon-react-viewer";
 
-const ImageViewer = ({id}) => {
+const ImageViewer = ({id, device}) => {
     const manifestUrl = `http://localhost:8000/api/catalog/finding-aids-image-manifest/${id}/manifest.json`;
 
     const options = {
@@ -11,6 +11,7 @@ const ImageViewer = ({id}) => {
         showTitle: false,
         deepLinking: false,
         height: 500,
+        containerId: `image-viewer-${device}`
     };
 
     const openSeadragonOptions = {

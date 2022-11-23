@@ -7,17 +7,27 @@
   border-right: 2px solid $black;
   min-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height} + #{$footer-height}));
 
+  &.Mobile {
+    border: none;
+  }
+
   .PageTitle {
     width: 100%;
     border-bottom: 2px solid $black;
-  }
 
-  h1 {
-    font-family: "Suisse Intl Condensed", serif;
-    font-size: 50px;
-    font-weight: 400;
-    margin: 0;
-    padding: 15px 20px;
+    &.Mobile {
+      h1 {
+        font-size: 30px;
+      }
+    }
+
+    h1 {
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 50px;
+      font-weight: 400;
+      margin: 0;
+      padding: 15px 20px;
+    }
   }
 
   .FormContent {

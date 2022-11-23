@@ -4,7 +4,7 @@ import {isadFieldConfig} from "../isadFieldConfig";
 import IsadItem from "../IsadItem";
 
 
-const IsadMetadataPage = ({id, data, language}) => {
+const IsadMetadataPage = ({id, data, language, isMobile}) => {
     if (data) {
         return (
             <div>
@@ -15,6 +15,7 @@ const IsadMetadataPage = ({id, data, language}) => {
                                 ifc['fields'].map((field, index) => (
                                     <IsadItem
                                         id={id}
+                                        isMobile={isMobile}
                                         language={language}
                                         key={index}
                                         record={data}

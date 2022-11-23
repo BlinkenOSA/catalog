@@ -12,6 +12,7 @@ div[data-testid="toolbar-wrapper"] {
   z-index: 10;
 
   .osrv-toolbar-button {
+    position: relative;
     cursor: pointer;
     width: 25px;
     height: 25px;

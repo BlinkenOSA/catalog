@@ -83,6 +83,11 @@
 .FondsLastSubfondsSeries {
   display: flex;
 
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+
   .Spacer {
     width: 60px;
     background-image: url("/icons/TreeFondsLastSeriesBg.svg");

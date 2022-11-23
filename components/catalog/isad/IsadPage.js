@@ -8,13 +8,9 @@ import LanguageButton from "../../pages/parts/buttons/LanguageButton";
 import IsadMetadataPage from "./tabs/IsadMetadataPage";
 import CollectionPage from "../../pages/CollectionPage";
 import IsadContentPage from "./tabs/IsadContentPage";
-import dynamic from "next/dynamic";
 
-const IsadDigitalContent = dynamic(() => import("./tabs/parts/IsadDigitalContent"), {
-    ssr: false,
-});
 
-const IsadPage = ({record}) => {
+const IsadPage = ({record, isMobile}) => {
     const { id, ams_id } = record;
     const { data, error } = useSWR(`archival-units/${ams_id}/`, fetcher)
 
@@ -44,11 +40,21 @@ const IsadPage = ({record}) => {
     const renderContent = () => {
         switch (selectedView) {
             case 'context':
-                return <IsadMetadataPage id={id} data={data} language={language} />
+                return <IsadMetadataPage
+                    id={id}
+                    data={data}
+                    language={language}
+                    isMobile={isMobile}/>
             case 'hierarchy':
-                return <CollectionPage activeUnitID={record['ams_id']} activeUnit={getActiveUnit()} />
+                return <CollectionPage
+                    activeUnitID={record['ams_id']}
+                    activeUnit={getActiveUnit()}
+                    isMobile={isMobile}/>
             case 'folders':
-                return <IsadContentPage seriesID={id} language={language} />
+                return <IsadContentPage
+                    seriesID={id}
+                    language={language}
+                    isMobile={isMobile}/>
             default:
                 return ''
         }
@@ -57,8 +63,8 @@ const IsadPage = ({record}) => {
     if (data) {
         return (
             <div className={style.Page}>
-                <div className={style.Header}>
-                    <div className={style.HeaderData}>
+                <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
+                    <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
                         { getTitle() }
                         <div className={style.Buttons}>
                             {
@@ -69,7 +75,7 @@ const IsadPage = ({record}) => {
                         </div>
                     </div>
                 </div>
-                <div className={style.Tabs}>
+                <div className={isMobile ? `${style.Tabs} ${style.Mobile}` : style.Tabs}>
                     <div
                         onClick={() => setSelectedView('context')}
                         className={selectedView === 'context' ? style.Active : ''}>
@@ -85,7 +91,7 @@ const IsadPage = ({record}) => {
                         <div
                             onClick={() => setSelectedView('folders')}
                             className={selectedView === 'folders' ? style.Active : ''}>
-                            Folders / Items in this series
+                            {isMobile ? 'Folders / Items' : 'Folders / Items in this series'}
                         </div>
                     }
                     <div className={style.TabPlaceholder}> </div>

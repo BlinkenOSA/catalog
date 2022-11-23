@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import style from "./IsadSearchBar.module.scss";
 import {AiOutlineSearch, AiOutlineClose} from "react-icons/ai";
+import {BiSlider} from "react-icons/bi"
 
 /**
  * Search bar in the header.
  */
-const IsadSearchBar = ({onSearch, seriesQuery, ...props}) => {
+const IsadSearchBar = ({onSearch, onFilter, seriesQuery, isMobile, filterOpen, ...props}) => {
     const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
@@ -14,6 +15,10 @@ const IsadSearchBar = ({onSearch, seriesQuery, ...props}) => {
 
     const handleSearch = () => {
         onSearch(searchValue)
+    }
+
+    const handleFilter = () => {
+        onFilter()
     }
 
     const handleKeyDown = (event) => {
@@ -29,7 +34,7 @@ const IsadSearchBar = ({onSearch, seriesQuery, ...props}) => {
 
     return (
         <div className={style.SearchBox}>
-            <div className={style.SearchInputWrapper}>
+            <div className={isMobile ? `${style.SearchInputWrapper} ${style.Mobile}` : style.SearchInputWrapper}>
                 <input
                     className={style.SearchInput}
                     value={searchValue || ''}
@@ -53,6 +58,15 @@ const IsadSearchBar = ({onSearch, seriesQuery, ...props}) => {
             >
                 <AiOutlineSearch/>
             </button>
+            {
+                isMobile &&
+                <button
+                    onClick={() => handleFilter()}
+                    className={filterOpen ? `${style.FilterButton} ${style.Open}`: style.FilterButton}
+                >
+                    <BiSlider/>
+                </button>
+            }
         </div>
     )
 }

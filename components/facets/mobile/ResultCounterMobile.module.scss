@@ -1,0 +1,57 @@
+@import "../../../styles/variables";
+
+.ResultCounterWrapper {
+  background-color: $black;
+
+  .ResultCounter {
+    color: $white;
+    font-family: "Suisse Intl", serif;
+    width: 100%;
+    display: inline-flex;
+    padding-top: 15px;
+
+    .Count {
+      flex: 1;
+      font-weight: 100;
+      font-size: 38px;
+      line-height: 40px;
+      text-align: right;
+      margin-right: 10px;
+    }
+
+    .CountText {
+      flex: 1;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 17px;
+      text-transform: uppercase;
+      align-self: center;
+    }
+  }
+
+  .FilterButtonWrapper {
+    margin-top: 5px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  .FilterButton {
+    height: 44px;
+    line-height: 44px;
+    border-radius: 22px;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 28px;
+    text-align: center;
+    background-color: $white;
+    font-family: "Suisse Intl", serif;
+    width: 170px;
+
+
+    &:hover {
+      cursor: pointer;
+      background-color: $yellow;
+    }
+  }
+}

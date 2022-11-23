@@ -8,6 +8,12 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
+  &.Mobile {
+    padding: 10px 10px 0 10px;
+    flex-direction: column;
+    height: unset;
+  }
 }
 
 .RecordsWrapper {
@@ -25,6 +31,29 @@
   font-family: "Suisse Intl", serif;
   font-size: 16px;
   box-sizing: border-box;
+
+  &.Mobile {
+    position: relative;
+    display: block;
+    padding: 5px 10px;
+
+    .CallNumber {
+      width: 100%;
+      text-align: left;
+      padding: 0 0 5px 0;
+    }
+
+    .ContainerType {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: $background;
+    }
+
+    .Data {
+      padding: 0;
+    }
+  }
 
   a {
     color: inherit;
@@ -87,6 +116,7 @@
       display: flex;
       gap: 5px;
       margin-top: 5px;
+      flex-wrap: wrap;
     }
   }
 }

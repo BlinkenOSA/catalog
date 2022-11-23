@@ -7,7 +7,7 @@ import {useState} from "react";
 import PrimaryTypeButton from "../buttons/PrimaryTypeButton";
 import Button from "../buttons/Button";
 
-const ArchivalUnitDrawer = ({open, archivalUnitID, onClose}) => {
+const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
     const {data, error} = useSWR(archivalUnitID !== 0 ? `archival-units-tree-quick-view/${archivalUnitID}/` : undefined, fetcher);
     const [language, setLanguage] = useState('EN')
 
@@ -115,16 +115,30 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose}) => {
         )
     }
 
-    return (
-        <div className={style.DrawerOpen}>
-            {
-                open ?
+    if (isMobile) {
+        return (
+            <div className={open ? `${style.Drawer} ${style.Mobile}` : `${style.Drawer} ${style.Closed} ${style.Mobile}`}>
                 <div className={style.Window}>
+                    <div className={style.CloseButton} onClick={onClose}>
+                        <span> </span>
+                        <span> </span>
+                    </div>
                     {data ? renderContent() : <Loader/>}
-                </div> : renderInfo()
-            }
-        </div>
-    )
+                </div>
+            </div>
+        )
+    } else {
+        return (
+            <div className={style.Drawer}>
+                {
+                    open ?
+                        <div className={style.Window}>
+                            {data ? renderContent() : <Loader/>}
+                        </div> : renderInfo()
+                }
+            </div>
+        )
+    }
 }
 
 export default ArchivalUnitDrawer;

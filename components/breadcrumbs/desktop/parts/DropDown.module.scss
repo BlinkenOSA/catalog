@@ -1,0 +1,102 @@
+@import "../../../../styles/variables";
+
+.DropDownWrapper {
+  flex: 1;
+}
+
+.Select:hover {
+  cursor: pointer;
+}
+
+.Select {
+  display: inline-block;
+  font-size: 12px;
+  width: 100%;
+  position: relative;
+
+  :global .rc-select-selector {
+    display: flex;
+    position: relative;
+    color: $white;
+    font-family: "Suisse Intl", serif;
+    font-size: 12px;
+    font-weight: 400;
+    height: 22px;
+    line-height: 22px;
+    background-color: $black;
+    padding-right: 20px;
+  }
+
+  :global .rc-select-selection-search {
+    width: 100%;
+
+    :global .rc-select-selection-search-input {
+      padding-left: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+  }
+
+  :global .rc-select-selection-item,
+  :global .rc-select-selection-placeholder {
+    position: absolute;
+    left: 10px;
+  }
+
+  :global .rc-select-arrow {
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 2px;
+
+    :global .rc-select-arrow-icon::after {
+      content: '';
+      border: solid $white;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+}
+
+.DropDown {
+  border: 1px solid $black;
+  min-height: 50px;
+  position: absolute;
+  background: $black;
+  color: $white;
+  z-index: 999;
+
+  :global .rc-select-item {
+    line-height: 1.5;
+    padding: 4px 10px;
+    font-family: "Suisse Intl", serif;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  :global .rc-select-item-option {
+    position: relative;
+  }
+
+  :global .rc-select-item-option-state {
+    position: absolute;
+    right: 10px;
+    top: 4px;
+    pointer-events: none;
+  }
+
+  :global .rc-select-item-option-active {
+    color: $black;
+    background-color: $yellow;
+  }
+}
+
+.DropDown:global.rc-select-dropdown-hidden {
+  display: none;
+}
+
+
+

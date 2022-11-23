@@ -1,21 +1,66 @@
 @import "../../../../styles/variables";
 
-.DrawerOpen {
+.Drawer {
   width: 50%;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 100px;
   align-self: flex-start;
-}
 
-.DrawerClosed {
-  display: none;
+  &.Mobile {
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    background-color: $background;
+    position: fixed;
+    z-index: 20;
+    transition: left 0.5s ease;
+
+    &.Closed {
+      left: -100vw;
+    }
+  }
 }
 
 .Window {
   margin-bottom: 20px;
   max-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height}));
-  overflow: scroll;
+  overflow-y: scroll;
+
+  .CloseButton {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    color: $black;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      background-color: $black;
+      left: 0;
+    }
+
+    span:nth-child(1) {
+      top: 10px;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      top: 10px;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
 }
 
 .ArchivalUnitData {

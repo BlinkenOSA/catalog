@@ -4,7 +4,7 @@ import Loader from "../../../pages/parts/loader/Loader";
 import style from "./IsadContentPage.module.scss";
 import CartButton from "../../../cart/CartButton";
 import {useCart} from "react-use-cart";
-import React from "react";
+import React, {useState} from "react";
 import AvailabilityButton from "../../../results/parts/buttons/AvailabilityButton";
 import parse from "html-react-parser";
 import PrimaryTypeButton from "../../../pages/parts/buttons/PrimaryTypeButton";
@@ -12,9 +12,12 @@ import IsadSearchBar from "./parts/IsadSearchBar";
 import IsadFilter from "./parts/IsadFilter";
 import {useRouter} from "next/router";
 import IsadThumbnail from "./parts/IsadThumbnail";
+import {Collapse} from 'react-collapse';
 
-const IsadContentPage = ({seriesID, language}) => {
+const IsadContentPage = ({seriesID, language, isMobile}) => {
     const { inCart } = useCart();
+
+    const [filterOpen, setFilterOpen] = useState(false);
 
     const router = useRouter();
     const {id, seriesQuery, ...selectedSeriesFacets} = router.query;
@@ -102,6 +105,7 @@ const IsadContentPage = ({seriesID, language}) => {
                     <div>{getNotes()}</div>
                 </div>
                 <div className={style.Buttons}>
+                    {isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
                     <PrimaryTypeButton primaryType={rec['primary_type']} />
                     <AvailabilityButton record={rec} />
                 </div>
@@ -150,59 +154,107 @@ const IsadContentPage = ({seriesID, language}) => {
         }
 
         return records.map((rec, index) => {
-            return (
-                <div className={isBoxRow(rec, index) ? style.Record : `${style.Record} ${style.InContainer}`} key={index}>
-                    <div className={style.CartButton}>
-                        <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />
-                    </div>
-                    <a href={`/catalog/${rec['id']}`}>
-                        <div className={style.CallNumber}>
-                            {renderThumbnail(rec)}
-                            {rec['call_number'][0]}
+            if (isMobile) {
+                return (
+                    <div className={isBoxRow(rec, index) ? `${style.Record} ${style.Mobile}` : `${style.Record} ${style.InContainer} ${style.Mobile}`} key={index}>
+                        <a href={`/catalog/${rec['id']}`}>
+                            <div className={style.CallNumber}>
+                                {rec['call_number'][0]}
+                            </div>
+                        </a>
+                        <div className={style.Data}>
+                            {renderData(rec, language)}
                         </div>
-                    </a>
-                    <div className={style.Data}>
-                        {renderData(rec, language)}
+                        {displayContainer(rec, index)}
                     </div>
-                    {displayContainer(rec, index)}
+                )
+            } else {
+                return (
+                    <div className={isBoxRow(rec, index) ? style.Record : `${style.Record} ${style.InContainer}`} key={index}>
+                        <div className={style.CartButton}>
+                            <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />
+                        </div>
+                        <a href={`/catalog/${rec['id']}`}>
+                            <div className={style.CallNumber}>
+                                {renderThumbnail(rec)}
+                                {rec['call_number'][0]}
+                            </div>
+                        </a>
+                        <div className={style.Data}>
+                            {renderData(rec, language)}
+                        </div>
+                        {displayContainer(rec, index)}
+                    </div>
+                )
+            }
+        })
+    }
+
+    const renderMenu = () => {
+        const renderFilters = () => (
+            <React.Fragment>
+                <IsadFilter
+                    facetName={'date_created'}
+                    onSelect={onFilter}
+                    facets={facets}
+                    placeholder={'Select creation date...'}
+                    value={selectedSeriesFacets.hasOwnProperty('date_created') ? selectedSeriesFacets['date_created'] : undefined}
+                    isMobile={true}
+                />
+                <IsadFilter
+                    facetName={'genre'}
+                    onSelect={onFilter}
+                    facets={facets}
+                    placeholder={'Select genre...'}
+                    value={selectedSeriesFacets.hasOwnProperty('genre') ? selectedSeriesFacets['genre'] : undefined}
+                    isMobile={true}
+                />
+                <IsadFilter
+                    facetName={'availability_facet'}
+                    onSelect={onFilter}
+                    facets={facets}
+                    placeholder={'Select availability...'}
+                    value={selectedSeriesFacets.hasOwnProperty('availability_facet') ? selectedSeriesFacets['availability_facet'] : undefined}
+                    isMobile={true}
+                />
+            </React.Fragment>
+        )
+
+        if (isMobile) {
+            return (
+                <div className={`${style.SeriesSearch} ${style.Mobile}`}>
+                    <IsadSearchBar
+                        placeholder={'Search in this series...'}
+                        seriesQuery={seriesQuery}
+                        onSearch={(value) => onFilter('seriesQuery', value)}
+                        onFilter={() => setFilterOpen(!filterOpen)}
+                        isMobile={true}
+                        filterOpen={filterOpen}
+                    />
+                    <Collapse isOpened={filterOpen}>
+                        {renderFilters()}
+                    </Collapse>
                 </div>
             )
-        })
+        } else {
+            return (
+                <div className={style.SeriesSearch}>
+                    <IsadSearchBar
+                        placeholder={'Search in this series...'}
+                        seriesQuery={seriesQuery}
+                        onSearch={(value) => onFilter('seriesQuery', value)}
+                    />
+                    {renderFilters()}
+                </div>
+            )
+        }
     }
 
     if (data) {
         return (
             <React.Fragment>
                 {
-                    (numFound > 10 || seriesQuery !== '' || Object.keys(selectedSeriesFacets).length > 0) &&
-                    <div className={style.SeriesSearch}>
-                        <IsadSearchBar
-                            placeholder={'Search in this series...'}
-                            seriesQuery={seriesQuery}
-                            onSearch={(value) => onFilter('seriesQuery', value)}
-                        />
-                        <IsadFilter
-                            facetName={'date_created'}
-                            onSelect={onFilter}
-                            facets={facets}
-                            placeholder={'Select creation date...'}
-                            value={selectedSeriesFacets.hasOwnProperty('date_created') ? selectedSeriesFacets['date_created'] : undefined}
-                        />
-                        <IsadFilter
-                            facetName={'genre'}
-                            onSelect={onFilter}
-                            facets={facets}
-                            placeholder={'Select genre...'}
-                            value={selectedSeriesFacets.hasOwnProperty('genre') ? selectedSeriesFacets['genre'] : undefined}
-                        />
-                        <IsadFilter
-                            facetName={'availability_facet'}
-                            onSelect={onFilter}
-                            facets={facets}
-                            placeholder={'Select availability...'}
-                            value={selectedSeriesFacets.hasOwnProperty('availability_facet') ? selectedSeriesFacets['availability_facet'] : undefined}
-                        />
-                    </div>
+                    (numFound > 10 || seriesQuery !== '' || Object.keys(selectedSeriesFacets).length > 0) && renderMenu()
                 }
                 <div className={style.RecordsWrapper}>
                     {

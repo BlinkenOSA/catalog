@@ -1,9 +1,8 @@
-import cssStyle from "./FacetValuesMobile.module.scss";
-import FacetSearchMobile from "./FacetSearchMobile";
+import style from "./FacetValues.module.scss";
+import FacetSearch from "./FacetSearch";
 import {facetConfig} from "../../../config/facetConfig";
-import {useCallback, useEffect, useRef, useState} from "react";
-import {useDeepCompareEffect, useWindowSize} from "react-use";
-import { VariableSizeList as List } from 'react-window';
+import {useState} from "react";
+import {useDeepCompareEffect} from "react-use";
 
 /**
  * Displays the selectable facet values belonging to the selected facet group.
@@ -13,17 +12,13 @@ import { VariableSizeList as List } from 'react-window';
  * @param {string} params.selectedFacetGroup The name of the selected facet group.
  * @param {Object} params.selectedFacetValues The selected facet values.
  * @param {function} params.onFacetActionClick The handler of facet value change.
+ * @param {function} params.onSelectFacetValue The function handling the facet selection.
  */
-const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues,
-                      onFacetActionClick}) => {
+const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
+                      onFacetActionClick, onSelectFacetValue}) => {
     const [facetValuesOriginal, setFacetValuesOriginal] = useState([])
     const [facetValuesDisplay, setFacetValuesDisplay] = useState([])
     const [facetValueClicked, setFacetValueClicked] = useState('')
-
-    const listRef = useRef();
-    const rowHeights = useRef({});
-
-    const {width} = useWindowSize();
 
     useDeepCompareEffect(() => {
         let f = [];
@@ -58,7 +53,14 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
      * @param {string} value The value of the clicked facet.
      */
     const handleFacetSelect = (value) => {
-        onFacetActionClick(value, 'add')
+        if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
+            if (facetConfig[selectedFacetGroup]['info']) {
+                onSelectFacetValue(value)
+                setFacetValueClicked(value)
+            }
+        } else {
+            onFacetActionClick(value, 'add')
+        }
     }
 
     /**
@@ -78,6 +80,24 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
     }
 
     /**
+     * Rendering the selected facet buttons.
+     */
+    const renderFacetButtons = () => {
+        return (
+            facetValuesDisplay.map((facet, index) => (
+                <li
+                    key={index}
+                    onClick={() => {handleFacetClick(facet['value'], selectedFacetValues.includes(facet['value']) ? 'deselect' : 'select')}}
+                    className={facetValueClicked === facet['value'] || selectedFacetValues.includes(facet['value']) ? style.Clicked : undefined}
+                >
+                    <div className={style.Value}>{facet['value']} <span className={style.Count}>({facet['number']})</span></div>
+                    <div className={selectedFacetValues.includes(facet['value']) ? style.RemoveButton : style.Button} />
+                </li>
+            ))
+        )
+    }
+
+    /**
      * Handling searching facets.
      *
      * @param {string} value The value to search. Search will fire after 2 characters.
@@ -91,55 +111,15 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
         }
     }
 
-    const setRowHeight = useCallback((index, size) => {
-        rowHeights.current = { ...rowHeights.current, [index]: size };
-        listRef.current.resetAfterIndex(0);
-    }, []);
-
-    const getRowHeight = (index) => {
-        return rowHeights.current[index] + 14 || 40;
-    }
-
-    const Row = ({ index, style }) => {
-        const rowRef = useRef({});
-        const facet = facetValuesDisplay[index];
-
-        useEffect(() => {
-            if (rowRef.current) {
-                setRowHeight(index, rowRef.current.clientHeight)
-            }
-        }, [rowRef]);
-
-        return (
-            <div
-                onClick={() => {handleFacetClick(facet['value'], selectedFacetValues.includes(facet['value']) ? 'deselect' : 'select')}}
-                className={`${cssStyle.ValueWrapper} ${selectedFacetValues.includes(facet['value']) ? cssStyle.Selected : ''}`}
-                style={style}>
-                <div
-                    className={cssStyle.Value}
-                    ref={rowRef}>
-                    {facet['value']} <span className={cssStyle.Count}>({facet['number']})</span>
-                </div>
-            </div>
-        )
-    };
-
-
     return (
-        <div className={cssStyle.FacetValues}>
-            {facetConfig[selectedFacetGroup]['search'] && <FacetSearchMobile onSearch={handleSearch}/>}
-            <List
-                ref={listRef}
-                height={Math.min(400, 40 * facetValuesDisplay.length + 2)}
-                itemCount={facetValuesDisplay.length}
-                itemSize={getRowHeight}
-                width={'100%'}
-            >
-                {Row}
-            </List>
+        <div className={style.FacetValues}>
+            {facetConfig[selectedFacetGroup]['search'] && <FacetSearch onSearch={handleSearch}/>}
+            <ul>
+                {renderFacetButtons()}
+            </ul>
         </div>
     )
 
 }
 
-export default FacetValuesMobile;
+export default FacetValues;

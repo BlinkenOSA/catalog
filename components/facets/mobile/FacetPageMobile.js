@@ -6,6 +6,8 @@ import {createParams} from "../../../utils/urlParamFunctions";
 import {facetConfig} from "../../../config/facetConfig";
 import {Collapse} from "react-collapse";
 import dynamic from "next/dynamic";
+import ResultCounterMobile from "./ResultCounterMobile";
+import FacetDateRangeMobile from "./FacetDateRangeMobile";
 
 const FacetValuesMobile = dynamic(() => import("./FacetValuesMobile"), {
     ssr: false,
@@ -96,14 +98,22 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
                         <span>{facetConfig[key]['title']}</span>
                         <div className={style.Button} />
                     </div>
-                    <Collapse isOpened={selectedFacetGroup === key}>
-                        {selectedFacetGroup !== '' &&
-                        <FacetValuesMobile
-                            breadcrumbHeight={breadcrumbHeight}
-                            facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
-                            selectedFacetGroup={selectedFacetGroup}
-                            selectedFacetValues={getSelectedFacetValues()}
-                        />}
+                    <Collapse id={key} isOpened={selectedFacetGroup === key}>
+                        {
+                            facetConfig[key]['type'] === 'list' ?
+                            <FacetValuesMobile
+                                breadcrumbHeight={breadcrumbHeight}
+                                facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
+                                selectedFacetGroup={key}
+                                selectedFacetValues={getSelectedFacetValues()}
+                                onFacetActionClick={onFacetActionClick}
+                            /> :
+                            <FacetDateRangeMobile
+                                facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
+                                selectedFacetGroup={key}
+                                selectedFacetValues={getSelectedFacetValues()}
+                                onFacetActionClick={onFacetActionClick}
+                            />}
                     </Collapse>
                 </div>
             ))
@@ -112,11 +122,16 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
 
     return (
         <React.Fragment>
-            <div className={style.FacetPageWrapper}>
-                <div className={style.FacetPage}>
-                    <div className={style.Facets}>
-                        {renderFacetButtons()}
-                    </div>
+            <div className={style.FacetPage}>
+                <div className={style.Facets}>
+                    {renderFacetButtons()}
+                </div>
+                <div className={style.ResultCounter}>
+                    <ResultCounterMobile
+                        total={total}
+                        breadcrumbHeight={breadcrumbHeight}
+                        onShowButtonClick={onShowButtonClick}
+                    />
                 </div>
             </div>
         </React.Fragment>

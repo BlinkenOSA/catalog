@@ -6,20 +6,16 @@
   font-family: "Suisse Intl Condensed", serif;
   font-weight: 400;
   font-size: 18px;
+  height: 100%;
 
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  li {
+  .FacetValueButton {
     align-items: center;
     color: $white;
     border-bottom: 2px solid $white;
     font-size: 16px;
     line-height: 24px;
     display: flex;
+    box-sizing: border-box;
 
     .Value {
       padding-left: 10px;
@@ -66,7 +62,7 @@
     }
   }
 
-  li:hover, li.Clicked {
+  .FacetValueButton:hover, .FacetValueButton.Clicked {
     cursor: pointer;
     color: $black;
     background-color: $white;

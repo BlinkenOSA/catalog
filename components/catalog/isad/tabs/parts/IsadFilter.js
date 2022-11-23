@@ -2,7 +2,7 @@ import style from "./IsadFilter.module.scss"
 import Select from "rc-select";
 import {useEffect, useState} from "react";
 
-const IsadFilter = ({facetName, facets, placeholder, onSelect, value}) => {
+const IsadFilter = ({facetName, facets, placeholder, onSelect, value, isMobile}) => {
     const [options, setOptions] = useState([])
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const IsadFilter = ({facetName, facets, placeholder, onSelect, value}) => {
     }
 
     return (
-        <div className={style.SelectWrapper}>
+        <div className={isMobile ? `${style.SelectWrapper} ${style.Mobile}` : style.SelectWrapper}>
             {
                 facets.hasOwnProperty(`${facetName}_facet`) && facets[`${facetName}_facet`].length > 1 ?
                 <Select

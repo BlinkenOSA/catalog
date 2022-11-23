@@ -1,0 +1,210 @@
+@import "../../../styles/variables";
+
+.Inverse {
+  color: $white;
+}
+
+.BreadcrumbWrapper {
+  border-top: 2px solid #EEE;
+  border-bottom: 2px solid $black;
+  background-color: $background;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  top: $header-height-mobile;
+  z-index: 10;
+}
+
+.BreadcrumbContent {
+  display: flex;
+  gap: 20px;
+  font-family: 'Suisse Intl Condensed', serif;
+  font-weight: 500;
+  margin: 0 auto;
+  padding: 0 10px;
+  height: 100%;
+  max-width: $max-width;
+  min-height: 40px;
+
+  .FilterButton {
+    flex: 1;
+    font-size: 20px;
+    align-self: center;
+    line-height: 0;
+    text-align: right;
+  }
+
+  .FilterButtonInverse {
+    flex: 1;
+    font-size: 20px;
+    align-self: center;
+    line-height: 0;
+    text-align: right;
+
+    svg {
+      fill: $white;
+    }
+  }
+
+  .Navigation {
+    width: 100%;
+  }
+}
+
+.Navigation {
+  display: inline-flex;
+  font-size: 12px;
+  width: $left-width + 2px;
+  margin-top: 12px;
+
+  span {
+    margin-right: 3px;
+    vertical-align: top;
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  a {
+    color: $black;
+    text-decoration: none;
+  }
+}
+
+.ResultModifiersWrapper {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+  width: 110px;
+  justify-content: left;
+}
+
+.BreadcrumbInverseWrapper {
+  border-top: 2px solid $background;
+  border-bottom: 2px solid $background;
+  background-color: $black;
+  position: -webkit-sticky;
+  position: sticky;
+  width: 100%;
+  top: $header-height-mobile;
+  z-index: 10;
+
+  .BreadcrumbContent {
+    color: $white;
+
+    .SelectedFacets {
+
+      .SelectedFacetButton {
+        color: $black;
+        background-color: $background;
+      }
+    }
+  }
+}
+
+.SelectedFacetsWrapper {
+  position: relative;
+  background-color: $background;
+  padding: 0 10px;
+  border-bottom: 2px solid $black;
+
+  &.Inverse {
+    background-color: $black;
+    border-bottom: 2px solid $white;
+
+    .SelectedFacets {
+
+      .SelectedFacetButton {
+        color: $black;
+        background-color: $white;
+      }
+    }
+  }
+
+  .SelectedFacets {
+    max-height: 300px;
+    margin: 0;
+    padding-top: 8px;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    -webkit-transition: max-height .5s linear;
+    -moz-transition: max-height .5s linear;
+    -o-transition: max-height .5s linear;
+    transition: max-height .5s linear;
+
+    .SelectedFacetButton {
+      color: $white;
+      background-color: $black;
+      border-radius: 11px;
+      font-family: "Suisse Intl", serif;
+      font-size: 12px;
+      padding: 0 10px;
+      height: 22px;
+      line-height: 22px;
+      margin-right: 5px;
+      margin-bottom: 8px;
+
+      svg {
+        position: relative;
+        top: 3px;
+        padding: 0 5px;
+      }
+
+      .SelectedFacetRemove {
+        display: inline-flex;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        svg {
+          padding-right: 0;
+          padding-left: 5px;
+        }
+      }
+    }
+
+    &.Closed {
+      max-height: 30px;
+    }
+  }
+
+  .Opener {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 9;
+    height: 22px;
+    width: 22px;
+    background-color: $white;
+    border-radius: 11px;
+
+    .UpArrow {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-top: 8px;
+      margin-left: 6px;
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+
+    .DownArrow {
+      border: solid $black;
+      border-width: 0 1px 1px 0;
+      display: inline-block;
+      padding: 4px;
+      margin-left: 6px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+}
+
+
+

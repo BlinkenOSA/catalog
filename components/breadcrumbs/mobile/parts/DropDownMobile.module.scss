@@ -1,4 +1,4 @@
-@import "../../../styles/variables";
+@import "../../../../styles/variables";
 
 .DropDownWrapper {
   flex: 1;
@@ -17,13 +17,14 @@
   :global .rc-select-selector {
     display: flex;
     position: relative;
-    color: $white;
+    border-bottom: 1px solid $form-background;
+    color: $black;
     font-family: "Suisse Intl", serif;
     font-size: 12px;
     font-weight: 400;
     height: 22px;
     line-height: 22px;
-    background-color: $black;
+    background-color: transparent;
     padding-right: 20px;
   }
 
@@ -51,7 +52,7 @@
 
     :global .rc-select-arrow-icon::after {
       content: '';
-      border: solid $white;
+      border: solid $black;
       border-width: 0 1px 1px 0;
       display: inline-block;
       padding: 4px;

@@ -11,7 +11,7 @@ import {useRouter} from "next/router";
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
  */
-const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false}) => {
+const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false, isMobile}) => {
     const [openNodes, setOpenNodes] = useState([]);
     const { data, error } = useSWR(activeUnitID ? `archival-units-tree/${activeUnitID}/` : 'archival-units-tree/all/', fetcher);
 
@@ -207,21 +207,40 @@ const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false
     }
 
     if (data) {
-        return (
-            <div style={{display: 'flex'}}>
-                <div className={showArchiveUnitDrawer ? style.TreeOpen : style.Tree}>
+        if (isMobile) {
+            return (
+                <div>
+                <div className={`${style.Tree} ${style.Mobile}`}>
                     {renderTree()}
                 </div>
                 {
                     showArchiveUnitDrawer &&
                     <ArchivalUnitDrawer
+                        isMobile={true}
                         archivalUnitID={selectedArchivalUnit}
                         open={selectedArchivalUnit !== 0}
-                        onClose={onSelectArchivalUnit}
+                        onClose={() => setSelectedArchivalUnit(0)}
                     />
                 }
-            </div>
-        )
+                </div>
+            )
+        } else {
+            return (
+                <div style={{display: 'flex'}}>
+                    <div className={showArchiveUnitDrawer ? style.TreeOpen : style.Tree}>
+                        {renderTree()}
+                    </div>
+                    {
+                        showArchiveUnitDrawer &&
+                        <ArchivalUnitDrawer
+                            archivalUnitID={selectedArchivalUnit}
+                            open={selectedArchivalUnit !== 0}
+                            onClose={onSelectArchivalUnit}
+                        />
+                    }
+                </div>
+            )
+        }
     } else {
         return <Loader/>
     }

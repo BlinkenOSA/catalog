@@ -1,0 +1,100 @@
+@import "../../../styles/variables";
+
+.FacetDateRange {
+  color: $black;
+  font-family: "Suisse Intl Condensed", serif;
+  font-weight: 400;
+  font-size: 16px;
+  background-color: $form-background;
+  padding-bottom: 10px;
+
+  .Values {
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+
+    .FromValue {
+      flex: 1;
+    }
+
+    .ToValue {
+      flex: 1;
+      text-align: right;
+    }
+  }
+
+  .Wrapper {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .ButtonWrapper {
+    margin-top: 40px;
+    padding-right: 10px;
+    text-align: right;
+  }
+
+  .Button {
+    padding: 5px 15px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 18px;
+    font-weight: 100;
+    text-transform: uppercase;
+    font-size: 16px;
+    text-align: center;
+    color: $white;
+    background-color: $black;
+    font-family: "Suisse Intl", serif;
+
+    &:hover {
+      cursor: pointer;
+      color: $black;
+      background-color: $yellow;
+    }
+  }
+
+  .Slider {
+
+    :global .rc-slider-mark-text {
+      font-family: "Suisse Intl", serif;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    :global .rc-slider-mark-text-active {
+      color: $black;
+    }
+
+    :global .rc-slider-rail {
+      background-color: $black;
+    }
+
+    :global .rc-slider-track {
+      background-color: $yellow;
+    }
+
+    :global .rc-slider-handle {
+      background-color: $yellow;
+      border-color: $yellow;
+      opacity: unset;
+    }
+
+    :global .rc-slider-handle.rc-slider-handle-dragging {
+      background-color: rgba(0, 0, 0, 0.5);
+      border-color: $black;
+      box-shadow: 0 0 0 3px $yellow;
+      opacity: unset;
+    }
+
+    :global .rc-slider-dot {
+      border-color: $black;
+    }
+
+    :global .rc-slider-dot-active {
+      border-color: $yellow;
+      background-color: $yellow;
+    }
+  }
+}

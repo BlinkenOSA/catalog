@@ -7,10 +7,8 @@
   color: $white;
   position: -webkit-sticky; /* for Safari */
   position: sticky;
-  top: 101px;
   align-self: flex-start;
   max-height: calc(100vh - 150px);
-  overflow: scroll;
 
   .Title {
     margin: 0;

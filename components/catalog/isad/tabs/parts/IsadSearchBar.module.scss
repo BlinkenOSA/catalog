@@ -15,6 +15,10 @@
     box-sizing: border-box;
     height: 32px;
 
+    &.Mobile {
+      width: calc(100vw - 20px - 40px - 40px)
+    }
+
     .SearchInput {
       font-family: "Suisse Intl Mono", serif;
       font-weight: 400;
@@ -49,7 +53,7 @@
     }
   }
 
-  .SearchButton {
+  .SearchButton, .FilterButton {
     border: 2px solid $black;
     border-radius: 0;
     background-color: $background;
@@ -63,6 +67,15 @@
       cursor: pointer;
       color: $black;
       background-color: $yellow;
+    }
+  }
+
+  .FilterButton {
+    border-left: none;
+
+    &.Open {
+      background-color: $black;
+      color: $white;
     }
   }
 }

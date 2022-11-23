@@ -10,7 +10,7 @@ import PrimaryTypeButton from "../pages/parts/buttons/PrimaryTypeButton";
 import CartButton from "../cart/CartButton";
 import { useCart } from "react-use-cart";
 
-const ResultItem = ({result, limit, offset, index}) => {
+const ResultItem = ({result, limit, offset, index, isMobile}) => {
     const { inCart } = useCart();
 
     const renderThumbnail = () => {
@@ -89,7 +89,7 @@ const ResultItem = ({result, limit, offset, index}) => {
                     {renderAvailabilityButton()}
                 </div>
             </div>
-            {renderThumbnail()}
+            {!isMobile && renderThumbnail()}
         </div>
     )
 }

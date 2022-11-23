@@ -1,8 +1,8 @@
 import style from "./Pagination.module.scss";
 import {useEffect, useState} from "react";
-import {defaultLimit, defaultOffset} from "../../../config/appConfig";
+import {defaultLimit, defaultOffset} from "../../../../config/appConfig";
 
-const Pagination = ({limit=defaultLimit, offset=defaultOffset, total, onChangePage}) => {
+const Pagination = ({limit=defaultLimit, offset=defaultOffset, total, onChangePage, isMobile=false}) => {
     const [resultsTotal, setResultsTotal] = useState(0);
 
     const lim = Number(limit);
