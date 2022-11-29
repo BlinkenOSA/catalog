@@ -8,9 +8,18 @@
     height: 300px;
     border-bottom: 2px solid $black;
 
+    &.Mobile {
+      display: block;
+      height: unset;
+    }
+
     .HeaderData {
       flex: 1;
       padding: 20px;
+
+      &.Mobile {
+        padding: 10px;
+      }
 
       .Title {
         font-family: "Suisse Works", serif;
@@ -23,6 +32,7 @@
         display: inline-flex;
         gap: 6px;
         margin-top: 20px;
+        flex-wrap: wrap;
       }
     }
 
@@ -31,6 +41,12 @@
       display: flex;
       justify-content: right;
       align-items: center;
+
+      &.Mobile {
+        width: unset;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
 
       div {
         display: flex;
@@ -43,11 +59,7 @@
   }
 
   .MetadataGroup:empty {
-    display: none;
-  }
-
-  .MetadataGroup:last-child {
-      border-bottom: none;
+    border-bottom: 0;
   }
 }
 

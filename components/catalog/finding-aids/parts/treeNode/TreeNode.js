@@ -11,7 +11,7 @@ import style from "./TreeNode.module.scss";
  * @param {string} params.classType The type of class should be used to display
  * @param {boolean} params.hasChildren Node has children?
  */
-const TreeNode = ({open, selected=false, data, onOpenClose, onTreeNodeClick, classType, hasChildren=false}) => {
+const TreeNode = ({open, selected=false, data, onOpenClose, onTreeNodeClick, classType, hasChildren=false, isMobile = false}) => {
     const key = data['key'];
 
     /**
@@ -66,15 +66,35 @@ const TreeNode = ({open, selected=false, data, onOpenClose, onTreeNodeClick, cla
     const renderIcon = () => {
         switch (data['level']) {
             case 'F':
-                return <div className={open ? style.IconOpen : style.IconClosed} />
+                return (
+                    <div className={open ? style.IconOpen : style.IconClosed}>
+                        <img alt="icon" src={open  ? '/icons/TreeBoxOpen.svg' : '/icons/TreeBoxClosed.svg'} style={{display: 'block'}}/>
+                    </div>
+                )
             case 'SF':
-                return <div className={open ? style.IconOpen : style.IconClosed} />
+                return (
+                    <div className={open ? style.IconOpen : style.IconClosed}>
+                        <img alt="icon" src={open  ? '/icons/TreeBoxOpen.svg' : '/icons/TreeBoxClosed.svg'} style={{display: 'block'}}/>
+                    </div>
+                )
             case 'S':
-                return <div className={open ? style.SeriesIconOpen : style.SeriesIcon} />
+                return (
+                    <div className={open ? style.SeriesIconOpen : style.SeriesIcon}>
+                        <img alt="icon" src={open  ? '/icons/TreeFolderOpen.svg' : '/icons/TreeFolder.svg'} style={{display: 'block'}}/>
+                    </div>
+                )
             case 'container':
-                return <div className={style.SeriesIconOpen} />
+                return (
+                    <div className={style.SeriesIconOpen}>
+                        <img alt="icon" src={'/icons/TreeFolderOpen.svg'} style={{display: 'block'}}/>
+                    </div>
+                )
             case 'folder':
-                return <div className={style.FolderIcon} />
+                return (
+                    <div className={style.FolderIcon}>
+                        <img alt="icon" src={'/icons/TreeFolder.svg'} style={{display: 'block'}}/>
+                    </div>
+                )
         }
     }
 
@@ -82,14 +102,14 @@ const TreeNode = ({open, selected=false, data, onOpenClose, onTreeNodeClick, cla
         switch (data['level']) {
             case 'container':
                 return (
-                    <div className={style.Title}>
+                    <div className={isMobile ? `${style.Title} ${style.Mobile}` : style.Title}>
                         <span className={style.ReferenceCode}>{data['reference_code']}</span>
                         <span className={style.ArchivalUnitTitle}>{data['carrier_type']} #{data['container_no']}</span>
                     </div>
                 )
             default:
                 return (
-                    <div className={style.Title} onClick={selected ?  undefined : () => onTreeNodeClick(data['catalog_id'])}>
+                    <div className={isMobile ? `${style.Title} ${style.Mobile}` : style.Title} onClick={selected ?  undefined : () => onTreeNodeClick(data['catalog_id'])}>
                         <span className={style.ReferenceCode}>{data['reference_code']}</span>
                         <span className={style.ArchivalUnitTitle}>{data['title']}</span>
                     </div>

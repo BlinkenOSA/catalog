@@ -128,7 +128,7 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
      * Rendering the right side content part of the breadcrumb.
      */
     const renderRightSideContent = () => {
-        if (module === 'staticPage' || module === 'collections') {
+        if (module === 'staticPage' || module === 'collections' || module === 'detail') {
             return ''
         }
 

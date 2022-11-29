@@ -10,11 +10,15 @@ import Loader from "../../pages/parts/loader/Loader";
 import React from "react";
 import LibraryItem from "./LibraryItem";
 import {libraryFieldConfig} from "./libraryFieldConfig";
-import LibraryHoldings from "./LibraryHoldings";
+import {filmLibraryFieldConfig} from "./filmLibraryFieldConfig";
+import LibraryHoldings from "./desktop/LibraryHoldings";
+import LibraryHoldingsMobile from "./mobile/LibraryHoldingsMobile";
 
 
-const LibraryPage = ({record}) => {
+const LibraryPage = ({record, type, isMobile}) => {
     const { inCart } = useCart();
+
+    const config = type === 'library' ? libraryFieldConfig : filmLibraryFieldConfig;
 
     const { id } = record;
     const { data, error } = useSWR(`/api/record/${id}`, nextAPIFetcher)
@@ -22,8 +26,8 @@ const LibraryPage = ({record}) => {
     if (data) {
         return (
             <div className={style.Page}>
-                <div className={style.Header}>
-                    <div className={style.HeaderData}>
+                <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
+                    <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
                         <div className={style.Title}>
                             {getTitle(data)}
                         </div>
@@ -37,7 +41,7 @@ const LibraryPage = ({record}) => {
                             <PrimaryTypeButton primaryType={record['primary_type']} />
                         </div>
                     </div>
-                    <div className={style.Thumbnail}>
+                    <div className={isMobile ? `${style.Thumbnail} ${style.Mobile}` : style.Thumbnail}>
                         <div>
                             <img
                                 alt={`Cover`}
@@ -49,18 +53,19 @@ const LibraryPage = ({record}) => {
                 </div>
                 <div>
                     {
-                        libraryFieldConfig.map(fc => (
+                        config.map(fc => (
                             <div className={style.MetadataGroup} key={fc['group']}>
                                 {
-                                    fc['fields'].map(f => (
+                                    fc['fields'].map((f, index) => (
                                     <LibraryItem
-                                        key={f['label']}
+                                        key={index}
                                         record={data}
                                         group={fc['group']}
                                         label={f['label']}
                                         links={f['links']}
                                         fieldConfig={f['fieldConfig']}
                                         display={f.hasOwnProperty('display') ? f['display'] : 'sameRow'}
+                                        isMobile={isMobile}
                                     />
                                 ))}
                             </div>
@@ -68,9 +73,11 @@ const LibraryPage = ({record}) => {
                     }
                 </div>
                 <div>
-                    <LibraryHoldings
-                        record={data}
-                    />
+                {
+                    isMobile ?
+                    <LibraryHoldingsMobile record={data} type={type} /> :
+                    <LibraryHoldings record={data} type={type} />
+                }
                 </div>
             </div>
         )

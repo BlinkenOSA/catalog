@@ -7,7 +7,7 @@ import {Collapse} from 'react-collapse';
 import Button from "../../pages/parts/buttons/Button";
 import {useState} from "react";
 
-const FindingAidsLocation = ({id, onTreeNodeClick}) => {
+const FindingAidsLocation = ({id, onTreeNodeClick, isMobile}) => {
     const [locationOpen, setLocationOpen] = useState(true)
 
     const { data, error } = useSWR(`finding-aids-location/${id}/`, fetcher)
@@ -19,20 +19,31 @@ const FindingAidsLocation = ({id, onTreeNodeClick}) => {
             case 'SF':
                 return 'FondsLastSubfondsLast'
             case 'S':
-                return 'FondsLastSubfondsLastSeriesLast'
-            case 'container':
-                return 'ContainerLast'
-            case 'folder':
-                if (record['key'] === 'placeholder') {
-                    return 'FolderPlaceholder'
+                if (record['has_subfonds']) {
+                    return 'FondsLastSubfondsLastSeriesLast'
                 } else {
-                    return isLast ? 'FolderLast' : 'Folder'
+                    return 'FondsLastSeriesLast'
                 }
+            case 'container':
+                if (record['has_subfonds']) {
+                    return 'ContainerWithSubfondsLast'
+                } else {
+                    return 'ContainerWithoutSubfondsLast'
+                }
+            case 'folder':
             case 'item':
                 if (record['key'] === 'placeholder') {
-                    return 'FolderPlaceholder'
+                    if (record['has_subfonds']) {
+                        return 'FolderPlaceholderWithSubfonds'
+                    } else {
+                        return 'FolderPlaceholderWithoutSubfonds'
+                    }
                 } else {
-                    return isLast ? 'FolderLast' : 'Folder'
+                    if (record['has_subfonds']) {
+                        return isLast ? 'FolderWithSubfondsLast' : 'FolderWithSubfonds'
+                    } else {
+                        return isLast ? 'FolderWithoutSubfondsLast' : 'FolderWithoutSubfonds'
+                    }
                 }
         }
     }
@@ -48,7 +59,7 @@ const FindingAidsLocation = ({id, onTreeNodeClick}) => {
     if (data) {
         return (
             <div className={style.LocationTree}>
-                <div className={style.Row}>
+                <div className={isMobile ? `${style.Row} ${style.Mobile}` : style.Row}>
                     <div className={style.Category}>Location</div>
                     <div className={style.Value}>
                         <Button
@@ -58,7 +69,7 @@ const FindingAidsLocation = ({id, onTreeNodeClick}) => {
                     </div>
                 </div>
                 <Collapse isOpened={locationOpen} >
-                    <div className={style.Tree}>
+                    <div className={isMobile ? `${style.Tree} ${style.Mobile}` : style.Tree}>
                         {
                             data.map((record, index) => (
                                 <TreeNode
@@ -68,6 +79,7 @@ const FindingAidsLocation = ({id, onTreeNodeClick}) => {
                                     selected={record['active']}
                                     classType={getClassType(record, index+1 === data.length)}
                                     open={true}
+                                    isMobile={isMobile}
                                 />
                             ))
                         }

@@ -1,9 +1,8 @@
-@import "../../../styles/variables";
+@import "../../../../styles/variables";
 
 .Row {
   display: flex;
   padding: 10px 20px;
-  border-top: 2px solid $black;
 
   .Category {
     font-family: "Suisse Intl Condensed", serif;
@@ -30,6 +29,5 @@
         text-align: center;
       }
     }
-
   }
 }

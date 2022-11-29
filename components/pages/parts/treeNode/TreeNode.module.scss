@@ -193,22 +193,17 @@
 .IconOpen {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeBoxOpen.svg");
-  background-repeat: no-repeat;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+
+  img {
+    background-color: $background
+  }
 }
 
 .IconClosed {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeBoxClosed.svg");
-  background-repeat: no-repeat;
-}
-
-.SeriesIcon {
-  width: 30px;
-  flex-shrink: 0;
-  background-image: url("/icons/TreeFolder.svg");
-  background-repeat: no-repeat;
 }
 
 .Line {

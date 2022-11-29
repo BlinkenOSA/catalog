@@ -8,8 +8,8 @@ div[data-testid="instance-container"] {
 div[data-testid="toolbar-wrapper"] {
   position: absolute;
   top: 20px;
-  right: 0;
-  z-index: 10;
+  left: 0;
+  z-index: 9;
 
   .osrv-toolbar-button {
     position: relative;

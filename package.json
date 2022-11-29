@@ -33,6 +33,7 @@
     "react-datepicker": "^4.8.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "18.2.0",
+    "react-fullscreen-crossbrowser": "^1.1.0",
     "react-icons": "^4.3.1",
     "react-pdf": "^5.7.2",
     "react-player": "^2.11.0",

@@ -27,4 +27,12 @@
     --vm-time-font-size: 12px;
     --vm-tooltip-z-index: 999;
   }
+
+  &.Mobile {
+    height: calc(100vw * 0.5625);
+
+    .VideoPlayer {
+      width: 100vw;
+    }
+  }
 }

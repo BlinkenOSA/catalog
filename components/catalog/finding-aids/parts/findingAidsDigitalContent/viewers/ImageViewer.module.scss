@@ -2,8 +2,8 @@
 
 // IIIF Viewer in a window
 .IIIFViewer {
+  position: relative;
   border-top: 2px solid $black;
-  height: 500px;
 
   :global .osrv-top-row-wrapper {
     display: none;
@@ -15,6 +15,46 @@
 
   :global div[data-testid="toolbar-wrapper"] {
     position: relative;
+  }
+
+  &.FullScreen {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .FullScreenButton {
+    cursor: pointer;
+    position: absolute;
+    z-index: 12;
+    bottom: 20px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 13px;
+    background-color: $black;
+
+    svg {
+      padding-top: 5px;
+      padding-left: 5px;
+      fill: $white;
+    }
+
+    &:hover {
+      background-color: $yellow;
+
+      svg {
+        fill: $black;
+      }
+    }
+  }
+
+  &.Mobile {
+    height: 300px;
+
+    :global div[data-testid="toolbar-container"] {
+      padding-right: 0;
+    }
   }
 }
 

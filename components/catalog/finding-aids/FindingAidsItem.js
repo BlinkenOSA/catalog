@@ -2,7 +2,7 @@ import style from "./FindingAidsItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
 
-const FindingAidsItem = ({id, record, language, group, label, field, links={}, display='sameRow'}) => {
+const FindingAidsItem = ({id, record, language, group, label, field, links={}, isMobile, display='sameRow'}) => {
     const fieldName = field;
 
     const renderValue = (data) => {
@@ -51,15 +51,29 @@ const FindingAidsItem = ({id, record, language, group, label, field, links={}, d
     }
 
     const displayField = () => {
-        return (
-            <div className={style.Row}>
-                <div className={style.Category}>{group.hasOwnProperty(language) ? group[language] : group['EN']}</div>
-                <div className={style.Label}>{label.hasOwnProperty(language) ? label[language] : label['EN']}</div>
-                <div className={style.Value}>
-                    {displayValues()}
+        if (isMobile) {
+            return (
+                <div className={`${style.Row} ${style.Mobile}`}>
+                    <div className={style.Category}>{group.hasOwnProperty(language) ? group[language] : group['EN']}</div>
+                    <div className={style.ValueWrapper}>
+                        <div className={style.Label}>{label.hasOwnProperty(language) ? label[language] : label['EN']}</div>
+                        <div className={style.Value}>
+                            {displayValues()}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <div className={style.Row}>
+                    <div className={style.Category}>{group.hasOwnProperty(language) ? group[language] : group['EN']}</div>
+                    <div className={style.Label}>{label.hasOwnProperty(language) ? label[language] : label['EN']}</div>
+                    <div className={style.Value}>
+                        {displayValues()}
+                    </div>
+                </div>
+            )
+        }
     }
 
     const detectValueExists = (fieldName) => {

@@ -1,5 +1,5 @@
 import style from "./LibraryHoldings.module.scss";
-import {getValues} from "../../../utils/marcFunctions";
+import {getValues} from "../../../../utils/marcFunctions";
 
 const ITEM_TYPES = {
     'BK': 'Book',

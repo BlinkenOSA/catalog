@@ -3,7 +3,7 @@ import {getValues} from "../../../utils/marcFunctions";
 import React from "react";
 import {displaySubjectField} from "../../../utils/libraryDisplayFunctions";
 
-const LibraryItem = ({record, data, group, label, fieldConfig, links={}, display='sameRow'}) => {
+const LibraryItem = ({record, data, group, label, fieldConfig, links={}, display='sameRow', isMobile}) => {
     let values = [];
 
     const addValues = (fieldKey, subfields) => {
@@ -120,15 +120,29 @@ const LibraryItem = ({record, data, group, label, fieldConfig, links={}, display
 
     if (data || values.length > 0) {
         if (values[0]['value'].length > 0 || values[0]['linkedValue'].length > 0 ) {
-            return (
-                <div className={style.Row}>
-                    <div className={style.Category}>{group}</div>
-                    <div className={style.Label}>{label}</div>
-                    <div className={style.Value}>
-                        {data ? data : displayValues()}
+            if (isMobile) {
+                return (
+                    <div className={`${style.Row} ${style.Mobile}`}>
+                        <div className={style.Category}>{group}</div>
+                        <div className={style.ValueWrapper}>
+                            <div className={style.Label}>{label}</div>
+                            <div className={style.Value}>
+                                {data ? data : displayValues()}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            )
+                )
+            } else {
+                return (
+                    <div className={style.Row}>
+                        <div className={style.Category}>{group}</div>
+                        <div className={style.Label}>{label}</div>
+                        <div className={style.Value}>
+                            {data ? data : displayValues()}
+                        </div>
+                    </div>
+                )
+            }
         }
     }
     return ''

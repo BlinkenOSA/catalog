@@ -5,6 +5,26 @@
   padding: 10px 20px;
   border-top: 2px solid $black;
 
+  &.Mobile {
+    padding: 5px 10px;
+    gap: 5px;
+
+    .Category {
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .ValueWrapper {
+      flex: 1;
+
+      .Label {
+        width: 100%;
+        padding: 0;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
   .Category {
     font-family: "Suisse Intl Condensed", serif;
     font-size: 18px;

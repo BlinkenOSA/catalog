@@ -1,8 +1,23 @@
 import style from "./ImageViewer.module.scss";
 import {OpenSeadragonViewer} from "openseadragon-react-viewer";
+import {FaExpand, FaCompress} from "react-icons/fa";
+import Fullscreen from 'react-fullscreen-crossbrowser';
+import {useState} from "react";
+import {useWindowSize} from 'react-use';
 
-const ImageViewer = ({id, device}) => {
+const ImageViewer = ({id, isMobile}) => {
     const manifestUrl = `http://localhost:8000/api/catalog/finding-aids-image-manifest/${id}/manifest.json`;
+
+    const {width, height} = useWindowSize();
+    const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
+
+    const getHeight = () => {
+        if (isMobile) {
+            return fullScreenEnabled ? height : 300;
+        } else {
+            return fullScreenEnabled ? height : 500;
+        }
+    }
 
     const options = {
         showDropdown: false,
@@ -10,8 +25,8 @@ const ImageViewer = ({id, device}) => {
         showToolbar: true,
         showTitle: false,
         deepLinking: false,
-        height: 500,
-        containerId: `image-viewer-${device}`
+        height: getHeight(),
+        containerId: `image-viewer-${isMobile ? 'mobile' : 'desktop'}`
     };
 
     const openSeadragonOptions = {
@@ -21,22 +36,38 @@ const ImageViewer = ({id, device}) => {
     };
 
     const toolBarOptions = {
-        showZoom: true,
-        showFullScreen: true,
+        showFullScreen: false,
         showDownload: false,
         showPreviousNext: false,
     };
 
-    return (
-        <div className={style.IIIFViewer}>
-            <OpenSeadragonViewer
-                manifestUrl={manifestUrl}
-                options={options}
-                openSeadragonOptions={openSeadragonOptions}
-                toolBarOptions={toolBarOptions}
-            />
-        </div>
-    )
+    const fullScreenClick = () => {
+        setFullScreenEnabled(!fullScreenEnabled)
+    }
+
+    const getClass = () => {
+        if (isMobile) {
+            return fullScreenEnabled ? `${style.IIIFViewer} ${style.Mobile} ${style.FullScreen}` : `${style.IIIFViewer} ${style.Mobile}`
+        } else {
+            return fullScreenEnabled ? `${style.IIIFViewer} ${style.FullScreen}` : style.IIIFViewer
+        }
+    }
+
+        return (
+            <Fullscreen enabled={fullScreenEnabled} onChange={(isFullscreenEnabled) => setFullScreenEnabled(isFullscreenEnabled)}>
+                <div className={getClass()} style={{height: getHeight()}}>
+                    <div className={style.FullScreenButton} onClick={() => fullScreenClick()}>
+                        {fullScreenEnabled ? <FaCompress/> : <FaExpand/>}
+                    </div>
+                    <OpenSeadragonViewer
+                        manifestUrl={manifestUrl}
+                        options={options}
+                        openSeadragonOptions={openSeadragonOptions}
+                        toolBarOptions={toolBarOptions}
+                    />
+                </div>
+            </Fullscreen>
+        )
 }
 
 export default ImageViewer;

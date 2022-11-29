@@ -17,9 +17,9 @@ import {
 } from '@vime/react';
 import style from "./VideoViewer.module.scss"
 
-const VideoViewer = ({archivalReferenceCode, id}) => {
+const VideoViewer = ({archivalReferenceCode, id, isMobile}) => {
     return (
-        <div className={style.VideoViewer}>
+        <div className={isMobile ? `${style.VideoViewer} ${style.Mobile}` : style.VideoViewer}>
             <div className={style.VideoPlayer}>
                 <Player
                     viewType={ViewType.Video}

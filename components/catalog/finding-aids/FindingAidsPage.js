@@ -1,7 +1,7 @@
 import style from "./FindingAidsPage.module.scss";
 import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
 import useSWR from "swr";
-import {fetcher, nextAPIFetcher} from "../../../utils/fetcherFunctions";
+import {fetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
 import React, {useRef, useState} from "react";
 import CartButton from "../../cart/CartButton";
@@ -18,7 +18,7 @@ const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigit
     ssr: false,
 });
 
-const FindingAidsPage = ({record}) => {
+const FindingAidsPage = ({record, isMobile}) => {
     const { id } = record;
     const { inCart } = useCart();
 
@@ -68,8 +68,8 @@ const FindingAidsPage = ({record}) => {
     if (data) {
         return (
             <div className={style.Page}>
-                <div className={style.Header}>
-                    <div className={style.HeaderData}>
+                <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
+                    <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
                         { getTitle(data) }
                         <div className={style.Buttons}>
                             <CartButton
@@ -85,17 +85,20 @@ const FindingAidsPage = ({record}) => {
                 {
                     data['digital_version_online'] &&
                     <React.Fragment>
-                        <PageNavigation primaryType={record['primary_type']} onSelect={handleSelectSection}/>
+                        {
+                            !isMobile &&
+                            <PageNavigation primaryType={record['primary_type']} onSelect={handleSelectSection}/>
+                        }
                         <div ref={digitalContentRef}>
-                            <FindingAidsDigitalContent id={id} data={data}/>
+                            <FindingAidsDigitalContent id={id} data={data} isMobile={isMobile}/>
                         </div>
                     </React.Fragment>
                 }
-                <FindingAidsCitation citation={data['citation']} />
+                <FindingAidsCitation citation={data['citation']} isMobile={isMobile} />
                 <div ref={metadataRef}>
-                    <FindingAidsMetadataPage id={id} data={data} language={language} />
+                    <FindingAidsMetadataPage id={id} data={data} language={language} isMobile={isMobile} />
                 </div>
-                <FindingAidsLocation id={id} onTreeNodeClick={handleTreeNodeClick} />
+                <FindingAidsLocation id={id} onTreeNodeClick={handleTreeNodeClick} isMobile={isMobile} />
             </div>
         )
     } else {

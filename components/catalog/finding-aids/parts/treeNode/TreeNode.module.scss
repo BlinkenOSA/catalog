@@ -178,7 +178,7 @@
   }
 }
 
-.ContainerLast {
+.ContainerWithSubfondsLast {
   display: flex;
 
   .Spacer {
@@ -188,7 +188,36 @@
   }
 }
 
-.Folder {
+.ContainerWithoutSubfondsLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 60px;
+  }
+
+  img {
+    background-color: $background;
+  }
+}
+
+.FolderWithSubfonds {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 120px;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FolderWithSubfondsLast {
   display: flex;
 
   .Spacer {
@@ -198,23 +227,63 @@
   }
 }
 
-.FolderLast {
+.FolderWithoutSubfonds {
   display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 90px;
+  }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreeLineBg.svg");
+    background-repeat: repeat-y;
+  }
+}
+
+.FolderWithoutSubfondsLast {
+  display: flex;
+
+  .Spacer {
+    background-image: none;
+    flex-shrink: 0;
+    width: 90px;
+  }
+}
+
+.FolderPlaceholderWithSubfonds {
+  display: flex;
+  min-height: 30px;
 
   .Spacer {
     background-image: none;
     flex-shrink: 0;
     width: 120px;
   }
+
+  .Opener, .Line {
+    background-image: url("/icons/TreePlaceholder.svg");
+    background-repeat: repeat-y;
+
+    img {
+      display: none !important;
+    }
+  }
+
+  .FolderIcon {
+    display: none;
+  }
 }
 
-.FolderPlaceholder {
+.FolderPlaceholderWithoutSubfonds {
   display: flex;
+  min-height: 30px;
 
   .Spacer {
     background-image: none;
     flex-shrink: 0;
-    width: 120px;
+    width: 90px;
   }
 
   .Opener, .Line {
@@ -241,43 +310,49 @@
 .IconOpen {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeBoxOpen.svg");
-  background-repeat: no-repeat;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+
+  img {
+    background-color: $background;
+  }
 }
 
 .IconClosed {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeBoxClosed.svg");
-  background-repeat: no-repeat;
 }
 
 .SeriesIcon {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeFolder.svg");
-  background-repeat: no-repeat;
 }
 
 .SeriesIconOpen {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeFolderOpen.svg");
-  background-repeat: no-repeat;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+
+  img {
+    background-color: $background;
+  }
 }
 
 .FolderIcon {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeFolder.svg");
-  background-repeat: no-repeat;
 }
 
 .FolderIconOpen {
   width: 30px;
   flex-shrink: 0;
-  background-image: url("/icons/TreeFolderOpen.svg");
-  background-repeat: no-repeat;
+  background-image: url("/icons/TreeLineBg.svg");
+  background-repeat: repeat-y;
+
+  img {
+    background-color: $background;
+  }
 }
 
 .Line {
@@ -297,6 +372,16 @@
 .Title {
   line-height: 30px;
   padding: 0 5px;
+
+  &.Mobile {
+    .ReferenceCode {
+      display: block;
+    }
+
+    .ArchivalUnitTitle {
+      padding: 0;
+    }
+  }
 
   .ReferenceCode {
     flex-shrink: 0;

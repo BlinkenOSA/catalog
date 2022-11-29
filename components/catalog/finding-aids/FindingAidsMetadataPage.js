@@ -3,7 +3,7 @@ import {findingAidsFieldConfig} from "./findingAidsFieldConfig";
 import FindingAidsItem from "./FindingAidsItem";
 import style from './FindingAidsPage.module.scss'
 
-const FindingAidsMetadataPage = ({id, data, language, passRef}) => {
+const FindingAidsMetadataPage = ({id, data, language, isMobile, passRef}) => {
     if (data) {
         return (
             <div className={style.MetadataWrapper} ref={passRef}>
@@ -23,6 +23,7 @@ const FindingAidsMetadataPage = ({id, data, language, passRef}) => {
                                         field={field['field']}
                                         bilingual={field['bilingual']}
                                         display={field.hasOwnProperty('display') ? field['display'] : 'sameRow'}
+                                        isMobile={isMobile}
                                     />
                                 ))}
                         </div>

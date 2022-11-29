@@ -7,7 +7,7 @@
     width: calc(100vw - 20px)
   }
 
-  &.Mobile:last-child {
+  &.Mobile:not(:empty) {
     padding-bottom: 10px;
   }
 }

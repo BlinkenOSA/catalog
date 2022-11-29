@@ -8,7 +8,6 @@ import {useRouter} from "next/router";
 import {useMeasure} from "react-use";
 import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
-import FilmLibraryPage from "../../components/catalog/film-library/FilmLibraryPage";
 import IsadPage from "../../components/catalog/isad/IsadPage";
 import dynamic from "next/dynamic";
 import { Media } from "../../utils/media";
@@ -31,14 +30,14 @@ const CatalogPage = () => {
             const record = data['response']['docs'][0]
             switch (record['record_origin']) {
                 case 'Library':
-                    return <LibraryPage record={record} />
+                    return <LibraryPage record={record} type={'library'} isMobile={isMobile}/>
                 case 'Film Library':
-                    return <FilmLibraryPage record={record} />
+                    return <LibraryPage record={record} type={'filmLibrary'} isMobile={isMobile}/>
                 case 'Archives':
                     if (record['primary_type'] === 'Archival Unit') {
                         return <IsadPage record={record} isMobile={isMobile}/>
                     } else {
-                        return <FindingAidsPage record={record} />
+                        return <FindingAidsPage record={record} isMobile={isMobile}/>
                     }
                 default:
                     return '';

@@ -65,9 +65,17 @@ const TreeNode = ({open, selected=false, archivalUnit, onOpenClose, onTreeNodeCl
      */
     const renderIcon = () => {
         if (archivalUnit['level'] === 'S') {
-            return <div className={style.SeriesIcon} />
+            return (
+                <div className={style.IconClosed}>
+                    <img alt="icon" src={'/icons/TreeFolder.svg'} style={{display: 'block'}}/>
+                </div>
+            )
         } else {
-            return <div className={open ? style.IconOpen : style.IconClosed} />
+            return (
+                <div className={open ? style.IconOpen : style.IconClosed}>
+                    <img alt="icon" src={open ? '/icons/TreeBoxOpen.svg' : '/icons/TreeBoxClosed.svg'} style={{display: 'block'}}/>
+                </div>
+            )
         }
     }
 

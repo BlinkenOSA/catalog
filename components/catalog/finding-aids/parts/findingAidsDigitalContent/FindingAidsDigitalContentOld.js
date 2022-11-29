@@ -1,6 +1,5 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import {Media} from "../../../../../utils/media";
 import ImageViewer from "./viewers/ImageViewer";
 
 const PDFViewer = dynamic(() => import("./viewers/PDFViewer"), {
@@ -11,31 +10,25 @@ const VideoViewer = dynamic(() => import("./viewers/VideoViewer"), {
     ssr: false
 });
 
-const FindingAidsDigitalContentOld = ({id, data}) => {
+const FindingAidsDigitalContentOld = ({id, data, isMobile}) => {
     switch (data['primary_type']) {
         case 'Still Image':
-            return (
-                <React.Fragment>
-                    <Media lessThan="md">
-                        <ImageViewer id={id} device={'mobile'}/>
-                    </Media>
-                    <Media greaterThanOrEqual="md">
-                        <ImageViewer id={id} device={'desktop'}/>
-                    </Media>
-                </React.Fragment>
-            )
+            return <ImageViewer id={id} isMobile={isMobile} />
         case 'Textual':
             return <PDFViewer
                 archivalReferenceCode={data['archival_reference_code']}
-                id={data['digital_version_identifier']} />
+                id={data['digital_version_identifier']}
+                isMobile={isMobile} />
         case 'Video':
             return <VideoViewer
                 archivalReferenceCode={data['archival_reference_code']}
-                id={data['digital_version_identifier']} />
+                id={data['digital_version_identifier']}
+                isMobile={isMobile} />
         case 'Audio':
             return <VideoViewer
                 archivalReferenceCode={data['archival_reference_code']}
-                id={data['digital_version_identifier']} />
+                id={data['digital_version_identifier']}
+                isMobile={isMobile} />
     }
 }
 
