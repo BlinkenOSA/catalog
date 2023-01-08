@@ -14,8 +14,6 @@
     "@react-pdf-viewer/core": "3.7.0",
     "@react-pdf-viewer/default-layout": "3.7.0",
     "@samvera/clover-iiif": "^1.12.3",
-    "@vime/core": "^5.3.3",
-    "@vime/react": "^5.3.3",
     "axios": "^0.27.2",
     "formik": "^2.2.9",
     "html-react-parser": "^3.0.1",

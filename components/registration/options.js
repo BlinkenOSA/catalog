@@ -8,3 +8,8 @@ export const occupationTypeOptions = [
     {value: 'staff', label: 'Staff'},
     {value: 'faculty', label: 'Faculty'}
 ]
+
+export const publishOptions = [
+    {value: 'yes', label: 'Yes'},
+    {value: 'no', label: 'No'},
+]

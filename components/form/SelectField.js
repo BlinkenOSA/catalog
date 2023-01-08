@@ -2,16 +2,18 @@ import {useField, useFormikContext} from "formik";
 import style from "./SelectField.module.scss";
 import Select from 'rc-select';
 import {useEffect, useState} from "react";
+import useSWR from "swr";
+import {fetcher} from "../../utils/fetcherFunctions";
 
 const SelectField = ({label, subLabel, disabled, required, selectAPI, labelProperty, valueProperty, selectOptions, ...props }) => {
     const { setFieldValue, touched, errors } = useFormikContext();
     const [field] = useField(props);
     const [options, setOptions] = useState([])
 
-    useEffect(() => {
-        if (selectAPI) {
+    const { data, error } = useSWR(selectAPI, fetcher)
 
-        } else {
+    useEffect(() => {
+        if (!selectAPI) {
             if (labelProperty && valueProperty) {
                 let newOptions = [];
                 selectOptions.forEach(option => {
@@ -26,6 +28,19 @@ const SelectField = ({label, subLabel, disabled, required, selectAPI, labelPrope
             }
         }
     }, [])
+
+    useEffect(() => {
+        let newOptions = [];
+        if (data) {
+            data.forEach(option => {
+                newOptions.push({
+                    label: option[labelProperty],
+                    value: option[valueProperty]
+                })
+            })
+            setOptions(newOptions);
+        }
+    }, [data])
 
     const onSelect = (value, option) => {
         setFieldValue(field.name, value);

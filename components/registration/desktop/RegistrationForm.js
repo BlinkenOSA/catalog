@@ -1,44 +1,19 @@
 import { Field, Form, Formik } from 'formik';
 import style from "./RegistrationForm.module.scss";
-import InputField from "../form/InputField";
-import * as Yup from 'yup';
-import TextAreaField from "../form/TextAreaField";
-import SelectField from "../form/SelectField";
-import {degreeOptions} from "./options/degree";
-import {occupationOptions, occupationTypeOptions} from "./options/occupation";
-import {countries} from "./options/countries";
-import RadioGroupField from "../form/RadioGroupField";
-import {publishOptions} from "./options/publish";
-import CheckboxField from "../form/CheckboxField";
-import CaptchaField from "../form/CaptchaField";
+import InputField from "../../form/InputField";
+import TextAreaField from "../../form/TextAreaField";
+import SelectField from "../../form/SelectField";
+import RadioGroupField from "../../form/RadioGroupField";
+import CheckboxField from "../../form/CheckboxField";
+import CaptchaField from "../../form/CaptchaField";
+import {initialValues, submitData, validationSchema} from "../registrationFuncitons";
+import {occupationOptions, occupationTypeOptions, publishOptions} from "../options";
+import {useAlert} from "react-alert";
+import {useRouter} from "next/router";
 
 const RegistrationForm = () => {
-    const validationSchema = Yup.object().shape({
-        first_name: Yup.string().required('Required'),
-        last_name: Yup.string().required('Required'),
-        email: Yup.string().email('Invalid email address').required('Required'),
-        passport: Yup.string().required('Required'),
-        citizenship: Yup.string().required('Required'),
-        occupation: Yup.string().required('Required'),
-        occupation_type: Yup.string().required('Please select one occupation type'),
-        agree_archival_materials_usage: Yup.boolean().oneOf([true], 'You should accept the conditions'),
-        agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement"),
-        captcha: Yup.string().required('Required!')
-    })
-
-    const initialValues = {
-        first_name: '',
-        last_name: '',
-        email: '',
-        passport: '',
-        citizenship: '',
-        occupation: '',
-        occupation_type: '',
-        degree: '',
-        publish: 'false',
-        agree_archival_materials_usage: false,
-        agree_researcher_statement: false
-    }
+    const alert = useAlert()
+    const router = useRouter();
 
     return (
         <div className={style.RegistrationFormWrapper}>
@@ -47,10 +22,7 @@ const RegistrationForm = () => {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={(values, actions) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            actions.setSubmitting(false);
-                        }, 1000);
+                        submitData(values, actions, router, alert)
                     }}
                 >
                     {() => (
@@ -101,15 +73,17 @@ const RegistrationForm = () => {
                                     name="country"
                                     label="Country"
                                     subLabel={'Address Abroad'}
-                                    selectOptions={countries}
+                                    selectAPI={'research/country/select/'}
                                     allowClear={true}
-                                    labelProperty={'en_short_name'}
-                                    valueProperty={'num_code'}
+                                    showSearch={true}
+                                    optionFilterProp={'label'}
+                                    labelProperty={'country'}
+                                    valueProperty={'id'}
                                 />
                             </div>
                             <div className={style.Column}>
                                 <Field
-                                    name="passport"
+                                    name="id_number"
                                     label="Passport or ID No."
                                     required={true}
                                     component={InputField}
@@ -126,9 +100,9 @@ const RegistrationForm = () => {
                                     required={true}
                                     showSearch={true}
                                     optionFilterProp={'label'}
-                                    selectOptions={countries}
+                                    selectAPI={'research/nationality/select'}
                                     labelProperty={'nationality'}
-                                    valueProperty={'num_code'}
+                                    valueProperty={'id'}
                                 />
                                 <SelectField
                                     name="occupation"
@@ -154,7 +128,9 @@ const RegistrationForm = () => {
                                 <SelectField
                                     name="degree"
                                     label="Degree"
-                                    selectOptions={degreeOptions}
+                                    selectAPI={'research/degree/select/'}
+                                    labelProperty={'degree'}
+                                    valueProperty={'id'}
                                 />
                             </div>
                             <div className={style.Column}>

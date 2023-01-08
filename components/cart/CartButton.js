@@ -1,10 +1,12 @@
 import React from 'react';
 import style from './CartButton.module.scss';
 import {useCart} from "react-use-cart";
+import { useAlert } from 'react-alert'
 import countObjectsByProperties from "../../utils/countObjectsByProperty";
 
 const CartButton = ({name, record, inCart, onCheckedChange}) => {
     const { addItem, removeItem, items } = useCart();
+    const alert = useAlert()
 
     const isFolderItem = () => {
         if (record.hasOwnProperty('archival_level')) {
