@@ -62,6 +62,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
 
             const item = {
                 id: record['id'],
+                ams_id: record.hasOwnProperty('ams_id') ? record['ams_id'] : '',
                 origin: record['record_origin'],
                 title: record['title'],
                 title_original: record.hasOwnProperty('title_original') ? record['title_original'] : '',

@@ -21,9 +21,9 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetValue, selec
                 return <RecordOrigin selectedFacetValue={selectedFacetValue} />
             case 'primary_type':
                 return <RecordType selectedFacetValue={selectedFacetValue} />
-            case 'subject_person':
+            case 'subject_wikidata':
                 break;
-            case 'date_created':
+            case 'year_created':
                 return <DateCreated facetValues={facetValues} />
             default:
                 break;

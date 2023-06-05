@@ -16,7 +16,7 @@ import { VariableSizeList as List } from 'react-window';
  * @param {function} params.onSelectFacetValue The function handling the facet selection.
  */
 const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
-                      onFacetActionClick, onSelectFacetValue}) => {
+                      onFacetActionClick, onSelectFacetValue, type}) => {
 
     const [facetValuesOriginal, setFacetValuesOriginal] = useState([])
     const [facetValuesDisplay, setFacetValuesDisplay] = useState([])
@@ -28,10 +28,19 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
     const {height} = useWindowSize();
 
     useDeepCompareEffect(() => {
+        const getWikiFacetValue = (value) => {
+            return value.split('#')[0]
+        }
+
+        const getWikiFacetID = (value) => {
+            return value.indexOf('#Q') ? `Q${value.split('#Q')[1]}` : ''
+        }
+
         let f = [];
         for (let i = 0; i < facetValues.length; i += 2) {
             f.push({
-                value: facetValues[i],
+                value: type === 'list' ? facetValues[i] : getWikiFacetValue(facetValues[i]),
+                wiki_id: getWikiFacetID(facetValues[i]),
                 number: facetValues[i+1]
             })
         }
@@ -43,14 +52,14 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
     /**
      * Handler of the click event on a facet value.
      *
-     * @param {string} value The value of the clicked facet
+     * @param {string} facet The object of the clicked facet
      * @param {string} action The action of the click: can be "select" or "deselect"
      */
-    const handleFacetClick = (value, action) => {
+    const handleFacetClick = (facet, action) => {
         if (action === 'select') {
-            handleFacetSelect(value)
+            handleFacetSelect(facet['value'])
         } else {
-            handleFacetDeselect(value)
+            handleFacetDeselect(facet['value'])
         }
     }
 
@@ -64,6 +73,8 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
             if (facetConfig[selectedFacetGroup]['info']) {
                 onSelectFacetValue(value)
                 setFacetValueClicked(value)
+            } else {
+                onFacetActionClick(value, 'add')
             }
         } else {
             onFacetActionClick(value, 'add')
@@ -121,7 +132,7 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
 
         return (
             <div
-                onClick={() => {handleFacetClick(facet['value'], selectedFacetValues.includes(facet['value']) ? 'deselect' : 'select')}}
+                onClick={() => {handleFacetClick(facet, selectedFacetValues.includes(facet['value']) ? 'deselect' : 'select')}}
                 className={facetValueClicked === facet['value'] || selectedFacetValues.includes(facet['value']) ? `${cssStyle.FacetValueButton} ${cssStyle.Clicked}` : cssStyle.FacetValueButton}
                 style={style}>
                 <div
@@ -139,7 +150,7 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
             <FacetSearch selectedFacetGroup={selectedFacetGroup} onSearch={handleSearch}/>
             <List
                 ref={listRef}
-                height={Math.min(height - (57 + 44 + 37), 40 * facetValuesDisplay.length + 2)}
+                height={height - (57 + 44 + 37)}
                 itemCount={facetValuesDisplay.length}
                 itemSize={getRowHeight}
                 width={'100%'}

@@ -7,13 +7,9 @@ const ParentUnits = ({label, result}) => {
             case 'Fonds':
                 return ''
             case 'Subfonds':
-                return <DescriptionValue label={label} value={'HU OSA 1 Records of the Open Society Foundation for Albania'} />
+                return <DescriptionValue label={label} value={result['fonds_name']} />
             case 'Series':
-                return (
-                    <React.Fragment>
-                        <DescriptionValue label={label} value={'HU OSA 1-1 Records of the Open Society Foundation for Albania:Executive Office'} />
-                    </React.Fragment>
-                )
+                return <DescriptionValue label={label} value={result['subfonds_name']} />
             case 'Folder':
                 return <DescriptionValue label={label} value={result['series_name']} />
             case 'Item':

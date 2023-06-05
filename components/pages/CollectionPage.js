@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import style from "./CollectionPage.module.scss";
 import useSWR from 'swr'
-import {fetcher, mockFetcher} from "../../utils/fetcherFunctions";
+import {fetcher} from "../../utils/fetcherFunctions";
 import Loader from "./parts/loader/Loader";
 import {useState} from "react";
 import TreeNode from "./parts/treeNode/TreeNode";

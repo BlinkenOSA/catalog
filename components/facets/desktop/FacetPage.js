@@ -87,6 +87,33 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
         setSelectedFacetValue(value)
     };
 
+    const renderFacetValues = (type) => {
+        switch (type) {
+            case 'list':
+            case 'wiki':
+                return (
+                  <FacetValues
+                    breadcrumbHeight={breadcrumbHeight}
+                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                    onFacetActionClick={onFacetActionClick}
+                    selectedFacetGroup={selectedFacetGroup}
+                    selectedFacetValues={getSelectedFacetValues()}
+                    onSelectFacetValue={onSelectFacetValue}
+                    type={type}
+                  />
+                )
+            case 'date':
+                return (
+                  <FacetDateRange
+                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                    onFacetActionClick={onFacetActionClick}
+                    selectedFacetGroup={selectedFacetGroup}
+                    selectedFacetValues={getSelectedFacetValues()}
+                  />
+                )
+        }
+    }
+
     return (
         <React.Fragment>
             <div className={style.FacetPageWrapper}>
@@ -97,23 +124,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
                         onSelectFacetGroup={onSelectFacetGroup}
                     />
                     <div className={style.FacetSelection}>
-                        {
-                            facetConfig[selectedFacetGroup]['type'] === 'list' ?
-                                <FacetValues
-                                    breadcrumbHeight={breadcrumbHeight}
-                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
-                                    onFacetActionClick={onFacetActionClick}
-                                    selectedFacetGroup={selectedFacetGroup}
-                                    selectedFacetValues={getSelectedFacetValues()}
-                                    onSelectFacetValue={onSelectFacetValue}
-                                /> :
-                                <FacetDateRange
-                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
-                                    onFacetActionClick={onFacetActionClick}
-                                    selectedFacetGroup={selectedFacetGroup}
-                                    selectedFacetValues={getSelectedFacetValues()}
-                                />
-                        }
+                        {renderFacetValues(facetConfig[selectedFacetGroup]['type'])}
                     </div>
                     <div className={style.FacetDescription}>
                         <FacetHelper

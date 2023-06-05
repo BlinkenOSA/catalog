@@ -2,7 +2,6 @@ import axios from 'axios';
 import {processParams} from "./urlParamFunctions";
 import {facetConfig} from "../config/facetConfig";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
-export const MOCK_API = process.env.NEXT_PUBLIC_CATALOG_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
 export const fetcher = (url, params) => {
@@ -11,13 +10,6 @@ export const fetcher = (url, params) => {
         {
             params: params,
         }
-    ).then(res => res.data);
-};
-
-export const mockFetcher = (url, params) => {
-    return axios.get(
-        `${MOCK_API}${url}`,
-        {params: params}
     ).then(res => res.data);
 };
 
@@ -32,17 +24,6 @@ export const solrFetcher = (params) => {
     const {query, filterQuery, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params)
 
     let baseParams = new URLSearchParams();
-    baseParams.append('facet.field', 'record_origin_facet')
-    baseParams.append('facet.field', 'primary_type_facet')
-    baseParams.append('facet.field', 'genre_facet')
-    baseParams.append('facet.field', 'language_facet')
-    baseParams.append('facet.field', 'date_created_facet')
-    baseParams.append('facet.field', 'subject_person_facet')
-    baseParams.append('facet.field', 'availability_facet')
-    baseParams.append('facet.limit', '-1')
-    baseParams.append('hl', 'true')
-    baseParams.append('hl.fl', 'title')
-    baseParams.append('wt', 'json')
 
     // Add query
     baseParams.append('q', query ? query : '*')
@@ -65,11 +46,11 @@ export const solrFetcher = (params) => {
                     const yearFrom = Number(years[0])
                     const yearTo = Number(years[1])
                     if (Number.isInteger(yearFrom) && Number.isInteger(yearTo)) {
-                        baseParams.append('fq', `date_created_facet:[${yearFrom} TO ${yearTo}]`)
+                        baseParams.append('fq', `year_created_facet:[${yearFrom} TO ${yearTo}]`)
                     }
                 } else {
                     const yearFrom = Number(years[0])
-                    baseParams.append('fq', `date_created_facet:${yearFrom}`)
+                    baseParams.append('fq', `year_created_facet:${yearFrom}`)
                 }
             }
         } else {
