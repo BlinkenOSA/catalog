@@ -1,7 +1,7 @@
 import style from "./DescriptionValue.module.scss";
 
 const DescriptionValue = ({label, value}) => {
-    if (value !== '') {
+    if (value && value !== '') {
         return (
             <div className={style.Description}>
                 <div className={style.Label}>{label}:</div>

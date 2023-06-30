@@ -1,0 +1,27 @@
+@import "../../../styles/variables";
+
+.HighlightsWrapper {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed;
+  border-color: $button-background;
+  font-family: 'Suisse Intl Mono', serif;
+  font-size: 12px;
+
+  .HighlightsValueWrapper {
+    .Label {
+      text-transform: uppercase;
+    }
+
+    .Value {
+      flex: 1;
+
+      em {
+        background: url('/images/highlight-brush.svg');
+        margin: -2px -6px;
+        padding: 2px  6px;
+        font-style: normal;
+      }
+    }
+  }
+}

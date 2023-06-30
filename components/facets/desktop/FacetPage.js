@@ -21,13 +21,13 @@ import FacetDateRange from "./FacetDateRange";
  * @param {number} params.total Total number of results.
  */
 const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, facets, total, breadcrumbHeight}) => {
-    const [selectedFacetValue, setSelectedFacetValue] = useState('')
+    const [selectedFacetObject, setSelectedFacetObject] = useState('')
 
     const router = useRouter();
     const {query, limit, offset, ...selectedFacets} = router.query;
 
     useEffect(() => {
-        setSelectedFacetValue('')
+        setSelectedFacetObject('')
     }, [selectedFacetGroup])
 
     /**
@@ -84,7 +84,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
     }
 
     const onSelectFacetValue = (value) => {
-        setSelectedFacetValue(value)
+        setSelectedFacetObject(value)
     };
 
     const renderFacetValues = (type) => {
@@ -131,7 +131,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
                             facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
                             onFacetActionClick={onFacetActionClick}
                             selectedFacetGroup={selectedFacetGroup}
-                            selectedFacetValue={selectedFacetValue}
+                            selectedFacetObject={selectedFacetObject}
                             selectedFacetValues={getSelectedFacetValues()}
                         />
                     </div>

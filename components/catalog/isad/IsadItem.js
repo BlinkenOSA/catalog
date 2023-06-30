@@ -41,13 +41,15 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
             case 'description_level':
                 return record['description_level']
             case 'isaar':
-                return record['isaar'].map((rec, index) => {
+                if (record.hasOwnProperty('isaar')) {
                     return (
-                        <div key={index}>
-                            <a href={`/catalog/isaar/${rec['id']}`}>{rec['name']}</a>
-                        </div>
+                      <div>
+                          <a href={`/catalog/isaar/${record['isaar']['id']}`}>{record['isaar']['name']}</a>
+                      </div>
                     )
-                })
+                } else {
+                    return ''
+                }
             case 'scope_and_content_abstract':
             case 'scope_and_content_narrative':
                 return parse(record[fieldName])

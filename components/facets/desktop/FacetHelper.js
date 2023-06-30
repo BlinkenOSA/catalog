@@ -3,6 +3,7 @@ import style from "./FacetHelper.module.scss";
 import RecordOrigin from "../../../config/facetHelpers/RecordOrigin";
 import RecordType from "../../../config/facetHelpers/RecordType";
 import DateCreated from "../../../config/facetHelpers/DateCreated";
+import Availability from "../../../config/facetHelpers/Availability";
 
 /**
  * Displaying the helper text upon facet selection
@@ -10,19 +11,23 @@ import DateCreated from "../../../config/facetHelpers/DateCreated";
  * @param {Object} params
  * @param {Object} params.facetValues Facet results of the search query.
  * @param {string} params.selectedFacetGroup Selected facet group
- * @param {string} params.selectedFacetValue Selected facet value
+ * @param {Object} params.selectedFacetObject Selected facet object
  * @param {Object} params.selectedFacetValues The selected facet values.
  * @param {function} params.onFacetActionClick The handler of facet value change.
  */
-const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetValue, selectedFacetValues, onFacetActionClick}) => {
+const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, selectedFacetValues, onFacetActionClick}) => {
     const getContent = () => {
         switch (selectedFacetGroup) {
             case 'record_origin':
-                return <RecordOrigin selectedFacetValue={selectedFacetValue} />
+                return <RecordOrigin selectedFacetValue={selectedFacetObject['value']} />
             case 'primary_type':
-                return <RecordType selectedFacetValue={selectedFacetValue} />
+                return <RecordType selectedFacetValue={selectedFacetObject['value']} />
+            case 'availability':
+                return <Availability selectedFacetValue={selectedFacetObject['value']} />
             case 'subject_wikidata':
                 break;
+            case 'geo_wikidata':
+                return <RecordType selectedFacetValue={selectedFacetObject['value']} />
             case 'year_created':
                 return <DateCreated facetValues={facetValues} />
             default:
@@ -31,18 +36,21 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetValue, selec
     }
 
     const handleClick = () => {
-        if (selectedFacetValues.includes(selectedFacetValue)) {
-            onFacetActionClick(selectedFacetValue, "remove")
+        if (selectedFacetValues.includes(selectedFacetObject['value'])) {
+            onFacetActionClick(selectedFacetObject['value'], "remove")
         } else {
-            onFacetActionClick(selectedFacetValue, "add")
+            onFacetActionClick(selectedFacetObject['value'], "add")
         }
     }
 
+    const truncate = (input) => input.length > 20 ? `${input.substring(0, 20)}...` : input;
+
     const renderButton = () => (
-        selectedFacetValue &&
+        selectedFacetObject['value'] &&
         <div className={style.ButtonWrapper}>
             <span className={style.Button} onClick={() => handleClick()}>
-                {selectedFacetValues.includes(selectedFacetValue) ? 'Remove' : 'Add'} '{selectedFacetValue}' Filter
+                {selectedFacetValues.includes(selectedFacetObject['value']) ? 'Remove ' : 'Add '}
+                '{truncate(selectedFacetObject['value'])}' Filter
             </span>
         </div>
     )
@@ -52,6 +60,8 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetValue, selec
             case 'record_origin':
                 return renderButton()
             case 'primary_type':
+                return renderButton()
+            case 'availability':
                 return renderButton()
             default:
                 break;

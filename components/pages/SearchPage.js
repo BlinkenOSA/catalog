@@ -20,6 +20,7 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
 
     const renderResults = (isMobile=false) => {
         const results = data['response']['docs']
+        const highlights = data['highlighting']
 
         if (results.length > 0) {
             return results.map((result, index) => (
@@ -27,6 +28,7 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
                     key={result['id']}
                     isMobile={isMobile}
                     result={result}
+                    highlights={highlights}
                     limit={limit ? Number(limit) : defaultLimit}
                     offset={offset ? Number(offset) : defaultOffset}
                     index={index}

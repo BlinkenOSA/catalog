@@ -9,31 +9,31 @@ import AvailabilityButton from "./parts/buttons/AvailabilityButton";
 import PrimaryTypeButton from "../pages/parts/buttons/PrimaryTypeButton";
 import CartButton from "../cart/CartButton";
 import { useCart } from "react-use-cart";
+import SearchHighglights from "./parts/SearchHighglights";
 
-const ResultItem = ({result, limit, offset, index, isMobile}) => {
+const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
     const { inCart } = useCart();
 
     const renderThumbnail = () => {
-        if (result['record_origin'] === 'Library') {
-            return (
-                <div className={style.ResultItemThumbnail}>
-                    <a href={`/catalog/${result['id']}`}>
-                        <div>
-                            <img
+        switch (result['record_origin']) {
+            case 'Library':
+                return (
+                  <div className={style.ResultItemThumbnail}>
+                      <a href={`/catalog/${result['id']}`}>
+                          <div>
+                              <img
                                 alt={`Book cover of ${result['title']}`}
                                 style={{maxHeight: '250px'}}
                                 src={`api/library/book-cover/${result['id']}`}
-                            />
-                        </div>
-                    </a>
-                </div>
-            )
-        } else {
-            return (
-                <div className={style.ResultItemThumbnail}>
-
-                </div>
-            )
+                              />
+                          </div>
+                      </a>
+                  </div>
+                )
+            case 'Archives':
+                return '';
+            default:
+                break;
         }
     }
 
@@ -63,6 +63,10 @@ const ResultItem = ({result, limit, offset, index, isMobile}) => {
         )
     }
 
+    const renderSearchHighlights = () => {
+        return <SearchHighglights result={result} highlights={highlights}/>
+    }
+
     return (
         <div className={limit === index + 1 ? style.ResultItemWrapperLast :  style.ResultItemWrapper}>
             <div className={style.ResultItemInfo}>
@@ -71,7 +75,7 @@ const ResultItem = ({result, limit, offset, index, isMobile}) => {
                 </div>
                 <div className={style.Title}>
                     <a href={`/catalog/${result['id']}`}>
-                        <Title result={result} />
+                        <Title result={result} highlights={highlights} />
                     </a>
                 </div>
                 <div className={style.Subtitle}>
@@ -79,10 +83,11 @@ const ResultItem = ({result, limit, offset, index, isMobile}) => {
                 </div>
                 <div className={style.DescriptionWrap} >
                     <RecordType label={'Format'} result={result} />
-                    <Publisher label={'Publisher'} result={result} />
-                    <ParentUnits label={'Part of'} result={result} />
                     <CallNumber label={'Call Number'} result={result} />
+                    <ParentUnits label={'Part of'} result={result} />
+                    <Publisher label={'Publisher'} result={result} />
                 </div>
+                {renderSearchHighlights()}
                 <div className={style.Buttons} >
                     {renderCartButton()}
                     <PrimaryTypeButton origin={result['record_origin']} primaryType={result['primary_type']} />

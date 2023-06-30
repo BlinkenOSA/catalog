@@ -3,7 +3,7 @@ import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
 import useSWR from "swr";
 import {fetcher, nextAPIFetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import LanguageButton from "../../pages/parts/buttons/LanguageButton";
 import IsadMetadataPage from "./tabs/IsadMetadataPage";
 import CollectionPage from "../../pages/CollectionPage";
@@ -69,7 +69,11 @@ const IsadPage = ({record, isMobile}) => {
                         <div className={style.Buttons}>
                             {
                                 data.hasOwnProperty('original_locale') &&
-                                <LanguageButton onLanguageChange={setLanguage} />
+                                <LanguageButton
+                                  selectedLanguage={language}
+                                  onLanguageChange={setLanguage}
+                                  originalLanguage={data['original_locale']}
+                                />
                             }
                             <PrimaryTypeButton primaryType={record['primary_type']} />
                         </div>

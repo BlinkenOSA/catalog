@@ -57,43 +57,43 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
      */
     const handleFacetClick = (facet, action) => {
         if (action === 'select') {
-            handleFacetSelect(facet['value'])
+            handleFacetSelect(facet)
         } else {
-            handleFacetDeselect(facet['value'])
+            handleFacetDeselect(facet)
         }
     }
 
     /**
      * Select (click) action.
      *
-     * @param {string} value The value of the clicked facet.
+     * @param {string} facet The object of the clicked facet.
      */
-    const handleFacetSelect = (value) => {
+    const handleFacetSelect = (facet) => {
         if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
             if (facetConfig[selectedFacetGroup]['info']) {
-                onSelectFacetValue(value)
-                setFacetValueClicked(value)
+                onSelectFacetValue(facet)
+                setFacetValueClicked(facet['value'])
             } else {
-                onFacetActionClick(value, 'add')
+                onFacetActionClick(facet['value'], 'add')
             }
         } else {
-            onFacetActionClick(value, 'add')
+            onFacetActionClick(facet['value'], 'add')
         }
     }
 
     /**
      * Deselection (2nd click) action.
      *
-     * @param {string} value The value of the clicked facet.
+     * @param {string} facet The object of the clicked facet.
      */
-    const handleFacetDeselect = (value) => {
+    const handleFacetDeselect = (facet) => {
         if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
             if (facetConfig[selectedFacetGroup]['info']) {
                 setFacetValueClicked('')
-                onFacetActionClick(value, 'remove')
+                onFacetActionClick(facet['value'], 'remove')
             }
         } else {
-            onFacetActionClick(value, 'remove')
+            onFacetActionClick(facet['value'], 'remove')
         }
     }
 

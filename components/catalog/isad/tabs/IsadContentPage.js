@@ -30,7 +30,6 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
             filterQuery: `series_id:${seriesID}`,
             offset: index * PER_PAGE,
             limit: PER_PAGE,
-            sort: 'fonds_sort asc, subfonds_sort asc, series_sort asc, container_number_sort asc, folder_number_sort asc',
             ...selectedSeriesFacets
         }
     }
@@ -42,21 +41,12 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
     const facets = data?.[0]?.['facet_counts']['facet_fields']
 
     const renderData = (rec, lang='EN') => {
-        const getContentFromJson = (key, lang, array=false) => {
-            const data = JSON.parse(rec['item_json'])
-            let data_json;
-
-            if (lang !== 'EN') {
-                if (data.hasOwnProperty('item_json_2nd')) {
-                    data_json = data['item_json_2nd']
-                } else {
-                    data_json = data['item_json_eng']
-                }
+        const getContentsSummary = () => {
+            if (lang === 'EN') {
+                return rec['contents_summary']
             } else {
-                data_json = data['item_json_eng']
+                return rec['contents_summary_original'] ? rec['contents_summary_original'] : rec['contents_summary']
             }
-
-            return data_json.hasOwnProperty(key) ? array ? data_json[key].join(', ') : data_json[key] : '';
         }
 
         const getTitle = () => {
@@ -67,26 +57,12 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
             }
         }
 
-        const getInfo = () => {
-            let parts = [];
-
-            let dates = []
-            const datesArray = getContentFromJson('dates', 'EN')
-            datesArray !== '' && datesArray.forEach(d => dates.push(`${d['dateType']}: ${d['date']}`))
-            dates.length > 0 && parts.push(dates.join(', '))
-
-            const language = getContentFromJson('language', 'EN', true);
-            language.length > 0 && parts.push(`${language} language`)
-
-            const duration = getContentFromJson('duration', 'EN');
-            duration.length > 0 && parts.push(`${duration}`)
-
-            return parts.join(', ')
-        }
-
         const getNotes = () => {
-            const notes = getContentFromJson('note', lang);
-            return notes.length > 0 ? `[${notes}]` : ''
+            if (lang === 'EN') {
+                return rec['note']
+            } else {
+                return rec['note_original'] ? rec['note_original'] : rec['note']
+            }
         }
 
         return (
@@ -98,11 +74,11 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
                     </div>
                 </a>
                 <div className={style.Description}>
-                    { parse(getContentFromJson('contentsSummary', lang)) }
+                    { getContentsSummary() }
                 </div>
                 <div className={style.Info}>
-                    <div>{getInfo()}</div>
-                    <div>{getNotes()}</div>
+                    { rec['info'] }
+                    { getNotes() }
                 </div>
                 <div className={style.Buttons}>
                     {isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
@@ -128,11 +104,11 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 
     const renderDocs = (records) => {
         const isBoxRow = (rec, index) => {
-            return index === 0 || (index > 0 && rec['container_number'] !== records[index - 1]['container_number']);
+            return index === 0 || (index > 0 && rec['container_number_sort'] !== records[index - 1]['container_number_sort']);
         }
 
         const displayContainer = (rec, index) => {
-            const containerNumber = `${rec['container_type']} #${rec['container_number']}`
+            const containerNumber = `${rec['container_type']} #${rec['container_number_sort']}`
 
             if (isBoxRow(rec, index)) {
                 return (
@@ -159,7 +135,7 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
                     <div className={isBoxRow(rec, index) ? `${style.Record} ${style.Mobile}` : `${style.Record} ${style.InContainer} ${style.Mobile}`} key={index}>
                         <a href={`/catalog/${rec['id']}`}>
                             <div className={style.CallNumber}>
-                                {rec['call_number'][0]}
+                                {rec['call_number']}
                             </div>
                         </a>
                         <div className={style.Data}>
@@ -177,7 +153,7 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
                         <a href={`/catalog/${rec['id']}`}>
                             <div className={style.CallNumber}>
                                 {renderThumbnail(rec)}
-                                {rec['call_number'][0]}
+                                {rec['call_number']}
                             </div>
                         </a>
                         <div className={style.Data}>

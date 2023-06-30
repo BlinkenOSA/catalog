@@ -1,15 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import style from './LanguageButton.module.scss';
 
-const LanguageButton = ({name='english', selectedLanguage='EN', onLanguageChange, originalLanguage='HU'}) => {
-    const [checked, setChecked] = useState('EN');
-
-    useEffect(() => {
-        setChecked(selectedLanguage)
-    }, [selectedLanguage])
-
+const LanguageButton = ({name='language-selector', selectedLanguage, onLanguageChange, originalLanguage}) => {
     const onChange = (checked) => {
-        setChecked(checked ? originalLanguage : 'EN')
         onLanguageChange(checked ? originalLanguage : 'EN')
     }
 
@@ -19,7 +12,7 @@ const LanguageButton = ({name='english', selectedLanguage='EN', onLanguageChange
                 type="checkbox"
                 name={name}
                 id={name}
-                checked={!(checked === 'EN')}
+                checked={!(selectedLanguage === 'EN')}
                 onChange={e => onChange(e.target.checked)}
             />
             <span className={`${style.Slider} ${style.Round}`}>
