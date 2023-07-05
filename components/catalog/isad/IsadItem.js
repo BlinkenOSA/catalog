@@ -22,11 +22,19 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
     const displayValues = () => {
         switch (field) {
             case 'year_from':
+                const renderDatePredominant = () => {
+                    if (record.hasOwnProperty('date_predominant')) {
+                        return record['date_predominant'] !== null ? ` (predominant ${record['date_predominant']})` : ''
+                    } else {
+                        return ''
+                    }
+                }
+
                 return (
                     <React.Fragment>
                         <div>
                             {record['year_from']} - {record.hasOwnProperty('year_to') ? record['year_to'] : ''}
-                            {record.hasOwnProperty('date_predominant') ? ` (predominant ${record['date_predominant']})` : ''}
+                            {renderDatePredominant()}
                         </div>
                     </React.Fragment>
                 )

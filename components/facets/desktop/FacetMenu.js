@@ -18,6 +18,7 @@ const FacetMenu = ({inverse, selectedFacetGroup, onSelectFacetGroup}) => {
   const renderFacetButtons = () => {
         return (
             Object.keys(facetConfig).map((key) => (
+                facetConfig[key]['type'] &&
                 <li
                     className={inverse && selectedFacetGroup === key ? style.FacetSelected : undefined}
                     key={key}

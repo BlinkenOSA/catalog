@@ -129,7 +129,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
      * Rendering the right side content part of the breadcrumb.
      */
     const renderRightSideContent = () => {
-        if (module === 'staticPage' || module === 'collections') {
+        if (module === 'staticPage' || module === 'collections' || module === 'detail') {
             return ''
         }
 
@@ -171,7 +171,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
      * Rendering the left side buttons.
      */
     const renderLeftSideContent = () => {
-        if (module === 'staticPage' || module === 'collections') {
+        if (module === 'staticPage' || module === 'collections' || module === 'detail') {
             return (
                 <div className={style.Navigation}>
                     <a href={'/'}>
@@ -186,17 +186,6 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
                 <span>Filter your search</span> <BiDownArrowAlt />
             </div>
         )
-    }
-
-    const getSelectedFacetNumber = () => {
-        let count = 0;
-        Object.keys(selectedFacets).forEach(key => {
-            count += Array.isArray(selectedFacets[key]) ? selectedFacets[key].length : 1
-        })
-        Object.keys(selectedFacetsDates).forEach(key => {
-            count += Array.isArray(selectedFacetsDates[key]) ? selectedFacetsDates[key].length : 1
-        })
-        return count;
     }
 
     /**

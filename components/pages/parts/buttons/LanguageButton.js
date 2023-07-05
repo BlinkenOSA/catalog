@@ -10,7 +10,6 @@ const LanguageButton = ({name='language-selector', selectedLanguage, onLanguageC
         <label className={style.Switch} htmlFor={name}>
             <input
                 type="checkbox"
-                name={name}
                 id={name}
                 checked={!(selectedLanguage === 'EN')}
                 onChange={e => onChange(e.target.checked)}

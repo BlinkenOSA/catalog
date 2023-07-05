@@ -35,7 +35,7 @@
   &.Mobile {
     position: relative;
     display: block;
-    padding: 5px 10px;
+    padding: 10px;
 
     .CallNumber {
       width: 100%;
@@ -100,14 +100,28 @@
       span {
         font-weight: 400;
       }
+
+      em {
+        background: url('/images/highlight-brush.svg');
+        margin: -2px -6px;
+        padding: 2px  6px;
+        font-style: normal;
+      }
     }
 
     .Description:not(:empty) {
-      margin-top: 5px;
+      margin-top: 10px;
+
+      em {
+        background: url('/images/highlight-brush.svg');
+        margin: -2px -6px;
+        padding: 2px  6px;
+        font-style: normal;
+      }
     }
 
     .Info:not(:empty) {
-      margin-top: 5px;
+      margin-top: 10px;
       font-family: "Suisse Intl Condensed", serif;
       font-size: 14px;
     }
@@ -115,7 +129,7 @@
     .Buttons:not(:empty) {
       display: flex;
       gap: 5px;
-      margin-top: 5px;
+      margin-top: 10px;
       flex-wrap: wrap;
     }
   }

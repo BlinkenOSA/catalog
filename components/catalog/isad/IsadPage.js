@@ -8,6 +8,7 @@ import LanguageButton from "../../pages/parts/buttons/LanguageButton";
 import IsadMetadataPage from "./tabs/IsadMetadataPage";
 import CollectionPage from "../../pages/CollectionPage";
 import IsadContentPage from "./tabs/IsadContentPage";
+import isadTabConfig from "./config/isadTabConfig";
 
 
 const IsadPage = ({record, isMobile}) => {
@@ -49,6 +50,7 @@ const IsadPage = ({record, isMobile}) => {
                 return <CollectionPage
                     activeUnitID={record['ams_id']}
                     activeUnit={getActiveUnit()}
+                    language={language}
                     isMobile={isMobile}/>
             case 'folders':
                 return <IsadContentPage
@@ -60,6 +62,10 @@ const IsadPage = ({record, isMobile}) => {
         }
     }
 
+    const renderTabName = (tab) => {
+        return isadTabConfig[tab].hasOwnProperty(language) ? isadTabConfig[tab][language] : isadTabConfig[tab]['EN']
+    }
+
     if (data) {
         return (
             <div className={style.Page}>
@@ -68,11 +74,12 @@ const IsadPage = ({record, isMobile}) => {
                         { getTitle() }
                         <div className={style.Buttons}>
                             {
-                                data.hasOwnProperty('original_locale') &&
+                                data['original_locale'] !== null &&
                                 <LanguageButton
+                                  name={`isad-page-language-selector-${isMobile ? 'mobile' : 'desktop'}`}
                                   selectedLanguage={language}
-                                  onLanguageChange={setLanguage}
                                   originalLanguage={data['original_locale']}
+                                  onLanguageChange={setLanguage}
                                 />
                             }
                             <PrimaryTypeButton primaryType={record['primary_type']} />
@@ -83,19 +90,19 @@ const IsadPage = ({record, isMobile}) => {
                     <div
                         onClick={() => setSelectedView('context')}
                         className={selectedView === 'context' ? style.Active : ''}>
-                        Context
+                        {renderTabName('context')}
                     </div>
                     <div
                         onClick={() => setSelectedView('hierarchy')}
                         className={selectedView === 'hierarchy' ? style.Active : ''}>
-                        Hierarchy
+                        {renderTabName('hierarchy')}
                     </div>
                     {
                         record['description_level'] === 'Series' &&
                         <div
                             onClick={() => setSelectedView('folders')}
                             className={selectedView === 'folders' ? style.Active : ''}>
-                            {isMobile ? 'Folders / Items' : 'Folders / Items in this series'}
+                            {isMobile ? renderTabName('folders-mobile') : renderTabName('folders')}
                         </div>
                     }
                     <div className={style.TabPlaceholder}> </div>

@@ -29,7 +29,8 @@ const SearchHighglights = ({result, highlights}) => {
   }
 
   if (highlights && highlights.hasOwnProperty(result['id'])) {
-    const highlightsObject = highlights[result['id']];
+    const highlightsObject = {...highlights[result['id']]};
+    delete(highlightsObject['title_search_en'])
 
     if (Object.keys(highlightsObject).length > 0) {
       return (

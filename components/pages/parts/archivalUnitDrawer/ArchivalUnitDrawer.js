@@ -30,8 +30,11 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
     const renderButtons = () => {
         return (
             <div className={style.Buttons}>
-                {   data['original_locale'] !== null &&
+                {
+                    data['original_locale'] !== null &&
                     <LanguageButton
+                        name={'archival-unit-drawer-language-selector'}
+                        selectedLanguage={language}
                         originalLanguage={data['original_locale']}
                         onLanguageChange={setLanguage}
                     />

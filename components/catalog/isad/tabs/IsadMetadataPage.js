@@ -1,6 +1,6 @@
 import style from "../IsadPage.module.scss";
 import React from "react";
-import {isadFieldConfig} from "../isadFieldConfig";
+import {isadFieldConfig} from "../config/isadFieldConfig";
 import IsadItem from "../IsadItem";
 
 

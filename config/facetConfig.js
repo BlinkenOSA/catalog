@@ -8,8 +8,11 @@ export const facetConfig = {
     primary_type: { title: 'Record Type', search: false, info: true, type: 'list' },
     year_created: { title: 'Year of Creation', search: false, info: true, type: 'date' },
     subject_wikidata: { title: 'Subjects', search: true, info: true, type: 'list' },
+    subject: { title: 'Subjects', search: true, info: true, type: undefined },
     contributor_wikidata: { title: 'Contributors', search: true, info: true, type: 'list' },
+    contributor: { title: 'Contributors', search: false, info: false, type: undefined },
     geo_wikidata: { title: 'Geo Locations', search: true, info: true, type: 'wiki' },
+    geo: { title: 'Geo Locations', search: true, info: true, type: undefined },
     keyword: { title: 'Keywords', search: true, info: false, type: 'list' },
 }
 

@@ -25,7 +25,7 @@ const CatalogPage = () => {
 
     const { data, error } = useSWR(id && {query: `id:${id}`}, solrFetcher)
 
-    const renderPage = (isMobile=false) => {
+    const renderPage = (isMobile) => {
         if (data) {
             const record = data['response']['docs'][0]
             switch (record['record_origin']) {
@@ -67,7 +67,7 @@ const CatalogPage = () => {
                     module={'detail'}
                 />
                 <div className={style.Page}>
-                    {renderPage()}
+                    {renderPage(false)}
                 </div>
             </Media>
 

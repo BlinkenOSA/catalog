@@ -33,7 +33,7 @@ const IsadFilter = ({facetName, facets, placeholder, onSelect, value, isMobile})
     return (
         <div className={isMobile ? `${style.SelectWrapper} ${style.Mobile}` : style.SelectWrapper}>
             {
-                facets.hasOwnProperty(`${facetName}_facet`) && facets[`${facetName}_facet`].length > 1 ?
+                facets.hasOwnProperty(`${facetName}_facet`) &&
                 <Select
                     placeholder={placeholder}
                     allowClear={true}
@@ -44,7 +44,7 @@ const IsadFilter = ({facetName, facets, placeholder, onSelect, value, isMobile})
                     value={value}
                     onSelect={handleSelect}
                     onDeselect={handleDeselect}
-                /> : ''
+                />
             }
 
         </div>
