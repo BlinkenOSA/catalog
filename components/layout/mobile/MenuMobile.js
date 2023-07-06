@@ -20,7 +20,10 @@ const MenuMobile = () => {
             </div>
             <div className={menuOpen ? `${style.Menu} ${style.Opened}` : style.Menu}>
                 <div className={style.MenuList}>
-                    <a href={'/archival-collections'}>Collections</a>
+                    <a href={'#'}>Collections</a>
+                    <a className={style.Submenu} href={'/archival-collections'}>Archival Collections</a>
+                    <a className={style.Submenu} href={'/library-special-collections'}>Library Sepcial Collections</a>
+                    <a className={style.Submenu} href={'/special-collections-in-film-library'}>Special Collections in Film Library</a>
                     <a href={'/requests'}>{totalUniqueItems > 0 ? `Requests (${totalUniqueItems})` : 'Requests'}</a>
                     <a href={'/info'}>Infos</a>
                     <a href={'/privacy-policy'}>Privacy Policy</a>
