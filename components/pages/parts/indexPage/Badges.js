@@ -1,4 +1,7 @@
 import style from "./Badges.module.scss";
+import useSWR from "swr";
+import {fetcher} from "../../../../utils/fetcherFunctions";
+import Loader from "../loader/Loader";
 
 const badgeText = [
     'CPG', 'Lenin', 'Szabad Európa Rádió', 'Srebrenica', 'EU',
@@ -10,6 +13,8 @@ const badgeText = [
  * Display badges on the front page.
  */
 const Badges = ({isMobile = false}) => {
+    const { data, error } = useSWR(`collection-specific-tags/`, fetcher)
+
     /**
      *
      * @param {string} badgeText The text that should be displayed
@@ -32,13 +37,14 @@ const Badges = ({isMobile = false}) => {
     }
 
     return (
+        data ?
         <div className={style.BadgeWrapper}>
             {
-                badgeText.map((badge, index) => (
-                    renderBadge(badge, index)
+                data.map((d, index) => (
+                    renderBadge(d['keyword'], index)
                 ))
             }
-        </div>
+        </div> : <Loader/>
     )
 }
 

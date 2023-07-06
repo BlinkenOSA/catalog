@@ -1,0 +1,51 @@
+@import "../../../../styles/variables";
+
+.StatisticsWrapper {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  column-gap: 10px;
+
+  h1 {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 22px;
+    font-weight: 400;
+    padding: 0 15px;
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+
+  .UnitRow {
+    display: flex;
+    font-family: "Suisse Intl", serif;
+    font-weight: 400;
+    font-size: 16px;
+
+    a {
+      width: 100%;
+      color: unset;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    a:hover {
+    }
+
+    .Unit {
+      padding: 10px 15px;
+      flex: 1;
+
+      .ReferenceCode {
+        font-family: "Suisse Works", serif;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .Date {
+        font-family: "Suisse Intl Condensed", serif;
+        font-size: 14px;
+      }
+    }
+  }
+}

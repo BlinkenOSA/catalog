@@ -3,7 +3,7 @@ import Layout from "../../components/layout/Layout";
 import BreadcrumbSearch from "../../components/breadcrumbs/desktop/BreadcrumbSearch";
 import React from "react";
 import useSWR from "swr";
-import {solrFetcher} from "../../utils/fetcherFunctions";
+import {fetcher, solrFetcher} from "../../utils/fetcherFunctions";
 import {useRouter} from "next/router";
 import {useMeasure} from "react-use";
 import LibraryPage from "../../components/catalog/library/LibraryPage";

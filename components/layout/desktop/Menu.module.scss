@@ -15,6 +15,7 @@
     color: $white;
     transition: 0.5s;
     will-change: transform;
+    cursor: pointer;
   }
 
   a:after {
@@ -27,5 +28,52 @@
 
   a:hover:after {
     transform: scaleX(1);
+  }
+}
+
+.Content {
+  background-color: $button-background;
+
+  .SubMenuWrapper {
+    margin: 0 auto;
+    height: 100%;
+    max-width: 1180px;
+
+    .SubMenuList {
+      display: flex;
+      list-style: none;
+      height: 42px;
+      align-items: center;
+      margin: 0;
+      margin-left: 265px;
+      gap: 10px;
+      padding: 0;
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 14px;
+      font-weight: 400;
+
+      li {
+        text-align: center;
+        color: $white;
+        border: 1px solid $white;
+        padding: 5px 10px;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+
+      li:hover {
+        background-color: $yellow;
+        border: 1px solid $black;
+
+        a {
+          color: $black;
+        }
+      }
+
+      a {
+        text-decoration: none;
+        color: $white;
+      }
+    }
   }
 }

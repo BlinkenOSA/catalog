@@ -3,6 +3,8 @@ import style from "./IndexPage.module.scss";
 import FacetMenu from "../facets/desktop/FacetMenu";
 import Badges from "./parts/indexPage/Badges";
 import {Media} from "../../utils/media"
+import Welcome from "./parts/indexPage/Welcome";
+import StatisticsArchives from "./parts/indexPage/StatisticsArchives";
 
 /**
  * Page responsible for displaying the search results
@@ -15,6 +17,10 @@ const IndexPage = ({onSelectFacetGroup}) => {
         <React.Fragment>
             <Media lessThan="md">
                 <div className={style.ContentMobile}>
+                    <Welcome isMobile={true} />
+                    <div className={style.LatestAdditions}>
+                        <StatisticsArchives />
+                    </div>
                     <Badges isMobile={true} />
                 </div>
             </Media>
@@ -24,6 +30,10 @@ const IndexPage = ({onSelectFacetGroup}) => {
                         onSelectFacetGroup={onSelectFacetGroup}
                     />
                     <div className={style.Content}>
+                        <Welcome />
+                        <div className={style.LatestAdditions}>
+                            <StatisticsArchives />
+                        </div>
                         <Badges />
                     </div>
                 </div>
