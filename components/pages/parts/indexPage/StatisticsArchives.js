@@ -23,7 +23,7 @@ const StatisticsArchives = () => {
           <div className={style.Unit}>
             <div className={style.ReferenceCode}>{unit['reference_code']}</div>
             <div>{renderTitle(unit['reference_code'], unit['title'])}</div>
-            <div className={style.Date}>{renderDate(unit['date_published'])}</div>
+            <div className={style.Date}>Published on: {renderDate(unit['date_published'])}</div>
           </div>
         </a>
       </div>

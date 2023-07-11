@@ -6,9 +6,10 @@ import React from "react";
 import dynamic from "next/dynamic";
 import { Media } from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+import LibraryCollectionPage from "../components/pages/LibraryCollectionPage";
 
 
-const ArchivalCollections = () => {
+const LibrarySpecialCollections = () => {
     const CollectionPage = dynamic(() => import('../components/pages/CollectionPage'), {
         ssr: false
     })
@@ -16,15 +17,15 @@ const ArchivalCollections = () => {
     return (
         <Layout>
             <Head>
-                <title>Blinken OSA Archivum - Archival Collections</title>
+                <title>Blinken OSA Archivum - Library Special Collections</title>
             </Head>
             <Media lessThan="md">
                 <BreadcrumbSearchMobile module={'collections'} />
                 <div className={`${style.Page} ${style.Mobile}`}>
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
-                        <h1>Archival Collections</h1>
+                        <h1>Library Special Collections</h1>
                     </div>
-                    <CollectionPage
+                    <LibraryCollectionPage
                         isMobile={true}
                         showArchiveUnitDrawer={true}
                     />
@@ -34,9 +35,9 @@ const ArchivalCollections = () => {
                 <BreadcrumbSearch module={'collections'} />
                 <div className={style.Page}>
                     <div className={style.PageTitle}>
-                        <h1>Archival Collections</h1>
+                        <h1>Library Special Collections</h1>
                     </div>
-                    <CollectionPage
+                    <LibraryCollectionPage
                         showArchiveUnitDrawer={true}
                     />
                 </div>
@@ -45,4 +46,4 @@ const ArchivalCollections = () => {
     )
 }
 
-export default ArchivalCollections;
+export default LibrarySpecialCollections;

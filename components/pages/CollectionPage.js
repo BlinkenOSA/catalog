@@ -210,18 +210,18 @@ const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false
         if (isMobile) {
             return (
                 <div>
-                <div className={`${style.Tree} ${style.Mobile}`}>
-                    {renderTree()}
-                </div>
-                {
-                    showArchiveUnitDrawer &&
-                    <ArchivalUnitDrawer
-                        isMobile={true}
-                        archivalUnitID={selectedArchivalUnit}
-                        open={selectedArchivalUnit !== 0}
-                        onClose={() => setSelectedArchivalUnit(0)}
-                    />
-                }
+                    <div className={`${style.Tree} ${style.Mobile}`}>
+                        {renderTree()}
+                    </div>
+                    {
+                        showArchiveUnitDrawer &&
+                        <ArchivalUnitDrawer
+                            isMobile={true}
+                            archivalUnitID={selectedArchivalUnit}
+                            open={selectedArchivalUnit !== 0}
+                            onClose={() => setSelectedArchivalUnit(0)}
+                        />
+                    }
                 </div>
             )
         } else {
