@@ -1,11 +1,13 @@
 import style from './ArchivalUnitDrawer.module.scss'
 import useSWR from "swr";
-import {fetcher} from "../../../../utils/fetcherFunctions";
+import {fetcher, solrFetcher} from "../../../../utils/fetcherFunctions";
 import Loader from "../loader/Loader";
 import LanguageButton from "../buttons/LanguageButton";
 import {useState} from "react";
 import PrimaryTypeButton from "../buttons/PrimaryTypeButton";
 import Button from "../buttons/Button";
+import InsightsPage from "../../../catalog/isad/tabs/InsightsPage";
+import DateDistribution from "./DateDistribution";
 
 const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
     const {data, error} = useSWR(archivalUnitID !== 0 ? `archival-units-tree-quick-view/${archivalUnitID}/` : undefined, fetcher);
@@ -71,6 +73,17 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
         )
     }
 
+    const getDescriptionLevel = (level) => {
+        switch (level) {
+            case 'F':
+                return 'Fonds';
+            case 'SF':
+                return 'Subfonds';
+            case 'S':
+                return 'Series'
+        }
+    }
+
     const renderContent = () => {
         if (language === 'EN') {
             return (
@@ -82,6 +95,7 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
                     {getDataWithLabel('Reference Code', data['reference_code'])}
                     {getDataWithLabel('Title', data['title'])}
                     {renderDates('Date(s)')}
+                    <DateDistribution archivalUnitID={archivalUnitID} descriptionLevel={getDescriptionLevel(data['description_level'])} />
                     {getDataWithLabel('Archival History', data['archival_history'])}
                     {getDataWithLabel('Scope and Content (abstract)', data['scope_and_content_abstract'])}
                     {getDataWithLabel('Scope and Content (narrative)', data['scope_and_content_narrative'])}
@@ -97,6 +111,7 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
                     {getDataWithLabel('Reference Code', data['reference_code'])}
                     {getDataWithLabel('Cím', data['title_original'])}
                     {renderDates('Időkör(ök)')}
+                    <DateDistribution archivalUnitID={archivalUnitID} descriptionLevel={getDescriptionLevel(data['description_level'])} />
                     {getDataWithLabel('Archival History', data['archival_history_original'])}
                     {getDataWithLabel('Scope and Content (abstract)', data['scope_and_content_abstract_original'])}
                     {getDataWithLabel('Scope and Content (narrative)', data['scope_and_content_narrative_original'])}

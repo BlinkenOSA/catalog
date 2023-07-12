@@ -9,6 +9,7 @@ import IsadMetadataPage from "./tabs/IsadMetadataPage";
 import CollectionPage from "../../pages/CollectionPage";
 import IsadContentPage from "./tabs/IsadContentPage";
 import isadTabConfig from "./config/isadTabConfig";
+import InsightsPage from "./tabs/InsightsPage";
 
 
 const IsadPage = ({record, isMobile}) => {
@@ -46,15 +47,22 @@ const IsadPage = ({record, isMobile}) => {
                     data={data}
                     language={language}
                     isMobile={isMobile}/>
+            case 'insights':
+                return <InsightsPage
+                    archivalUnitID={ams_id}
+                    descriptionLevel={record['description_level']}
+                    language={language}
+                    isMobile={isMobile}
+                />
             case 'hierarchy':
                 return <CollectionPage
-                    activeUnitID={record['ams_id']}
+                    activeUnitID={ams_id}
                     activeUnit={getActiveUnit()}
                     language={language}
                     isMobile={isMobile}/>
             case 'folders':
                 return <IsadContentPage
-                    seriesID={id}
+                    seriesID={ams_id}
                     language={language}
                     isMobile={isMobile}/>
             default:
@@ -96,6 +104,11 @@ const IsadPage = ({record, isMobile}) => {
                         onClick={() => setSelectedView('hierarchy')}
                         className={selectedView === 'hierarchy' ? style.Active : ''}>
                         {renderTabName('hierarchy')}
+                    </div>
+                    <div
+                      onClick={() => setSelectedView('insights')}
+                      className={selectedView === 'insights' ? style.Active : ''}>
+                        {renderTabName('insights')}
                     </div>
                     {
                         record['description_level'] === 'Series' &&

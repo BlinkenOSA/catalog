@@ -51,7 +51,7 @@ const DateCreated = ({facetValues}) => {
                         <XAxis dataKey="x" stroke={'#FFF'} />
                         <YAxis stroke={'#FFF'} />
                         <Tooltip cursor={{ fill: '#FFEB42' }} contentStyle={{backgroundColor: '#000'}} labelFormatter={getLabel} />
-                        <Brush startIndex={brushValues['startIndex']} endIndex={brushValues['endIndex']} dataKey="x" height={40} stroke="#FFF" fill={"#000"} onChange={handleBrushChange}/>
+                        <Brush dataKey="x" height={40} stroke="#FFF" fill={"#000"} onChange={handleBrushChange}/>
                         <Bar dataKey="y" fill="#FFF" name={'Number of records'} />
                     </BarChart>
                 </ResponsiveContainer>

@@ -18,7 +18,7 @@ const StatisticsArchives = () => {
 
   const renderArchivalUnit = (unit) => {
     return (
-      <div className={style.UnitRow}>
+      <div key={unit['reference_code']} className={style.UnitRow}>
         <a href={`/catalog/${unit['id']}`}>
           <div className={style.Unit}>
             <div className={style.ReferenceCode}>{unit['reference_code']}</div>

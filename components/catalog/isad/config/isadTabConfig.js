@@ -7,6 +7,10 @@ const IsadTabConfig = {
     'EN': 'Hierarchy',
     'HU': 'Hierarchia'
   },
+  'insights': {
+    'EN': 'Insights',
+    'HU': 'Betekintés'
+  },
   'folders': {
     'EN': 'Folders / Items in this series',
     'HU': 'Mappák / tételek a sorozatban',
