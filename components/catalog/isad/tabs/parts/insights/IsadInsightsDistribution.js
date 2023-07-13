@@ -13,11 +13,17 @@ import {
 import style from "./IsadInsightsDistribution.module.scss";
 
 const primaryTypes = [
-	'Textual', 'Moving Image', 'Audio', 'Still Image'
+	{label: 'Textual', value: 'Textual'},
+	{label: 'Moving Image', value: 'Moving Image'},
+	{label: 'Audio', value: 'Audio'},
+	{label: 'Still Image', value: 'Still Image'},
+	{label: 'Webarchive', value: 'Webarchive'},
 ]
 
 const availabilityTypes = [
-	'Digitally Anywhere / With Registration', 'Digitally Anywhere / Without Registration', 'In the Research Room'
+	{label: 'Digital Without Registration', value: 'Digitally Anywhere / Without Registration'},
+	{label: 'Digital With Registration', value: 'Digitally Anywhere / With Registration'},
+	{label: 'In the Research Room', value: 'In the Research Room'}
 ]
 
 const IsadInsightsDistribution = ({facets, isMobile}) => {
@@ -36,7 +42,7 @@ const IsadInsightsDistribution = ({facets, isMobile}) => {
 
 		source.forEach(element => {
 			values.push(
-				{label: element, value: getValue(element)}
+				{label: element['label'], value: getValue(element['value'])}
 			)
 		})
 
