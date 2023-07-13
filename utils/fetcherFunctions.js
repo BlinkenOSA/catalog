@@ -4,6 +4,7 @@ import {facetConfig} from "../config/facetConfig";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 export const SOLR_FOLDERS_ITEMS_API = process.env.NEXT_PUBLIC_SOLR_FOLDERS_ITEMS;
+export const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 
 export const fetcher = (url, params) => {
     return axios.get(
@@ -80,7 +81,18 @@ export const solrFetcher = (params) => {
         baseParams.append('sort', sort)
     }
 
-    const solrAPI = solrCore === 'folders-items' ? SOLR_FOLDERS_ITEMS_API : SOLR_API;
+    let solrAPI;
+    switch (solrCore) {
+        case 'folders-items':
+            solrAPI = SOLR_FOLDERS_ITEMS_API
+            break;
+        case 'stats':
+            solrAPI = SOLR_STATS_API
+            break;
+        default:
+            solrAPI = SOLR_API;
+            break;
+    }
 
     return axios.get(
         solrAPI,

@@ -53,7 +53,7 @@ const IsadInsightsDates = ({facets, isOnDrawer=false, isMobile=false}) => {
 									<XAxis dataKey="year" stroke={'#000'} />
 									<YAxis stroke={'#000'} />
 									<Tooltip content={<CustomTooltip />} />
-									<Area type="monotone" dataKey="numberOfRecords" fill="#666" stroke="#000" />
+									<Area type="monotone" dataKey="numberOfRecords" fill="#666" stroke="#000"/>
 								</AreaChart>
 							</ResponsiveContainer>
 						</div>

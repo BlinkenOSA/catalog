@@ -1,3 +1,11 @@
+@import "../../../../styles/variables";
+
 .InsightsWrapper {
   min-height: 400px;
+
+  .Distributions {
+    display: flex;
+    min-height: 200px;
+    border-bottom: 2px solid $data-line;
+  }
 }

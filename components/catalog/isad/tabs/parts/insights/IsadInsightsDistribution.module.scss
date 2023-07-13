@@ -1,0 +1,53 @@
+@import "../../../../../../styles/variables";
+
+.DistributionWrapper {
+  border-bottom: 2px solid $data-line;
+  min-height: 200px;
+  display: flex;
+
+  &.Mobile {
+    border-bottom: unset;
+    display: block;
+
+    .Graph {
+      border-bottom: 2px solid $data-line;
+    }
+  }
+
+  .Graph {
+    flex: 1;
+    padding: 10px 20px;
+
+    &.Left {
+     border-right: 2px solid $data-line;
+    }
+
+    .Title {
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .Tooltip {
+      padding: 10px;
+      background-color: $background;
+      color: $black;
+      border: 2px solid $black;
+    }
+  }
+
+  :global text.recharts-polar-angle-axis-tick-value {
+    fill: $black;
+  }
+
+  :global text.recharts-polar-radius-axis-tick-value {
+    padding-left: 12px;
+    fill: $button-background;
+    font-size: 10px;
+  }
+
+  :global text.recharts-cartesian-axis-tick-value {
+    fill: $black;
+  }
+}
+
