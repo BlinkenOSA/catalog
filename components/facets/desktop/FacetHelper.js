@@ -1,9 +1,11 @@
 import React from "react";
 import style from "./FacetHelper.module.scss";
-import RecordOrigin from "../../../config/facetHelpers/RecordOrigin";
-import RecordType from "../../../config/facetHelpers/RecordType";
-import DateCreated from "../../../config/facetHelpers/DateCreated";
-import Availability from "../../../config/facetHelpers/Availability";
+import RecordOrigin from "../facetHelpers/RecordOrigin";
+import RecordType from "../facetHelpers/RecordType";
+import DateCreated from "../facetHelpers/DateCreated";
+import Availability from "../facetHelpers/Availability";
+import WikiFacet from "../facetHelpers/WikiFacet";
+
 
 /**
  * Displaying the helper text upon facet selection
@@ -25,9 +27,11 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, sele
             case 'availability':
                 return <Availability selectedFacetValue={selectedFacetObject['value']} />
             case 'subject_wikidata':
-                break;
+                return <WikiFacet selectedFacetObject={selectedFacetObject} type={'subject'} />
+            case 'contributor_wikidata':
+                return <WikiFacet selectedFacetObject={selectedFacetObject} type={'contributor'} />
             case 'geo_wikidata':
-                return <RecordType selectedFacetValue={selectedFacetObject['value']} />
+                return <WikiFacet selectedFacetObject={selectedFacetObject} type={'geo'} />
             case 'year_created':
                 return <DateCreated facetValues={facetValues} />
             default:
@@ -58,10 +62,11 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, sele
     const getButton = () => {
         switch (selectedFacetGroup) {
             case 'record_origin':
-                return renderButton()
             case 'primary_type':
-                return renderButton()
             case 'availability':
+            case 'geo_wikidata':
+            case 'subject_wikidata':
+            case 'contributor_wikidata':
                 return renderButton()
             default:
                 break;

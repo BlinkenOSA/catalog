@@ -33,7 +33,7 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
         }
 
         const getWikiFacetID = (value) => {
-            return value.indexOf('#Q') ? `Q${value.split('#Q')[1]}` : ''
+            return value.indexOf('#Q') !== -1 ? `Q${value.split('#Q')[1]}` : ''
         }
 
         let f = [];

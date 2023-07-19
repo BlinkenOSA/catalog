@@ -38,7 +38,7 @@ const DateCreated = ({facetValues}) => {
     return (
         <div className={style.FacetHelperText}>
             <div className={style.FacetGroup}>
-                <h2>Date Created</h2>
+                <h2>Year of Creation</h2>
                 <p>
                     Please select the date range on the left side.
                     You can see how many records per year exist in the repository on the rights side.

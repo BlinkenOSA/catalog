@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import {solrFetcher} from "../../../../../utils/fetcherFunctions";
 import Loader from "../../../../pages/parts/loader/Loader";
-import DateCreated from "../../../../../config/facetHelpers/DateCreated";
+import DateCreated from "../../../../facets/facetHelpers/DateCreated";
 
 const IsadDates = ({id}) => {
     const { data, error } = useSWR({query: `series_id:${id}`}, solrFetcher)

@@ -1,0 +1,92 @@
+@import "../../../styles/variables";
+
+.FacetHelperText {
+  margin-bottom: 10px;
+
+  .FacetGroup {
+    padding: 15px 15px 0 15px;
+  }
+
+  .FacetExplanation {
+    padding: 10px 10px 10px 15px;
+
+    p {
+      margin: 0;
+    }
+
+    .Description {
+      margin-bottom: 10px;
+    }
+
+    .ImageWrapper {
+      margin: 10px 0;
+      width: 100%;
+      min-height: 200px;
+      position: relative;
+    }
+
+    .Buttons {
+      display: flex;
+      gap: 10px;
+    }
+  }
+
+  p {
+    margin: 0 0 10px 0;
+  }
+
+  h3, h2 {
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+  }
+
+  h3 {
+    font-size: 14px;
+    padding: 15px 0 5px 0;
+  }
+
+  h2 {
+    font-size: 16px;
+    height: 35px;
+    line-height: 35px;
+    margin: 0;
+  }
+}
+
+.Button {
+  cursor: pointer;
+  margin-top: 10px;
+  height: 25px;
+  border-radius: 12px;
+  background-color: $button-background;
+  color: $white;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  width: auto;
+  padding-left: 5px;
+
+  .Text {
+    text-align: center;
+    color: $white;
+    font-family: 'Suisse Intl', serif;
+    font-size: 10px;
+    line-height: 25px;
+    padding: 0 10px 0 2px;
+    text-transform: uppercase;
+  }
+}
+
+.Button:hover {
+  background-color: $yellow;
+  color: $black;
+
+  .Text {
+    color: $black;
+  }
+}
+
+.Button img {
+  margin: 0 auto;
+}

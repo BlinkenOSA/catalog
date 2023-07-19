@@ -1,0 +1,8 @@
+.MapWrapper {
+  margin-top: 20px;
+
+  :global .leaflet-tile-pane {
+    -webkit-filter: grayscale(100%) !important;
+    filter: grayscale(100%) !important;
+  }
+}

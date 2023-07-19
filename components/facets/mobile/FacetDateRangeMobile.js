@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import {useDeepCompareEffect} from "react-use";
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import DateCreated from "../../../config/facetHelpers/DateCreated";
+import DateCreated from "../facetHelpers/DateCreated";
 
 /**
  * Displays the selectable facet values belonging to the selected facet group.
