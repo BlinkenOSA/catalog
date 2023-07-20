@@ -6,7 +6,6 @@ import LanguageButton from "../buttons/LanguageButton";
 import {useState} from "react";
 import PrimaryTypeButton from "../buttons/PrimaryTypeButton";
 import Button from "../buttons/Button";
-import InsightsPage from "../../../catalog/isad/tabs/InsightsPage";
 import DateDistribution from "./DateDistribution";
 
 const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {

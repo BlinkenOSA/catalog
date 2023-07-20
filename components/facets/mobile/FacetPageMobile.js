@@ -8,6 +8,7 @@ import {Collapse} from "react-collapse";
 import dynamic from "next/dynamic";
 import ResultCounterMobile from "./ResultCounterMobile";
 import FacetDateRangeMobile from "./FacetDateRangeMobile";
+import FacetHelperMobile from "./FacetHelperMobile";
 
 const FacetValuesMobile = dynamic(() => import("./FacetValuesMobile"), {
     ssr: false,
@@ -25,7 +26,9 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
     const router = useRouter();
     const {query, limit, offset, ...selectedFacets} = router.query;
 
+    const [selectedFacet, setSelectedFacet] = useState({})
     const [selectedFacetGroup, setSelectedFacetGroup] = useState('record_origin')
+    const [infoOpen, setInfoOpen] = useState(false);
 
     /**
      * Handler of changing the facetValue, either it's an add or a remove.
@@ -34,6 +37,7 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
      * @param action The action wether it's 'add' or 'remove'.
      */
     const onFacetActionClick = (value, action) => {
+        setInfoOpen(false)
         if (action === 'add') {
             addFacetValue(value)
         } else {
@@ -42,12 +46,23 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
     }
 
     /**
+     * Handler of clicking the info icon.
+     *
+     * @param {Object} facet The facet object.
+     */
+    const onFacetInfoClick = (facet) => {
+        setSelectedFacet(facet)
+        setInfoOpen(!infoOpen)
+    }
+
+    /**
      * Handler of adding the facetValue.
      *
      * @param value The value to be added to the selectedFacets. It will be added to the page URL params.
      */
     const addFacetValue = (value) => {
-        const sf = addFacet(selectedFacets, selectedFacetGroup, value);
+        const SFGroup = selectedFacetGroup.replace('_wikidata', '')
+        const sf = addFacet(selectedFacets, SFGroup, value);
 
         router.replace({
             query: createParams(query, limit, 0, sf),
@@ -60,7 +75,8 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
      * @param value The value to be removed from the selectedFacets. It will be removed from the page URL params.
      */
     const removeFacetValue = (value) => {
-        const newFacets = removeFacet(selectedFacets, selectedFacetGroup, value)
+        const SFGroup = selectedFacetGroup.replace('_wikidata', '')
+        const newFacets = removeFacet(selectedFacets, SFGroup, value)
 
         router.replace({
             query: createParams(query, limit, 0, newFacets),
@@ -69,12 +85,13 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
 
     const getSelectedFacetValues = () => {
         let facetValues = [];
+        const SFGroup = selectedFacetGroup.replace('_wikidata', '')
 
-        if (selectedFacets.hasOwnProperty(selectedFacetGroup)) {
-            if (Array.isArray(selectedFacets[selectedFacetGroup])) {
-                facetValues = selectedFacets[selectedFacetGroup];
+        if (selectedFacets.hasOwnProperty(SFGroup)) {
+            if (Array.isArray(selectedFacets[SFGroup])) {
+                facetValues = selectedFacets[SFGroup];
             } else {
-                facetValues = [selectedFacets[selectedFacetGroup]]
+                facetValues = [selectedFacets[SFGroup]]
             }
         }
         return facetValues
@@ -84,12 +101,40 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
         selectedFacetGroup === key ? setSelectedFacetGroup('') : setSelectedFacetGroup(key)
     }
 
+    const renderFacetValues = (key) => {
+        const type = facetConfig[key]['type']
+        switch (type) {
+            case 'list':
+            case 'wiki':
+                return (
+                  <FacetValuesMobile
+                    breadcrumbHeight={breadcrumbHeight}
+                    facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
+                    selectedFacetGroup={key}
+                    selectedFacetValues={getSelectedFacetValues()}
+                    onFacetActionClick={onFacetActionClick}
+                    onFacetInfoClick={onFacetInfoClick}
+                    type={type}
+                  />)
+            case 'date':
+                return (
+                  <FacetDateRangeMobile
+                    facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
+                    selectedFacetGroup={key}
+                    selectedFacetValues={getSelectedFacetValues()}
+                    onFacetActionClick={onFacetActionClick}
+                    onFacetInfoClick={onFacetInfoClick}
+                  />)
+        }
+    }
+
     /**
      * Rendering the facetGroup buttons.
      */
     const renderFacetButtons = () => {
         return (
             Object.keys(facetConfig).map((key) => (
+                facetConfig[key]['type'] &&
                 <div key={key}>
                     <div
                         className={selectedFacetGroup === key ? `${style.FacetGroup} ${style.Selected}`: style.FacetGroup}
@@ -99,21 +144,7 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
                         <div className={style.Button} />
                     </div>
                     <Collapse id={key} isOpened={selectedFacetGroup === key}>
-                        {
-                            facetConfig[key]['type'] === 'list' ?
-                            <FacetValuesMobile
-                                breadcrumbHeight={breadcrumbHeight}
-                                facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
-                                selectedFacetGroup={key}
-                                selectedFacetValues={getSelectedFacetValues()}
-                                onFacetActionClick={onFacetActionClick}
-                            /> :
-                            <FacetDateRangeMobile
-                                facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
-                                selectedFacetGroup={key}
-                                selectedFacetValues={getSelectedFacetValues()}
-                                onFacetActionClick={onFacetActionClick}
-                            />}
+                        {renderFacetValues(key)}
                     </Collapse>
                 </div>
             ))
@@ -131,6 +162,21 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
                         total={total}
                         breadcrumbHeight={breadcrumbHeight}
                         onShowButtonClick={onShowButtonClick}
+                    />
+                </div>
+            </div>
+            <div className={infoOpen ? `${style.Drawer}` : `${style.Drawer} ${style.Closed}`}>
+                <div className={style.Window}>
+                    <div className={style.CloseButton} onClick={() => setInfoOpen(false)}>
+                        <span> </span>
+                        <span> </span>
+                    </div>
+                    <FacetHelperMobile
+                      facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                      onFacetActionClick={onFacetActionClick}
+                      selectedFacetGroup={selectedFacetGroup}
+                      selectedFacetObject={selectedFacet}
+                      selectedFacetValues={getSelectedFacetValues()}
                     />
                 </div>
             </div>

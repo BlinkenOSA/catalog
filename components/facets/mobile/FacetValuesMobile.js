@@ -4,6 +4,7 @@ import {facetConfig} from "../../../config/facetConfig";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useDeepCompareEffect, useWindowSize} from "react-use";
 import { VariableSizeList as List } from 'react-window';
+import { FiInfo } from 'react-icons/fi';
 
 /**
  * Displays the selectable facet values belonging to the selected facet group.
@@ -15,7 +16,7 @@ import { VariableSizeList as List } from 'react-window';
  * @param {function} params.onFacetActionClick The handler of facet value change.
  */
 const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues,
-                      onFacetActionClick}) => {
+                      onFacetActionClick, onFacetInfoClick, type}) => {
     const [facetValuesOriginal, setFacetValuesOriginal] = useState([])
     const [facetValuesDisplay, setFacetValuesDisplay] = useState([])
     const [facetValueClicked, setFacetValueClicked] = useState('')
@@ -26,10 +27,19 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
     const {width} = useWindowSize();
 
     useDeepCompareEffect(() => {
+        const getWikiFacetValue = (value) => {
+            return value.split('#')[0]
+        }
+
+        const getWikiFacetID = (value) => {
+            return value.indexOf('#Q') !== -1 ? `Q${value.split('#Q')[1]}` : ''
+        }
+
         let f = [];
         for (let i = 0; i < facetValues.length; i += 2) {
             f.push({
-                value: facetValues[i],
+                value: type === 'list' ? facetValues[i] : getWikiFacetValue(facetValues[i]),
+                wiki_id: getWikiFacetID(facetValues[i]),
                 number: facetValues[i+1]
             })
         }
@@ -111,14 +121,19 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
         }, [rowRef]);
 
         return (
-            <div
-                onClick={() => {handleFacetClick(facet['value'], selectedFacetValues.includes(facet['value']) ? 'deselect' : 'select')}}
-                className={`${cssStyle.ValueWrapper} ${selectedFacetValues.includes(facet['value']) ? cssStyle.Selected : ''}`}
-                style={style}>
-                <div
-                    className={cssStyle.Value}
-                    ref={rowRef}>
-                    {facet['value']} <span className={cssStyle.Count}>({facet['number']})</span>
+            <div className={`${cssStyle.ValueWrapper} ${selectedFacetValues.includes(facet['value']) ? cssStyle.Selected : ''}`}
+                 style={style}>
+                <div className={cssStyle.LinkWrapper}
+                     onClick={() => {handleFacetClick(facet['value'], selectedFacetValues.includes(facet['value']) ? 'deselect' : 'select')}}>
+                    <div
+                        className={cssStyle.Value}
+                        ref={rowRef}>
+                        {facet['value']} <span className={cssStyle.Count}>({facet['number']})</span>
+                    </div>
+                </div>
+                <div onClick={() => {onFacetInfoClick(facet)}}
+                    className={cssStyle.InfoButton}>
+                    <FiInfo />
                 </div>
             </div>
         )

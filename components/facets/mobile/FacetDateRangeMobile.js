@@ -14,7 +14,7 @@ import DateCreated from "../facetHelpers/DateCreated";
  * @param {function} params.onFacetActionClick The handler of facet value change.
  * @param {Object} params.selectedFacetValues The selected facet values.
  */
-const FacetDateRangeMobile = ({facetValues, selectedFacetGroup, selectedFacetValues, onFacetActionClick}) => {
+const FacetDateRangeMobile = ({facetValues, selectedFacetGroup, selectedFacetValues, onFacetActionClick, onFacetInfoClick}) => {
     const [values, setValues] = useState([1900, 1990])
     const [limits, setLimits] = useState([1950, 2000])
 
@@ -70,6 +70,9 @@ const FacetDateRangeMobile = ({facetValues, selectedFacetGroup, selectedFacetVal
                     />
                 </div>
                 <div className={style.ButtonWrapper}>
+                    <span className={style.Button} onClick={() => onFacetInfoClick({})}>
+                        Info
+                    </span>
                     <span className={style.Button} onClick={() => handleClick(getAction())}>
                         {getAction().toUpperCase()} Date Filter
                     </span>
