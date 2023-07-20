@@ -79,20 +79,6 @@ const WikiFacet = ({selectedFacetObject, type}) => {
       }
     }
 
-    const getMap = () => {
-      const properties = data['properties']
-      if (properties.hasOwnProperty('geoshape')) {
-        return (
-          <a href={properties['geoshape']} target={'_blank'}>
-            <div className={style.Button}>
-              <FaMapMarkerAlt />
-              <span className={style.Text}>Show Area</span>
-            </div>
-          </a>
-        )
-      }
-    }
-
     const getBirthData = (type) => {
       const formatDate = (date) => {
         return dayjs(date, '+YYYY-MM-DDTHH:mm:ssZ').format('YYYY/MM/DD')
@@ -132,10 +118,27 @@ const WikiFacet = ({selectedFacetObject, type}) => {
       }
     }
 
+    const getMap = () => {
+      const coordinates = data['properties']['coordinates'];
+
+      if(data['properties'].hasOwnProperty('geojson')) {
+        const geoJSONData = data['properties']['geojson']['data']['features']
+        return coordinates &&
+          <MapWithNoSSR
+            lat={coordinates['lat']}
+            long={coordinates['long']}
+            zoom={data['properties']['geojson']['zoom'] + 2}
+            geoJSON={true}
+            geoJSONData={geoJSONData}
+          />
+      } else {
+        return coordinates && <MapWithNoSSR lat={coordinates['lat']} long={coordinates['long']} />
+      }
+    }
+
     const renderFacetInfo = () => {
       switch (type) {
         case 'geo':
-          const coordinates = data['properties']['coordinates'];
           return (
             <React.Fragment>
               <h2>{data['title']}</h2>
@@ -143,18 +146,17 @@ const WikiFacet = ({selectedFacetObject, type}) => {
               {getCountry()}
               <div className={style.Buttons}>
                 {getWikipedia()}
-                {getMap()}
               </div>
-              {coordinates && <MapWithNoSSR lat={coordinates['lat']} long={coordinates['long']} />}
+              {getMap()}
             </React.Fragment>
           )
         case 'subject':
         case 'contributor':
           return (
             <React.Fragment>
+              {getImage()}
               <h2>{data['title']}</h2>
               <p className={style.Description}>{data['description']}</p>
-              {getImage()}
               {getBirthData('birth')}
               {getBirthData('death')}
               {getListData('occupation', 'Occupation')}

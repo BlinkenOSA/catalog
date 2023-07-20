@@ -19,10 +19,16 @@
     }
 
     .ImageWrapper {
+      display: flex;
+      justify-content: left;
       margin: 10px 0;
-      width: 100%;
-      min-height: 200px;
+      min-height: 300px;
       position: relative;
+
+      img {
+        -webkit-filter: grayscale(100%) !important;
+        filter: grayscale(100%) !important;
+      }
     }
 
     .Buttons {

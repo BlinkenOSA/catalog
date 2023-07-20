@@ -50,7 +50,8 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
      * @param value The value to be added to the selectedFacets. It will be added to the page URL params.
      */
     const addFacetValue = (value) => {
-        const sf = addFacet(selectedFacets, selectedFacetGroup, value);
+        const SFGroup = selectedFacetGroup.replace('_wikidata', '')
+        const sf = addFacet(selectedFacets, SFGroup, value);
 
         router.replace({
             query: createParams(query, limit, 0, sf),
@@ -63,7 +64,8 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
      * @param value The value to be removed from the selectedFacets. It will be removed from the page URL params.
      */
     const removeFacetValue = (value) => {
-        const newFacets = removeFacet(selectedFacets, selectedFacetGroup, value)
+        const SFGroup = selectedFacetGroup.replace('_wikidata', '')
+        const newFacets = removeFacet(selectedFacets, SFGroup, value)
 
         router.replace({
             query: createParams(query, limit, 0, newFacets),
@@ -72,12 +74,13 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, f
 
     const getSelectedFacetValues = () => {
         let facetValues = [];
+        const SFGroup = selectedFacetGroup.replace('_wikidata', '')
 
-        if (selectedFacets.hasOwnProperty(selectedFacetGroup)) {
-            if (Array.isArray(selectedFacets[selectedFacetGroup])) {
-                facetValues = selectedFacets[selectedFacetGroup];
+        if (selectedFacets.hasOwnProperty(SFGroup)) {
+            if (Array.isArray(selectedFacets[SFGroup])) {
+                facetValues = selectedFacets[SFGroup];
             } else {
-                facetValues = [selectedFacets[selectedFacetGroup]]
+                facetValues = [selectedFacets[SFGroup]]
             }
         }
         return facetValues

@@ -66,7 +66,7 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
     /**
      * Select (click) action.
      *
-     * @param {string} facet The object of the clicked facet.
+     * @param {Object} facet The object of the clicked facet.
      */
     const handleFacetSelect = (facet) => {
         if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
@@ -84,7 +84,7 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
     /**
      * Deselection (2nd click) action.
      *
-     * @param {string} facet The object of the clicked facet.
+     * @param {Object} facet The object of the clicked facet.
      */
     const handleFacetDeselect = (facet) => {
         if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
