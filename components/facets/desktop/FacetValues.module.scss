@@ -28,8 +28,16 @@
       font-size: 12px;
     }
 
-    .Button {
+    .ButtonsWrapper {
       margin-left: auto;
+      display: flex;
+
+      .InfoButton {
+        padding-top: 8px;
+      }
+    }
+
+    .Button {
       width: 35px;
       height: 35px;
       transform: translate(0%, 0%) rotate(0deg);

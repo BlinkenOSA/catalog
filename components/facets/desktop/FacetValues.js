@@ -4,6 +4,7 @@ import {facetConfig} from "../../../config/facetConfig";
 import {useCallback, useRef, useEffect, useState} from "react";
 import {useDeepCompareEffect, useWindowSize} from "react-use";
 import { VariableSizeList as List } from 'react-window';
+import { FiInfo } from 'react-icons/fi';
 
 /**
  * Displays the selectable facet values belonging to the selected facet group.
@@ -140,7 +141,15 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
                     ref={rowRef}>
                     {facet['value']} <span className={cssStyle.Count}>({facet['number']})</span>
                 </div>
-                <div className={selectedFacetValues.includes(facet['value']) ? cssStyle.RemoveButton : cssStyle.Button} />
+                <div className={cssStyle.ButtonsWrapper}>
+                    {
+                        facet['wiki_id'] !== '' &&
+                        <div className={cssStyle.InfoButton}>
+                            <FiInfo />
+                        </div>
+                    }
+                    <div className={selectedFacetValues.includes(facet['value']) ? cssStyle.RemoveButton : cssStyle.Button} />
+                </div>
             </div>
         )
     };

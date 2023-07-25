@@ -8,7 +8,7 @@ const CloverIIIF = dynamic(() => import("@samvera/clover-iiif"), {
 const FindingAidsDigitalContent = ({id, data}) => {
     switch (data['primary_type']) {
         case 'Still Image':
-            const manifestUrl = `http://localhost:8000/api/catalog/finding-aids-image-manifest/${id}/manifest.json`;
+            const manifestUrl = `http://localhost:8000/v1/catalog/finding-aids-image-manifest/${id}/manifest.json`;
 
             const options = {
                 canvasBackgroundColor: '#808080',

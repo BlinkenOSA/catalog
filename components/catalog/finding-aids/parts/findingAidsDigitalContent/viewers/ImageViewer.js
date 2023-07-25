@@ -5,8 +5,10 @@ import Fullscreen from 'react-fullscreen-crossbrowser';
 import {useState} from "react";
 import {useWindowSize} from 'react-use';
 
+const API = process.env.NEXT_PUBLIC_AMS_API;
+
 const ImageViewer = ({id, isMobile}) => {
-    const manifestUrl = `http://localhost:8000/api/catalog/finding-aids-image-manifest/${id}/manifest.json`;
+    const manifestUrl = `${API}finding-aids-image-manifest/${id}/manifest.json`;
 
     const {width, height} = useWindowSize();
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)

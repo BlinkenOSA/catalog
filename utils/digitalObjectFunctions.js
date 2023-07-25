@@ -5,6 +5,7 @@ const generateSeriesCodeFromReferenceCode = (referenceCode) => {
 const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) => {
     let storageURL = '';
     let extension = '';
+
     switch (type) {
         case 'Textual':
             storageURL = 'https://storage.osaarchivum.org/catalog/textual'

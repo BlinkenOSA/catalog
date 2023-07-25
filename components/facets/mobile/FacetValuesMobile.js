@@ -131,10 +131,12 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
                         {facet['value']} <span className={cssStyle.Count}>({facet['number']})</span>
                     </div>
                 </div>
-                <div onClick={() => {onFacetInfoClick(facet)}}
-                    className={cssStyle.InfoButton}>
-                    <FiInfo />
-                </div>
+                { facet['wiki_id'] !== '' &&
+                    <div onClick={() => {onFacetInfoClick(facet)}}
+                        className={cssStyle.InfoButton}>
+                        <FiInfo />
+                    </div>
+                }
             </div>
         )
     };

@@ -1,8 +1,11 @@
 import style from "./IsadDigitalContent.module.scss";
 import {OpenSeadragonViewer} from "openseadragon-react-viewer";
 
+export const API = process.env.NEXT_PUBLIC_AMS_API;
+
+
 const IsadDigitalContent = ({seriesID}) => {
-    const manifestUrl = `http://localhost:8000/api/catalog/archival-units-image-manifest/${seriesID}/manifest.json`;
+    const manifestUrl = `${API}/archival-units-image-manifest/${seriesID}/manifest.json`;
 
     const options = {
         showDropdown: true,
