@@ -1,7 +1,5 @@
 import React, {useEffect} from 'react';
 import style from "./CollectionPage.module.scss";
-import useSWR from 'swr'
-import {fetcher} from "../../utils/fetcherFunctions";
 import Loader from "./parts/loader/Loader";
 import {useState} from "react";
 import TreeNode from "./parts/treeNode/TreeNode";
@@ -11,9 +9,10 @@ import {useRouter} from "next/router";
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
  */
-const CollectionPage = ({activeUnit, activeUnitID, showArchiveUnitDrawer = false, isMobile}) => {
+const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer = false, isMobile}) => {
     const [openNodes, setOpenNodes] = useState([]);
-    const { data, error } = useSWR(activeUnitID ? `archival-units-tree/${activeUnitID}/` : 'archival-units-tree/all/', fetcher);
+
+    // const { data, error } = useSWR(activeUnitID ? `archival-units-tree/${activeUnitID}/` : 'archival-units-tree/all/', fetcher);
 
     const router = useRouter();
 

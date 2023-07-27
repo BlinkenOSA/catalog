@@ -26,7 +26,6 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 	const PER_PAGE = 50;
 
 	const getKey = (index) => {
-		console.log(seriesID)
 		return {
 			solrCore: 'folders-items',
 			query: seriesQuery,

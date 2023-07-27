@@ -4,6 +4,9 @@ import Layout from "../components/layout/Layout";
 import Head from "next/head";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 
+export const getStaticProps = async () => {
+    return { props: {} }
+}
 
 const PrivacyPolicy = () => {
     return (

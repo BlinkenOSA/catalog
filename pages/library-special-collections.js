@@ -10,10 +10,6 @@ import LibraryCollectionPage from "../components/pages/LibraryCollectionPage";
 
 
 const LibrarySpecialCollections = () => {
-    const CollectionPage = dynamic(() => import('../components/pages/CollectionPage'), {
-        ssr: false
-    })
-
     return (
         <Layout>
             <Head>

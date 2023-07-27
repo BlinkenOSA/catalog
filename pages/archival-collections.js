@@ -3,16 +3,21 @@ import Head from "next/head";
 import style from "./pages.module.scss";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import React from "react";
-import dynamic from "next/dynamic";
 import { Media } from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+import CollectionPage from "../components/pages/CollectionPage";
+export const API = process.env.NEXT_PUBLIC_AMS_API;
 
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`${API}archival-units-tree/all/`)
+  const data = await res.json()
 
-const ArchivalCollections = () => {
-    const CollectionPage = dynamic(() => import('../components/pages/CollectionPage'), {
-        ssr: false
-    })
+  // Pass data to the page via props
+  return { props: { data } }
+}
 
+const ArchivalCollections = ({data}) => {
     return (
         <Layout>
             <Head>
@@ -27,6 +32,7 @@ const ArchivalCollections = () => {
                     <CollectionPage
                         isMobile={true}
                         showArchiveUnitDrawer={true}
+                        data={data}
                     />
                 </div>
             </Media>
@@ -38,6 +44,7 @@ const ArchivalCollections = () => {
                     </div>
                     <CollectionPage
                         showArchiveUnitDrawer={true}
+                        data={data}
                     />
                 </div>
             </Media>

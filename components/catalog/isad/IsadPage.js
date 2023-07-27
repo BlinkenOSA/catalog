@@ -12,9 +12,8 @@ import isadTabConfig from "./config/isadTabConfig";
 import InsightsPage from "./tabs/InsightsPage";
 
 
-const IsadPage = ({record, isMobile}) => {
+const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
     const { id, ams_id } = record;
-    const { data, error } = useSWR(`archival-units/${ams_id}/`, fetcher)
 
     const [language, setLanguage] = useState('EN');
     const [selectedView, setSelectedView] = useState('context')
@@ -44,7 +43,7 @@ const IsadPage = ({record, isMobile}) => {
             case 'context':
                 return <IsadMetadataPage
                     id={id}
-                    data={data}
+                    data={metadata}
                     language={language}
                     isMobile={isMobile}/>
             case 'insights':
@@ -58,6 +57,7 @@ const IsadPage = ({record, isMobile}) => {
                 return <CollectionPage
                     activeUnitID={ams_id}
                     activeUnit={getActiveUnit()}
+                    data={hierarchy}
                     language={language}
                     isMobile={isMobile}/>
             case 'folders':

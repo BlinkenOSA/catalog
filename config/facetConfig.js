@@ -14,6 +14,6 @@ export const facetConfig = {
     subject_term: { title: 'Subject Terms', search: true, info: false, type: 'list' },
     geo_wikidata: { title: 'Geo Locations', search: true, info: true, type: 'wiki' },
     geo: { title: 'Geo Locations', search: true, info: true, type: undefined },
-    keyword: { title: 'Keywords', search: true, info: false, type: 'list' },
+    keyword: { title: 'Keywords & Terms', search: true, info: false, type: 'list' },
 }
 

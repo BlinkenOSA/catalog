@@ -8,6 +8,9 @@ import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbS
 import { Media } from "../utils/media";
 import RegistrationFormMobile from "../components/registration/mobile/RegistrationFormMobile";
 
+export const getStaticProps = async () => {
+  return { props: {} }
+}
 
 const Registration = () => {
     return (
