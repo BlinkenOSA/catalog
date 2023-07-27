@@ -9,15 +9,13 @@ import {useMeasure} from "react-use";
 import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
 import IsadPage from "../../components/catalog/isad/IsadPage";
-import dynamic from "next/dynamic";
 import { Media } from "../../utils/media";
 import BreadcrumbSearchMobile from "../../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+import FindingAidsPage from "../../components/catalog/finding-aids/FindingAidsPage";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
+export const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 
-const FindingAidsPage = dynamic(() => import("../../components/catalog/finding-aids/FindingAidsPage"), {
-    ssr: false,
-});
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
@@ -37,23 +35,44 @@ export async function getServerSideProps(context) {
             case 'Library':
                 break;
             case 'Archives':
+                const {ams_id} = record;
                 if (record['primary_type'] === 'Archival Unit') {
-                    const {ams_id} = record;
-                    const [metadataRes, hierarchyRes] = await Promise.all([
+
+                    const statsParams = new URLSearchParams({
+                        q: `${record['description_level'].toLowerCase()}_id:${ams_id}`
+                    })
+
+                    const [metadataRes, hierarchyRes, insightsRes] = await Promise.all([
                         fetch(`${API}archival-units/${ams_id}/`),
-                        fetch(`${API}archival-units-tree/${ams_id}/`)
+                        fetch(`${API}archival-units-tree/${ams_id}/`),
+                        fetch(`${SOLR_STATS_API}?` + statsParams)
                     ])
-                    const [metadata, hierarchy] = await Promise.all([
+                    const [metadata, hierarchy, insights] = await Promise.all([
+                        metadataRes.json(), hierarchyRes.json(), insightsRes.json()
+                    ])
+                    return {
+                        props: {
+                            solrData,
+                            metadata,
+                            hierarchy,
+                            insights
+                        }
+                    }
+                } else {
+                    const [metadataRes, hierarchyRes] = await Promise.all([
+                        fetch(`${API}finding-aids/${id}/`),
+                        fetch(`${API}finding-aids-location/${id}/`),
+                    ])
+                    const [metadata, hierarchy, insights] = await Promise.all([
                         metadataRes.json(), hierarchyRes.json()
                     ])
-                    console.log(hierarchy)
-                    return { props: {
-                        solrData,
-                        metadata,
-                        hierarchy
-                    } }
-                } else {
-
+                    return {
+                        props: {
+                            solrData,
+                            metadata,
+                            hierarchy
+                        }
+                    }
                 }
         }
     }
@@ -64,27 +83,32 @@ export async function getServerSideProps(context) {
     } }
 }
 
-const CatalogPage = ({solrData, data, metadata, hierarchy}) => {
-    const [ref, {height}] = useMeasure();
-
-    // const router = useRouter();
-    // const { id } = router.query;
-
-    // const { data, error } = useSWR(id && {query: `id:${id}`}, solrFetcher)
+const CatalogPage = ({solrData, metadata, hierarchy, insights}) => {
+    const [ref] = useMeasure();
 
     const renderPage = (isMobile) => {
         if (solrData) {
             const record = solrData['response']['docs'][0]
             switch (record['record_origin']) {
                 case 'Library':
-                    return <LibraryPage record={record} type={'library'} isMobile={isMobile}/>
+                    return <LibraryPage record={solrData} type={'library'} isMobile={isMobile}/>
                 case 'Film Library':
-                    return <LibraryPage record={record} type={'filmLibrary'} isMobile={isMobile}/>
+                    return <LibraryPage record={solrData} type={'filmLibrary'} isMobile={isMobile}/>
                 case 'Archives':
                     if (record['primary_type'] === 'Archival Unit') {
-                        return <IsadPage data={data} metadata={metadata} hierarchy={hierarchy} record={record} isMobile={isMobile}/>
+                        return <IsadPage
+                          solrData={record}
+                          metadata={metadata}
+                          hierarchy={hierarchy}
+                          insights={insights}
+                          isMobile={isMobile}/>
                     } else {
-                        return <FindingAidsPage record={record} isMobile={isMobile}/>
+                        return <FindingAidsPage
+                          solrData={record}
+                          metadata={metadata}
+                          hierarchy={hierarchy}
+                          isMobile={isMobile}
+                        />
                     }
                 default:
                     return '';

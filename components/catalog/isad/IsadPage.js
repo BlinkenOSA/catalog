@@ -1,7 +1,5 @@
 import style from "./IsadPage.module.scss";
 import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
-import useSWR from "swr";
-import {fetcher, nextAPIFetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
 import React, {useEffect, useState} from "react";
 import LanguageButton from "../../pages/parts/buttons/LanguageButton";
@@ -12,8 +10,8 @@ import isadTabConfig from "./config/isadTabConfig";
 import InsightsPage from "./tabs/InsightsPage";
 
 
-const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
-    const { id, ams_id } = record;
+const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
+    const { id, ams_id } = solrData;
 
     const [language, setLanguage] = useState('EN');
     const [selectedView, setSelectedView] = useState('context')
@@ -22,20 +20,20 @@ const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
         if (language === 'EN') {
             return (
                 <div className={style.Title}>
-                    {data['reference_code']} {data['title']}
+                    {metadata['reference_code']} {metadata['title']}
                 </div>
             )
         } else {
             return (
                 <div className={style.Title}>
-                    {data['reference_code']} {data['title_original'] ? data['title_original'] : data['title']}
+                    {metadata['reference_code']} {metadata['title_original'] ? metadata['title_original'] : metadata['title']}
                 </div>
             )
         }
     }
 
     const getActiveUnit = () => {
-        return record['reference_code'].replace("HU OSA ", "hu_osa_")
+        return metadata['reference_code'].replace("HU OSA ", "hu_osa_")
     }
 
     const renderContent = () => {
@@ -48,10 +46,7 @@ const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
                     isMobile={isMobile}/>
             case 'insights':
                 return <InsightsPage
-                    archivalUnitID={ams_id}
-                    descriptionLevel={record['description_level']}
-                    language={language}
-                    isMobile={isMobile}
+                    data={insights}
                 />
             case 'hierarchy':
                 return <CollectionPage
@@ -74,7 +69,7 @@ const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
         return isadTabConfig[tab].hasOwnProperty(language) ? isadTabConfig[tab][language] : isadTabConfig[tab]['EN']
     }
 
-    if (data) {
+    if (metadata) {
         return (
             <div className={style.Page}>
                 <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
@@ -82,15 +77,15 @@ const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
                         { getTitle() }
                         <div className={style.Buttons}>
                             {
-                                data['original_locale'] !== null &&
+                                metadata['original_locale'] !== null &&
                                 <LanguageButton
                                   name={`isad-page-language-selector-${isMobile ? 'mobile' : 'desktop'}`}
                                   selectedLanguage={language}
-                                  originalLanguage={data['original_locale']}
+                                  originalLanguage={metadata['original_locale']}
                                   onLanguageChange={setLanguage}
                                 />
                             }
-                            <PrimaryTypeButton primaryType={record['primary_type']} />
+                            <PrimaryTypeButton primaryType={solrData['primary_type']} />
                         </div>
                     </div>
                 </div>
@@ -111,7 +106,7 @@ const IsadPage = ({record, data, metadata, hierarchy, isMobile}) => {
                         {renderTabName('insights')}
                     </div>
                     {
-                        record['description_level'] === 'Series' &&
+                        metadata['description_level'] === 'Series' &&
                         <div
                             onClick={() => setSelectedView('folders')}
                             className={selectedView === 'folders' ? style.Active : ''}>

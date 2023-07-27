@@ -7,10 +7,8 @@ import {Collapse} from 'react-collapse';
 import Button from "../../pages/parts/buttons/Button";
 import {useState} from "react";
 
-const FindingAidsLocation = ({id, onTreeNodeClick, isMobile}) => {
+const FindingAidsLocation = ({data, onTreeNodeClick, isMobile}) => {
     const [locationOpen, setLocationOpen] = useState(true)
-
-    const { data, error } = useSWR(`finding-aids-location/${id}/`, fetcher)
 
     const getClassType = (record, isLast=false) => {
         switch (record['level']) {

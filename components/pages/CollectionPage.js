@@ -10,12 +10,9 @@ import {useRouter} from "next/router";
  * Page responsible for displaying the hierarchical list of archival collections.
  */
 const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer = false, isMobile}) => {
-    const [openNodes, setOpenNodes] = useState([]);
-
-    // const { data, error } = useSWR(activeUnitID ? `archival-units-tree/${activeUnitID}/` : 'archival-units-tree/all/', fetcher);
-
     const router = useRouter();
 
+    const [openNodes, setOpenNodes] = useState([]);
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
 
     useEffect(() => {

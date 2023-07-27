@@ -18,14 +18,12 @@ const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigit
     ssr: false,
 });
 
-const FindingAidsPage = ({record, isMobile}) => {
-    const { id } = record;
+const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
+    const { id } = solrData;
     const { inCart } = useCart();
 
     const router = useRouter();
-
-    const { data, error } = useSWR(`finding-aids/${id}/`, fetcher)
-
+    
     const digitalContentRef = useRef();
     const metadataRef = useRef();
 
@@ -35,13 +33,13 @@ const FindingAidsPage = ({record, isMobile}) => {
         if (language === 'EN') {
             return (
                 <div className={style.Title}>
-                    {data['archival_reference_code']} {data['title']}
+                    {metadata['archival_reference_code']} {metadata['title']}
                 </div>
             )
         } else {
             return (
                 <div className={style.Title}>
-                    {data['archival_reference_code']} {data['title_original'] ? data['title_original'] : data['title']}
+                    {metadata['archival_reference_code']} {metadata['title_original'] ? metadata['title_original'] : metadata['title']}
                 </div>
             )
         }
@@ -65,40 +63,40 @@ const FindingAidsPage = ({record, isMobile}) => {
         router.push(`/catalog/${id}`);
     }
 
-    if (data) {
+    if (metadata) {
         return (
             <div className={style.Page}>
                 <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
                     <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
-                        { getTitle(data) }
+                        { getTitle(metadata) }
                         <div className={style.Buttons}>
                             <CartButton
-                                record={record}
+                                solrData={solrData}
                                 inCart={inCart(id)}
                                 name={id}
                             />
-                            <PrimaryTypeButton primaryType={record['primary_type']} />
-                            <AvailabilityButton record={record} />
+                            <PrimaryTypeButton primaryType={solrData['primary_type']} />
+                            <AvailabilityButton record={solrData} />
                         </div>
                     </div>
                 </div>
                 {
-                    data['digital_version_online'] &&
+                    metadata['digital_version_online'] &&
                     <React.Fragment>
                         {
                             !isMobile &&
-                            <PageNavigation primaryType={record['primary_type']} onSelect={handleSelectSection}/>
+                            <PageNavigation primaryType={solrData['primary_type']} onSelect={handleSelectSection}/>
                         }
-                        <div ref={digitalContentRef}>
-                            <FindingAidsDigitalContent id={id} data={data} isMobile={isMobile}/>
+                        <div ref={digitalContentRef} style={isMobile ? {minHeight: 300} : {minHeight: 500}}>
+                            <FindingAidsDigitalContent id={id} data={metadata} isMobile={isMobile}/>
                         </div>
                     </React.Fragment>
                 }
-                <FindingAidsCitation citation={data['citation']} isMobile={isMobile} />
+                <FindingAidsCitation citation={metadata['citation']} isMobile={isMobile} />
                 <div ref={metadataRef}>
-                    <FindingAidsMetadataPage id={id} data={data} language={language} isMobile={isMobile} />
+                    <FindingAidsMetadataPage id={id} data={metadata} language={language} isMobile={isMobile} />
                 </div>
-                <FindingAidsLocation id={id} onTreeNodeClick={handleTreeNodeClick} isMobile={isMobile} />
+                <FindingAidsLocation data={hierarchy} onTreeNodeClick={handleTreeNodeClick} isMobile={isMobile} />
             </div>
         )
     } else {
