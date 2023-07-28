@@ -55,7 +55,7 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 						return parse(elementHighlight[`${field}_search_general`].join())
 					}
 				}
-				return parse(rec[field])
+				return rec[field] ? parse(rec[field]) : rec[field]
 			} else {
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];

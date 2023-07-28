@@ -1,6 +1,6 @@
 import style from './ArchivalUnitDrawer.module.scss'
 import useSWR from "swr";
-import {fetcher, solrFetcher} from "../../../../utils/fetcherFunctions";
+import {fetcher} from "../../../../utils/fetcherFunctions";
 import Loader from "../loader/Loader";
 import LanguageButton from "../buttons/LanguageButton";
 import {useState} from "react";

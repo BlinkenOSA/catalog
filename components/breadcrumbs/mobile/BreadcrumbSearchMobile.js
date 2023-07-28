@@ -36,7 +36,7 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
 
         router.replace({
             query: createParams(query, limit, 0, newFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     }
 
     /**

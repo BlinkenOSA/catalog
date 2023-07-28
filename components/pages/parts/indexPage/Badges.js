@@ -6,18 +6,10 @@ import React from "react";
 import {createParams} from "../../../../utils/urlParamFunctions";
 import {useRouter} from "next/router";
 
-const badgeText = [
-    'CPG', 'Lenin', 'Szabad Európa Rádió', 'Srebrenica', 'EU',
-    'Emigré', 'Bős-nagymarosi vízlépcső', 'Перестройка',
-    'USSR', 'CIA'
-]
-
 /**
  * Display badges on the front page.
  */
-const Badges = ({isMobile = false}) => {
-    const { data, error } = useSWR(`collection-specific-tags/`, fetcher)
-
+const Badges = ({data, isMobile = false}) => {
     const router = useRouter();
 
     /**
@@ -37,7 +29,7 @@ const Badges = ({isMobile = false}) => {
         const handleClick = (value) => {
           router.replace({
             query: createParams(undefined, 20, 0, {keyword: value}),
-          }, undefined, {shallow: true});
+          }, undefined, {shallow: false});
         }
 
         return (

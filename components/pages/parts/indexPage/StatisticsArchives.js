@@ -1,13 +1,9 @@
-import useSWR from "swr";
-import {fetcher} from "../../../../utils/fetcherFunctions";
 import style from "./Statistics.module.scss";
 import React from "react";
 import Loader from "../loader/Loader";
 import dayjs from 'dayjs';
 
-const StatisticsArchives = () => {
-  const { data, error } = useSWR(`newly-added-content/isad`, fetcher)
-
+const StatisticsArchives = ({data}) => {
   const renderTitle = (referenceCode, title) => {
     return title.replace(referenceCode, '').trim()
   }

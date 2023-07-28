@@ -37,7 +37,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
 
         router.replace({
             query: createParams(query, limit, 0, newFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     }
 
     /**
@@ -81,7 +81,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
     const onQueryRemove = () => {
         router.replace({
             query: createParams('', limit, 0, selectedFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     }
 
     /**
@@ -105,13 +105,13 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
     const onPerPageChange = (limit) => {
         router.replace({
             query: createParams(query, limit, 0, selectedFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     };
 
     const onChangePage = (offset) => {
         router.replace({
             query: createParams(query, limit, offset, selectedFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     };
 
     const renderPerPageModifier = () => {

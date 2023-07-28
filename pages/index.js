@@ -5,7 +5,7 @@ import IndexPage from "../components/pages/IndexPage";
 import React, {useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
 import useSWR from "swr";
-import {solrFetcher} from "../utils/fetcherFunctions";
+import {makeSolrParams, solrFetcher} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
 import SearchPage from "../components/pages/SearchPage";
 import LayoutWithFacet from "../components/layout/LayoutWithFacet";
@@ -13,13 +13,39 @@ import {useMeasure} from "react-use";
 import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+export const API = process.env.NEXT_PUBLIC_AMS_API;
+export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
-const Index = () => {
+
+export async function getServerSideProps(context) {
+  const params = context.query
+  const solrParams = params ? makeSolrParams(params) : ''
+
+  const res = await fetch(`${SOLR_API}?` + solrParams)
+  const data = await res.json()
+
+  if (Object.entries(params).length === 0) {
+    const [tagDataRes, newContentIsadRes] = await Promise.all([
+      fetch(`${API}collection-specific-tags/`),
+      fetch(`${API}newly-added-content/isad`)
+    ]);
+
+    const [badgeData, newIsadData] = await Promise.all([
+      tagDataRes.json(), newContentIsadRes.json()
+    ])
+    return { props: { data, badgeData, newIsadData } }
+  } else {
+    return { props: { data } }
+  }
+}
+
+
+const Index = ({data, badgeData, newIsadData}) => {
     const [ref, {height}] = useMeasure();
 
     const router = useRouter();
 
-    const { data, error } = useSWR(router.query, solrFetcher)
+    // const { data, error } = useSWR(router.query, solrFetcher)
     const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
 
     const onSelectFacetGroup = (facetGroup) => {
@@ -72,6 +98,8 @@ const Index = () => {
                 {
                     Object.entries(router.query).length === 0 ?
                         <IndexPage
+                            badgeData={badgeData}
+                            newIsadData={newIsadData}
                             onSelectFacetGroup={onSelectFacetGroup}
                         /> :
                         <SearchPage

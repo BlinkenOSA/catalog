@@ -66,7 +66,7 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
 
         router.replace({
             query: createParams(query, limit, 0, sf),
-        }, undefined, {shallow: true});
+        }, undefined, {shallow: false});
     };
 
     /**
@@ -80,7 +80,7 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
 
         router.replace({
             query: createParams(query, limit, 0, newFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     }
 
     const getSelectedFacetValues = () => {

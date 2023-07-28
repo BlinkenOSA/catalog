@@ -4,7 +4,6 @@ import {facetConfig} from "../config/facetConfig";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 export const SOLR_FOLDERS_ITEMS_API = process.env.NEXT_PUBLIC_SOLR_FOLDERS_ITEMS;
-export const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 
 export const fetcher = (url, params) => {
     return axios.get(
@@ -22,10 +21,8 @@ export const nextAPIFetcher = (url, params) => {
     ).then(res => res.data);
 }
 
-export const solrFetcher = (params) => {
+export const makeSolrParams = (params) => {
     const {query, filterQuery, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params)
-    const {solrCore} = params;
-
     let baseParams = new URLSearchParams();
 
     // Add query
@@ -81,13 +78,18 @@ export const solrFetcher = (params) => {
         baseParams.append('sort', sort)
     }
 
+    return baseParams
+}
+
+export const solrFetcher = (params) => {
     let solrAPI;
+    const { solrCore } = params;
+
+    const solrParams = makeSolrParams(params);
+
     switch (solrCore) {
         case 'folders-items':
             solrAPI = SOLR_FOLDERS_ITEMS_API
-            break;
-        case 'stats':
-            solrAPI = SOLR_STATS_API
             break;
         default:
             solrAPI = SOLR_API;
@@ -95,7 +97,7 @@ export const solrFetcher = (params) => {
     }
 
     return axios.get(
-        solrAPI,
-        {params: baseParams}
+      solrAPI,
+      {params: solrParams}
     ).then(res => res.data);
 }

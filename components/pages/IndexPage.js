@@ -12,15 +12,15 @@ import StatisticsArchives from "./parts/indexPage/StatisticsArchives";
  * @param {Object} params
  * @param {func} params.onSelectFacetGroup Handling of selecting a particular group.
  */
-const IndexPage = ({onSelectFacetGroup}) => {
+const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
     return (
         <React.Fragment>
             <Media lessThan="md">
                 <div className={style.ContentMobile}>
                     <Welcome isMobile={true} />
-                    <Badges isMobile={true} />
+                    <Badges data={badgeData} isMobile={true} />
                     <div className={style.LatestAdditions}>
-                        <StatisticsArchives />
+                        <StatisticsArchives data={newIsadData} />
                     </div>
                 </div>
             </Media>
@@ -31,9 +31,9 @@ const IndexPage = ({onSelectFacetGroup}) => {
                     />
                     <div className={style.Content}>
                         <Welcome />
-                        <Badges />
+                        <Badges data={badgeData} />
                         <div className={style.LatestAdditions}>
-                            <StatisticsArchives />
+                            <StatisticsArchives data={newIsadData} />
                         </div>
                     </div>
                 </div>
