@@ -66,7 +66,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
                 origin: record['record_origin'],
                 title: record['title'],
                 title_original: record.hasOwnProperty('title_original') ? record['title_original'] : '',
-                call_number: record.hasOwnProperty('call_number') ? record['call_number'][0] : '',
+                call_number: record.hasOwnProperty('call_number') ? record['call_number'] : '',
                 sorting_code: getSortingCode(),
                 digital_version: record.hasOwnProperty('digital_version_barcode') ? record['digital_version_barcode'] : '',
                 type: getType(),

@@ -1,5 +1,3 @@
-import useSWR from "swr";
-import {fetcher} from "../../../utils/fetcherFunctions";
 import style from "./FindingAidsLocation.module.scss";
 import Loader from "../../pages/parts/loader/Loader";
 import TreeNode from "./parts/treeNode/TreeNode";

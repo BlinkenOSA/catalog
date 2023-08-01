@@ -4,8 +4,7 @@ import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch
 import IndexPage from "../components/pages/IndexPage";
 import React, {useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
-import useSWR from "swr";
-import {makeSolrParams, solrFetcher} from "../utils/fetcherFunctions";
+import {makeSolrParams} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
 import SearchPage from "../components/pages/SearchPage";
 import LayoutWithFacet from "../components/layout/LayoutWithFacet";
@@ -19,7 +18,7 @@ export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
 export async function getServerSideProps(context) {
   const params = context.query
-  const solrParams = params ? makeSolrParams(params) : ''
+  const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : ''
 
   const res = await fetch(`${SOLR_API}?` + solrParams)
   const data = await res.json()
@@ -45,7 +44,6 @@ const Index = ({data, badgeData, newIsadData}) => {
 
     const router = useRouter();
 
-    // const { data, error } = useSWR(router.query, solrFetcher)
     const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
 
     const onSelectFacetGroup = (facetGroup) => {

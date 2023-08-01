@@ -1,6 +1,4 @@
 import style from "./Badges.module.scss";
-import useSWR from "swr";
-import {fetcher} from "../../../../utils/fetcherFunctions";
 import Loader from "../loader/Loader";
 import React from "react";
 import {createParams} from "../../../../utils/urlParamFunctions";

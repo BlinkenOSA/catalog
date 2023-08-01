@@ -1,7 +1,5 @@
 import style from "./FindingAidsPage.module.scss";
 import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
-import useSWR from "swr";
-import {fetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
 import React, {useRef, useState} from "react";
 import CartButton from "../../cart/CartButton";
@@ -71,7 +69,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                         { getTitle(metadata) }
                         <div className={style.Buttons}>
                             <CartButton
-                                solrData={solrData}
+                                record={solrData}
                                 inCart={inCart(id)}
                                 name={id}
                             />

@@ -1,8 +1,9 @@
 import {facetConfig} from "../config/facetConfig";
 
 export const createParams = (query, limit, offset, selectedFacets) => {
+    const {id, ...restOfTheFacets} = selectedFacets;
     const params = {
-        ...selectedFacets
+        ...restOfTheFacets
     }
 
     if (query && query !== '') {
