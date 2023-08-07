@@ -19,15 +19,18 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
             case 'Library':
                 return (
                   <div className={style.ResultItemThumbnail}>
-                      <a href={`/catalog/${result['id']}`}>
-                          <div>
-                              <img
-                                alt={`Book cover of ${result['title']}`}
-                                style={{maxHeight: '250px'}}
-                                src={`api/library/book-cover/${result['id']}`}
-                              />
-                          </div>
-                      </a>
+                      {
+                          result['thumbnail'] &&
+                          <a href={`/catalog/${result['id']}`}>
+                              <div>
+                                  <img
+                                    alt={`Book cover of ${result['title']}`}
+                                    style={{maxHeight: '220px', maxWidth: '200px'}}
+                                    src={`${result['thumbnail']}`}
+                                  />
+                              </div>
+                          </a>
+                      }
                   </div>
                 )
             case 'Archives':

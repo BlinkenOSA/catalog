@@ -4,9 +4,9 @@ const Publisher = ({label, result}) => {
     const renderValue = () => {
         switch (result['record_origin']) {
             case 'Library':
-                return result.hasOwnProperty('publisher') ? result['publisher'].join(', ') : ''
+                return result.hasOwnProperty('publisher') ? result['publisher'] : ''
             case 'Film Library':
-                return result.hasOwnProperty('publisher') ? result['publisher'].join(', ') : ''
+                return result.hasOwnProperty('publisher') ? result['publisher'] : ''
             default:
                 return '';
         }

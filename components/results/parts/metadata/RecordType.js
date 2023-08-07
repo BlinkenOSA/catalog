@@ -29,7 +29,7 @@ const RecordType = ({label, result}) => {
             case 'Film Library':
                 return `Moving Image, ${result['extent']}`
             case 'Library':
-                return `${result['primary_type']}${result['extent'] ? `, ${result['extent'].join(', ')}` : ''}`
+                return `${result['primary_type']}${result['extent'] ? `, ${result['extent']}` : ''}`
             default:
                 return ''
         }

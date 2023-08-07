@@ -8,8 +8,9 @@ export default async function handler(req, res) {
     const getData = () => {
         let baseParams = new URLSearchParams();
         baseParams.append('q', `id:${id}`);
+        baseParams.append('fl', 'marc,record_origin')
         return axios.get(
-            `http://localhost:8983/solr/osacatalog/select`,
+            `http://localhost:8983/solr/catalog/select`,
             {params: baseParams}
         ).then(res => res.data);
     }
@@ -18,9 +19,8 @@ export default async function handler(req, res) {
     if (data['response']['docs'].length === 1) {
         const record = data['response']['docs'][0];
         if (record['record_origin'] === 'Library') {
-            const marc = Marc.parse(record['marcxml'], 'Marcxml');
+            const marc = Marc.parse(record['marc'], 'Iso2709');
             const values = getSubfieldValues(marc, '020', 'a')
-
             if (values > 0) {
                 const isbn = values[0];
                 const url = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg`

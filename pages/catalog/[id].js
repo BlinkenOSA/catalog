@@ -30,7 +30,12 @@ export async function getServerSideProps(context) {
 
         switch (record['record_origin']) {
             case 'Library':
-                break;
+            case 'Film Library':
+                return {
+                    props: {
+                        solrData
+                    }
+                }
             case 'Archives':
                 const {ams_id} = record;
                 if (record['primary_type'] === 'Archival Unit') {
@@ -71,6 +76,8 @@ export async function getServerSideProps(context) {
                         }
                     }
                 }
+            default:
+                break;
         }
     }
 
@@ -88,9 +95,9 @@ const CatalogPage = ({solrData, metadata, hierarchy, insights}) => {
             const record = solrData['response']['docs'][0]
             switch (record['record_origin']) {
                 case 'Library':
-                    return <LibraryPage record={solrData} type={'library'} isMobile={isMobile}/>
+                    return <LibraryPage record={record} type={'library'} isMobile={isMobile}/>
                 case 'Film Library':
-                    return <LibraryPage record={solrData} type={'filmLibrary'} isMobile={isMobile}/>
+                    return <LibraryPage record={record} type={'film-library'} isMobile={isMobile}/>
                 case 'Archives':
                     if (record['primary_type'] === 'Archival Unit') {
                         return <IsadPage

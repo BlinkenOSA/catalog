@@ -36,6 +36,15 @@ const WikiFacet = ({selectedFacetObject, type}) => {
               </p>
             </React.Fragment>
           )
+        case 'keyword':
+          return (
+            <React.Fragment>
+              <h2>Keyword & Terms</h2>
+              <p>
+                Topical terms and keywords assigned to the records.
+              </p>
+            </React.Fragment>
+          )
         case 'subject':
           return (
             <React.Fragment>

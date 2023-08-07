@@ -47,7 +47,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
             if (isFolderItem()) {
                 return `${record['container_type']} #${record['container_number']}`
             } else {
-                return `${record['primary_type']}${record['extent'] ? `, ${record['extent'].join(', ')}` : ''}`
+                return `${record['primary_type']}${record['extent'] ? `, ${record['extent']}` : ''}`
             }
         }
 

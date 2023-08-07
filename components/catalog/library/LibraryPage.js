@@ -21,7 +21,7 @@ const LibraryPage = ({record, type, isMobile}) => {
     const config = type === 'library' ? libraryFieldConfig : filmLibraryFieldConfig;
 
     const { id } = record;
-    const { data, error } = useSWR(`/api/record/${id}`, nextAPIFetcher)
+    const { data, error } = useSWR(`/api/library/record/${id}`, nextAPIFetcher)
 
     if (data) {
         return (

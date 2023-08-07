@@ -22,7 +22,7 @@ export const nextAPIFetcher = (url, params) => {
 }
 
 export const makeSolrParams = (params) => {
-    const {query, filterQuery, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params)
+    const {query, filterQuery, limit, offset, sort, qf, selectedFacets, selectedFacetsDates} = processParams(params)
     let baseParams = new URLSearchParams();
 
     // Add query
@@ -76,6 +76,10 @@ export const makeSolrParams = (params) => {
 
     if (sort) {
         baseParams.append('sort', sort)
+    }
+
+    if (qf) {
+        baseParams.append('qf', qf)
     }
 
     return baseParams
