@@ -1,125 +1,99 @@
 import style from "./LibraryItem.module.scss";
-import {getValues} from "../../../utils/marcFunctions";
-import React from "react";
-import {displaySubjectField} from "../../../utils/libraryDisplayFunctions";
+import React, {useEffect, useState} from "react";
 
-const LibraryItem = ({record, data, group, label, fieldConfig, links={}, display='sameRow', isMobile}) => {
+const LibraryItem = ({record, group, label, fieldConfig, links={}, display='sameRow', isMobile}) => {
     let values = [];
 
+    const getValues = (document, field, subfields, linkedSubfields) => {
+        const values = [];
+        const fields = document['fields'].filter(df => Object.keys(df).includes(field))
+        fields.forEach(f => {
+            const v = []
+            f[field]['subfields'].forEach(sf => {
+                const subfieldTag = Object.keys(sf)[0]
+                if (subfields.includes(subfieldTag)) {
+                    const value = sf[subfieldTag]
+                    if (linkedSubfields.includes(subfieldTag)) {
+                        v.push({value: value, link: true})
+                    } else {
+                        v.push({value: value, link: false})
+                    }
+                }
+            })
+            values.push(v)
+        })
+        return values
+    }
+
     const addValues = (fieldKey, subfields) => {
-        const value = {field: fieldKey, linkedValue: [], value: [] , link: ''};
+        const value = {
+            field: fieldKey,
+            displayValues: [],
+            link: ''
+        };
+        let linkedSubfields = []
+
+        // We collect the target parameter, plus the linked subfields
         if (Object.keys(links).includes(fieldKey)) {
-            subfields = subfields.filter(x => !links[fieldKey]['fields'].includes(x));
             value['link'] = links[fieldKey]['target']
-            value['linkedValue'] = getValues(record, fieldKey, links[fieldKey]['fields'])
+            linkedSubfields = links[fieldKey]['subfields'];
         }
-        value['value'] = getValues(record, fieldKey, subfields)
-        if (value['linkedValue'].length > 0 || value['value'].length > 0) {
-            values = values.concat(value)
+        const displayValues = getValues(record, fieldKey, subfields, linkedSubfields)
+
+        if (displayValues.length > 0) {
+            if(displayValues[0].length > 0) {
+                value['displayValues'] = displayValues
+                values.push(value)
+            }
         }
     }
 
-    if (fieldConfig) {
-        if (Array.isArray(fieldConfig)) {
-            fieldConfig.forEach(fieldKey => {
-                const alphabetArray = "abcdefghijklmnopqrstuvwxyz".split("");
-                addValues(fieldKey, alphabetArray)
-            })
-        } else {
-            Object.keys(fieldConfig).forEach(fieldKey => {
-                if (fieldConfig[fieldKey] === 'all') {
-                    const alphabetArray = "abcdefghijklmnopqrstuvwxyz".split("");
-                    addValues(fieldKey, alphabetArray)
-                } else {
-                    let subfields = fieldConfig[fieldKey]
-                    addValues(fieldKey, subfields)
-                }
-            })
-        }
+    const clearLinkText = (value) => {
+        return value.replace(/[\s|\.|\,]+$/i, '');
     }
 
     const displayValues = () => {
-        const displayLink = (link, linkedValues, type = 'sameRow') => {
-            if (linkedValues.length > 0) {
-                switch (type) {
-                    case 'sameRow':
-                        return (
-                            linkedValues.map(lv => (
-                                <a href={`/?${link}=${lv.join(' ')}`}>
-                                    {lv.join(' ')}
-                                </a>
-                            ))
-                        )
-                    default:
-                        return linkedValues.map((lv, index) => (
-                            <div key={index}>
-                                <a href={`/?${link}=${lv.join(' ')}`}>
-                                    {lv.join(' ')}
-                                </a>
-                            </div>
-                        ))
-                }
-            } else {
-                return ''
-            }
-        }
-
-        const displayData = (value, type = 'sameRow') => {
-            if (value.length > 0) {
-                switch (type) {
-                    case 'sameRow':
-                        return value.map(v => v.join(' ')).join(' ')
-                    default:
-                        return value.map((v, index) => (
-                            <div key={index}>
-                                {v.join(' ')}
-                            </div>
-                        ))
-                }
-            } else {
-                return ''
-            }
-        }
-
-        if (display === 'sameRow') {
-            return (
-                <div>
-                    {
-                        values.map((value, index) => {
-                            switch (value['field']) {
-                                default:
-                                    return (
-                                        <span key={index}>
-                                            {displayLink(value['link'], value['linkedValue'])} {displayData(value['value'])}
-                                        </span>
-                                    )
-                            }
-                        })
-                    }
-                </div>
-            )
-        } else {
-            return (
-                values.map((value, index) => {
-                    switch (value['field']) {
-                        case '650':
-                            return displaySubjectField(value);
-                        default:
+        return values.map(fieldValues => (
+            fieldValues['displayValues'].map((displayValues) => (
+              <div>
+                  {
+                      displayValues.map((displayValue, index) => {
+                        if (displayValue['link']) {
                             return (
-                                <div key={index}>
-                                    <span>
-                                        {displayLink(value['link'], value['linkedValue'], 'newRow')} {displayData(value['value'], 'newRow')}
-                                    </span>
-                                </div>
+                              <a href={`/?${fieldValues['link']}=${clearLinkText(displayValue['value'])}`}>
+                                  {displayValue['value']}
+                              </a>
                             )
-                    }
-                })
-            )
+                        } else {
+                            return (<span> {displayValue['value']}</span>)
+                        }
+                      })
+                  }
+              </div>
+            ))
+        ))
+    }
+
+    // Preparation
+    if (fieldConfig) {
+        let subfields;
+        // If fieldConfig is an array of values, that means that we need to grab all the subfields
+        if (Array.isArray(fieldConfig)) {
+            fieldConfig.forEach(fieldKey => {
+                subfields = "abcdefghijklmnopqrstuvwxyz".split("")
+                addValues(fieldKey, subfields)
+            })
+            // Every other case, we are only allowing certain subfields
+        } else {
+            Object.keys(fieldConfig).forEach(fieldKey => {
+                subfields = fieldConfig[fieldKey]
+                addValues(fieldKey, subfields)
+            })
         }
     }
 
-    if (data || values.length > 0) {
-        if (values[0]['value'].length > 0 || values[0]['linkedValue'].length > 0 ) {
+    if (values.length > 0) {
+        if (values[0]['displayValues'].length > 0) {
             if (isMobile) {
                 return (
                     <div className={`${style.Row} ${style.Mobile}`}>
@@ -127,7 +101,7 @@ const LibraryItem = ({record, data, group, label, fieldConfig, links={}, display
                         <div className={style.ValueWrapper}>
                             <div className={style.Label}>{label}</div>
                             <div className={style.Value}>
-                                {data ? data : displayValues()}
+                                {displayValues()}
                             </div>
                         </div>
                     </div>
@@ -138,7 +112,7 @@ const LibraryItem = ({record, data, group, label, fieldConfig, links={}, display
                         <div className={style.Category}>{group}</div>
                         <div className={style.Label}>{label}</div>
                         <div className={style.Value}>
-                            {data ? data : displayValues()}
+                            {displayValues()}
                         </div>
                     </div>
                 )

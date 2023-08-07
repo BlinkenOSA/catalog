@@ -4,8 +4,6 @@ import CartButton from "../../cart/CartButton";
 import {useCart} from "react-use-cart";
 import AvailabilityButton from "../../results/parts/buttons/AvailabilityButton";
 import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
-import useSWR from "swr";
-import {nextAPIFetcher} from "../../../utils/fetcherFunctions";
 import Loader from "../../pages/parts/loader/Loader";
 import React from "react";
 import LibraryItem from "./LibraryItem";
@@ -15,13 +13,18 @@ import LibraryHoldings from "./desktop/LibraryHoldings";
 import LibraryHoldingsMobile from "./mobile/LibraryHoldingsMobile";
 
 
-const LibraryPage = ({record, type, isMobile}) => {
+const LibraryPage = ({solrData, data, type, isMobile}) => {
     const { inCart } = useCart();
 
     const config = type === 'library' ? libraryFieldConfig : filmLibraryFieldConfig;
 
-    const { id } = record;
-    const { data, error } = useSWR(`/api/library/record/${id}`, nextAPIFetcher)
+    const { id } = solrData;
+
+    const getKey = (idx) => {
+      const key01 = type === 'library' ? 'library' : 'film-library'
+      const key02 = isMobile ? 'mobile' : 'desktop'
+      return `${key01}-${key02}-${idx}`
+    }
 
     if (data) {
         return (
@@ -33,23 +36,25 @@ const LibraryPage = ({record, type, isMobile}) => {
                         </div>
                         <div className={style.Buttons}>
                             <CartButton
-                                record={record}
+                                record={solrData}
                                 inCart={inCart(id)}
                                 name={id}
                             />
-                            <AvailabilityButton record={record} />
-                            <PrimaryTypeButton primaryType={record['primary_type']} />
+                            <AvailabilityButton record={solrData} />
+                            <PrimaryTypeButton primaryType={solrData['primary_type']} />
                         </div>
                     </div>
-                    <div className={isMobile ? `${style.Thumbnail} ${style.Mobile}` : style.Thumbnail}>
-                        <div>
-                            <img
-                                alt={`Cover`}
-                                style={{maxHeight: '300px'}}
-                                src={`/api/library/book-cover/${id}`}
-                            />
+                    { solrData['thumbnail'] &&
+                        <div className={isMobile ? `${style.Thumbnail} ${style.Mobile}` : style.Thumbnail}>
+                            <div>
+                                <img
+                                    alt={`Cover`}
+                                    style={{maxHeight: '300px'}}
+                                    src={`${solrData['thumbnail']}`}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div>
                     {
@@ -58,7 +63,8 @@ const LibraryPage = ({record, type, isMobile}) => {
                                 {
                                     fc['fields'].map((f, index) => (
                                     <LibraryItem
-                                        key={index}
+                                        id={getKey(index)}
+                                        key={getKey(index)}
                                         record={data}
                                         group={fc['group']}
                                         label={f['label']}

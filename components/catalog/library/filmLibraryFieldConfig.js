@@ -6,7 +6,7 @@ export const filmLibraryFieldConfig = [
                 label: 'Director/Creator',
                 fieldConfig: {'100': ['a', 'd']},
                 links: {
-                    '100': { fields: ['a'], target: 'author' }
+                    '100': { subfields: ['a'], target: 'author' }
                 }
             }, {
                 label: 'Original Title',
@@ -57,7 +57,7 @@ export const filmLibraryFieldConfig = [
                 fieldConfig: ['655'],
                 display: 'vertical',
                 links: {
-                    '655': {fields: ['a'], target: 'genre'}
+                    '655': {subfields: ['a'], target: 'genre'}
                 }
             }
         ]

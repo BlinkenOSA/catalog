@@ -30,10 +30,21 @@ export async function getServerSideProps(context) {
 
         switch (record['record_origin']) {
             case 'Library':
-            case 'Film Library':
+                const libraryRes = await fetch(`http://127.0.0.1:3001/api/library/record/${id}`)
+                const libraryData = await libraryRes.json();
                 return {
                     props: {
-                        solrData
+                        solrData,
+                        libraryData
+                    }
+                }
+            case 'Film Library':
+                const filmLibraryRes = await fetch(`http://127.0.0.1:3001/api/library/record/${id}`)
+                const filmLibraryData = await filmLibraryRes.json();
+                return {
+                    props: {
+                        solrData,
+                        filmLibraryData
                     }
                 }
             case 'Archives':
@@ -87,7 +98,7 @@ export async function getServerSideProps(context) {
     } }
 }
 
-const CatalogPage = ({solrData, metadata, hierarchy, insights}) => {
+const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarchy, insights}) => {
     const [ref] = useMeasure();
 
     const renderPage = (isMobile) => {
@@ -95,9 +106,19 @@ const CatalogPage = ({solrData, metadata, hierarchy, insights}) => {
             const record = solrData['response']['docs'][0]
             switch (record['record_origin']) {
                 case 'Library':
-                    return <LibraryPage record={record} type={'library'} isMobile={isMobile}/>
+                    return <LibraryPage
+                      id={'library-page'}
+                      solrData={record}
+                      data={libraryData}
+                      type={'library'}
+                      isMobile={isMobile}/>
                 case 'Film Library':
-                    return <LibraryPage record={record} type={'film-library'} isMobile={isMobile}/>
+                    return <LibraryPage
+                      id={'film-library-page'}
+                      solrData={record}
+                      data={filmLibraryData}
+                      type={'film-library'}
+                      isMobile={isMobile}/>
                 case 'Archives':
                     if (record['primary_type'] === 'Archival Unit') {
                         return <IsadPage

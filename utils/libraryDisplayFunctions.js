@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const displaySubjectField = (fieldValues) => {
+export const displaySubjectField = (fieldValues, key) => {
     const getLinks = (linkedValues, currentIndex) => {
         let links = [];
         Array(currentIndex+1).fill(0).map((_, i) => links.push(`${fieldValues['link']}=${linkedValues[i]}`))
@@ -28,7 +28,7 @@ export const displaySubjectField = (fieldValues) => {
 
     if (fieldValues['linkedValue'].length > 0) {
         return (
-            <div>
+            <div key={key}>
                 {renderValues()}
             </div>
         )

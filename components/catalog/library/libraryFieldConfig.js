@@ -4,14 +4,14 @@ export const libraryFieldConfig = [
         fields: [
             {
                 label: 'Author',
-                fieldConfig: {'100': ['a', 'd']},
-                links: {
-                    '100': { fields: ['a'], target: 'author' }
-                }
+                fieldConfig: {'100': ['a', 'd']}
             }, {
                 label: 'Original Title',
-                fieldConfig: {'880': ['a', 'c'], '245': ['a', 'c']},
-                display: 'vertical'
+                fieldConfig: {'880': ['a', 'b'], '245': ['a', 'b', 'c']},
+                display: 'newRow'
+            }, {
+                label: 'Translated Title',
+                fieldConfig: {'242': ['a', 'b', 'c']},
             }, {
                 label: 'Uniform Title',
                 fieldConfig: {'240': ['a']}
@@ -26,10 +26,7 @@ export const libraryFieldConfig = [
                 fieldConfig: {'300': ['a', 'b', 'c', 'e', 'f', 'g']}
             }, {
                 label: 'Series',
-                fieldConfig: ['440', '800', '810', '811', '830'],
-                links: {
-                    '440': { fields: ['a'], target: 'series' }
-                }
+                fieldConfig: ['440', '800', '810', '811', '830']
             }
         ]
     }, {
@@ -38,10 +35,6 @@ export const libraryFieldConfig = [
             {
                 label: '',
                 fieldConfig: ['700', '710'],
-                links: {
-                    '700': { fields: ['a'], target: 'added_person' },
-                    '710': { fields: ['a'], target: 'added_corporation' },
-                }
             }
         ],
     }, {
@@ -58,16 +51,15 @@ export const libraryFieldConfig = [
             {
                 label: 'Subject',
                 fieldConfig: ['600','610','611','630','650','651','653','654','656','657','658','690','691','693','696', '697','698','699'],
-                display: 'vertical',
+                display: 'newRow',
                 links: {
-                    '600': { fields: ['a'], target: 'subject_person' },
-                    '610': { fields: ['a'], target: 'subject_corporation' },
-                    '650': { fields: ['a', 'x'], target: 'keyword' },
+                    '600': { subfields: ['a'], target: 'subject_wikidata' },
+                    '610': { subfields: ['a'], target: 'subject_wikidata' },
                 }
             }, {
                 label: 'Genre',
                 fieldConfig: ['655'],
-                display: 'vertical'
+                display: 'newRow'
             }
         ]
     }, {
@@ -106,7 +98,7 @@ export const libraryFieldConfig = [
             }, {
                 label: 'Note',
                 fieldConfig: ['500', '502', '526', '530', '545', '547', '550', '552', '563', '584', '590', '592'],
-                display: 'vertical'
+                display: 'newRow'
             }, {
                 label: 'With',
                 fieldConfig: ['501']
@@ -155,7 +147,10 @@ export const libraryFieldConfig = [
             }, {
                 label: 'Library Special Collection',
                 fieldConfig: ['580'],
-                display: 'vertical'
+                display: 'newRow',
+                links: {
+                    '580': { subfields: ['a'], target: 'library_collection' }
+                }
             }, {
                 label: 'ISBN',
                 fieldConfig: {'020': ['a']}

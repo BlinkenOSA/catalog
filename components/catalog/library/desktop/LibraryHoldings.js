@@ -44,7 +44,7 @@ const LibraryHoldings = ({record}) => {
     values = values.concat(getValues(record, "952", subfields))
 
     const getValueFromConfig = (value, config) => {
-        return config.hasOwnProperty(value) ? config[value] : '-'
+        return config.hasOwnProperty(value) ? config[value] : value
     }
 
     return (
