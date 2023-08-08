@@ -1,5 +1,4 @@
 import style from "./LibraryPage.module.scss";
-import {getTitle} from "../../../utils/marcFunctions";
 import CartButton from "../../cart/CartButton";
 import {useCart} from "react-use-cart";
 import AvailabilityButton from "../../results/parts/buttons/AvailabilityButton";
@@ -7,10 +6,11 @@ import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
 import Loader from "../../pages/parts/loader/Loader";
 import React from "react";
 import LibraryItem from "./LibraryItem";
-import {libraryFieldConfig} from "./libraryFieldConfig";
-import {filmLibraryFieldConfig} from "./filmLibraryFieldConfig";
+import {libraryFieldConfig} from "./config/libraryFieldConfig";
+import {filmLibraryFieldConfig} from "./config/filmLibraryFieldConfig";
 import LibraryHoldings from "./desktop/LibraryHoldings";
 import LibraryHoldingsMobile from "./mobile/LibraryHoldingsMobile";
+import Title from "../../results/parts/metadata/Title";
 
 
 const LibraryPage = ({solrData, data, type, isMobile}) => {
@@ -32,7 +32,7 @@ const LibraryPage = ({solrData, data, type, isMobile}) => {
                 <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
                     <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
                         <div className={style.Title}>
-                            {getTitle(data)}
+                            <Title result={solrData} />
                         </div>
                         <div className={style.Buttons}>
                             <CartButton
@@ -49,7 +49,7 @@ const LibraryPage = ({solrData, data, type, isMobile}) => {
                             <div>
                                 <img
                                     alt={`Cover`}
-                                    style={{maxHeight: '300px'}}
+                                    style={{maxHeight: '250px'}}
                                     src={`${solrData['thumbnail']}`}
                                 />
                             </div>

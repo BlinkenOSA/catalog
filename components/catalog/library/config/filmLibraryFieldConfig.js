@@ -1,23 +1,23 @@
-export const libraryFieldConfig = [
+export const filmLibraryFieldConfig = [
     {
         group: 'General Information',
         fields: [
             {
-                label: 'Author',
-                fieldConfig: {'100': ['a', 'd']}
+                label: 'Director/Creator',
+                fieldConfig: {'100': ['a', 'd']},
+                links: {
+                    '100': { subfields: ['a'], target: 'director' }
+                }
             }, {
                 label: 'Original Title',
-                fieldConfig: {'880': ['a', 'b'], '245': ['a', 'b', 'c']},
-                display: 'newRow'
-            }, {
-                label: 'Translated Title',
-                fieldConfig: {'242': ['a', 'b', 'c']},
+                fieldConfig: {'880': ['a', 'c'], '245': ['a', 'c']},
+                display: 'vertical'
             }, {
                 label: 'Uniform Title',
                 fieldConfig: {'240': ['a']}
             }, {
                 label: 'Language',
-                fieldConfig: {'041': ['a'], '546': ['a']},
+                fieldConfig: {'041': ['a'], '546': ['a']}
             }, {
                 label: 'Published',
                 fieldConfig: {'260': ['a', 'b', 'c', 'e', 'f']}
@@ -34,9 +34,9 @@ export const libraryFieldConfig = [
         fields: [
             {
                 label: '',
-                fieldConfig: ['700', '710'],
+                fieldConfig: ['700', '710', '711', '720', '730']
             }
-        ],
+        ]
     }, {
         group: 'Contents Summary',
         fields: [
@@ -51,15 +51,14 @@ export const libraryFieldConfig = [
             {
                 label: 'Subject',
                 fieldConfig: ['600','610','611','630','650','651','653','654','656','657','658','690','691','693','696', '697','698','699'],
-                display: 'newRow',
-                links: {
-                    '600': { subfields: ['a'], target: 'subject_wikidata' },
-                    '610': { subfields: ['a'], target: 'subject_wikidata' },
-                }
+                display: 'vertical'
             }, {
                 label: 'Genre',
                 fieldConfig: ['655'],
-                display: 'newRow'
+                display: 'vertical',
+                links: {
+                    '655': {subfields: ['a'], target: 'genre'}
+                }
             }
         ]
     }, {
@@ -98,7 +97,7 @@ export const libraryFieldConfig = [
             }, {
                 label: 'Note',
                 fieldConfig: ['500', '502', '526', '530', '545', '547', '550', '552', '563', '584', '590', '592'],
-                display: 'newRow'
+                display: 'vertical'
             }, {
                 label: 'With',
                 fieldConfig: ['501']
@@ -146,11 +145,7 @@ export const libraryFieldConfig = [
                 fieldConfig: ['555']
             }, {
                 label: 'Library Special Collection',
-                fieldConfig: ['580'],
-                display: 'newRow',
-                links: {
-                    '580': { subfields: ['a'], target: 'library_collection' }
-                }
+                fieldConfig: ['580']
             }, {
                 label: 'ISBN',
                 fieldConfig: {'020': ['a']}

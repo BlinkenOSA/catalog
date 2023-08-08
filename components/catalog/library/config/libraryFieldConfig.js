@@ -1,23 +1,26 @@
-export const filmLibraryFieldConfig = [
+export const libraryFieldConfig = [
     {
         group: 'General Information',
         fields: [
             {
-                label: 'Director/Creator',
+                label: 'Author',
                 fieldConfig: {'100': ['a', 'd']},
                 links: {
                     '100': { subfields: ['a'], target: 'author' }
                 }
             }, {
                 label: 'Original Title',
-                fieldConfig: {'880': ['a', 'c'], '245': ['a', 'c']},
-                display: 'vertical'
+                fieldConfig: {'880': ['a', 'b'], '245': ['a', 'b', 'c']},
+                display: 'newRow'
+            }, {
+                label: 'Translated Title',
+                fieldConfig: {'242': ['a', 'b', 'c']},
             }, {
                 label: 'Uniform Title',
                 fieldConfig: {'240': ['a']}
             }, {
                 label: 'Language',
-                fieldConfig: {'041': ['a'], '546': ['a']}
+                fieldConfig: {'041': ['a'], '546': ['a']},
             }, {
                 label: 'Published',
                 fieldConfig: {'260': ['a', 'b', 'c', 'e', 'f']}
@@ -34,9 +37,9 @@ export const filmLibraryFieldConfig = [
         fields: [
             {
                 label: '',
-                fieldConfig: ['700', '710', '711', '720', '730']
+                fieldConfig: ['700', '710']
             }
-        ]
+        ],
     }, {
         group: 'Contents Summary',
         fields: [
@@ -50,15 +53,21 @@ export const filmLibraryFieldConfig = [
         fields: [
             {
                 label: 'Subject',
-                fieldConfig: ['600','610','611','630','650','651','653','654','656','657','658','690','691','693','696', '697','698','699'],
-                display: 'vertical'
+                fieldConfig: ['600','610'],
+                display: 'newRow',
+                links: {
+                    '600': { subfields: ['a'], target: 'subject_wikidata' },
+                    '610': { subfields: ['a'], target: 'subject_wikidata' },
+                }
+            },
+            {
+                label: 'Subject Terms',
+                fieldConfig: ['650','651','653','654','656','657','658','690','691','693','696', '697','698','699'],
+                display: 'newRow',
             }, {
                 label: 'Genre',
                 fieldConfig: ['655'],
-                display: 'vertical',
-                links: {
-                    '655': {subfields: ['a'], target: 'genre'}
-                }
+                display: 'newRow'
             }
         ]
     }, {
@@ -97,7 +106,7 @@ export const filmLibraryFieldConfig = [
             }, {
                 label: 'Note',
                 fieldConfig: ['500', '502', '526', '530', '545', '547', '550', '552', '563', '584', '590', '592'],
-                display: 'vertical'
+                display: 'newRow'
             }, {
                 label: 'With',
                 fieldConfig: ['501']
@@ -145,7 +154,11 @@ export const filmLibraryFieldConfig = [
                 fieldConfig: ['555']
             }, {
                 label: 'Library Special Collection',
-                fieldConfig: ['580']
+                fieldConfig: ['580'],
+                display: 'newRow',
+                links: {
+                    '580': { subfields: ['a'], target: 'library_collection' }
+                }
             }, {
                 label: 'ISBN',
                 fieldConfig: {'020': ['a']}

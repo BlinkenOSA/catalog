@@ -18,7 +18,7 @@ const Title = ({result, highlights}) => {
             return <span>{renderTitle()} [{result['date_created']}]</span>
         }
     } else {
-        return `${result['title']} [${result['date_created']}]`
+        return <span>{renderTitle()}{result['date_created'] ? ` [${result['date_created']}]` : ''}</span>
     }
 }
 

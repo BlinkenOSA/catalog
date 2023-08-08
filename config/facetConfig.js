@@ -15,5 +15,7 @@ export const facetConfig = {
     geo: { title: 'Geo Locations', search: true, info: true, type: undefined },
     keyword: { title: 'Keywords & Terms', search: true, info: true, type: 'list' },
     library_collection: { title: 'Library Collection', search: true, info: false, type: undefined },
+    author: { title: 'Author', search: true, info: false, type: undefined },
+    director: { title: 'Director', search: true, info: false, type: undefined },
 }
 

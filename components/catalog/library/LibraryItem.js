@@ -1,5 +1,6 @@
 import style from "./LibraryItem.module.scss";
 import React, {useEffect, useState} from "react";
+import {iso6392} from "iso-639-2";
 
 const LibraryItem = ({record, group, label, fieldConfig, links={}, display='sameRow', isMobile}) => {
     let values = [];
@@ -53,25 +54,65 @@ const LibraryItem = ({record, group, label, fieldConfig, links={}, display='same
     }
 
     const displayValues = () => {
-        return values.map(fieldValues => (
-            fieldValues['displayValues'].map((displayValues) => (
-              <div>
-                  {
-                      displayValues.map((displayValue, index) => {
-                        if (displayValue['link']) {
-                            return (
-                              <a href={`/?${fieldValues['link']}=${clearLinkText(displayValue['value'])}`}>
-                                  {displayValue['value']}
-                              </a>
-                            )
-                        } else {
-                            return (<span> {displayValue['value']}</span>)
-                        }
-                      })
-                  }
-              </div>
-            ))
-        ))
+        return values.map(fieldValues => {
+            switch (fieldValues['field']) {
+                case '041':
+                    return fieldValues['displayValues'].map((displayValues) => (
+                      <div>
+                          {
+                              displayValues.map((displayValue, index) => {
+                                  const lang = iso6392.filter(l => l['iso6392B'] === displayValue['value'])
+                                  return <span> {lang.length > 0 ? lang[0]['name'] : ''}</span>
+                              })
+                          }
+                      </div>
+                    ))
+                case '650':
+                    return fieldValues['displayValues'].map((displayValues) => (
+                      <div>
+                          {
+                              displayValues.map((displayValue, index) => {
+                                  if (displayValue['link']) {
+                                      return (
+                                        <React.Fragment>
+                                            <span> {index > 0 ? '->' : ''} </span>
+                                            <a href={`/?${fieldValues['link']}=${clearLinkText(displayValue['value'])}`}>
+                                                {displayValue['value']}
+                                            </a>
+                                        </React.Fragment>
+                                      )
+                                  } else {
+                                      return (
+                                        <React.Fragment>
+                                            <span> {index > 0 ? '->' : ''} </span>
+                                            <span> {displayValue['value']}</span>
+                                        </React.Fragment>
+                                      )
+                                  }
+                              })
+                          }
+                      </div>
+                    ))
+                default:
+                    return fieldValues['displayValues'].map((displayValues) => (
+                        <div>
+                            {
+                              displayValues.map((displayValue, index) => {
+                                  if (displayValue['link']) {
+                                      return (
+                                        <a href={`/?${fieldValues['link']}=${clearLinkText(displayValue['value'])}`}>
+                                            {displayValue['value']}
+                                        </a>
+                                      )
+                                  } else {
+                                      return (<span> {displayValue['value']}</span>)
+                                  }
+                              })
+                            }
+                        </div>
+                    ))
+            }
+        })
     }
 
     // Preparation
