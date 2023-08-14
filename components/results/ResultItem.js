@@ -71,7 +71,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
     }
 
     return (
-        <div className={limit === index + 1 ? style.ResultItemWrapperLast :  style.ResultItemWrapper}>
+        <div className={style.ResultItemWrapper}>
             <div className={style.ResultItemInfo}>
                 <div className={style.Sequence}>
                     {offset + index + 1}.

@@ -5,7 +5,7 @@ import React from "react";
 const AlertTemplate = ({ style, options, message, close }) => (
     <div className={alertStyle.AlertWrapper} style={style}>
         <AiOutlineExclamationCircle />
-        <span>{message}</span>
+        <span className={alertStyle.MessageWrapper}>{message}</span>
         <button onClick={close} className={alertStyle.Button} >
             <AiOutlineClose size={18} />
         </button>

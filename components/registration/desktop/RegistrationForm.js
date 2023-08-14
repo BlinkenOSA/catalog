@@ -7,9 +7,17 @@ import RadioGroupField from "../../form/RadioGroupField";
 import CheckboxField from "../../form/CheckboxField";
 import CaptchaField from "../../form/CaptchaField";
 import {initialValues, submitData, validationSchema} from "../registrationFuncitons";
-import {occupationOptions, occupationTypeOptions, publishOptions} from "../options";
+import {howDoYouKnowOptions, occupationOptions, occupationTypeOptions, publishOptions} from "../options";
 import {useAlert} from "react-alert";
 import {useRouter} from "next/router";
+import * as Yup from "yup";
+
+const validation = Yup.object().shape({
+  first_name: Yup.string().required('Required'),
+  last_name: Yup.string().required('Required'),
+  agree_archival_materials_usage: Yup.boolean().oneOf([true], 'You should accept the conditions'),
+  agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement"),
+})
 
 const RegistrationForm = () => {
     const alert = useAlert()
@@ -20,12 +28,12 @@ const RegistrationForm = () => {
             <div className={style.Form}>
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={validationSchema}
+                    validationSchema={validation}
                     onSubmit={(values, actions) => {
-                        submitData(values, actions, router, alert)
+                      submitData(values, actions, router, alert)
                     }}
                 >
-                    {() => (
+                    {({values}) => (
                         <Form>
                             <div className={style.Column}>
                                 <Field
@@ -137,7 +145,7 @@ const RegistrationForm = () => {
                                 <Field
                                     name="research_subject"
                                     label="Research Subject"
-                                    rows={6}
+                                    rows={4}
                                     component={TextAreaField}
                                 />
                                 <RadioGroupField
@@ -145,11 +153,21 @@ const RegistrationForm = () => {
                                     label={"Do you want to publish your research?"}
                                     options={publishOptions}
                                 />
-                                <Field
-                                    name="tentative_date"
-                                    label="If yes, tentative date?"
-                                    component={InputField}
+                                <SelectField
+                                    name="how_do_you_know_osa"
+                                    label="How do you know OSA?"
+                                    required={false}
+                                    selectOptions={howDoYouKnowOptions}
                                 />
+                                {
+                                    values['how_do_you_know_osa'] === 'other' &&
+                                    <Field
+                                        name="how_do_you_know_osa_other"
+                                        label="How do you know OSA? (Other)"
+                                        rows={4}
+                                        component={TextAreaField}
+                                    />
+                                }
                                 <CheckboxField
                                     name="agree_archival_materials_usage"
                                     fontSize={12}
@@ -171,6 +189,11 @@ const RegistrationForm = () => {
                                 <div className={style.SubmitButtonWrapper}>
                                     <button type="submit">Register</button>
                                 </div>
+                                <a href={'/forgot-card-number'}>
+                                  <div className={style.SubmitButtonWrapper} style={{marginTop: '10px'}}>
+                                    <button type="button" className={style.ForgotButton} >Forgot Card Number</button>
+                                  </div>
+                                </a>
                                 <CaptchaField />
                             </div>
                         </Form>

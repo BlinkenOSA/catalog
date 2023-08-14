@@ -1,14 +1,15 @@
 import Head from 'next/head'
 import Layout from "../../components/layout/Layout";
 import BreadcrumbSearch from "../../components/breadcrumbs/desktop/BreadcrumbSearch";
-import React from "react";
-import {useMeasure} from "react-use";
+import React, {useEffect} from "react";
+import {useMeasure, useSessionStorage} from "react-use";
 import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
 import IsadPage from "../../components/catalog/isad/IsadPage";
 import { Media } from "../../utils/media";
 import BreadcrumbSearchMobile from "../../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import FindingAidsPage from "../../components/catalog/finding-aids/FindingAidsPage";
+import {useRouter} from "next/router";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 export const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;

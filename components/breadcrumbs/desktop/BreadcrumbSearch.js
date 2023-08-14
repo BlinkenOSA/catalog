@@ -10,6 +10,11 @@ import {removeFacet} from "../../../utils/facetFunctions";
 import DropDown from "./parts/DropDown";
 import Pagination from "./parts/Pagination";
 import {defaultLimit} from "../../../config/appConfig";
+import dynamic from "next/dynamic";
+
+const BackButton = dynamic(() => import("../parts/BackButton"), {
+    ssr: false,
+});
 
 /**
  * Breadcrumb component.
@@ -22,9 +27,6 @@ import {defaultLimit} from "../../../config/appConfig";
 const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup}) => {
     const router = useRouter();
     const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(router.query)
-
-    const [selectedFacetsOpen, setSelectedFacetsOpen] = useState(true);
-
 
     /**
      * Removing the facet from the url and from the selectedFacets.
@@ -167,18 +169,14 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
         }
     }
 
+
+
     /**
      * Rendering the left side buttons.
      */
     const renderLeftSideContent = () => {
         if (module === 'staticPage' || module === 'collections' || module === 'detail') {
-            return (
-                <div className={style.Navigation}>
-                    <a href={'/'}>
-                        <AiOutlineLeft /> <span>Back to Catalog</span>
-                    </a>
-                </div>
-            )
+            return <BackButton />
         }
 
         return (

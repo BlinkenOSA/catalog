@@ -10,6 +10,12 @@ import {removeFacet} from "../../../utils/facetFunctions";
 import DropDownMobile from "./parts/DropDownMobile";
 import PaginationMobile from "./parts/PaginationMobile";
 import {defaultLimit} from "../../../config/appConfig";
+import dynamic from "next/dynamic";
+
+const BackButton = dynamic(() => import("../parts/BackButton"), {
+    ssr: false,
+});
+
 
 /**
  * Breadcrumb component.
@@ -152,13 +158,7 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
      */
     const renderLeftSideContent = () => {
         if (module === 'staticPage' || module === 'collections' || module === 'detail') {
-            return (
-                <div className={style.Navigation}>
-                    <a href={'/'}>
-                        <AiOutlineLeft /> <span>Back to Catalog</span>
-                    </a>
-                </div>
-            )
+            return <BackButton />
         }
 
         if (inverse) {

@@ -7,7 +7,7 @@ import RadioGroupField from "../../form/RadioGroupField";
 import CheckboxField from "../../form/CheckboxField";
 import CaptchaField from "../../form/CaptchaField";
 import {initialValues, submitData, validationSchema} from "../registrationFuncitons";
-import {occupationOptions, occupationTypeOptions, publishOptions} from "../options";
+import {howDoYouKnowOptions, occupationOptions, occupationTypeOptions, publishOptions} from "../options";
 import {useAlert} from "react-alert";
 import {useRouter} from "next/router";
 
@@ -25,7 +25,7 @@ const RegistrationFormMobile = () => {
                         submitData(values, actions, router, alert)
                     }}
                 >
-                    {() => (
+                    {({values}) => (
                         <Form>
                             <Field
                                 name="last_name"
@@ -139,11 +139,21 @@ const RegistrationFormMobile = () => {
                                 label={"Do you want to publish your research?"}
                                 options={publishOptions}
                             />
-                            <Field
-                                name="tentative_date"
-                                label="If yes, tentative date?"
-                                component={InputField}
+                            <SelectField
+                                name="how_do_you_know_osa"
+                                label="How do you know OSA?"
+                                required={false}
+                                selectOptions={howDoYouKnowOptions}
                             />
+                            {
+                                values['how_do_you_know_osa'] === 'other' &&
+                                <Field
+                                    name="how_do_you_know_osa_other"
+                                    label="How do you know OSA? (Other)"
+                                    rows={4}
+                                    component={TextAreaField}
+                                />
+                            }
                             <CheckboxField
                                 name="agree_archival_materials_usage"
                                 fontSize={12}
@@ -165,6 +175,11 @@ const RegistrationFormMobile = () => {
                             <div className={style.SubmitButtonWrapper}>
                                 <button type="submit">Register</button>
                             </div>
+                            <a href={'/forgot-card-number'}>
+                              <div className={style.SubmitButtonWrapper} style={{marginTop: '10px'}}>
+                                <button type="button" className={style.ForgotButton} >Forgot Card Number</button>
+                              </div>
+                            </a>
                             <div className={style.Captcha}>
                                 <CaptchaField />
                             </div>

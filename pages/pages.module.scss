@@ -33,6 +33,10 @@
 
   .FormContent {
     display: flex;
+
+    &.Mobile {
+      display: block;
+    }
   }
 
   .StaticContent {

@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import CartButton from "../cart/CartButton";
 import { FiMeh } from 'react-icons/fi';
 
-const CartList = () => {
+const CartList = ({isMobile=false}) => {
     const { removeItem, inCart, items } = useCart();
     const [demoButtonChecked, setDemoButtonChecked] = useState(false);
 
@@ -69,7 +69,7 @@ const CartList = () => {
 
     if (items.length > 0) {
         return (
-            <div className={style.CartListWrapper}>
+            <div className={isMobile ? `${style.CartListWrapper} ${style.Mobile}` : style.CartListWrapper}>
                 {displayItems('Archives')}
                 {displayItems('Library')}
                 {displayItems('Film Library')}

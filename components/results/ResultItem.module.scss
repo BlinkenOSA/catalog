@@ -6,9 +6,8 @@
   border-bottom: 2px solid $black;
 }
 
-.ResultItemWrapperLast {
-  display: flex;
-  min-height: 50px;
+.ResultItemWrapper:last-child {
+  border-bottom: unset;
 }
 
 .ResultItemInfo {

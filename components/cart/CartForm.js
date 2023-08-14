@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import {useCart} from "react-use-cart";
 import CaptchaField from "../form/CaptchaField";
 
-const CartForm = () => {
+const CartForm = ({isMobile=false}) => {
     const { isEmpty } = useCart();
 
     const isWeekday = (date) => {
@@ -27,7 +27,7 @@ const CartForm = () => {
     })
 
     return (
-        <div className={style.CartFormWrapper}>
+        <div className={isMobile ? `${style.CartFormWrapper} ${style.Mobile}` : style.CartFormWrapper}>
             <div className={style.Form}>
                 <Formik
                     initialValues={{ card_number: '', email: '', request_date: '' }}
@@ -76,11 +76,37 @@ const CartForm = () => {
                                     If you don't own a Researcher Identification Card, please register using the
                                     Research Registration form below.
                                 </span>
-                                <a href={'/registration'}>
-                                    <button className={style.FormButton} type="button">
-                                        Register
-                                    </button>
-                                </a>
+                                {
+                                    isMobile ?
+                                    <div style={{textAlign: 'center'}}>
+                                        <div>
+                                            <a href={'/registration'}>
+                                                <button className={style.FormButton} type="button">
+                                                    Register
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div>
+                                            <a href={'/forgot-card-number'}>
+                                                <button className={`${style.FormButton} ${style.ForgotButton}`} type="button">
+                                                    Forgot card number
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div> :
+                                    <div>
+                                        <a href={'/registration'}>
+                                            <button className={style.FormButton} type="button">
+                                                Register
+                                            </button>
+                                        </a>
+                                        <a href={'/forgot-card-number'}>
+                                            <button className={`${style.FormButton} ${style.ForgotButton}`} type="button">
+                                                Forgot card number
+                                            </button>
+                                        </a>
+                                    </div>
+                                }
                             </div>
                         </Form>
                     )}

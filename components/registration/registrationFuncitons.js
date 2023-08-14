@@ -46,10 +46,10 @@ export const submitData = (formData, actions, router, alert) => {
     )
     .then(res => {
         const {data} = res
-        alert.show(`${data['message']}`);
+        alert.show(`Registration successful!`);
         setTimeout(function () {
             router.push('/requests')
-        }, 3000);
+        }, 2000);
     })
     .catch((error) => {
         const {status, statusText, data} = error.response
@@ -57,17 +57,25 @@ export const submitData = (formData, actions, router, alert) => {
             alert.show(`${status} ${statusText} - ${data['message']}`);
         } else {
             if (data.hasOwnProperty('email')) {
-                alert.show(`This e-mail address is already registered in our system!`)
+                alert.show(
+                  <div>
+                      This e-mail address is already registered in our system!<br/>
+                      If you forgot your Research Card Number, use the 'Forgot My Research Card Number' link.
+                  </div>
+                )
             } else {
                 let message = []
                 Object.keys(data).forEach(key => {
                     message.push(`${key}: ${data[key]}`)
                 })
                 alert.show(
-                    <span>
-                    The following fields are containing errors:<br/>
-                        {message.join('\n')}
-                </span>
+                  <div>
+                      The following fields are containing errors:<br/>
+                      {
+                          message.map(m => (
+                            <div>{m}</div>
+                          ))}
+                  </div>
                 )
             }
         }

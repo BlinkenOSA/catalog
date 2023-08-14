@@ -2,16 +2,17 @@ import Head from 'next/head'
 import Layout from "../components/layout/Layout";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import IndexPage from "../components/pages/IndexPage";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
 import {makeSolrParams} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
 import SearchPage from "../components/pages/SearchPage";
 import LayoutWithFacet from "../components/layout/LayoutWithFacet";
-import {useMeasure} from "react-use";
+import {useDeepCompareEffect, useMeasure, useSessionStorage} from "react-use";
 import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
@@ -44,6 +45,12 @@ const Index = ({data, badgeData, newIsadData}) => {
     const router = useRouter();
 
     const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
+
+    /* Keep current route in the session storage */
+    const [storage, setStorage] = useSessionStorage('blinken-osa-catalog-searchpage', router.asPath);
+    useDeepCompareEffect(() => {
+       setStorage(router.asPath)
+    }, [router])
 
     const onSelectFacetGroup = (facetGroup) => {
         if (selectedFacetGroup === facetGroup) {

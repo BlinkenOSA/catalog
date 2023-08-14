@@ -3,14 +3,35 @@
 .CartFormWrapper {
   min-height: 400px;
   width: 470px;
-  margin-bottom: 50px;
+
+  &.Mobile {
+    width: 100%;
+
+    .Form {
+      padding: 25px;
+    }
+
+    .SubmitButtonWrapper {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .Registration {
+      width: 100%;
+      margin-top: 20px;
+
+      span {
+        display: block;
+      }
+    }
+  }
 
   .Form {
     padding: 25px 70px 25px 70px;
   }
 
   .SubmitButtonWrapper {
-    margin-top: 40px;
+    margin-top: 15px;
   }
 
   .FormButton {
@@ -25,6 +46,10 @@
     color: $white;
     border: none;
     cursor: pointer;
+
+    &.ForgotButton {
+      background-color: $button-background;
+    }
 
     &:hover {
       background-color: $yellow;
