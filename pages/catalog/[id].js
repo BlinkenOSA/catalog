@@ -10,10 +10,10 @@ import { Media } from "../../utils/media";
 import BreadcrumbSearchMobile from "../../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import FindingAidsPage from "../../components/catalog/finding-aids/FindingAidsPage";
 import {useRouter} from "next/router";
-export const API = process.env.NEXT_PUBLIC_AMS_API;
-export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
-export const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;
-
+const API = process.env.NEXT_PUBLIC_AMS_API;
+const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
+const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;
+const CATALOG_API = process.env.NEXT_PUBLIC_CATALOG_APP_API;
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
 
         switch (record['record_origin']) {
             case 'Library':
-                const libraryRes = await fetch(`http://127.0.0.1:3001/api/library/record/${id}`)
+                const libraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
                 const libraryData = await libraryRes.json();
                 return {
                     props: {
@@ -40,7 +40,7 @@ export async function getServerSideProps(context) {
                     }
                 }
             case 'Film Library':
-                const filmLibraryRes = await fetch(`http://127.0.0.1:3001/api/library/record/${id}`)
+                const filmLibraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
                 const filmLibraryData = await filmLibraryRes.json();
                 return {
                     props: {
