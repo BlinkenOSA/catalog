@@ -22,10 +22,10 @@ const DatePickerField = ({label, disabled, required, ...props }) => {
                 disabled={disabled}
                 wrapperClassName={style.DatePickerField}
                 popperClassName={style.DatePickerCalendar}
-                dateFormat="yyyy-MM-dd"
+                dateFormat={"yyyy-MM-dd"}
                 selected={(field.value && new Date(field.value)) || null}
-                onChange={val => {
-                    setFieldValue(field.name, val);
+                onChange={(date) => {
+                    setFieldValue(field.name, date.toISOString().split('T')[0]);
                 }}
             />
             {

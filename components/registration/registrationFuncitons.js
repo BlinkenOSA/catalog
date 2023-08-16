@@ -1,6 +1,7 @@
 import axios from "axios";
-import {API} from "../../utils/fetcherFunctions";
 import * as Yup from "yup";
+
+const API = process.env.NEXT_PUBLIC_AMS_API;
 
 export const validationSchema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
