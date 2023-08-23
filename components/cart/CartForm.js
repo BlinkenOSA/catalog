@@ -7,7 +7,7 @@ import {useCart} from "react-use-cart";
 import CaptchaField from "../form/CaptchaField";
 
 const CartForm = ({isMobile=false}) => {
-    const { isEmpty } = useCart();
+    const { items, isEmpty } = useCart();
 
     const isWeekday = (date) => {
         const day = date.getDay();
@@ -17,6 +17,14 @@ const CartForm = ({isMobile=false}) => {
     const getMaxDate = () => {
         const d = new Date();
         return new Date(d.setMonth(d.getMonth() + 6))
+    }
+
+    const handleSubmit = (values, actions) => {
+        values['items'] = items;
+        setTimeout(() => {
+            console.log(JSON.stringify(values, null, 2));
+            actions.setSubmitting(false);
+        }, 1000);
     }
 
     const validationSchema = Yup.object().shape({
@@ -33,17 +41,14 @@ const CartForm = ({isMobile=false}) => {
                     initialValues={{ card_number: '', email: '', request_date: '' }}
                     validationSchema={validationSchema}
                     onSubmit={(values, actions) => {
-                        setTimeout(() => {
-                            alert(JSON.stringify(values, null, 2));
-                            actions.setSubmitting(false);
-                        }, 1000);
+                        handleSubmit(values, actions)
                     }}
                 >
                     {({errors, touched}) => (
                         <Form>
                             <Field
                                 name="card_number"
-                                label="Researcher Identification Card Number"
+                                label="Research Card Number"
                                 disabled={isEmpty}
                                 required={true}
                                 component={InputField}
