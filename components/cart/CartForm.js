@@ -5,9 +5,14 @@ import DatePickerField from "../form/DatePickerField";
 import * as Yup from 'yup';
 import {useCart} from "react-use-cart";
 import CaptchaField from "../form/CaptchaField";
+import axios from "axios";
+import {useAlert} from "react-alert";
+
+const API = process.env.NEXT_PUBLIC_AMS_API;
 
 const CartForm = ({isMobile=false}) => {
-    const { items, isEmpty } = useCart();
+    const { isEmpty, items } = useCart();
+    const alert = useAlert()
 
     const isWeekday = (date) => {
         const day = date.getDay();
@@ -31,8 +36,19 @@ const CartForm = ({isMobile=false}) => {
         card_number: Yup.string().required('Required'),
         email: Yup.string().email('Invalid email address').required('Required'),
         request_date: Yup.date().required('Required'),
-        captcha: Yup.date().required('Required')
+        captcha: Yup.string().required('Required')
     })
+
+    const handleSubmit = (values, actions) => {
+        values['items'] = items
+        return axios.post(
+          `${API}request/`,
+          values
+        ).then(res => {
+          const {data} = res
+          alert.show(`Request successful!`);
+        })
+    }
 
     return (
         <div className={isMobile ? `${style.CartFormWrapper} ${style.Mobile}` : style.CartFormWrapper}>
@@ -40,15 +56,13 @@ const CartForm = ({isMobile=false}) => {
                 <Formik
                     initialValues={{ card_number: '', email: '', request_date: '' }}
                     validationSchema={validationSchema}
-                    onSubmit={(values, actions) => {
-                        handleSubmit(values, actions)
-                    }}
+                    onSubmit={handleSubmit}
                 >
                     {({errors, touched}) => (
                         <Form>
                             <Field
                                 name="card_number"
-                                label="Research Card Number"
+                                label="Researcher Card Number"
                                 disabled={isEmpty}
                                 required={true}
                                 component={InputField}
