@@ -7,19 +7,20 @@ import {useState} from "react";
 import PrimaryTypeButton from "../buttons/PrimaryTypeButton";
 import Button from "../buttons/Button";
 import DateDistribution from "./DateDistribution";
+import parse from "html-react-parser";
 
 
 const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
     const {data, error} = useSWR(archivalUnitID !== 0 ? `archival-units-tree-quick-view/${archivalUnitID}/` : undefined, fetcher);
     const [language, setLanguage] = useState('EN')
 
-    const getDataWithLabel = (label, text) => {
+    const getDataWithLabel = (label, text, isHTML=false) => {
         if (text) {
             return (
                 <div className={style.Row}>
                     <div>
                         <div className={style.Label}>{label}</div>
-                        <div className={style.Text}>{text}</div>
+                        <div className={style.Text}>{isHTML ? parse(text) : text}</div>
                     </div>
                 </div>
             )
@@ -96,9 +97,9 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
                     {getDataWithLabel('Title', data['title'])}
                     {renderDates('Date(s)')}
                     <DateDistribution archivalUnitID={archivalUnitID} descriptionLevel={getDescriptionLevel(data['description_level'])} />
-                    {getDataWithLabel('Archival History', data['archival_history'])}
-                    {getDataWithLabel('Scope and Content (abstract)', data['scope_and_content_abstract'])}
-                    {getDataWithLabel('Scope and Content (narrative)', data['scope_and_content_narrative'])}
+                    {getDataWithLabel('Archival History', data['archival_history'], true)}
+                    {getDataWithLabel('Scope and Content (abstract)', data['scope_and_content_abstract'], true)}
+                    {getDataWithLabel('Scope and Content (narrative)', data['scope_and_content_narrative'], true)}
                 </div>
             )
         } else {
@@ -112,9 +113,9 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
                     {getDataWithLabel('Cím', data['title_original'])}
                     {renderDates('Időkör(ök)')}
                     <DateDistribution archivalUnitID={archivalUnitID} descriptionLevel={getDescriptionLevel(data['description_level'])} />
-                    {getDataWithLabel('Archival History', data['archival_history_original'])}
-                    {getDataWithLabel('Scope and Content (abstract)', data['scope_and_content_abstract_original'])}
-                    {getDataWithLabel('Scope and Content (narrative)', data['scope_and_content_narrative_original'])}
+                    {getDataWithLabel('Archival History', data['archival_history_original'], true)}
+                    {getDataWithLabel('Scope and Content (abstract)', data['scope_and_content_abstract_original'], true)}
+                    {getDataWithLabel('Scope and Content (narrative)', data['scope_and_content_narrative_original'], true)}
                 </div>
             )
         }
