@@ -1,19 +1,23 @@
 import Head from 'next/head'
 import Layout from "../../components/layout/Layout";
 import BreadcrumbSearch from "../../components/breadcrumbs/desktop/BreadcrumbSearch";
-import React, {useEffect} from "react";
-import {useMeasure, useSessionStorage} from "react-use";
+import React from "react";
+import {useMeasure} from "react-use";
 import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
 import IsadPage from "../../components/catalog/isad/IsadPage";
 import { Media } from "../../utils/media";
 import BreadcrumbSearchMobile from "../../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import FindingAidsPage from "../../components/catalog/finding-aids/FindingAidsPage";
-import {useRouter} from "next/router";
+import {Buffer} from "buffer";
+
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 const SOLR_STATS_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 const CATALOG_API = process.env.NEXT_PUBLIC_CATALOG_APP_API;
+
+const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER
+const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
@@ -23,7 +27,13 @@ export async function getServerSideProps(context) {
         q: `id:${id}`
     })
 
-    const res = await fetch(`${SOLR_API}?` + solrParams)
+    // SOLR Basic Authentication
+    let headers = new Headers();
+    headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+
+    const res = await fetch(`${SOLR_API}?` + solrParams, {
+        headers: headers
+    })
     const solrData = await res.json()
 
     if (solrData) {
@@ -59,7 +69,9 @@ export async function getServerSideProps(context) {
                     const [metadataRes, hierarchyRes, insightsRes] = await Promise.all([
                         fetch(`${API}archival-units/${ams_id}/`),
                         fetch(`${API}archival-units-tree/${ams_id}/`),
-                        fetch(`${SOLR_STATS_API}?` + statsParams)
+                        fetch(`${SOLR_STATS_API}?` + statsParams, {
+                            headers: headers
+                        })
                     ])
                     const [metadata, hierarchy, insights] = await Promise.all([
                         metadataRes.json(), hierarchyRes.json(), insightsRes.json()

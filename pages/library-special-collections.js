@@ -3,7 +3,6 @@ import Head from "next/head";
 import style from "./pages.module.scss";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import React from "react";
-import dynamic from "next/dynamic";
 import { Media } from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import LibraryCollectionPage from "../components/pages/LibraryCollectionPage";
@@ -21,10 +20,7 @@ const LibrarySpecialCollections = () => {
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
                         <h1>Library Special Collections</h1>
                     </div>
-                    <LibraryCollectionPage
-                        isMobile={true}
-                        showArchiveUnitDrawer={true}
-                    />
+                    <LibraryCollectionPage isMobile={true} />
                 </div>
             </Media>
             <Media greaterThanOrEqual="md">
@@ -33,9 +29,7 @@ const LibrarySpecialCollections = () => {
                     <div className={style.PageTitle}>
                         <h1>Library Special Collections</h1>
                     </div>
-                    <LibraryCollectionPage
-                        showArchiveUnitDrawer={true}
-                    />
+                    <LibraryCollectionPage />
                 </div>
             </Media>
         </Layout>

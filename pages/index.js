@@ -12,15 +12,25 @@ import {useDeepCompareEffect, useMeasure, useSessionStorage} from "react-use";
 import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+import {Buffer} from "buffer";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
+
+const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
+const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
 export async function getServerSideProps(context) {
   const params = context.query
   const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : makeSolrParams({qf: 'identifier_search'})
 
-  const res = await fetch(`${SOLR_API}?` + solrParams)
+  // SOLR Basic Authentication
+  let headers = new Headers();
+  headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+
+  const res = await fetch(`${SOLR_API}?` + solrParams, {
+    headers: headers
+  })
   const data = await res.json()
 
   if (Object.entries(params).length === 0) {

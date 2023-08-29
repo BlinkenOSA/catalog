@@ -52,7 +52,7 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
                 if (record.hasOwnProperty('isaar')) {
                     return (
                       <div>
-                          <a href={`/catalog/isaar/${record['isaar']['id']}`}>{record['isaar']['name']}</a>
+                         {record['isaar']['name']}
                       </div>
                     )
                 } else {

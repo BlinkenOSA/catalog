@@ -8,6 +8,7 @@ import PrimaryTypeButton from "../buttons/PrimaryTypeButton";
 import Button from "../buttons/Button";
 import DateDistribution from "./DateDistribution";
 
+
 const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
     const {data, error} = useSWR(archivalUnitID !== 0 ? `archival-units-tree-quick-view/${archivalUnitID}/` : undefined, fetcher);
     const [language, setLanguage] = useState('EN')

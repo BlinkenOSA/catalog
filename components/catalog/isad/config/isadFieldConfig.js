@@ -73,7 +73,7 @@ const ContextArea = {
                 'HU': 'Az iratképző(k) neve'
             },
             field: 'isaar',
-            link: '/isaar/{id}'
+            link: {}
         }, {
             label: {
                 'EN': 'Administrative / Biographical history',

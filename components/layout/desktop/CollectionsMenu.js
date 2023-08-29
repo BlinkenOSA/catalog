@@ -15,9 +15,6 @@ const CollectionsMenu = () => {
           <li>
             <a href={'/library-special-collections'}>Library Special Collections</a>
           </li>
-          <li>
-            <a href={'/special-collections-in-film-library'}>Special Collections in Film Library</a>
-          </li>
         </ul>
       </div>
     </div>
