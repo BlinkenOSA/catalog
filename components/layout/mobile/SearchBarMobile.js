@@ -28,7 +28,7 @@ const SearchBarMobile = () => {
         router.replace({
             pathname: '/',
             query: createParams(searchValue, limit, offset, selectedFacets),
-        }, undefined, {shallow: true});
+        }, undefined, {shallow: false});
     }
 
     const handleKeyDown = (event) => {

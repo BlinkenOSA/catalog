@@ -23,7 +23,7 @@ const CartForm = ({isMobile=false}) => {
         const d = new Date();
         return new Date(d.setMonth(d.getMonth() + 6))
     }
-    
+
     const validationSchema = Yup.object().shape({
         card_number: Yup.string().required('Required'),
         email: Yup.string().email('Invalid email address').required('Required'),

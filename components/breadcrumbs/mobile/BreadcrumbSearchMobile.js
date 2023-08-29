@@ -86,7 +86,7 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
     const onQueryRemove = () => {
         router.replace({
             query: createParams('', limit, 0, selectedFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     }
 
     /**
@@ -110,13 +110,13 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
     const onPerPageChange = (limit) => {
         router.replace({
             query: createParams(query, limit, 0, selectedFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     };
 
     const onChangePage = (offset) => {
         router.replace({
             query: createParams(query, limit, offset, selectedFacets),
-        }, undefined, {shallow: true})
+        }, undefined, {shallow: false})
     };
 
     const renderPerPageModifier = () => {
