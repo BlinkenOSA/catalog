@@ -18,10 +18,8 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
             <Media lessThan="md">
                 <div className={style.ContentMobile}>
                     <Welcome isMobile={true} />
+                    <StatisticsArchives data={newIsadData} />
                     <Badges data={badgeData} isMobile={true} />
-                    <div className={style.LatestAdditions}>
-                        <StatisticsArchives data={newIsadData} />
-                    </div>
                 </div>
             </Media>
             <Media greaterThanOrEqual="md">
@@ -31,10 +29,8 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
                     />
                     <div className={style.Content}>
                         <Welcome />
+                        <StatisticsArchives data={newIsadData} />
                         <Badges data={badgeData} />
-                        <div className={style.LatestAdditions}>
-                            <StatisticsArchives data={newIsadData} />
-                        </div>
                     </div>
                 </div>
             </Media>

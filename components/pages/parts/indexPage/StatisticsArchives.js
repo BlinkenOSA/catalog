@@ -14,28 +14,30 @@ const StatisticsArchives = ({data}) => {
 
   const renderArchivalUnit = (unit) => {
     return (
-      <div key={unit['reference_code']} className={style.UnitRow}>
-        <a href={`/catalog/${unit['id']}`}>
-          <div className={style.Unit}>
-            <div className={style.ReferenceCode}>{unit['reference_code']}</div>
-            <div>{renderTitle(unit['reference_code'], unit['title'])}</div>
-            <div className={style.Date}>Published on: {renderDate(unit['date_published'])}</div>
-          </div>
-        </a>
-      </div>
+      <React.Fragment>
+        <div key={unit['reference_code']} className={style.ScrollItem}>
+          <span className={style.ScrollItemDivider}>New collections</span>
+          <a href={`/catalog/${unit['id']}`}>
+            <span className={style.ReferenceCode}>{unit['reference_code']}</span>
+            <span className={style.Title}>{renderTitle(unit['reference_code'], unit['title'])}</span>
+            <span className={style.Date}>({renderDate(unit['date_published'])})</span>
+          </a>
+        </div>
+      </React.Fragment>
     )
   }
 
   return (
     data ?
-    <div className={style.StatisticsWrapper}>
-      <h1>Newly added collection descriptions</h1>
-      <div className={style.Units}>
-        {data.map(unit => (
-            renderArchivalUnit(unit)
-        ))}
+    <React.Fragment>
+      <div className={style.StatisticsWrapper}>
+        <div className={style.StatisticsMove}>
+          {data.map(
+            d => renderArchivalUnit(d)
+          )}
+        </div>
       </div>
-    </div> : <Loader/>
+    </React.Fragment>: <Loader/>
   )
 }
 

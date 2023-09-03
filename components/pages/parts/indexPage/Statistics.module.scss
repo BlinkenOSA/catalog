@@ -1,50 +1,92 @@
 @import "../../../../styles/variables";
 
-.StatisticsWrapper {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 10px;
-  column-gap: 10px;
-  margin-bottom: 5px;
+$duration: 50s;
 
-  h1 {
-    font-family: "Suisse Intl Condensed", serif;
-    font-size: 22px;
-    font-weight: 400;
-    padding: 0 15px;
-    margin-top: 15px;
-    margin-bottom: 0;
+@-webkit-keyframes tickerh {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
   }
 
-  .UnitRow {
-    display: flex;
-    font-family: "Suisse Intl", serif;
-    font-weight: 400;
-    font-size: 16px;
+  100% {
+    -webkit-transform: translate3d(-1050%, 0, 0);
+    transform: translate3d(-1050%, 0, 0);
+  }
+}
 
-    a {
-      width: 100%;
-      color: unset;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
+@keyframes tickerh {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+
+  100% {
+    -webkit-transform: translate3d(-1050%, 0, 0);
+    transform: translate3d(-1050%, 0, 0);
+  }
+}
+
+.StatisticsWrapper {
+  overflow: hidden;
+  height: 50px;
+  padding-left: 100%;
+  border-bottom: 2px solid $black;
+  background-color: $form-background;
+
+  .StatisticsMove {
+    display: inline-flex;
+    justify-content: left;
+
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-name: tickerh;
+    animation-name: tickerh;
+    -webkit-animation-duration: $duration;
+    animation-duration: $duration;
+
+    &:hover {
+      animation-play-state: paused;
     }
 
-    a:hover {
-    }
+    .ScrollItem {
+      font-family: "Suisse Intl Condensed", serif;
+      font-weight: 400;
+      font-size: 20px;
+      border-right: 2px solid $black;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      color: $black;
 
-    .Unit {
-      padding: 10px 15px;
-      flex: 1;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .ScrollItemDivider {
+        padding: 15px;
+        background-color: $black;
+        color: $white;
+        text-transform: uppercase;
+      }
 
       .ReferenceCode {
-        font-family: "Suisse Works", serif;
-        font-size: 16px;
-        font-weight: 500;
+        padding: 15px 10px 15px 15px;
+      }
+
+      .Title {
+        padding: 15px 0;
       }
 
       .Date {
-        font-family: "Suisse Intl Condensed", serif;
+        padding-left: 10px;
+        padding-right: 15px;
         font-size: 14px;
       }
     }
