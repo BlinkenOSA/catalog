@@ -8,6 +8,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  position: sticky;
+  top: $header-height + $breadcrumb-height;
+  z-index: 10;
 
   &.Mobile {
     padding: 10px 10px 0 10px;

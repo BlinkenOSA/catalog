@@ -1,8 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import style from "./Menu.module.scss";
 import { useCart } from "react-use-cart";
-import {Collapse} from 'react-collapse';
-import CollectionsMenu from "./CollectionsMenu";
 
 /**
  * Top right static menu

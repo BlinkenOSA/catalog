@@ -37,15 +37,14 @@
   .SubMenuWrapper {
     margin: 0 auto;
     height: 100%;
-    max-width: 1180px;
+    max-width: $max-width;
 
     .SubMenuList {
       display: flex;
       list-style: none;
       height: 42px;
       align-items: center;
-      margin: 0;
-      margin-left: 265px;
+      margin: 0 0 0 $left-width;
       gap: 10px;
       padding: 0;
       font-family: "Suisse Intl Condensed", serif;
@@ -54,8 +53,9 @@
 
       li {
         text-align: center;
-        color: $white;
-        border: 1px solid $white;
+        color: $black;
+        background-color: $white;
+        border: 1px solid $black;
         padding: 5px 10px;
         transition: 0.3s;
         cursor: pointer;
@@ -72,7 +72,7 @@
 
       a {
         text-decoration: none;
-        color: $white;
+        color: $black;
       }
     }
   }

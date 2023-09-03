@@ -2,8 +2,18 @@ import style from "./FindingAidsCitation.module.scss";
 import React, {useState} from "react";
 import Button from "../../../../pages/parts/buttons/Button";
 
-const FindingAidsCitation = ({citation, isMobile}) => {
+const FindingAidsCitation = ({citation, language, isMobile}) => {
     const [copied, setCopied] = useState(false);
+
+    const label = {
+      'EN': 'Citation',
+      'HU': 'Hivatkozás'
+    }
+
+    const labelClipboard = {
+      'EN': 'Copy citation to clipboard',
+      'HU': 'Hivatkozás másolása vágólapra'
+    }
 
     const onClick = () => {
         setCopied(true)
@@ -16,11 +26,11 @@ const FindingAidsCitation = ({citation, isMobile}) => {
     if (isMobile) {
         return (
             <div className={isMobile ? `${style.Citation} ${style.Mobile}` : style.Citation}>
-                <div className={style.Category}>Citation</div>
+                <div className={style.Category}>{label[language]}</div>
                 <div className={style.ValueWrapper}>
                     <div className={style.Label}>
                         <Button
-                            text={copied ? `Citation copied` : `Copy citation to clipboard`}
+                            text={copied ? `Citation copied` : `${labelClipboard[language]}`}
                             disabled={copied}
                             onClick={onClick}
                         />
@@ -32,10 +42,10 @@ const FindingAidsCitation = ({citation, isMobile}) => {
     } else {
         return (
             <div className={style.Citation}>
-                <div className={style.Category}>Citation</div>
+                <div className={style.Category}>{label[language]}</div>
                 <div className={style.Label}>
                     <Button
-                        text={copied ? `Citation copied` : `Copy citation to clipboard`}
+                        text={copied ? `Citation copied` : `${labelClipboard[language]}`}
                         disabled={copied}
                         onClick={onClick}
                     />

@@ -1,5 +1,5 @@
 import React from "react";
-import {findingAidsFieldConfig} from "./findingAidsFieldConfig";
+import {findingAidsFieldConfig} from "./config/findingAidsFieldConfig";
 import FindingAidsItem from "./FindingAidsItem";
 import style from './FindingAidsPage.module.scss'
 

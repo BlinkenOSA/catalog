@@ -1,7 +1,7 @@
 @import "../../../styles/variables";
 
 .SearchBox {
-  width: 266px;
+  width: $facet-width + 2px;
   height: 37px;
   display: inline-flex;
   position: -webkit-sticky; /* for Safari */

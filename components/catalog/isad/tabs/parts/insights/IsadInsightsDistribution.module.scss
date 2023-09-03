@@ -1,16 +1,18 @@
 @import "../../../../../../styles/variables";
 
 .DistributionWrapper {
-  border-bottom: 2px solid $data-line;
-  min-height: 200px;
+  border-bottom: 2px solid $black;
+  min-height: 100px;
+  flex: 1;
   display: flex;
+  flex-direction: column;
 
   &.Mobile {
     border-bottom: unset;
     display: block;
 
     .Graph {
-      border-bottom: 2px solid $data-line;
+      border-bottom: 2px solid $black;
     }
   }
 
@@ -18,8 +20,8 @@
     flex: 1;
     padding: 10px 20px;
 
-    &.Left {
-     border-right: 2px solid $data-line;
+    &.Top {
+     border-bottom: 2px solid black;
     }
 
     .Title {

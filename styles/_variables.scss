@@ -7,8 +7,21 @@ $button-background: #808080;
 $white: #FFF;
 $yellow: #FFEB42;
 
+// VERSION A
+$max-width: 1440px;
 $left-width: 264px;
-$max-width: 1180px;
+$facet-width: 366px;
+$search-width: 450px;
+$results-width: 220px;
+
+// VERSION B
+/*
+$max-width: 1200px;
+$left-width: 264px;
+$facet-width: 264px;
+$search-width: 300px;
+$results-width: 220px;
+ */
 
 $header-height: 57px;
 $breadcrumb-height: 44px;

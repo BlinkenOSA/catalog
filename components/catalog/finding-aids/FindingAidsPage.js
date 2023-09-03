@@ -11,6 +11,7 @@ import dynamic from "next/dynamic";
 import PageNavigation from "./parts/pageNavigation/PageNavigation";
 import { useRouter } from 'next/router'
 import FindingAidsCitation from "./parts/findingAidsCitation/FindingAidsCitation";
+import LanguageButton from "../../pages/parts/buttons/LanguageButton";
 
 const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigitalContent/FindingAidsDigitalContentOld"), {
     ssr: false,
@@ -31,13 +32,13 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
         if (language === 'EN') {
             return (
                 <div className={style.Title}>
-                    {metadata['archival_reference_code']} {metadata['title']}
+                    {metadata['archival_reference_code']}<br/>{metadata['title']}
                 </div>
             )
         } else {
             return (
                 <div className={style.Title}>
-                    {metadata['archival_reference_code']} {metadata['title_original'] ? metadata['title_original'] : metadata['title']}
+                    {metadata['archival_reference_code']}<br/>{metadata['title_original'] ? metadata['title_original'] : metadata['title']}
                 </div>
             )
         }
@@ -73,6 +74,15 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                                 inCart={inCart(id)}
                                 name={id}
                             />
+                            {
+                              metadata['original_locale'] !== null &&
+                              <LanguageButton
+                                name={`finding-aids-page-language-selector-${isMobile ? 'mobile' : 'desktop'}`}
+                                selectedLanguage={language}
+                                originalLanguage={metadata['original_locale']}
+                                onLanguageChange={setLanguage}
+                              />
+                            }
                             <PrimaryTypeButton primaryType={solrData['primary_type']} />
                             <AvailabilityButton record={solrData} />
                         </div>
@@ -90,11 +100,11 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                         </div>
                     </React.Fragment>
                 }
-                <FindingAidsCitation citation={metadata['citation']} isMobile={isMobile} />
+                <FindingAidsCitation language={language} citation={metadata['citation']} isMobile={isMobile} />
                 <div ref={metadataRef}>
                     <FindingAidsMetadataPage id={id} data={metadata} language={language} isMobile={isMobile} />
                 </div>
-                <FindingAidsLocation data={hierarchy} onTreeNodeClick={handleTreeNodeClick} isMobile={isMobile} />
+                <FindingAidsLocation data={hierarchy} language={language} onTreeNodeClick={handleTreeNodeClick} isMobile={isMobile} />
             </div>
         )
     } else {

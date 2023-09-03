@@ -44,8 +44,7 @@ const IsadInsightsDates = ({facets, isOnDrawer=false, isMobile=false}) => {
 	if (facets.hasOwnProperty('year_created_facet')) {
 		if (facets['year_created_facet'].length > 1) {
 			return (
-				<div>
-					<div className={style.InsightDateWrapper}>
+					<div className={isOnDrawer ? `${style.InsightDateWrapper} ${style.BorderLess}` : style.InsightDateWrapper}>
 						<div className={isOnDrawer ? style.TitleDrawer : style.Title}>Date distribution of the material in this archival unit</div>
 						<div style={{marginLeft: '-30px'}}>
 							<ResponsiveContainer width={'100%'} height={isMobile ? 200 : isOnDrawer ? 200 : 400}>
@@ -58,7 +57,6 @@ const IsadInsightsDates = ({facets, isOnDrawer=false, isMobile=false}) => {
 							</ResponsiveContainer>
 						</div>
 					</div>
-				</div>
 			)
 		}
 	}

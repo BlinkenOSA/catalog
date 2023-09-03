@@ -2,8 +2,8 @@ import style from "./FindingAidsItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
 
-const FindingAidsItem = ({id, record, language, group, label, field, links={}, isMobile, display='sameRow'}) => {
-    const fieldName = field;
+const FindingAidsItem = ({id, record, language, group, label, field, bilingual, links={}, isMobile, display='sameRow'}) => {
+    const fieldName = language === 'EN' ? field : (bilingual ? `${field}_original` : field);
 
     const renderValue = (data) => {
         if (Array.isArray(data)) {
@@ -20,7 +20,7 @@ const FindingAidsItem = ({id, record, language, group, label, field, links={}, i
     }
 
     const displayValues = () => {
-        switch (field) {
+        switch (fieldName) {
             case 'archival_unit':
                 return <a href={`/catalog/${record['catalog_id']}`}>{record['archival_unit']['title_full']}</a>
             case 'date_from':
@@ -31,7 +31,8 @@ const FindingAidsItem = ({id, record, language, group, label, field, links={}, i
                 })
                 return renderValue(dates)
             case 'contents_summary':
-                return parse(record[field])
+            case 'contents_summary_original':
+                return parse(record[fieldName])
             case 'duration':
                 let d = []
                 const duration = record['duration'].split(':')
@@ -53,7 +54,7 @@ const FindingAidsItem = ({id, record, language, group, label, field, links={}, i
     const displayField = () => {
         if (isMobile) {
             return (
-                <div className={`${style.Row} ${style.Mobile}`}>
+                <div key={id} className={`${style.Row} ${style.Mobile}`}>
                     <div className={style.Category}>{group.hasOwnProperty(language) ? group[language] : group['EN']}</div>
                     <div className={style.ValueWrapper}>
                         <div className={style.Label}>{label.hasOwnProperty(language) ? label[language] : label['EN']}</div>
@@ -65,7 +66,7 @@ const FindingAidsItem = ({id, record, language, group, label, field, links={}, i
             )
         } else {
             return (
-                <div className={style.Row}>
+                <div key={id} className={style.Row}>
                     <div className={style.Category}>{group.hasOwnProperty(language) ? group[language] : group['EN']}</div>
                     <div className={style.Label}>{label.hasOwnProperty(language) ? label[language] : label['EN']}</div>
                     <div className={style.Value}>

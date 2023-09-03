@@ -66,7 +66,7 @@ const IsadInsightsDistribution = ({facets, isMobile}) => {
 			<div className={style.Graph}>
 				<div className={style.Title}>{title}</div>
 				<div>
-					<ResponsiveContainer width="100%" minHeight={300}>
+					<ResponsiveContainer width="100%" minHeight={200}>
 						<RadarChart data={data}>
 							<PolarGrid />
 							<PolarAngleAxis dataKey="label" />
@@ -82,10 +82,10 @@ const IsadInsightsDistribution = ({facets, isMobile}) => {
 
 	const renderDistributionBar = (data, title) => {
 		return (
-			<div className={isMobile ? style.Graph : `${style.Graph} ${style.Left}`}>
+			<div className={isMobile ? style.Graph : `${style.Graph} ${style.Top}`}>
 				<div className={style.Title}>{title}</div>
 				<div style={{marginLeft: '-20px'}}>
-					<ResponsiveContainer width="100%" minHeight={300}>
+					<ResponsiveContainer width="100%" minHeight={200}>
 						<BarChart data={data} >
 							<XAxis dataKey="label" />
 							<YAxis />

@@ -3,11 +3,11 @@ import Layout from "../../components/layout/Layout";
 import BreadcrumbSearch from "../../components/breadcrumbs/desktop/BreadcrumbSearch";
 import React from "react";
 import {useMeasure} from "react-use";
-import LibraryPage from "../../components/catalog/library/LibraryPage";
 import style from "../pages.module.scss"
-import IsadPage from "../../components/catalog/isad/IsadPage";
 import { Media } from "../../utils/media";
 import BreadcrumbSearchMobile from "../../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
+import IsadPage from "../../components/catalog/isad/IsadPage";
+import LibraryPage from "../../components/catalog/library/LibraryPage";
 import FindingAidsPage from "../../components/catalog/finding-aids/FindingAidsPage";
 import {Buffer} from "buffer";
 

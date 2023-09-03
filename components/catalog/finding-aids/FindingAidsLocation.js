@@ -5,8 +5,18 @@ import {Collapse} from 'react-collapse';
 import Button from "../../pages/parts/buttons/Button";
 import {useState} from "react";
 
-const FindingAidsLocation = ({data, onTreeNodeClick, isMobile}) => {
+const FindingAidsLocation = ({data, language, onTreeNodeClick, isMobile}) => {
     const [locationOpen, setLocationOpen] = useState(true)
+
+    const locationLabel = {
+        'EN': 'Location',
+        'HU': 'Lokáció'
+    }
+
+    const locationButtonText = {
+        'EN': `${locationOpen ? 'Close' : 'Open'} location info`,
+        'HU': `Lokáció Információ ${locationOpen ? 'Bezárása' : 'Kinyitása'}`,
+    }
 
     const getClassType = (record, isLast=false) => {
         switch (record['level']) {
@@ -56,10 +66,10 @@ const FindingAidsLocation = ({data, onTreeNodeClick, isMobile}) => {
         return (
             <div className={style.LocationTree}>
                 <div className={isMobile ? `${style.Row} ${style.Mobile}` : style.Row}>
-                    <div className={style.Category}>Location</div>
+                    <div className={style.Category}>{locationLabel[language]}</div>
                     <div className={style.Value}>
                         <Button
-                            text={`${locationOpen ? 'Close' : 'Open'} location info`}
+                            text={locationButtonText[language]}
                             onClick={onClick}
                         />
                     </div>
