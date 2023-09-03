@@ -20,7 +20,6 @@ const StatisticsArchives = ({data}) => {
           <a href={`/catalog/${unit['id']}`}>
             <span className={style.ReferenceCode}>{unit['reference_code']}</span>
             <span className={style.Title}>{renderTitle(unit['reference_code'], unit['title'])}</span>
-            <span className={style.Date}>({renderDate(unit['date_published'])})</span>
           </a>
         </div>
       </React.Fragment>
