@@ -1,7 +1,6 @@
 import style from "./FindingAidsItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
-import FindingAidsGeoLocations from "./parts/findingAidsDisplay/FindingAidsItemWithWiki";
 import FindingAidsItemWithWiki from "./parts/findingAidsDisplay/FindingAidsItemWithWiki";
 
 const FindingAidsItem = ({id, record, language, group, label, field, bilingual, links={}, isMobile, display='sameRow'}) => {
@@ -114,6 +113,7 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
         switch (fieldName) {
             case 'added_geo_locations':
                 return <FindingAidsItemWithWiki
+                  id={'added_geo_locations'}
                   fieldName={fieldName}
                   record={record}
                   fields={['added_country', 'added_place']}
@@ -123,6 +123,7 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
                 />
             case 'contributors':
                 return <FindingAidsItemWithWiki
+                  id={'contributors'}
                   fieldName={fieldName}
                   record={record}
                   fields={['added_person', 'added_corporation']}
@@ -132,9 +133,20 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
                 />
             case 'subjects':
                 return <FindingAidsItemWithWiki
+                  id={'subjects'}
                   fieldName={fieldName}
                   record={record}
                   fields={['subject_person', 'subject_corporation']}
+                  group={group}
+                  language={language}
+                  label={label}
+                />
+            case 'spatial_coverage':
+                return <FindingAidsItemWithWiki
+                  id={'spatial_coverage'}
+                  fieldName={fieldName}
+                  record={record}
+                  fields={['spatial_coverage_country', 'spatial_coverage_place']}
                   group={group}
                   language={language}
                   label={label}

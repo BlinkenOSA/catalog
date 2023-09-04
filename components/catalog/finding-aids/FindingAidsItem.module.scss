@@ -50,6 +50,10 @@
       padding: 2px  6px;
     }
 
+    .InfoIcon {
+      line-height: 20px;
+    }
+
     .Comma:last-child {
       display: none;
     }
@@ -91,5 +95,11 @@
 
 .Row:last-child {
   border-bottom: none;
+}
+
+.WikiDataWrapper {
+  min-height: 200px;
+  background-color: $form-background;
+  border-top: $border-width solid $black;
 }
 

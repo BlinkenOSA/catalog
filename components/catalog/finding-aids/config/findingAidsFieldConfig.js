@@ -165,7 +165,15 @@ const Subject = {
             field: 'subjects',
             bilingual: false,
             link: {}
-        }
+        }, {
+            label: {
+                'EN': 'Spatial Coverage',
+                'HU': 'Területi Lefedettség'
+            },
+            field: 'spatial_coverage',
+            bilingual: false,
+            link: {}
+        },
     ]
 }
 

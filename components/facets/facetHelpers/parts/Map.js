@@ -15,7 +15,7 @@ export function ChangeView({ coords, zoom }) {
 	return null;
 }
 
-const Map = ({lat, long, geoJSON=false, geoJSONData, zoom=0}) => {
+const Map = ({lat, long, geoJSON=false, geoJSONData, zoom=0, mapStyle}) => {
 	const center = [lat, long];
 
 	const geoJSONStyle = {
@@ -26,7 +26,7 @@ const Map = ({lat, long, geoJSON=false, geoJSONData, zoom=0}) => {
 	}
 
 	return (
-		<div className={style.MapWrapper}>
+		<div className={style.MapWrapper} style={mapStyle}>
 			<MapContainer center={center} zoom={zoom !== 0 ? zoom : 12} style={{ height: '300px'}}>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
