@@ -2,7 +2,7 @@
 
 .CartListWrapper {
   flex: 1;
-  border-left: 2px solid $black;
+  border-left: $border-width solid $black;
 
   &.Mobile {
     border-left: unset;
@@ -10,7 +10,7 @@
 
   .OriginRow {
     width: 100%;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
     height: 30px;
     background-color: $form-background;
 
@@ -26,7 +26,7 @@
     display: flex;
     min-height: 60px;
     align-items: center;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
     padding: 10px 25px 10px 25px;
     font-family: "Suisse Works", serif;
     font-weight: 400;
@@ -53,7 +53,7 @@
 
 .CartListEmptyWrapper {
   flex: 1;
-  border-left: 2px solid $black;
+  border-left: $border-width solid $black;
 
   .IconWrapper {
     display: flex;

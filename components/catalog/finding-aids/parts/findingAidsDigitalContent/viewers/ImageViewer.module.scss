@@ -3,7 +3,7 @@
 // IIIF Viewer in a window
 .IIIFViewer {
   position: relative;
-  border-top: 2px solid $black;
+  border-top: $border-width solid $black;
 
   :global .osrv-top-row-wrapper {
     display: none;

@@ -3,8 +3,8 @@
 .Page {
   margin: 0 auto;
   max-width: $max-width;
-  border-left: 2px solid $black;
-  border-right: 2px solid $black;
+  border-left: $border-width solid $black;
+  border-right: $border-width solid $black;
   min-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height} + #{$footer-height}));
 
   &.Mobile {
@@ -13,7 +13,7 @@
 
   .PageTitle {
     width: 100%;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
 
     &.Mobile {
       h1 {

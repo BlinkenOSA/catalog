@@ -19,7 +19,7 @@
 
   li {
     height: 35px;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
     font-size: 16px;
     line-height: 35px;
 
@@ -104,11 +104,11 @@
   border-right: none  ;
   position: -webkit-sticky; /* for Safari */
   position: sticky;
-  top: 101px;
+  top: calc(#{$header-height} + #{$breadcrumb-height});
   align-self: flex-start;
 
   li {
-    border-bottom: 2px solid $white;
+    border-bottom: $border-width solid $white;
 
     .Button {
       &:after {

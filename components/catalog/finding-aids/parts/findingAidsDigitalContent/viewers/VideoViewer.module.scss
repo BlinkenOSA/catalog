@@ -2,7 +2,7 @@
 
 .VideoViewer {
   height: 400px;
-  border-top: 2px solid $black;
+  border-top: $border-width solid $black;
   background-color: $form-background;
 
   .VideoPlayer {

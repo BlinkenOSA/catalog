@@ -32,7 +32,7 @@ $duration: 50s;
   overflow: hidden;
   height: 50px;
   padding-left: 100%;
-  border-bottom: 2px solid $black;
+  border-bottom: $border-width solid $black;
 
   .StatisticsMove {
     display: inline-flex;
@@ -55,7 +55,7 @@ $duration: 50s;
       font-family: "Suisse Intl Condensed", serif;
       font-weight: 400;
       font-size: 20px;
-      border-right: 2px solid $black;
+      border-right: $border-width solid $black;
       flex-shrink: 0;
       box-sizing: border-box;
       height: 50px;

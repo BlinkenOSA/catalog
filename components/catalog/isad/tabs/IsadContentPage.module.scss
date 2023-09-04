@@ -4,7 +4,7 @@
   padding: 0 10px;
   height: 50px;
   background-color: $form-background;
-  border-bottom: 2px solid $black;
+  border-bottom: $border-width solid $black;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -30,7 +30,7 @@
 .Record {
   display: flex;
   align-items: center;
-  border-top: 2px solid $black;
+  border-top: $border-width solid $black;
   font-family: "Suisse Intl", serif;
   font-size: 16px;
   box-sizing: border-box;
@@ -74,8 +74,8 @@
     width: 150px;
     text-align: left;
     align-self: flex-start;
-    border-bottom: 2px solid $black;
-    border-left: 2px solid $black;
+    border-bottom: $border-width solid $black;
+    border-left: $border-width solid $black;
 
     span {
       padding-left: 10px;
@@ -139,7 +139,7 @@
 }
 
 .InContainer {
-  border-top: 2px solid $form-background;
+  border-top: $border-width solid $form-background;
 }
 
 .MoreButtonWrapper {

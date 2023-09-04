@@ -4,14 +4,14 @@
   margin: 0 auto;
   max-width: $max-width;
   min-height: calc(100vh - 217px);
-  border-left: 2px solid $black;
-  border-right: 2px solid $black;
+  border-left: $border-width solid $black;
+  border-right: $border-width solid $black;
   display: flex;
 }
 
 .Content {
   flex: 1;
-  border-left: 2px solid $black;
+  border-left: $border-width solid $black;
 }
 
 .ContentMobile {

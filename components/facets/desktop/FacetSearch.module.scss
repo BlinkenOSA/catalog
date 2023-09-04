@@ -1,12 +1,12 @@
 @import "../../../styles/variables";
 
 .SearchBox {
-  width: $facet-width + 2px;
+  width: $facet-width + $border-width;
   height: 37px;
   display: inline-flex;
   position: -webkit-sticky; /* for Safari */
   position: sticky;
-  top: 101px;
+  top: calc(#{$header-height} + #{$breadcrumb-height});
   z-index: 999;
 
   .SearchInput {
@@ -18,7 +18,7 @@
     padding: 0 10px;
     height: 35px;
     flex: 1;
-    border-bottom: 2px solid $white;
+    border-bottom: $border-width solid $white;
   }
 
   .SearchInput:focus-visible {
@@ -29,18 +29,18 @@
     background-color: $white;
     color: $black;
     display: block;
-    height: 37px;
+    height: 35px + $border-width;
     line-height: 42px;
     text-align: left;
     pointer-events: none;
-    width: 31px;
+    width: 29px + $border-width;
   }
 
   .ClearButton {
     background-color: $white;
     color: $black;
     display: block;
-    height: 37px;
+    height: 35px + $border-width;
     line-height: 42px;
     text-align: left;
     width: 31px;

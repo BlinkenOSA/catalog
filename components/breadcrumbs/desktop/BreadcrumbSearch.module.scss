@@ -10,8 +10,8 @@
 }
 
 .BreadcrumbWrapper {
-  border-top: 2px solid #EEE;
-  border-bottom: 2px solid $black;
+  border-top: $border-width solid #EEE;
+  border-bottom: $border-width solid $black;
   background-color: $background;
   position: -webkit-sticky;
   position: sticky;
@@ -116,8 +116,8 @@
 }
 
 .BreadcrumbInverseWrapper {
-  border-top: 2px solid $background;
-  border-bottom: 2px solid $background;
+  border-top: $border-width solid $background;
+  border-bottom: $border-width solid $background;
   background-color: $black;
   position: -webkit-sticky;
   position: sticky;

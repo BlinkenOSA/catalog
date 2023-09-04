@@ -33,12 +33,11 @@
       line-height: 40px;
       text-align: center;
       position: relative;
-      z-index: 10;
+      z-index: 999;
       color: $black;
       background-color: $form-background;
-      border-top: 1px solid $black;
-      border-bottom: 1px solid $black;
-      border-right: 2px solid $black;
+      border-top: $border-width solid $black;
+      border-right: $border-width solid $black;
     }
 
     .Icon:hover {
@@ -52,22 +51,22 @@
       vertical-align: middle;
       color: $background;
       background-color: $black;
-      line-height: 37px;
+      line-height: 35px;
       overflow: hidden;
       padding: 0 10px;
-      margin-left: -100px
+      margin-left: -100px;
     }
   }
 
   li:first-child {
     .Icon {
-      border-top: 2px solid $black;
+      border-top: $border-width solid $black;
     }
   }
 
   li:last-child {
     .Icon {
-      border-bottom: 2px solid $black;
+      border-bottom: $border-width solid $black;
     }
 
     .Text {

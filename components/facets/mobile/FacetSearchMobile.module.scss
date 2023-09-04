@@ -15,7 +15,7 @@
     padding: 0 10px;
     height: 35px;
     flex: 1;
-    border-bottom: 2px solid $white;
+    border-bottom: $border-width solid $white;
   }
 
   .SearchInput:focus-visible {

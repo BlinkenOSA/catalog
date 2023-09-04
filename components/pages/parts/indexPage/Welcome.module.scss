@@ -6,7 +6,7 @@
     flex-wrap: wrap;
     row-gap: 10px;
     column-gap: 10px;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
 
     .Content {
         padding: 15px;

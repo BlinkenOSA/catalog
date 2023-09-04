@@ -1,7 +1,7 @@
 @import "../../../../../../styles/variables";
 
 .DistributionWrapper {
-  border-bottom: 2px solid $black;
+  border-bottom: $border-width solid $black;
   min-height: 100px;
   flex: 1;
   display: flex;
@@ -12,7 +12,7 @@
     display: block;
 
     .Graph {
-      border-bottom: 2px solid $black;
+      border-bottom: $border-width solid $black;
     }
   }
 
@@ -21,7 +21,7 @@
     padding: 10px 20px;
 
     &.Top {
-     border-bottom: 2px solid black;
+     border-bottom: $border-width solid black;
     }
 
     .Title {
@@ -34,7 +34,7 @@
       padding: 10px;
       background-color: $background;
       color: $black;
-      border: 2px solid $black;
+      border: $border-width solid $black;
     }
   }
 

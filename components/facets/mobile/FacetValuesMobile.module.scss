@@ -10,7 +10,7 @@
   .ValueWrapper {
     align-items: center;
     color: $black;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
     font-size: 16px;
     line-height: 24px;
     display: flex;

@@ -5,8 +5,8 @@
 }
 
 .BreadcrumbWrapper {
-  border-top: 2px solid #EEE;
-  border-bottom: 2px solid $black;
+  border-top: $border-width solid #EEE;
+  border-bottom: $border-width solid $black;
   background-color: $background;
   position: -webkit-sticky;
   position: sticky;
@@ -82,8 +82,8 @@
 }
 
 .BreadcrumbInverseWrapper {
-  border-top: 2px solid $background;
-  border-bottom: 2px solid $background;
+  border-top: $border-width solid $background;
+  border-bottom: $border-width solid $background;
   background-color: $black;
   position: -webkit-sticky;
   position: sticky;
@@ -108,11 +108,11 @@
   position: relative;
   background-color: $background;
   padding: 0 10px;
-  border-bottom: 2px solid $black;
+  border-bottom: $border-width solid $black;
 
   &.Inverse {
     background-color: $black;
-    border-bottom: 2px solid $white;
+    border-bottom: $border-width solid $white;
 
     .SelectedFacets {
 

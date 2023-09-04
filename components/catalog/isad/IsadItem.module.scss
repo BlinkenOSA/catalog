@@ -3,7 +3,7 @@
 .Row {
   display: flex;
   padding: 10px 20px;
-  border-bottom: 2px solid $form-background;
+  border-bottom: $border-width solid $form-background;
 
   .Category {
     font-family: "Suisse Intl Condensed", serif;

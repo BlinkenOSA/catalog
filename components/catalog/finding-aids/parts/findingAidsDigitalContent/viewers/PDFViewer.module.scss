@@ -3,7 +3,7 @@
 .PDFViewerFullScreen {
   flex: 1;
   overflow: hidden;
-  border-top: 2px solid $black;
+  border-top: $border-width solid $black;
   height: 100%;
 
   :global .rpv-core__inner-page {
@@ -14,7 +14,7 @@
 .PDFViewer {
   flex: 1;
   overflow: hidden;
-  border-top: 2px solid $black;
+  border-top: $border-width solid $black;
   height: 464px;
 
   :global .rpv-core__inner-page {
@@ -27,7 +27,7 @@
   flex-direction: column;
   align-items: center;
   height: 35px;
-  border-top: 2px solid $black;
+  border-top: $border-width solid $black;
   font-family: "Suisse Intl Condensed", serif;
   font-size: 12px;
   background-color: $background;

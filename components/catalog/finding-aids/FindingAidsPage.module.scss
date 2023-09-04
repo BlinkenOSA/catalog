@@ -63,11 +63,11 @@
   }
 
   .MetadataWrapper {
-    border-top: 2px solid $black;
+    border-top: $border-width solid $black;
   }
 
   .MetadataGroup {
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
   }
 
   .MetadataGroup:empty {
@@ -83,9 +83,9 @@
     div {
       color: $black;
       background-color: unset;
-      border-top: 2px solid $black;
-      border-right: 2px solid $black;
-      border-bottom: 2px solid $black;
+      border-top: $border-width solid $black;
+      border-right: $border-width solid $black;
+      border-bottom: $border-width solid $black;
       padding: 10px 20px;
       cursor: pointer;
     }
@@ -93,7 +93,7 @@
     div.Active {
       color: $white;
       background-color: $black;
-      border-top: 2px solid $black;
+      border-top: $border-width solid $black;
       border-bottom: none;
     }
 

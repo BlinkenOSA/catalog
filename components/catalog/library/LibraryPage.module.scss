@@ -6,7 +6,7 @@
   .Header {
     display: flex;
     height: 250px;
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
 
     &.Mobile {
       display: block;
@@ -55,7 +55,7 @@
   }
 
   .MetadataGroup {
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
   }
 
   .MetadataGroup:empty {

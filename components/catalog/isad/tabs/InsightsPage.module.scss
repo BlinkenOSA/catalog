@@ -6,6 +6,6 @@
 
   .Distributions {
     min-height: 200px;
-    border-bottom: 2px solid $data-line;
+    border-bottom: $border-width solid $data-line;
   }
 }

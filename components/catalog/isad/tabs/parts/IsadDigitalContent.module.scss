@@ -66,7 +66,7 @@
   }
 
   :global div[data-testid="instance-container"] {
-    border-bottom: 2px solid $black;
+    border-bottom: $border-width solid $black;
   }
 }
 

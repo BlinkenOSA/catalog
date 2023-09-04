@@ -3,12 +3,12 @@
 .InsightDateWrapper {
   flex: 1;
   padding: 10px 20px 0 20px;
-  border-right: 2px solid $black;
-  border-bottom: 2px solid $black;
+  border-right: $border-width solid $black;
+  border-bottom: $border-width solid $black;
 
   &.BorderLess {
     border-right: none;
-    border-bottom: 2px solid $form-background;
+    border-bottom: $border-width solid $form-background;
   }
 
   .TitleDrawer {
@@ -29,6 +29,6 @@
     padding: 10px;
     background-color: $background;
     color: $black;
-    border: 2px solid $black;
+    border: $border-width solid $black;
   }
 }

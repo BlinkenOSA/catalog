@@ -9,14 +9,14 @@
   margin: 0 auto;
   max-width: $max-width;
   min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height});
-  border-left: 2px solid $white;
+  border-left: $border-width solid $white;
   display: flex;
 }
 
 .FacetSelection {
   width: $facet-width;
-  border-right: 2px solid $white;
-  border-left: 2px solid $white;
+  border-right: $border-width solid $white;
+  border-left: $border-width solid $white;
 }
 
 .FacetDescription {

@@ -3,7 +3,7 @@
 .ResultItemWrapper {
   display: flex;
   min-height: 50px;
-  border-bottom: 2px solid $black;
+  border-bottom: $border-width solid $black;
 }
 
 .ResultItemWrapper:last-child {
