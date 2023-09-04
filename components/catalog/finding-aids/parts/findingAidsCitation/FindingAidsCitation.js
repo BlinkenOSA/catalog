@@ -7,12 +7,14 @@ const FindingAidsCitation = ({citation, language, isMobile}) => {
 
     const label = {
       'EN': 'Citation',
-      'HU': 'Hivatkozás'
+      'HU': 'Hivatkozás',
+      'RU': 'Цитирование'
     }
 
     const labelClipboard = {
       'EN': 'Copy citation to clipboard',
-      'HU': 'Hivatkozás másolása vágólapra'
+      'HU': 'Hivatkozás másolása vágólapra',
+      'RU': 'Копировать цитату в буфер обмена'
     }
 
     const onClick = () => {

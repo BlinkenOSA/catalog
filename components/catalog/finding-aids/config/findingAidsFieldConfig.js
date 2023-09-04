@@ -1,7 +1,8 @@
 const GeneralInformationArea = {
     group: {
         'EN': 'General Information',
-        'HU': 'Általános Információk'
+        'HU': 'Általános Információk',
+        'RU': 'Общая Информация'
     },
     fields: [
         {
@@ -61,6 +62,20 @@ const GeneralInformationArea = {
             },
             field: 'duration',
             link: {},
+        }, {
+            label: {
+                'EN': 'Language',
+                'HU': 'Nyelv'
+            },
+            field: 'languages',
+            link: {},
+        }, {
+            label: {
+                'EN': 'Notes',
+                'HU': 'Feljegyzések'
+            },
+            field: 'note',
+            link: {},
         }
     ],
 }
@@ -68,10 +83,19 @@ const GeneralInformationArea = {
 const Content = {
     group: {
         'EN': 'Content',
-        'HU': 'Tartalom'
+        'HU': 'Tartalom',
+        'RU': 'Контент'
     },
     fields: [
         {
+            label: {
+                'EN': 'Form / Genre',
+                'HU': 'Zsáner'
+            },
+            field: 'genre',
+            bilingual: false,
+            link: {}
+        }, {
             label: {
                 'EN': 'Contents Summary',
                 'HU': 'Tartalmi Összegzés'
@@ -79,11 +103,75 @@ const Content = {
             field: 'contents_summary',
             bilingual: true,
             link: {}
+        }, {
+            label: {
+                'EN': 'Physical Description',
+                'HU': 'Fizikai Leírás'
+            },
+            field: 'physical_description',
+            bilingual: true,
+            link: {}
+        }, {
+            label: {
+                'EN': 'Physical Condition',
+                'HU': 'Fizikai Állapot'
+            },
+            field: 'physical_description',
+            bilingual: true,
+            link: {}
+        },
+    ]
+}
+
+const Context = {
+    group: {
+        'EN': 'Context',
+        'HU': 'Kontextus',
+        'RU': 'Контекст'
+    },
+    fields: [
+        {
+            label: {
+                'EN': 'Contributors',
+                'HU': 'Közreműködők'
+            },
+            field: 'contributors',
+            bilingual: false,
+            link: {}
+        }, {
+            label: {
+                'EN': 'Added Geo Locations',
+                'HU': 'Hozzáadott Geolokációk'
+            },
+            field: 'added_geo_locations',
+            bilingual: false,
+            link: {}
+        }
+    ]
+}
+
+const Subject = {
+    group: {
+        'EN': 'Subject',
+        'HU': 'Tárgy',
+        'RU': 'Тема'
+    },
+    fields: [
+        {
+            label: {
+                'EN': 'Subjects',
+                'HU': 'Tárgyszavak'
+            },
+            field: 'subjects',
+            bilingual: false,
+            link: {}
         }
     ]
 }
 
 export const findingAidsFieldConfig = [
   GeneralInformationArea,
-  Content
+  Content,
+  Context,
+  Subject
 ]

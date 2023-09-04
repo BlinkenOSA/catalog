@@ -1,6 +1,8 @@
 import style from "./FindingAidsItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
+import FindingAidsGeoLocations from "./parts/findingAidsDisplay/FindingAidsItemWithWiki";
+import FindingAidsItemWithWiki from "./parts/findingAidsDisplay/FindingAidsItemWithWiki";
 
 const FindingAidsItem = ({id, record, language, group, label, field, bilingual, links={}, isMobile, display='sameRow'}) => {
     const fieldName = language === 'EN' ? field : (bilingual ? `${field}_original` : field);
@@ -25,13 +27,17 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
                 return <a href={`/catalog/${record['catalog_id']}`}>{record['archival_unit']['title_full']}</a>
             case 'date_from':
                 let dates = []
-                dates.push(`${record['date_from']}${record['date_to'] ? `- ${record['date_to']}` : ''}`)
+                dates.push(`${record['date_from']}${record['date_to'] ? ` - ${record['date_to']}` : ''}`)
                 record['dates'].forEach(d => {
                     dates.push(`${d['date_from']}${d['date_to'] ? `- ${d['date_to']}` : ''}${d['date_type'] ? ` (${d['date_type']})` : ''}`)
                 })
                 return renderValue(dates)
             case 'contents_summary':
             case 'contents_summary_original':
+            case 'physical_description':
+            case 'physical_description_original':
+            case 'physical_condition':
+            case 'physical_condition_original':
                 return parse(record[fieldName])
             case 'duration':
                 let d = []
@@ -46,6 +52,17 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
                     d.push(Number(duration[2]) > 1 ? `${Number(duration[2])} seconds` : `${Number(duration[2])} second`)
                 }
                 return d.join(' ');
+            case 'genre':
+                return renderValue(record['genre'].map(g => g['genre']))
+            case 'languages':
+                const languages = record['languages'].map(lang => {
+                    if (lang['language_usage'] && lang['language_usage'] !== null) {
+                        return (`${lang['language']['language']} (${lang['language_usage']})`)
+                    } else {
+                        return (`${lang['language']['language']}`)
+                    }
+                })
+                return renderValue(languages)
             default:
                 return renderValue(record[fieldName])
         }
@@ -94,8 +111,38 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
     }
 
     if (record) {
-        if (detectValueExists(fieldName)) {
-            return displayField()
+        switch (fieldName) {
+            case 'added_geo_locations':
+                return <FindingAidsItemWithWiki
+                  fieldName={fieldName}
+                  record={record}
+                  fields={['added_country', 'added_place']}
+                  group={group}
+                  language={language}
+                  label={label}
+                />
+            case 'contributors':
+                return <FindingAidsItemWithWiki
+                  fieldName={fieldName}
+                  record={record}
+                  fields={['added_person', 'added_corporation']}
+                  group={group}
+                  language={language}
+                  label={label}
+                />
+            case 'subjects':
+                return <FindingAidsItemWithWiki
+                  fieldName={fieldName}
+                  record={record}
+                  fields={['subject_person', 'subject_corporation']}
+                  group={group}
+                  language={language}
+                  label={label}
+                />
+            default:
+                if (detectValueExists(fieldName)) {
+                    return displayField()
+                }
         }
     }
     return ''
