@@ -16,7 +16,7 @@ const StatisticsArchives = ({data}) => {
     return (
       <React.Fragment>
         <div key={unit['reference_code']} className={style.ScrollItem}>
-          <span className={style.ScrollItemDivider}>New collections</span>
+          <span className={style.ScrollItemDivider}>+++ New collections +++</span>
           <a href={`/catalog/${unit['id']}`}>
             <span className={style.ReferenceCode}>{unit['reference_code']}</span>
             <span className={style.Title}>{renderTitle(unit['reference_code'], unit['title'])}</span>
