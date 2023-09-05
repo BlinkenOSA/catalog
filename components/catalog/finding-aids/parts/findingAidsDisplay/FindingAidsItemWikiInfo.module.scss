@@ -24,7 +24,11 @@
     .Data {
       padding-bottom: 10px;
       padding-left: 20px;
-      flex: 1
+      flex: 1;
+
+      p {
+        margin: 0;
+      }
     }
 
     .Map {
