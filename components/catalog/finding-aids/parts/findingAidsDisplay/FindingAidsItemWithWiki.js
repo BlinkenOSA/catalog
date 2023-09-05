@@ -135,14 +135,14 @@ const FindingAidsItemWithWiki = ({record, language, fieldName, fields=[], displa
 							<span
 								className={selectedWikidata === d['wikidata_id'] ? style.WikiValueActive : style.WikiValue}
 								onClick={() => toggleSelectedValue(d['wikidata_id'])}>{d['value']}</span>
-							<span className={style.Comma}>, </span>
+							<span className={style.Comma}> | </span>
 						</React.Fragment>
 					)
 				} else {
 					return (
 						<React.Fragment key={d['value']}>
 							<span>{d['value']}</span>
-							<span className={style.Comma}>, </span>
+							<span className={style.Comma}> | </span>
 						</React.Fragment>
 					)
 				}
