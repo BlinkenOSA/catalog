@@ -3,6 +3,8 @@ import {Marc} from "marcjs";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
+const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER
+const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 
 export default async function handler(req, res) {
     const {id} = req.query;
@@ -14,7 +16,13 @@ export default async function handler(req, res) {
         baseParams.append('fl', 'id,record_origin,marc')
         return axios.get(
           SOLR_API,
-            {params: baseParams}
+            {
+                params: baseParams,
+                auth: {
+                    username: SOLR_USER,
+                    password: SOLR_PASS
+                }
+            }
         ).then(res => res.data);
     }
     const data = await getData();
