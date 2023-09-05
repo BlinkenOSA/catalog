@@ -17,6 +17,7 @@ const validation = Yup.object().shape({
   last_name: Yup.string().required('Required'),
   agree_archival_materials_usage: Yup.boolean().oneOf([true], 'You should accept the conditions'),
   agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement"),
+  captcha: Yup.string().required('Required!')
 })
 
 const RegistrationForm = () => {
