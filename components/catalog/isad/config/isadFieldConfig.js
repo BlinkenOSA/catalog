@@ -57,7 +57,7 @@ const IdentityStatementArea = {
 const ContextArea = {
     group: {
         'EN': 'Context',
-        'HU': 'Konteksztus'
+        'HU': 'Kontextus'
     },
     fields: [
         {

@@ -1,7 +1,7 @@
 const IsadTabConfig = {
   'context': {
     'EN': 'Context',
-    'HU': 'Konteksztus'
+    'HU': 'Kontextus'
   },
   'hierarchy': {
     'EN': 'Hierarchy',
