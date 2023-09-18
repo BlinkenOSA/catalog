@@ -1,4 +1,4 @@
-import { Field, Form, Formik } from 'formik';
+import {Field, Form, Formik} from 'formik';
 import style from "./CartForm.module.scss";
 import InputField from "../form/InputField";
 import DatePickerField from "../form/DatePickerField";
@@ -7,11 +7,16 @@ import {useCart} from "react-use-cart";
 import CaptchaField from "../form/CaptchaField";
 import axios from "axios";
 import {useAlert} from "react-alert";
+import dynamic from "next/dynamic";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
-const CartForm = ({isMobile=false}) => {
-    const { isEmpty, items } = useCart();
+const CartList = dynamic(() => import('./CartList'), {
+    ssr: false
+})
+
+const CartForm = ({isMobile = false}) => {
+    const {isEmpty, items} = useCart();
     const alert = useAlert()
 
     const isWeekday = (date) => {
@@ -28,11 +33,18 @@ const CartForm = ({isMobile=false}) => {
         card_number: Yup.string().required('Required'),
         email: Yup.string().email('Invalid email address').required('Required'),
         request_date: Yup.date().required('Required'),
-        captcha: Yup.string().required('Required')
+        captcha: Yup.string().required('Required'),
+        items: Yup.array().of(
+            Yup.object().shape({
+                volume: Yup.string().required('Required')
+            })
+        )
     })
 
     const handleSubmit = (values, actions) => {
-        values['items'] = items
+        console.log(values);
+        // values['items'] = items
+        /*
         return axios.post(
           `${API}request/`,
           values
@@ -40,18 +52,34 @@ const CartForm = ({isMobile=false}) => {
           const {data} = res
           alert.show(`Request successful!`);
         })
+        */
+    }
+
+    const getInitialValuesForItems = () => {
+        return items.map(item => {
+            item['volume'] = ''
+            return item
+        })
+    }
+
+    const initialValues = {
+        card_number: '',
+        email: '',
+        request_date: '',
+        items: getInitialValuesForItems()
     }
 
     return (
-        <div className={isMobile ? `${style.CartFormWrapper} ${style.Mobile}` : style.CartFormWrapper}>
-            <div className={style.Form}>
-                <Formik
-                    initialValues={{ card_number: '', email: '', request_date: '' }}
-                    validationSchema={validationSchema}
-                    onSubmit={handleSubmit}
-                >
-                    {({errors, touched}) => (
-                        <Form>
+        <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+        >
+            { formik => (
+            <Form>
+                <div style={isMobile ? {display: "block"} : {display: 'flex'}}>
+                    <div className={isMobile ? `${style.CartFormWrapper} ${style.Mobile}` : style.CartFormWrapper}>
+                        <div className={style.Form}>
                             <Field
                                 name="card_number"
                                 label="Researcher Card Number"
@@ -76,7 +104,7 @@ const CartForm = ({isMobile=false}) => {
                                 minDate={new Date()}
                                 maxDate={getMaxDate()}
                             />
-                            {!isEmpty && <CaptchaField />}
+                            {!isEmpty && <CaptchaField/>}
                             <div className={style.SubmitButtonWrapper}>
                                 <button className={style.FormButton} type="submit" disabled={isEmpty}>
                                     Send Request
@@ -84,8 +112,8 @@ const CartForm = ({isMobile=false}) => {
                             </div>
                             <div className={style.Registration}>
                                 <span>
-                                    If you don't own a Researcher Identification Card, please register using the
-                                    Research Registration form below.
+                                  If you don't own a Researcher Identification Card, please register using the
+                                  Research Registration form below.
                                 </span>
                                 {
                                     isMobile ?
@@ -99,7 +127,8 @@ const CartForm = ({isMobile=false}) => {
                                         </div>
                                         <div>
                                             <a href={'/forgot-card-number'}>
-                                                <button className={`${style.FormButton} ${style.ForgotButton}`} type="button">
+                                                <button className={`${style.FormButton} ${style.ForgotButton}`}
+                                                        type="button">
                                                     Forgot card number
                                                 </button>
                                             </a>
@@ -112,18 +141,33 @@ const CartForm = ({isMobile=false}) => {
                                             </button>
                                         </a>
                                         <a href={'/forgot-card-number'}>
-                                            <button className={`${style.FormButton} ${style.ForgotButton}`} type="button">
+                                            <button className={`${style.FormButton} ${style.ForgotButton}`}
+                                                    type="button">
                                                 Forgot card number
                                             </button>
                                         </a>
                                     </div>
                                 }
                             </div>
-                        </Form>
-                    )}
-                </Formik>
-            </div>
-        </div>
+                        </div>
+                    </div>
+                    <CartList isMobile={isMobile}/>
+
+                    <pre
+                        style={{
+                            width: 500,
+                            background: "lightgray",
+                            border: "1px solid black",
+                            padding: 10,
+                            margin: "30px auto 0 auto"
+                        }}
+                    >
+                        {JSON.stringify(formik, null, 2)}
+                      </pre>
+                </div>
+            </Form>
+            )}
+        </Formik>
     )
 }
 

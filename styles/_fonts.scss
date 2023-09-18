@@ -9,13 +9,13 @@ $suisse-font-path: "/fonts";
 @font-face {
   src: url("#{$suisse-font-path}/SuisseIntl-Regular-WebM.woff2") format("woff2");
   font-family: "Suisse Intl";
-  font-weight: 400;
+  font-weight: 400 800;
 }
 
 @font-face {
   src: url("#{$suisse-font-path}/SuisseIntl-Thin-WebS.woff2") format("woff2");
   font-family: "Suisse Intl";
-  font-weight: 100;
+  font-weight: 100 300;
 }
 
 @font-face {

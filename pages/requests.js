@@ -8,12 +8,8 @@ import { Media } from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 
 
-const PrivacyPolicy = () => {
+const RequestsPage = () => {
     const CartForm = dynamic(() => import('../components/cart/CartForm'), {
-        ssr: false
-    })
-
-    const CartList = dynamic(() => import('../components/cart/CartList'), {
         ssr: false
     })
 
@@ -28,10 +24,7 @@ const PrivacyPolicy = () => {
                 <div className={`${style.PageTitle} ${style.Mobile}`}>
                   <h1>Requests</h1>
                 </div>
-                <div className={`${style.FormContent} ${style.Mobile}`}>
-                  <CartList isMobile={true} />
-                  <CartForm isMobile={true} />
-                </div>
+                <CartForm isMobile={true} />
               </div>
             </Media>
             <Media greaterThanOrEqual="md">
@@ -40,14 +33,11 @@ const PrivacyPolicy = () => {
                   <div className={style.PageTitle}>
                       <h1>Requests</h1>
                   </div>
-                  <div className={style.FormContent}>
-                      <CartForm />
-                      <CartList />
-                  </div>
+                  <CartForm />
               </div>
             </Media>
         </Layout>
     )
 };
 
-export default PrivacyPolicy;
+export default RequestsPage;

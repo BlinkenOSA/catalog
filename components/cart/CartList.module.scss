@@ -32,12 +32,21 @@
     font-weight: 400;
     font-size: 12px;
 
+    &.Mobile {
+      gap: 20px;
+    }
+
     .CartButton {
       width: 70px;
     }
 
     .Title {
       flex: 1;
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
 
       span {
         font-weight: 600;

@@ -3,12 +3,14 @@ import {useCart} from "react-use-cart";
 import React, {useState} from 'react';
 import CartButton from "../cart/CartButton";
 import { FiMeh } from 'react-icons/fi';
+import {Field, FieldArray} from "formik";
+import InputField from "../form/InputField";
 
 const CartList = ({isMobile=false}) => {
     const { removeItem, inCart, items } = useCart();
     const [demoButtonChecked, setDemoButtonChecked] = useState(false);
 
-    const renderTitle = (item) => {
+    const renderTitle = (item, index) => {
         if (item['origin'] === 'Archives') {
             return (
                 <div className={style.Title}>
@@ -20,7 +22,9 @@ const CartList = ({isMobile=false}) => {
         } else {
             return (
                 <div className={style.Title}>
-                    <span>{item['title']}</span>
+                    <span>
+                        <a href={`/catalog/${item['id']}`} target={"_blank"}>{item['title']}</a>
+                    </span>
                     <div>{item['type']}</div>
                 </div>
             )
@@ -28,8 +32,9 @@ const CartList = ({isMobile=false}) => {
     }
 
     const renderItems = (items) => (
-        items.map((item, index) => (
-            <div className={style.CartItem} key={index}>
+        <FieldArray name="items" render={ arrayHelpers => (
+            items.map((item, index) => (
+            <div className={isMobile ? `${style.CartItem} ${style.Mobile}` : style.CartItem} key={index}>
                 <div className={style.CartButton}>
                     <CartButton
                         inCart={inCart(item['id'])}
@@ -37,10 +42,33 @@ const CartList = ({isMobile=false}) => {
                         onCheckedChange={() => removeItem(item['id'])}
                     />
                 </div>
-                <div className={style.CallNumber}>{item['call_number']}</div>
-                {renderTitle(item)}
+                {
+                    isMobile ?
+                    <div>
+                        <div className={style.CallNumber}>{item['call_number']}</div>
+                        {renderTitle(item, index)}
+                    </div> :
+                    <>
+                        <div className={style.CallNumber}>{item['call_number']}</div>
+                        <div style={{flex: 1}}>
+                            {renderTitle(item, index)}
+                            {
+                                item['origin'] === 'Library' && item['type'].includes('Continuing Resource') &&
+                                <div style={{display: 'block'}}>
+                                    <Field
+                                        style={{maxWidth: '350px'}}
+                                        name={`items[${index}].volume`}
+                                        placeholder={'Please indicate the requested volumes'}
+                                        component={InputField}
+                                    />
+                                </div>
+                            }
+                        </div>
+                    </>
+                }
             </div>
-        ))
+            ))
+        )}/>
     )
 
     const displayItems = (origin) => {

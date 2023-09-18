@@ -69,6 +69,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
                 call_number: record.hasOwnProperty('call_number') ? record['call_number'] : '',
                 sorting_code: getSortingCode(),
                 digital_version: record.hasOwnProperty('digital_version_barcode') ? record['digital_version_barcode'] : '',
+                primary_type: record['primary_type'],
                 type: getType(),
                 series_name: record.hasOwnProperty('series_name') ? record['series_name'] : '',
                 price: 0
@@ -81,7 +82,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
                     alert.show(`You have reached the maximum amount of '${record['record_origin']}' items allowed to be requested!`);
                 }
             } else {
-                addItem(item, 1);
+                addItem(item);
             }
         } else {
             removeItem(record['id'])
