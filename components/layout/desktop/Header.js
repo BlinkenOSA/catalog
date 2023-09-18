@@ -15,7 +15,8 @@ const Menu = dynamic(() => import('./Menu'), {
 const Header = () => {
     const [collectionsMenuOpen, setCollectionsMenuOpen] = useState(false)
 
-    const handleMenuOpen = (menu) => {
+    const handleMenuOpen = () => {
+        console.log(collectionsMenuOpen)
         setCollectionsMenuOpen(!collectionsMenuOpen)
     }
 

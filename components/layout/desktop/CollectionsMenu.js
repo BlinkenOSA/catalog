@@ -13,6 +13,9 @@ const CollectionsMenu = () => {
             <a href={'/archival-collections'}>Archival Collections</a>
           </li>
           <li>
+            <a href={'/image-gallery'}>Digital Image Gallery</a>
+          </li>
+          <li>
             <a href={'/library-special-collections'}>Library Special Collections</a>
           </li>
         </ul>

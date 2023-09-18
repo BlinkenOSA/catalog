@@ -38,7 +38,7 @@ const SearchHighglights = ({result, highlights}) => {
           {
             Object.keys(highlightsObject).map(key => {
               return (
-                <div className={style.HighlightsValueWrapper}>
+                <div key={key} className={style.HighlightsValueWrapper}>
                   <div className={style.Label}>{FIELDS.hasOwnProperty(key) ? FIELDS[key] : 'label'}:</div>
                   <div className={style.Value}>{renderValue(key, highlightsObject[key].join())}</div>
                 </div>

@@ -13,7 +13,7 @@ import { useRouter } from 'next/router'
 import FindingAidsCitation from "./parts/findingAidsCitation/FindingAidsCitation";
 import LanguageButton from "../../pages/parts/buttons/LanguageButton";
 
-const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigitalContent/FindingAidsDigitalContentOld"), {
+const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigitalContent/FindingAidsDigitalContent"), {
     ssr: false,
 });
 
