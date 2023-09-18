@@ -42,9 +42,6 @@ const CartForm = ({isMobile = false}) => {
     })
 
     const handleSubmit = (values, actions) => {
-        console.log(values);
-        // values['items'] = items
-        /*
         return axios.post(
           `${API}request/`,
           values
@@ -52,7 +49,6 @@ const CartForm = ({isMobile = false}) => {
           const {data} = res
           alert.show(`Request successful!`);
         })
-        */
     }
 
     const getInitialValuesForItems = () => {
@@ -152,18 +148,6 @@ const CartForm = ({isMobile = false}) => {
                         </div>
                     </div>
                     <CartList isMobile={isMobile}/>
-
-                    <pre
-                        style={{
-                            width: 500,
-                            background: "lightgray",
-                            border: "1px solid black",
-                            padding: 10,
-                            margin: "30px auto 0 auto"
-                        }}
-                    >
-                        {JSON.stringify(formik, null, 2)}
-                      </pre>
                 </div>
             </Form>
             )}
