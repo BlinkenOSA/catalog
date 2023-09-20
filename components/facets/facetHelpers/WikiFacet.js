@@ -156,6 +156,7 @@ const WikiFacet = ({selectedFacetObject, type}) => {
               <div className={style.Buttons}>
                 {getWikipedia()}
               </div>
+              <div className={style.DataSource}>Data source: Wikidata</div>
               {getMap()}
             </React.Fragment>
           )
@@ -170,6 +171,7 @@ const WikiFacet = ({selectedFacetObject, type}) => {
               {getBirthData('death')}
               {getListData('occupation', 'Occupation')}
               {getListData('notable_work', 'Notable Works')}
+              <div className={style.DataSource}>Data source: Wikidata</div>
               {getWikipedia()}
             </React.Fragment>
           )

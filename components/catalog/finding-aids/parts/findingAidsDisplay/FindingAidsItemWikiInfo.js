@@ -116,6 +116,7 @@ const FindingAidsItemWikiInfo = ({wikidata_id, value, type}) => {
               <h2>{data['title']}</h2>
               <p>{data['description']}</p>
               {getCountry()}
+              <div className={style.DataSource}>Data source: Wikidata</div>
               {getWikipedia()}
             </div>
           </div>
@@ -135,6 +136,7 @@ const FindingAidsItemWikiInfo = ({wikidata_id, value, type}) => {
                 {getBirthData('death')}
                 {getListData('occupation', 'Occupation')}
                 {getListData('notable_work', 'Notable Works')}
+                <div className={style.DataSource}>Data source: Wikidata</div>
                 {getWikipedia()}
               </div>
             </div>
