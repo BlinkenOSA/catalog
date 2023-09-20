@@ -76,7 +76,21 @@ const GeneralInformationArea = {
             },
             field: 'note',
             link: {},
-        }
+        }, {
+            label: {
+                'EN': 'Access Rights',
+                'HU': 'Jogosultságok'
+            },
+            field: 'access_rights',
+            link: {},
+        }, {
+            label: {
+                'EN': 'Restriction Explanation',
+                'HU': 'Korlátozás oka'
+            },
+            field: 'access_rights_restriction_explanation',
+            link: {},
+        },
     ],
 }
 

@@ -14,6 +14,7 @@ import IsadThumbnail from "./parts/IsadThumbnail";
 import {Collapse} from 'react-collapse';
 import parse from "html-react-parser";
 import filterPlaceholders from "./config/filterPlaceholders";
+import AccessRightsButton from "../../../pages/parts/buttons/AccessRightsButton";
 
 const IsadContentPage = ({seriesID, language, isMobile}) => {
 	const { inCart } = useCart();
@@ -100,6 +101,7 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 					{isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
 					<PrimaryTypeButton primaryType={rec['primary_type']} />
 					<AvailabilityButton record={rec} />
+					<AccessRightsButton record={rec} />
 				</div>
 			</div>
 		)

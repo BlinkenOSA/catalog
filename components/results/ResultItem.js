@@ -10,6 +10,7 @@ import PrimaryTypeButton from "../pages/parts/buttons/PrimaryTypeButton";
 import CartButton from "../cart/CartButton";
 import { useCart } from "react-use-cart";
 import SearchHighglights from "./parts/SearchHighglights";
+import AccessRightsButton from "../pages/parts/buttons/AccessRightsButton";
 
 const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
     const { inCart } = useCart();
@@ -45,6 +46,12 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
             return <AvailabilityButton record={result} />
         } else {
             return ''
+        }
+    }
+
+    const renderAccessRightsButton = () => {
+        if (result['description_level'] === 'Folder' || result['description_level'] === 'Item') {
+            return <AccessRightsButton record={result}/>
         }
     }
 
@@ -95,6 +102,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                     {renderCartButton()}
                     <PrimaryTypeButton origin={result['record_origin']} primaryType={result['primary_type']} />
                     {renderAvailabilityButton()}
+                    {renderAccessRightsButton()}
                 </div>
             </div>
             {!isMobile && renderThumbnail()}

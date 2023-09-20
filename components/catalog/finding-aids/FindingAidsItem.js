@@ -26,9 +26,19 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
                 return <a href={`/catalog/${record['catalog_id']}`}>{record['archival_unit']['title_full']}</a>
             case 'date_from':
                 let dates = []
-                dates.push(`${record['date_from']}${record['date_to'] ? ` - ${record['date_to']}` : ''}`)
+
+                if (record['date_to'] && record['date_from'] !== record['date_to']) {
+                    dates.push(`${record['date_from']}${record['date_to'] ? ` - ${record['date_to']}` : ''}`)
+                } else {
+                    dates.push(`${record['date_from']}`)
+                }
+
                 record['dates'].forEach(d => {
-                    dates.push(`${d['date_from']}${d['date_to'] ? `- ${d['date_to']}` : ''}${d['date_type'] ? ` (${d['date_type']})` : ''}`)
+                    if (record['date_to'] && record['date_from'] !== record['date_to']) {
+                        dates.push(`${d['date_from']}${d['date_to'] ? `- ${d['date_to']}` : ''}${d['date_type'] ? ` (${d['date_type']})` : ''}`)
+                    } else {
+                        dates.push(`${d['date_from']}${d['date_type'] ? ` (${d['date_type']})` : ''}`)
+                    }
                 })
                 return renderValue(dates)
             case 'contents_summary':

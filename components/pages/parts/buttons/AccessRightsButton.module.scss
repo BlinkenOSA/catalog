@@ -1,0 +1,36 @@
+@import "../../../../styles/variables";
+
+.Button {
+  height: 25px;
+  border-radius: 12px;
+  background-color: $button-background;
+  color: $white;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  width: auto;
+  padding-left: 5px;
+
+  &.Restricted {
+    background-color: $button-background;
+  }
+
+  svg {
+    padding-left: 4px;
+  }
+
+  .Text {
+    text-align: center;
+    color: $white;
+    font-family: 'Suisse Intl', serif;
+    font-size: 10px;
+    line-height: 25px;
+    padding: 0 10px 0 5px;
+    text-transform: uppercase;
+  }
+}
+
+.Button img {
+  margin: 0 auto;
+}

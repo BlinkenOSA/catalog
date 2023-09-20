@@ -12,6 +12,7 @@ import PageNavigation from "./parts/pageNavigation/PageNavigation";
 import { useRouter } from 'next/router'
 import FindingAidsCitation from "./parts/findingAidsCitation/FindingAidsCitation";
 import LanguageButton from "../../pages/parts/buttons/LanguageButton";
+import AccessRightsButton from "../../pages/parts/buttons/AccessRightsButton";
 
 const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigitalContent/FindingAidsDigitalContent"), {
     ssr: false,
@@ -85,6 +86,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                             }
                             <PrimaryTypeButton primaryType={solrData['primary_type']} />
                             <AvailabilityButton record={solrData} />
+                            <AccessRightsButton record={metadata} />
                         </div>
                     </div>
                 </div>
