@@ -45,10 +45,7 @@ const ImageGallery = ({data}) => {
 				module={'image-gallery'}
 				isMobile={false}
 			/>
-			<div className={style.Page}>
-				<div className={style.PageTitle}>
-					<h1>Digital Image Gallery</h1>
-				</div>
+			<div className={`${style.Page} ${style.FullWidth}`}>
 				<ImageGalleryPage data={data} />
 			</div>
 		</Layout>

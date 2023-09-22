@@ -7,6 +7,12 @@
   border-right: $border-width solid $black;
   min-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height} + #{$footer-height}));
 
+  &.FullWidth {
+    max-width: unset;
+    width: 100%;
+    border: unset;
+  }
+
   &.Mobile {
     border: none;
   }
