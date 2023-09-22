@@ -1,11 +1,11 @@
 import style from './ArchivalUnitDrawer.module.scss'
 import useSWR from "swr";
 import {fetcher} from "../../../../utils/fetcherFunctions";
-import Loader from "../loader/Loader";
-import LanguageButton from "../buttons/LanguageButton";
+import Loader from "../../../layout/Loader";
+import LanguageButton from "../../search/parts/LanguageButton";
 import {useState} from "react";
-import PrimaryTypeButton from "../buttons/PrimaryTypeButton";
-import Button from "../buttons/Button";
+import PrimaryTypeButton from "../../search/parts/PrimaryTypeButton";
+import Button from "../../search/parts/Button";
 import DateDistribution from "./DateDistribution";
 import parse from "html-react-parser";
 

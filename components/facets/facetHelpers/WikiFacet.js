@@ -1,7 +1,7 @@
 import React from "react";
 import useSWR from "swr";
 import {fetcher} from "../../../utils/fetcherFunctions";
-import Loader from "../../pages/parts/loader/Loader";
+import Loader from "../../layout/Loader";
 import style from "./FacetHelper.module.scss";
 import { FaWikipediaW, FaMapMarkerAlt } from "react-icons/fa";
 import dayjs from "dayjs";

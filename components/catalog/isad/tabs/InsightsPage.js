@@ -1,4 +1,4 @@
-import Loader from "../../../pages/parts/loader/Loader";
+import Loader from "../../../layout/Loader";
 import style from "./InsightsPage.module.scss";
 import IsadInsightsDates from "./parts/insights/IsadInsightsDates";
 import IsadInsightsTopValues from "./parts/insights/IsadInsightsTopValues";

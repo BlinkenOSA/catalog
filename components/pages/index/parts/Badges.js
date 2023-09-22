@@ -1,5 +1,5 @@
 import style from "./Badges.module.scss";
-import Loader from "../loader/Loader";
+import Loader from "../../../layout/Loader";
 import React from "react";
 import {createParams} from "../../../../utils/urlParamFunctions";
 import {useRouter} from "next/router";

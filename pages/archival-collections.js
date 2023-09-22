@@ -5,7 +5,7 @@ import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch
 import React from "react";
 import { Media } from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
-import CollectionPage from "../components/pages/CollectionPage";
+import CollectionPage from "../components/pages/collections/CollectionPage";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 
 export async function getServerSideProps() {

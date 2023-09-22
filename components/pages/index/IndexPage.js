@@ -1,10 +1,10 @@
 import React from "react";
 import style from "./IndexPage.module.scss";
-import FacetMenu from "../facets/desktop/FacetMenu";
-import Badges from "./parts/indexPage/Badges";
-import {Media} from "../../utils/media"
-import Welcome from "./parts/indexPage/Welcome";
-import StatisticsArchives from "./parts/indexPage/StatisticsArchives";
+import FacetMenu from "../../facets/desktop/FacetMenu";
+import Badges from "./parts/Badges";
+import {Media} from "../../../utils/media"
+import Welcome from "./parts/Welcome";
+import StatisticsArchives from "./parts/StatisticsArchives";
 
 /**
  * Page responsible for displaying the search results

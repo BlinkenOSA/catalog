@@ -1,7 +1,7 @@
 import style from "./IsadInsightsBadges.module.scss";
 import React, {useState} from "react";
 import {createParams} from "../../../../../../utils/urlParamFunctions";
-import Loader from "../../../../../../components/pages/parts/loader/Loader"
+import Loader from "../../../../../layout/Loader"
 import {useRouter} from "next/router";
 import {useDeepCompareEffect} from "react-use";
 

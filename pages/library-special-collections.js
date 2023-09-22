@@ -5,7 +5,7 @@ import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch
 import React from "react";
 import { Media } from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
-import LibraryCollectionPage from "../components/pages/LibraryCollectionPage";
+import LibraryCollectionPage from "../components/pages/library-collections/LibraryCollectionPage";
 
 
 const LibrarySpecialCollections = () => {

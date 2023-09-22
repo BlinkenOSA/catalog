@@ -62,6 +62,7 @@ const ImageViewer = ({id, isMobile}) => {
                         {fullScreenEnabled ? <FaCompress/> : <FaExpand/>}
                     </div>
                     <OpenSeadragonViewer
+                        id={id}
                         manifestUrl={manifestUrl}
                         options={options}
                         openSeadragonOptions={openSeadragonOptions}

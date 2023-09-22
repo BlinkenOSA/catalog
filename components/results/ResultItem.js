@@ -6,11 +6,11 @@ import Publisher from "./parts/metadata/Publisher";
 import ParentUnits from "./parts/metadata/ParentUnits";
 import CallNumber from "./parts/metadata/CallNumber";
 import AvailabilityButton from "./parts/buttons/AvailabilityButton";
-import PrimaryTypeButton from "../pages/parts/buttons/PrimaryTypeButton";
+import PrimaryTypeButton from "../pages/search/parts/PrimaryTypeButton";
 import CartButton from "../cart/CartButton";
 import { useCart } from "react-use-cart";
 import SearchHighglights from "./parts/SearchHighglights";
-import AccessRightsButton from "../pages/parts/buttons/AccessRightsButton";
+import AccessRightsButton from "../pages/search/parts/AccessRightsButton";
 
 const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
     const { inCart } = useCart();

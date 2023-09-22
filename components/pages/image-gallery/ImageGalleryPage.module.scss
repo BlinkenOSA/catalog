@@ -1,0 +1,21 @@
+@import "../../../styles/variables";
+
+.ImageGalleryPage {
+  display: flex;
+  gap: 20px;
+  min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - #{$footer-height});
+
+  .ImageGalleryThumbnails {
+    flex: 3;
+    border-right: 1px solid $black;
+
+    .FilterBar {
+      height: 36px;
+      border-bottom: 1px solid $black;
+    }
+  }
+
+  .ImageGalleryViewer {
+    flex: 2;
+  }
+}

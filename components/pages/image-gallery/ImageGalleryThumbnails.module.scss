@@ -1,0 +1,39 @@
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+
+
+  &:after {
+    content: '';
+    flex-grow: 999999999;
+  }
+
+  figure {
+    cursor: pointer;
+    margin: 10px;
+    position: relative;
+
+    i {
+      display: block;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      vertical-align: bottom;
+      filter: grayscale(1);
+      -webkit-transition: all .4s ease;
+      -moz-transition: all .4s ease;
+      -o-transition: all .4s ease;
+      transition: all .4s ease;
+    }
+  }
+
+  figure:hover {
+    img {
+      filter: grayscale(0);
+    }
+  }
+
+}

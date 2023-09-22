@@ -57,12 +57,15 @@
         text-align: center;
         color: $black;
         // background-color: $white;
-        border-left: 1px solid $black;
         transition: 0.3s;
         cursor: pointer;
       }
 
-      li:last-child {
+      a {
+        border-left: 1px solid $black;
+      }
+
+      a:last-child {
         border-right: 1px solid $black;
       }
 

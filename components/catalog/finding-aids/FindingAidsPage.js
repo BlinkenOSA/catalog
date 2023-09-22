@@ -1,6 +1,6 @@
 import style from "./FindingAidsPage.module.scss";
-import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
-import Loader from "../../pages/parts/loader/Loader";
+import PrimaryTypeButton from "../../pages/search/parts/PrimaryTypeButton";
+import Loader from "../../layout/Loader";
 import React, {useRef, useState} from "react";
 import CartButton from "../../cart/CartButton";
 import {useCart} from "react-use-cart";
@@ -11,8 +11,8 @@ import dynamic from "next/dynamic";
 import PageNavigation from "./parts/pageNavigation/PageNavigation";
 import { useRouter } from 'next/router'
 import FindingAidsCitation from "./parts/findingAidsCitation/FindingAidsCitation";
-import LanguageButton from "../../pages/parts/buttons/LanguageButton";
-import AccessRightsButton from "../../pages/parts/buttons/AccessRightsButton";
+import LanguageButton from "../../pages/search/parts/LanguageButton";
+import AccessRightsButton from "../../pages/search/parts/AccessRightsButton";
 
 const FindingAidsDigitalContent = dynamic(() => import("./parts/findingAidsDigitalContent/FindingAidsDigitalContent"), {
     ssr: false,

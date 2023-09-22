@@ -1,10 +1,10 @@
 import style from "./IsadPage.module.scss";
-import PrimaryTypeButton from "../../pages/parts/buttons/PrimaryTypeButton";
-import Loader from "../../pages/parts/loader/Loader";
+import PrimaryTypeButton from "../../pages/search/parts/PrimaryTypeButton";
+import Loader from "../../layout/Loader";
 import React, {useEffect, useState} from "react";
-import LanguageButton from "../../pages/parts/buttons/LanguageButton";
+import LanguageButton from "../../pages/search/parts/LanguageButton";
 import IsadMetadataPage from "./tabs/IsadMetadataPage";
-import CollectionPage from "../../pages/CollectionPage";
+import CollectionPage from "../../pages/collections/CollectionPage";
 import IsadContentPage from "./tabs/IsadContentPage";
 import isadTabConfig from "./config/isadTabConfig";
 import InsightsPage from "./tabs/InsightsPage";

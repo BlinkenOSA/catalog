@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import style from "./CollectionPage.module.scss";
-import Loader from "./parts/loader/Loader";
+import Loader from "../../layout/Loader";
 import {useState} from "react";
-import TreeNode from "./parts/treeNode/TreeNode";
-import ArchivalUnitDrawer from "./parts/archivalUnitDrawer/ArchivalUnitDrawer";
+import TreeNode from "./parts/TreeNode";
+import ArchivalUnitDrawer from "./parts/ArchivalUnitDrawer";
 import {useRouter} from "next/router";
 
 /**

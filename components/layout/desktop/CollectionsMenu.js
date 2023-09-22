@@ -9,15 +9,21 @@ const CollectionsMenu = () => {
     <div className={style.Content}>
       <div className={style.SubMenuWrapper}>
         <ul className={style.SubMenuList}>
-          <li>
-            <a href={'/archival-collections'}>Archival Collections</a>
-          </li>
-          <li>
-            <a href={'/image-gallery'}>Digital Image Gallery</a>
-          </li>
-          <li>
-            <a href={'/library-special-collections'}>Library Special Collections</a>
-          </li>
+          <a href={'/archival-collections'}>
+            <li>
+              Archival Collections
+            </li>
+          </a>
+          <a href={'/image-gallery'}>
+            <li>
+              Digital Image Gallery
+            </li>
+          </a>
+          <a href={'/library-special-collections'}>
+            <li>
+              Library Special Collections
+            </li>
+          </a>
         </ul>
       </div>
     </div>

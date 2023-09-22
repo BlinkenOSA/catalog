@@ -2,8 +2,8 @@ import React from 'react';
 import style from "./LibraryCollectionPage.module.scss";
 import {useState} from "react";
 import {useRouter} from "next/router";
-import {libraryCollections} from "./config/libraryCollections";
-import LibraryCollectionDrawer from "./parts/libraryCollectionDrawer/LibraryCollectionDrawer";
+import {libraryCollections} from "./libraryCollections";
+import LibraryCollectionDrawer from "./parts/LibraryCollectionDrawer";
 
 /**
  * Page responsible for displaying the hierarchical list of archival collections.

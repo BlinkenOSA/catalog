@@ -1,8 +1,8 @@
 import style from "./FindingAidsLocation.module.scss";
-import Loader from "../../pages/parts/loader/Loader";
+import Loader from "../../layout/Loader";
 import TreeNode from "./parts/treeNode/TreeNode";
 import {Collapse} from 'react-collapse';
-import Button from "../../pages/parts/buttons/Button";
+import Button from "../../pages/search/parts/Button";
 import {useState} from "react";
 
 const FindingAidsLocation = ({data, language, onTreeNodeClick, isMobile}) => {

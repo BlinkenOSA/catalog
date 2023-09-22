@@ -1,6 +1,6 @@
 import style from "./FindingAidsCitation.module.scss";
 import React, {useState} from "react";
-import Button from "../../../../pages/parts/buttons/Button";
+import Button from "../../../../pages/search/parts/Button";
 
 const FindingAidsCitation = ({citation, language, isMobile}) => {
     const [copied, setCopied] = useState(false);

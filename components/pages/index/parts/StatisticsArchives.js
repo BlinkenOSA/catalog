@@ -1,6 +1,6 @@
 import style from "./Statistics.module.scss";
 import React from "react";
-import Loader from "../loader/Loader";
+import Loader from "../../../layout/Loader";
 import dayjs from 'dayjs';
 
 const StatisticsArchives = ({data}) => {

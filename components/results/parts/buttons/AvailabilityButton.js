@@ -1,5 +1,5 @@
 import style from './AvailabilityButton.module.scss';
-import Button from "../../../pages/parts/buttons/Button";
+import Button from "../../../pages/search/parts/Button";
 
 const AvailabilityButton = ({record}) => {
     const renderDigitalVersionButton = () => (

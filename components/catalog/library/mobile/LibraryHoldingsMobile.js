@@ -3,7 +3,7 @@ import style from "./LibraryHoldingsMobile.module.scss";
 import {getValues} from "../../../../utils/marcFunctions";
 import React, {useState} from "react";
 import {Collapse} from "react-collapse";
-import Button from "../../../pages/parts/buttons/Button";
+import Button from "../../../pages/search/parts/Button";
 
 const ITEM_TYPES = {
     'BK': 'Book',

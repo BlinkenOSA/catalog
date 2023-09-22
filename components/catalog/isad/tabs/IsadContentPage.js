@@ -1,12 +1,12 @@
 import useSWRInfinite from 'swr/infinite'
 import {solrFetcher} from "../../../../utils/fetcherFunctions";
-import Loader from "../../../pages/parts/loader/Loader";
+import Loader from "../../../layout/Loader";
 import style from "./IsadContentPage.module.scss";
 import CartButton from "../../../cart/CartButton";
 import {useCart} from "react-use-cart";
 import React, {useState} from "react";
 import AvailabilityButton from "../../../results/parts/buttons/AvailabilityButton";
-import PrimaryTypeButton from "../../../pages/parts/buttons/PrimaryTypeButton";
+import PrimaryTypeButton from "../../../pages/search/parts/PrimaryTypeButton";
 import IsadSearchBar from "./parts/IsadSearchBar";
 import IsadFilter from "./parts/IsadFilter";
 import {useRouter} from "next/router";
@@ -14,7 +14,7 @@ import IsadThumbnail from "./parts/IsadThumbnail";
 import {Collapse} from 'react-collapse';
 import parse from "html-react-parser";
 import filterPlaceholders from "./config/filterPlaceholders";
-import AccessRightsButton from "../../../pages/parts/buttons/AccessRightsButton";
+import AccessRightsButton from "../../../pages/search/parts/AccessRightsButton";
 
 const IsadContentPage = ({seriesID, language, isMobile}) => {
 	const { inCart } = useCart();
