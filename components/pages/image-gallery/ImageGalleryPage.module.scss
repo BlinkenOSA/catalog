@@ -2,20 +2,31 @@
 
 .ImageGalleryPage {
   display: flex;
-  gap: 20px;
   min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - #{$footer-height});
 
   .ImageGalleryThumbnails {
-    flex: 3;
+    flex: 4;
     border-right: 1px solid $black;
 
     .FilterBar {
-      height: 36px;
+      display: flex;
+      height: 35px;
       border-bottom: 1px solid $black;
+      position: sticky;
+      position: -webkit-sticky;
+      top: calc(#{$header-height} + #{$breadcrumb-height});
+      z-index: 10;
+      background-color: $background;
     }
   }
 
   .ImageGalleryViewer {
-    flex: 2;
+    margin: 0;
+    flex: 3;
+
+    .Content {
+      position: sticky;
+      top: calc(#{$header-height} + #{$breadcrumb-height});
+    }
   }
 }

@@ -7,7 +7,7 @@ import {useWindowSize} from 'react-use';
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
-const ImageViewer = ({id, isMobile}) => {
+const ImageViewer = ({id, isGallery=false, isMobile}) => {
     const manifestUrl = `${API}finding-aids-image-manifest/${id}/manifest.json`;
 
     const {width, height} = useWindowSize();
@@ -49,9 +49,17 @@ const ImageViewer = ({id, isMobile}) => {
 
     const getClass = () => {
         if (isMobile) {
-            return fullScreenEnabled ? `${style.IIIFViewer} ${style.Mobile} ${style.FullScreen}` : `${style.IIIFViewer} ${style.Mobile}`
+            if (isGallery) {
+                return fullScreenEnabled ? `${style.IIIFViewer} ${style.Mobile} ${style.FullScreen}` : `${style.IIIFViewer} ${style.Mobile}`
+            } else {
+                return fullScreenEnabled ? `${style.IIIFViewer} ${style.Mobile} ${style.FullScreen}` : `${style.IIIFViewer} ${style.Mobile}`
+            }
         } else {
-            return fullScreenEnabled ? `${style.IIIFViewer} ${style.FullScreen}` : style.IIIFViewer
+            if (isGallery) {
+                return fullScreenEnabled ? `${style.IIIFViewer} ${style.Gallery} ${style.FullScreen}` : `${style.IIIFViewer} ${style.Gallery}`
+            } else {
+                return fullScreenEnabled ? `${style.IIIFViewer} ${style.FullScreen}` : style.IIIFViewer
+            }
         }
     }
 

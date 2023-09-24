@@ -1,0 +1,140 @@
+@import "../../../../styles/variables";
+
+.Facets {
+  flex: 1;
+  font-family: "Suisse Intl Condensed", serif;
+  font-weight: 400;
+  font-size: 18px;
+  align-self: flex-start;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+  }
+
+  li {
+    flex: 1;
+    height: 35px;
+    border-right: $border-width solid $black;
+    font-size: 16px;
+    line-height: 35px;
+
+    &:last-child {
+      border-right: unset;
+    }
+
+    span {
+      padding-left: 10px;
+    }
+
+    div {
+      float: right;
+    }
+
+    .Button {
+      position: relative;
+      top: 17px;
+      right: -10px;
+      width: 30px;
+      height: 30px;
+      transform: translate(-50%, -50%) rotate(0deg);
+      cursor: pointer;
+      z-index: 100;
+      transition: 0.8s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 1px;
+        width: 50%;
+        background: $black;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 50%;
+        width: 1px;
+        background: $black;
+      }
+    }
+  }
+
+  li:hover {
+    cursor: pointer;
+    color: $white;
+    background-color: $black;
+
+    .Button {
+      &:after {
+        background: $white;
+      }
+
+      &:before {
+        background: $white;
+      }
+    }
+  }
+
+  li.FacetSelected {
+    color: $black;
+    background-color: $white;
+
+    .Button {
+      &:after {
+        background: $black;
+      }
+
+      &:before {
+        width: 0;
+        background: $black;
+      }
+    }
+  }
+}
+
+.FacetsInverse {
+  color: $white;
+  border-right: none  ;
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: calc(#{$header-height} + #{$breadcrumb-height});
+  align-self: flex-start;
+
+  li {
+    border-bottom: $border-width solid $white;
+
+    .Button {
+      &:after {
+        background: $white;
+      }
+
+      &:before {
+        background: $white;
+      }
+    }
+  }
+
+  li:hover {
+    color: $black;
+    background-color: $white;
+
+    .Button {
+      &:after {
+        background: $black;
+      }
+
+      &:before {
+        background: $black;
+      }
+    }
+  }
+}

@@ -17,10 +17,23 @@
     position: relative;
   }
 
+  &.Gallery {
+    border-top: unset;
+    border-bottom: $border-width solid $black;
+
+    :global .openseadragon-container .navigator {
+      display: none !important;
+    }
+  }
+
   &.FullScreen {
     border: 0;
     padding: 0;
     margin: 0;
+
+    :global .openseadragon-container .navigator {
+      display: block !important;
+    }
   }
 
   .FullScreenButton {

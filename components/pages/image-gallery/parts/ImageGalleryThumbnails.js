@@ -1,7 +1,7 @@
 import React from 'react';
 import style from "./ImageGalleryThumbnails.module.scss";
 
-const ImageGalleryThumbnails = ({records}) => {
+const ImageGalleryThumbnails = ({records, onSelect}) => {
 	const maxHeight = 200;
 
 	const getDimensionData = (record) => {
@@ -27,7 +27,10 @@ const ImageGalleryThumbnails = ({records}) => {
 					const dimensionData = getDimensionData(record);
 					if (dimensionData) {
 						return (
-							<figure key={index} style={{ flexGrow: dimensionData['flexGrow'], flexBasis: `${dimensionData['flexBasis']}px` }}>
+							<figure
+								key={index}
+								onClick={() => onSelect(record['id'])}
+								style={{ flexGrow: dimensionData['flexGrow'], flexBasis: `${dimensionData['flexBasis']}px` }}>
 								<i style={{ paddingBottom: `${dimensionData['paddingBottom']}%` }} />
 								<img src={dimensionData['imageURL']} alt="placeholder"/>
 							</figure>

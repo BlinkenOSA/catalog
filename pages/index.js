@@ -13,6 +13,7 @@ import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import {Buffer} from "buffer";
+import IndexPageNew from "../components/pages/index/IndexPageNew";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
@@ -20,7 +21,7 @@ const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps2(context) {
   const params = context.query
   const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : makeSolrParams({qf: 'identifier_search'})
 
@@ -75,54 +76,56 @@ const Index = ({data, badgeData, newIsadData}) => {
     }
 
     if (selectedFacetGroup === '') {
-        return (
+        if (Object.entries(router.query).length === 0) {
+          return (
+            <IndexPageNew
+              badgeData={badgeData}
+              newIsadData={newIsadData}
+              onSelectFacetGroup={onSelectFacetGroup}
+            />
+          )
+        } else {
+          return (
             <Layout>
-                <Head>
-                    <title>Blinken OSA Archivum - Catalog</title>
-                </Head>
-                <Media lessThan="md">
-                    {
-                        (className, renderChildren) => {
-                            return renderChildren ?
-                                <BreadcrumbSearchMobile
-                                    total={data ? data['response']['numFound'] : 0}
-                                    reference={ref}
-                                    inverse={false}
-                                    module={''}
-                                    onSelectFacetGroup={onSelectFacetGroup}
-                                    isMobile={true}
-                                /> : '';
-                        }
-                    }
-                </Media>
-                <Media greaterThanOrEqual="md">
-                    {
-                        (className, renderChildren) => {
-                            return renderChildren ?
-                                <BreadcrumbSearch
-                                    total={data ? data['response']['numFound'] : 0}
-                                    reference={ref}
-                                    inverse={false}
-                                    module={''}
-                                    isMobile={false}
-                                /> : '';
-                        }
-                    }
-                </Media>
+              <Head>
+                <title>Blinken OSA Archivum - Catalog</title>
+              </Head>
+              <Media lessThan="md">
                 {
-                    Object.entries(router.query).length === 0 ?
-                        <IndexPage
-                            badgeData={badgeData}
-                            newIsadData={newIsadData}
-                            onSelectFacetGroup={onSelectFacetGroup}
-                        /> :
-                        <SearchPage
-                            data={data}
-                            onSelectFacetGroup={onSelectFacetGroup}
-                        />
+                  (className, renderChildren) => {
+                    return renderChildren ?
+                      <BreadcrumbSearchMobile
+                        total={data ? data['response']['numFound'] : 0}
+                        reference={ref}
+                        inverse={false}
+                        module={''}
+                        onSelectFacetGroup={onSelectFacetGroup}
+                        isMobile={true}
+                      /> : '';
+                  }
                 }
+              </Media>
+              <Media greaterThanOrEqual="md">
+                {
+                  (className, renderChildren) => {
+                    return renderChildren ?
+                      <BreadcrumbSearch
+                        total={data ? data['response']['numFound'] : 0}
+                        reference={ref}
+                        inverse={false}
+                        module={''}
+                        isMobile={false}
+                      /> : '';
+                  }
+                }
+              </Media>
+              <SearchPage
+                data={data}
+                onSelectFacetGroup={onSelectFacetGroup}
+              />
             </Layout>
-        )
+          )
+        }
     } else {
         return (
             <LayoutWithFacet>
