@@ -22,7 +22,7 @@ const SearchBar = () => {
     const handleSearch = () => {
         router.replace({
             pathname: '/',
-            query: createParams(searchValue),
+            query: createParams(searchValue, undefined, undefined, {}),
         }, undefined, {shallow: false});
     }
 

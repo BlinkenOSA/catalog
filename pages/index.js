@@ -21,7 +21,7 @@ const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
-export async function getServerSideProps2(context) {
+export async function getServerSideProps(context) {
   const params = context.query
   const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : makeSolrParams({qf: 'identifier_search'})
 
