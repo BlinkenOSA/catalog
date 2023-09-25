@@ -110,12 +110,11 @@ const IndexPage = () => {
                           className={style.IntroText}
                           variants={longTextVariants}
                           transition={{ delay: 1 }}>
-                            Our traditional archival holdings comprise approximately 7500 linear meters of records.
-                            Based on their provenance as well as their focus, Blinken OSA holdings are divided into three
-                            main groups:<br/>
-                            <span>Communism, the Cold War, and their Afterlife</span>&nbsp;
-                            <span>Human Rights</span>&nbsp;
-                            <span>Open Society Foundations Network and the CEU</span>.
+                            10,000 linear meters, 17,000 hours of audiovisual, and 15 TB of digital records, as
+                            well as 150,000 photographs and 19,000 library items on three areas of interest:<br/><br/>
+                            <span>Communism, the Cold War, and their Afterlives</span>&nbsp;
+                            <span>Human Rights and Social Justice</span>&nbsp;
+                            <span>Central European University and the Open Society Foundations Network</span>.
                         </motion.p>
                     </div>
                     <div className={style.MiddleRight}/>
