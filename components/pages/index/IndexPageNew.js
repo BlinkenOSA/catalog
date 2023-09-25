@@ -102,7 +102,7 @@ const IndexPage = () => {
                       className={style.Placeholder}
                       variants={placeholderVariants}
                       style={{zIndex: 1}}
-                      transition={{ ease: "linear", duration: 0.5, delay: 2 }}/>
+                      transition={{ ease: "linear", duration: 0.5, delay: 1.5 }}/>
                 </motion.div>
                 <div className={style.Right}>
                     <div className={style.TopRight}>
