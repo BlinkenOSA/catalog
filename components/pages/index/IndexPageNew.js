@@ -27,7 +27,7 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
     }
 
     const logoVariants = {
-        visible: { y: 0, opacity: 1, transition: {delay: 0.5} },
+        visible: { y: 0, opacity: 1, transition: {delay: 0.5, duration: 1} },
         hidden: { y: -100, opacity: 0 }
     }
 

@@ -13,17 +13,13 @@ import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import {Buffer} from "buffer";
-import dynamic from "next/dynamic";
+import IndexPageNew from "../components/pages/index/IndexPageNew";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
-
-const IndexPageNew = dynamic(() => import('../components/pages/index/IndexPageNew'), {
-  ssr: false,
-});
 
 export async function getServerSideProps(context) {
   const params = context.query
