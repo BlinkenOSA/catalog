@@ -183,8 +183,8 @@ const RegistrationForm = () => {
                                     fontSize={12}
                                 >
                                     <span>
-                                        By clicking this checkbox I confirm that I have read, understand,
-                                        and agree the content of the <a target={"_new"} href={"/researchers-statement"}>Researcher Statement</a>.
+                                        By clicking this checkbox I confirm that I have read, understood,
+                                        and agree with the content of the <a target={"_new"} href={"/researchers-statement"}>Researcher Statement</a>.
                                     </span>
                                 </CheckboxField>
                                 <div className={style.SubmitButtonWrapper}>
