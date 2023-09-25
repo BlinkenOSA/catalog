@@ -46,7 +46,7 @@ const RecordOrigin = ({selectedFacetValue}) => {
                             and are accessible in the Research Room of Blinken OSA (Budapest 1051, Arany János 32)
                         </p>
                         <p>
-                            Before visiting, don't forget to register and add the materials to your Request Cart and the request to us.
+                            Before visiting, don't forget to <a href={'/register'}>register</a> and add the requested items to your Request Cart.
                         </p>
                     </React.Fragment>
                 )
