@@ -8,8 +8,8 @@ const IsadTabConfig = {
     'HU': 'Hierarchia'
   },
   'insights': {
-    'EN': 'Insights',
-    'HU': 'Betekintés'
+    'EN': 'Statistics',
+    'HU': 'Statisztika'
   },
   'folders': {
     'EN': 'Folders / Items in this series',
