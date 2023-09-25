@@ -11,7 +11,7 @@ import RotatingText from "./parts/RotatingText";
  * @param {Object} params
  * @param {func} params.onSelectFacetGroup Handling of selecting a particular group.
  */
-const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
+const IndexPage = () => {
     const menuVariants = {
         visible: {
             transition: {
@@ -27,17 +27,17 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
     }
 
     const logoVariants = {
-        visible: { y: 0, opacity: 1, transition: {delay: 0.5, duration: 1} },
+        visible: { y: 0, opacity: 1 },
         hidden: { y: -100, opacity: 0 }
     }
 
     const searchBarVariants = {
-        visible: { x: 0, opacity: 1, transition: {delay: 2} },
+        visible: { x: 0, opacity: 1 },
         hidden: { x: -1000, opacity: 0 }
     }
 
     const longTextVariants = {
-        visible: { y: 0, opacity: 1, transition: {delay: 1} },
+        visible: { y: 0, opacity: 1 },
         hidden: { y: -5, opacity: 0 }
     }
 
@@ -57,7 +57,11 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
               className={style.ContentWrapper}>
                 <div className={style.Left}>
                     <div className={style.TopLeft}>
-                        <motion.div className={style.Logo} variants={logoVariants}>
+                        <motion.div
+                          className={style.Logo}
+                          variants={logoVariants}
+                          transition={{delay: 0.5}}
+                        >
                             <img src={"/images/osa-logo.svg"} alt={"Vera and Donald Blinken Open Society Archives"}/>
                         </motion.div>
                     </div>
@@ -102,7 +106,10 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
                 </motion.div>
                 <div className={style.Right}>
                     <div className={style.TopRight}>
-                        <motion.p className={style.IntroText} variants={longTextVariants}>
+                        <motion.p
+                          className={style.IntroText}
+                          variants={longTextVariants}
+                          transition={{ delay: 1 }}>
                             Our traditional archival holdings comprise approximately 7500 linear meters of records.
                             Based on their provenance as well as their focus, Blinken OSA holdings are divided into three
                             main groups:<br/>
@@ -121,7 +128,9 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
                 </div>
                 <div className={style.Search}>
                     <div className={style.SearchLeft} />
-                    <motion.div variants={searchBarVariants}>
+                    <motion.div
+                      variants={searchBarVariants}
+                      transition={{delay: 2}}>
                         <SearchBar />
                     </motion.div>
                     <div className={style.SearchRight} />
