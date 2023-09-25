@@ -39,9 +39,9 @@ const WikiFacet = ({selectedFacetObject, type}) => {
         case 'keyword':
           return (
             <React.Fragment>
-              <h2>Keyword & Terms</h2>
+              <h2>Tags</h2>
               <p>
-                Topical terms and keywords assigned to the records.
+                Tags assigned to the records.
               </p>
             </React.Fragment>
           )
