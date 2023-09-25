@@ -169,7 +169,7 @@ const WikiFacet = ({selectedFacetObject, type}) => {
               <p className={style.Description}>{data['description']}</p>
               {getBirthData('birth')}
               {getBirthData('death')}
-              {getListData('occupation', 'Occupation')}
+              {getListData('occupation', 'Affiliation')}
               {getListData('notable_work', 'Notable Works')}
               <div className={style.DataSource}>Data source: Wikidata</div>
               {getWikipedia()}
