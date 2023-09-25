@@ -27,22 +27,22 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
     }
 
     const logoVariants = {
-        visible: { y: 0, opacity: 1 },
+        visible: { y: 0, opacity: 1, transition: {delay: 0.5} },
         hidden: { y: -100, opacity: 0 }
     }
 
     const searchBarVariants = {
-        visible: { x: 0, opacity: 1 },
+        visible: { x: 0, opacity: 1, transition: {delay: 2} },
         hidden: { x: -1000, opacity: 0 }
     }
 
     const longTextVariants = {
-        visible: { y: 0, opacity: 1 },
+        visible: { y: 0, opacity: 1, transition: {delay: 1} },
         hidden: { y: -5, opacity: 0 }
     }
 
     const placeholderVariants = {
-        visible: { x: 0, opacity: 1 },
+        visible: { x: 0, opacity: 1, transition: {delay: 0.5} },
         hidden: { x: -40, opacity: 0 }
     }
 
