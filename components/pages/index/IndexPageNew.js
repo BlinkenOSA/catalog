@@ -42,7 +42,7 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
     }
 
     const placeholderVariants = {
-        visible: { x: 0, opacity: 1, transition: {delay: 0.5} },
+        visible: { x: 0, opacity: 1 },
         hidden: { x: -40, opacity: 0 }
     }
 
@@ -93,12 +93,12 @@ const IndexPage = ({badgeData, newIsadData, onSelectFacetGroup}) => {
                       className={style.Placeholder}
                       variants={placeholderVariants}
                       style={{zIndex: 2}}
-                      transition={{ ease: "linear", duration: 0.5 }}/>
+                      transition={{ ease: "linear", duration: 0.5, delay: 1 }}/>
                     <motion.div
                       className={style.Placeholder}
                       variants={placeholderVariants}
                       style={{zIndex: 1}}
-                      transition={{ ease: "linear", duration: 0.5 }}/>
+                      transition={{ ease: "linear", duration: 0.5, delay: 2 }}/>
                 </motion.div>
                 <div className={style.Right}>
                     <div className={style.TopRight}>
