@@ -42,9 +42,8 @@ const RecordOrigin = ({selectedFacetValue}) => {
                             In the Research Room
                         </h2>
                         <p>
-                            These materials are only available in an analog format (physical paper, photos, VHS tapes, etc.
-                            and can only be accessed from our Research Room at the Blinken OSA Archivum building. (Budapest,
-                            Arany Janos u. 32.)
+                            These materials are only available in an analog format (physical papers, photos)
+                            and are accessible in the Research Room of Blinken OSA (Budapest 1051, Arany János 32)
                         </p>
                         <p>
                             Before visiting, don't forget to register and add the materials to your Request Cart and the request to us.
