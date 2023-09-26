@@ -20,10 +20,12 @@ const SearchBar = () => {
     }, []);
 
     const handleSearch = () => {
+      if (searchValue && searchValue.trim() !== '') {
         router.replace({
             pathname: '/',
             query: createParams(searchValue, undefined, undefined, {}),
         }, undefined, {shallow: false});
+      }
     }
 
     const handleKeyDown = (event) => {
