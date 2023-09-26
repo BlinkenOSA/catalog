@@ -92,7 +92,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                     <Subtitle result={result} />
                 </div>
                 <div className={style.DescriptionWrap} >
-                    <RecordType label={'Format'} result={result} />
+                    <RecordType label={'Record Type'} result={result} />
                     <CallNumber label={'Call Number'} result={result} />
                     <ParentUnits label={'Part of'} result={result} />
                     <Publisher label={'Publisher'} result={result} />
