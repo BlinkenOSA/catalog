@@ -62,7 +62,7 @@ const IndexPage = () => {
                           variants={logoVariants}
                           transition={{delay: 0.5}}
                         >
-                            <img src={"/images/osa-logo.svg"} alt={"Vera and Donald Blinken Open Society Archives"}/>
+                            <img src={"/images/osa-logo-old.svg"} alt={"Vera and Donald Blinken Open Society Archives"}/>
                         </motion.div>
                     </div>
                     <div className={style.MiddleLeft}/>
