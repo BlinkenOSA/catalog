@@ -50,8 +50,8 @@ const GeneralInformationArea = {
             link: {},
         }, {
             label: {
-                'EN': 'Primary Type',
-                'HU': 'Elsődleges Típus'
+                'EN': 'Record Type',
+                'HU': 'Rekord Típusa'
             },
             field: 'primary_type',
             link: {},
