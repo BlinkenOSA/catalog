@@ -9,14 +9,14 @@ const FindingAidsLocation = ({data, language, onTreeNodeClick, isMobile}) => {
     const [locationOpen, setLocationOpen] = useState(true)
 
     const locationLabel = {
-        'EN': 'Location',
-        'HU': 'Lokáció',
-        'RU': 'Местоположение'
+        'EN': 'Hierarchy',
+        'HU': 'Hierarchia',
+        'RU': 'Иерархия'
     }
 
     const locationButtonText = {
-        'EN': `${locationOpen ? 'Close' : 'Open'} location info`,
-        'HU': `Lokáció Információ ${locationOpen ? 'Bezárása' : 'Kinyitása'}`,
+        'EN': `${locationOpen ? 'Close' : 'Open'} hierarchy info`,
+        'HU': `Hierarchia Információ ${locationOpen ? 'Bezárása' : 'Kinyitása'}`,
         'RU': `${locationOpen ? 'Закрыть' : 'Открыть'} информация`
     }
 
