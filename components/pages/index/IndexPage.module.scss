@@ -1,26 +1,147 @@
 @import "../../../styles/variables";
 
-.ContentIndex {
-  margin: 0 auto;
-  max-width: $max-width;
-  min-height: calc(100vh - 213px);
-  border-left: $border-width solid $black;
-  border-right: $border-width solid $black;
+.ContentWrapper {
   display: flex;
-  align-items: stretch;
+  width: 100vw;
+  height: 100vh;
+  background-color: $background;
+
+  .Left {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid $black;
+    z-index: 3;
+
+    .TopLeft {
+      flex: 1;
+    }
+
+    .MiddleLeft {
+      flex: 1
+    }
+
+    .BottomLeft {
+      flex: 1;
+    }
+  }
+
+  .PlaceholderWrapper {
+    width: 80px;
+    display: flex;
+    background: $white;
+
+    .Placeholder {
+      flex: 1;
+      width: 100px;
+      border-right: 1px solid $black;
+      background: $background;
+    }
+  }
+
+  .Right {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    background-color: $white;
+
+    .TopRight {
+      flex: 1;
+      display: flex;
+      justify-content: right;
+    }
+
+    .MiddleRight {
+      flex: 1
+    }
+
+    .BottomRight {
+      height: 125px;
+    }
+  }
 }
 
-.Content {
-  flex: 1;
-  border-left: $border-width solid $black;
+.Badges {
+  padding: 20px;
+  list-style: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  a {
+    text-decoration: none;
+
+    &:last-child {
+      .Badge {
+        margin-bottom: 0;
+      }
+    }
+
+    .Badge {
+      width: fit-content;
+      font-size: 30px;
+      font-family: "Suisse Intl", serif;
+      font-weight: 300;
+      padding: 0 20px;
+      color: $black;
+      background-color: $white;
+      border-radius: 200px;
+      transition: 0.1s;
+      margin-bottom: 20px;
+      border: $border-width solid $black;
+
+      &:hover {
+        cursor: pointer;
+        color: $black;
+        background-color: $yellow;
+      }
+    }
+  }
 }
 
-.ContentMobile {
-  flex: 1;
+.IntroText {
+  margin: 0;
+  padding: 20px;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: 800;
+  font-family: "Suisse Intl", serif;
+
+  span {
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: $background;
+  }
 }
 
-.LatestAdditions {
-  flex: 1;
+.Search {
+  position: absolute;
+  top: 50%;
+  width: 100vw;
   display: flex;
-  min-height: 200px;
+  // border-top: 1px solid $black;
+  // border-bottom: 1px solid $black;
+  height: 50px;
+  z-index: 10;
+
+  .SearchLeft {
+    flex: 1;
+  }
+
+  .SearchRight {
+    flex: 1;
+  }
+}
+
+.Title {
+  text-align: right;
+  padding: 10px;
+  font-size: 80px;
+  font-weight: 800;
+  font-family: "Suisse Intl", serif;
+}
+
+.Logo {
+  width: 250px;
+  padding: 20px;
 }

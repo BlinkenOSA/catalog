@@ -1,6 +1,7 @@
 import style from "./PrimaryTypeButton.module.scss";
+import {GrTree} from "react-icons/gr";
 
-const PrimaryTypeButton = ({origin, primaryType}) => {
+const PrimaryTypeButton = ({origin, primaryType, descriptionLevel}) => {
     if (origin === 'Film Library') {
         return (
             <div className={style.Button}>
@@ -18,15 +19,10 @@ const PrimaryTypeButton = ({origin, primaryType}) => {
     switch (primaryType) {
         case 'Archival Unit':
             return(
-                <div className={style.Button}>
-                    <img
-                        alt="ArchivalUnitIcon"
-                        title={'Archival Unit'}
-                        src={'/icons/TypeArchivalUnit.svg'}
-                        style={{display: 'block'}}
-                    />
-                    <span className={style.Text}>Archival Unit</span>
-                </div>
+              <div className={style.Button}>
+                <GrTree/>
+                <span className={style.Text}>{`Archival ${descriptionLevel}`}</span>
+              </div>
             )
         case 'Book':
             return(

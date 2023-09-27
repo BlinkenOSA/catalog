@@ -34,6 +34,8 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, sele
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'geo'} />
             case 'keyword':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'keyword'} />
+            case 'language_wikidata':
+                return <WikiFacet selectedFacetObject={selectedFacetObject} type={'language'} />
             case 'year_created':
                 return <DateCreated facetValues={facetValues} />
             default:
@@ -69,6 +71,7 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, sele
             case 'geo_wikidata':
             case 'subject_wikidata':
             case 'keyword':
+            case 'language_wikidata':
             case 'contributor_wikidata':
                 return renderButton()
             default:

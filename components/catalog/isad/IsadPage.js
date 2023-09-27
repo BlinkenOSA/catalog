@@ -85,7 +85,9 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
                                   onLanguageChange={setLanguage}
                                 />
                             }
-                            <PrimaryTypeButton primaryType={solrData['primary_type']} />
+                            <PrimaryTypeButton
+                              primaryType={solrData['primary_type']}
+                              descriptionLevel={solrData['description_level']} />
                         </div>
                     </div>
                 </div>

@@ -1,28 +1,30 @@
 @import "../../../../styles/variables";
 
 .Button {
-  height: 25px;
+  height: 23px;
   border-radius: 12px;
-  background-color: $button-background;
-  color: $white;
+  background-color: $background;
+  color: $black;
   text-align: center;
   display: inline-flex;
   align-items: center;
   overflow: hidden;
   width: auto;
   padding-left: 5px;
+  border: 1px solid $black;
 
   .Text {
     text-align: center;
-    color: $white;
+    color: $black;
     font-family: 'Suisse Intl', serif;
     font-size: 10px;
-    line-height: 25px;
-    padding: 0 10px 0 2px;
+    line-height: 23px;
+    padding: 0 10px 0 4px;
     text-transform: uppercase;
   }
 }
 
 .Button img {
+  filter: invert(1);
   margin: 0 auto;
 }

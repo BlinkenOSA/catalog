@@ -43,6 +43,16 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
             }
         }
 
+        const getContainerCode = () => {
+            if (isFolderItem()) {
+                const [fonds, subfonds, series] = record['series_reference_code'].trim().split('-')
+                const container = record['container_number'].toString()
+                return `HU OSA ${fonds}-${subfonds}-${series}-${container}`
+            } else {
+                return ''
+            }
+        }
+
         const getType = () => {
             if (isFolderItem()) {
                 return `${record['container_type']} #${record['container_number']}`
@@ -67,6 +77,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
                 title: record['title'],
                 title_original: record.hasOwnProperty('title_original') ? record['title_original'] : '',
                 call_number: record.hasOwnProperty('call_number') ? record['call_number'] : '',
+                container_code: getContainerCode(),
                 sorting_code: getSortingCode(),
                 digital_version: record.hasOwnProperty('digital_version_barcode') ? record['digital_version_barcode'] : '',
                 primary_type: record['primary_type'],

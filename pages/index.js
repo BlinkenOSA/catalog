@@ -13,7 +13,7 @@ import { Media } from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import {Buffer} from "buffer";
-import IndexPageNew from "../components/pages/index/IndexPageNew";
+import IndexPageNew from "../components/pages/index/IndexPage";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;

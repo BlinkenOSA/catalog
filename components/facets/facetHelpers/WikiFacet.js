@@ -63,6 +63,15 @@ const WikiFacet = ({selectedFacetObject, type}) => {
               </p>
             </React.Fragment>
           )
+        case 'language':
+          return (
+            <React.Fragment>
+              <h2>Language</h2>
+              <p>
+                The original language of the material. In case of moving images, all the additional dubbings, voice-overs and subtitles.
+              </p>
+            </React.Fragment>
+          )
       }
     }
 
@@ -147,6 +156,17 @@ const WikiFacet = ({selectedFacetObject, type}) => {
 
     const renderFacetInfo = () => {
       switch (type) {
+        case 'language':
+          return(
+            <React.Fragment>
+              <h2>{data['title']}</h2>
+              <p>{data['description']}</p>
+              <div className={style.Buttons}>
+                {getWikipedia()}
+              </div>
+              <div className={style.DataSource}>Data source: Wikidata</div>
+            </React.Fragment>
+          )
         case 'geo':
           return (
             <React.Fragment>

@@ -91,16 +91,21 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                 <div className={style.Subtitle}>
                     <Subtitle result={result} />
                 </div>
+                <div style={{marginTop: 15}}>
+                    <PrimaryTypeButton
+                      origin={result['record_origin']}
+                      descriptionLevel={result['description_level']}
+                      primaryType={result['primary_type']}
+                    />
+                </div>
                 <div className={style.DescriptionWrap} >
-                    <RecordType label={'Record Type'} result={result} />
                     <CallNumber label={'Call Number'} result={result} />
-                    <ParentUnits label={'Part of'} result={result} />
+                    <ParentUnits label={'Part of the Series'} result={result} />
                     <Publisher label={'Publisher'} result={result} />
                 </div>
                 {renderSearchHighlights()}
                 <div className={style.Buttons} >
                     {renderCartButton()}
-                    <PrimaryTypeButton origin={result['record_origin']} primaryType={result['primary_type']} />
                     {renderAvailabilityButton()}
                     {renderAccessRightsButton()}
                 </div>

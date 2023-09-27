@@ -12,7 +12,7 @@ const CallNumber = ({label, result}) => {
                 return ''
         }
     } else {
-        return ''
+        return <DescriptionValue label={label} value={result['call_number']} />
     }
 }
 

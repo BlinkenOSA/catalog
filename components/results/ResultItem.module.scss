@@ -47,11 +47,15 @@
   }
 
   .DescriptionWrap {
-    padding-top: 17px;
+    padding-top: 15px;
     font-family: "Suisse Intl", serif;
     font-weight: 400;
     font-size: 14px;
     gap: 16px;
+
+    &:empty {
+      padding: 0;
+    }
   }
 
   .Buttons {
@@ -59,6 +63,10 @@
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 20px;
+
+    &:empty {
+      display: none;
+    }
   }
 
   .SearchHitsWrap {

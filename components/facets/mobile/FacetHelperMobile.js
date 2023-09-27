@@ -67,6 +67,7 @@ const FacetHelperMobile = ({facetValues, selectedFacetGroup, selectedFacetObject
             case 'geo_wikidata':
             case 'subject_wikidata':
             case 'contributor_wikidata':
+            case 'language_wikidata':
                 return renderButton()
             default:
                 break;
