@@ -21,7 +21,7 @@ const PrimaryTypeButton = ({origin, primaryType, descriptionLevel}) => {
             return(
               <div className={style.Button}>
                 <GrTree/>
-                <span className={style.Text}>{`Archival ${descriptionLevel}`}</span>
+                <span className={style.Text}>{`${descriptionLevel} Description`}</span>
               </div>
             )
         case 'Book':

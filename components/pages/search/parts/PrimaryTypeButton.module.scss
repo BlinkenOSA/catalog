@@ -1,7 +1,7 @@
 @import "../../../../styles/variables";
 
 .Button {
-  height: 23px;
+  height: 25px;
   border-radius: 12px;
   background-color: $background;
   color: $black;
@@ -10,8 +10,8 @@
   align-items: center;
   overflow: hidden;
   width: auto;
-  padding-left: 5px;
-  border: 1px solid $black;
+  //padding-left: 5px;
+  //border: 1px solid $black;
 
   .Text {
     text-align: center;

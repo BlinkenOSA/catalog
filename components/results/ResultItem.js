@@ -77,6 +77,12 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
         return <SearchHighglights result={result} highlights={highlights}/>
     }
 
+    const renderDividerButton = () => {
+        if (result['primary_type'] !== 'Archival Unit') {
+            return <div className={style.Divider} />
+        }
+    }
+
     return (
         <div className={style.ResultItemWrapper}>
             <div className={style.ResultItemInfo}>
@@ -91,13 +97,6 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                 <div className={style.Subtitle}>
                     <Subtitle result={result} />
                 </div>
-                <div style={{marginTop: 15}}>
-                    <PrimaryTypeButton
-                      origin={result['record_origin']}
-                      descriptionLevel={result['description_level']}
-                      primaryType={result['primary_type']}
-                    />
-                </div>
                 <div className={style.DescriptionWrap} >
                     <CallNumber label={'Call Number'} result={result} />
                     <ParentUnits label={'Part of the Series'} result={result} />
@@ -105,9 +104,19 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                 </div>
                 {renderSearchHighlights()}
                 <div className={style.Buttons} >
-                    {renderCartButton()}
-                    {renderAvailabilityButton()}
-                    {renderAccessRightsButton()}
+                    <div className={style.ActionButtons}>
+                        {renderCartButton()}
+                        {renderAvailabilityButton()}
+                        {renderAccessRightsButton()}
+                        {renderDividerButton()}
+                    </div>
+                    <div className={style.PrimaryButton}>
+                        <PrimaryTypeButton
+                          origin={result['record_origin']}
+                          descriptionLevel={result['description_level']}
+                          primaryType={result['primary_type']}
+                        />
+                    </div>
                 </div>
             </div>
             {!isMobile && renderThumbnail()}

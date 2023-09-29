@@ -25,6 +25,15 @@
     font-size: 22px;
     font-weight: 400;
     padding-top: 5px;
+    display: flex;
+    gap: 20px;
+
+    .Button {
+      margin-top: 2px;
+      min-width: 200px;
+      flex: 1;
+      font-size: 14px;
+    }
 
     a {
       color: inherit;
@@ -59,13 +68,23 @@
   }
 
   .Buttons {
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 6px;
+    display: flex;
     margin-top: 20px;
 
-    &:empty {
-      display: none;
+    .ActionButtons {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 6px;
+
+      .Divider {
+        border-left: 1px solid $button-background;
+        margin-left: 4px;
+        padding-right: 10px;
+      }
+
+      &:empty {
+        display: none;
+      }
     }
   }
 
