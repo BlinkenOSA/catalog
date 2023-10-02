@@ -32,6 +32,12 @@
         margin-top: 20px;
         flex-wrap: wrap;
       }
+
+      .Divider {
+        border-left: 1px solid $button-background;
+        margin-left: 4px;
+        padding-right: 0px;
+      }
     }
 
     .Thumbnail {

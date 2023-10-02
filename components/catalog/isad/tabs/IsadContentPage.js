@@ -99,9 +99,10 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 				</div>
 				<div className={style.Buttons}>
 					{isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
-					<PrimaryTypeButton primaryType={rec['primary_type']} />
 					<AvailabilityButton record={rec} />
 					<AccessRightsButton record={rec} />
+					<div className={style.Divider} />
+					<PrimaryTypeButton primaryType={rec['primary_type']} />
 				</div>
 			</div>
 		)

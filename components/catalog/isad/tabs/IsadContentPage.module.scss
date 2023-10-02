@@ -134,6 +134,12 @@
       gap: 5px;
       margin-top: 10px;
       flex-wrap: wrap;
+
+      .Divider {
+        border-left: 1px solid $button-background;
+        margin-left: 5px;
+        padding-right: 1px;
+      }
     }
   }
 }

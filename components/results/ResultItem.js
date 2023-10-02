@@ -110,7 +110,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                         {renderAccessRightsButton()}
                         {renderDividerButton()}
                     </div>
-                    <div className={style.PrimaryButton}>
+                    <div>
                         <PrimaryTypeButton
                           origin={result['record_origin']}
                           descriptionLevel={result['description_level']}

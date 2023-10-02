@@ -69,9 +69,6 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                 <div className={isMobile ? `${style.Header} ${style.Mobile}` : style.Header}>
                     <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
                         { getTitle(metadata) }
-                        <div style={{marginTop: '20px', display: "block"}}>
-                            <PrimaryTypeButton primaryType={solrData['primary_type']} />
-                        </div>
                         <div className={style.Buttons}>
                             <CartButton
                                 record={solrData}
@@ -89,6 +86,8 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                             }
                             <AvailabilityButton record={solrData} />
                             <AccessRightsButton record={metadata} />
+                            <div className={style.Divider} />
+                            <PrimaryTypeButton primaryType={solrData['primary_type']} />
                         </div>
                     </div>
                 </div>

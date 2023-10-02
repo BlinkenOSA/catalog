@@ -1,13 +1,13 @@
-<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1">
-
+<svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve">
  <g>
   <title>Layer 1</title>
-  <g id="svg_1">
-   <rect id="svg_2" fill="#FFFFFF" height="0.89" width="5.03" class="st0" y="6.605" x="9.435"/>
-   <rect id="svg_3" fill="#FFFFFF" height="0.89" width="5.03" class="st0" y="8.895" x="9.435"/>
-   <rect id="svg_4" fill="#FFFFFF" height="0.89" width="5.03" class="st0" y="11.115" x="9.435"/>
-   <path id="svg_5" fill="#FFFFFF" d="m17.915,3.195l0,12.72l-0.94,0l0,-12.28l-0.44,-0.44l-14.89,0l-0.44,0.44l0,12.72l0.44,0.44l14.44,0l0,0.01l2.27,0l0.44,-0.44l0,-13.17l-0.88,0zm-1.83,12.71l-13.99,0l0,-11.83l13.99,0l0,11.83z" class="st0"/>
-   <path id="svg_6" fill="#FFFFFF" d="m7.715,13.655l0.44,-0.44l0,-6.18l-0.44,-0.45l-3.88,0l-0.45,0.45l0,6.18l0.44,0.44l3.89,0zm-3.44,-6.18l3,0l0,5.29l-3,0l0,-5.29z" class="st0"/>
+  <g stroke="null" id="svg_1">
+   <rect stroke="null" x="9.59675" y="7.37521" class="st0" width="4.09296" height="0.7242" fill="#FFFFFF" id="svg_2"/>
+   <rect stroke="null" x="9.59675" y="9.23861" class="st0" width="4.09296" height="0.7242" fill="#FFFFFF" id="svg_3"/>
+   <rect stroke="null" x="9.59675" y="11.04505" class="st0" width="4.09296" height="0.7242" fill="#FFFFFF" id="svg_4"/>
+   <path stroke="null" class="st0" d="m16.49701,4.60046l0,10.35039l-0.76489,0l0,-9.99236l-0.35803,-0.35803l-12.11615,0l-0.35803,0.35803l0,10.35039l0.35803,0.35803l11.74998,0l0,0.00814l1.84712,0l0.35803,-0.35803l0,-10.71656l-0.71607,0zm-1.48909,10.34226l-11.38381,0l0,-9.62619l11.38381,0l0,9.62619z" fill="#FFFFFF" id="svg_5"/>
+   <path stroke="null" class="st0" d="m8.19717,13.11187l0.35803,-0.35803l0,-5.02873l-0.35803,-0.36617l-3.1572,0l-0.36617,0.36617l0,5.02873l0.35803,0.35803l3.16533,0zm-2.79916,-5.02873l2.44113,0l0,4.30453l-2.44113,0l0,-4.30453z" fill="#FFFFFF" id="svg_6"/>
   </g>
  </g>
+
 </svg>

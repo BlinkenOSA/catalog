@@ -78,12 +78,15 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
                         <div className={style.Buttons}>
                             {
                                 metadata['original_locale'] !== null &&
-                                <LanguageButton
-                                  name={`isad-page-language-selector-${isMobile ? 'mobile' : 'desktop'}`}
-                                  selectedLanguage={language}
-                                  originalLanguage={metadata['original_locale']}
-                                  onLanguageChange={setLanguage}
-                                />
+                                <>
+                                    <LanguageButton
+                                      name={`isad-page-language-selector-${isMobile ? 'mobile' : 'desktop'}`}
+                                      selectedLanguage={language}
+                                      originalLanguage={metadata['original_locale']}
+                                      onLanguageChange={setLanguage}
+                                    />
+                                    <div className={style.Divider} />
+                                </>
                             }
                             <PrimaryTypeButton
                               primaryType={solrData['primary_type']}
