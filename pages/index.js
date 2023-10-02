@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import Layout from "../components/layout/Layout";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
-import IndexPage from "../components/pages/index/IndexPage";
+import IndexPageDesktop from "../components/pages/index/desktop/IndexPage";
+import IndexPageMobile from "../components/pages/index/mobile/IndexPage";
 import React, {useEffect, useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
 import {makeSolrParams} from "../utils/fetcherFunctions";
@@ -13,7 +14,6 @@ import {Media} from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import {Buffer} from "buffer";
-import IndexPageNew from "../components/pages/index/IndexPage";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
@@ -70,11 +70,22 @@ const Index = ({data, badgeData, newIsadData}) => {
 
     if (data.length === 0) {
         return (
-            <IndexPageNew
-                badgeData={badgeData}
-                newIsadData={newIsadData}
-                onSelectFacetGroup={onSelectFacetGroup}
-            />
+            <>
+                <Media lessThan="md">
+                    <IndexPageMobile
+                        badgeData={badgeData}
+                        newIsadData={newIsadData}
+                        onSelectFacetGroup={onSelectFacetGroup}
+                    />
+                </Media>
+                <Media greaterThanOrEqual="md">
+                    <IndexPageDesktop
+                        badgeData={badgeData}
+                        newIsadData={newIsadData}
+                        onSelectFacetGroup={onSelectFacetGroup}
+                    />
+                </Media>
+            </>
         )
     } else {
         if (selectedFacetGroup === '') {

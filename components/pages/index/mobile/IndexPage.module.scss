@@ -1,62 +1,57 @@
-@import "../../../styles/variables";
+@import "../../../../styles/variables";
 
 .ContentWrapper {
   display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   background-color: $background;
 
-  .Left {
+  .Up {
     flex: 2;
     display: flex;
-    flex-direction: column;
-    border-right: 1px solid $black;
     z-index: 3;
+    border-bottom: 1px solid $black;
 
     .TopLeft {
-      flex: 1;
+      width: 150px;
     }
 
-    .MiddleLeft {
-      flex: 1
-    }
-
-    .BottomLeft {
+    .TopRight {
       flex: 1;
     }
   }
 
   .PlaceholderWrapper {
-    width: 80px;
     display: flex;
+    flex-direction: column;
     background: $white;
+    height: 80px;
 
     .Placeholder {
       flex: 1;
-      width: 100px;
-      border-right: 1px solid $black;
+      flex-shrink: 0 !important;
+      width: 100vw;
+      height: 40px;
+      border-bottom: 1px solid $black;
       background: $background;
     }
   }
 
-  .Right {
-    flex: 3;
+  .Down {
+    flex: 2;
     display: flex;
     flex-direction: column;
     background-color: $white;
 
-    .TopRight {
+    .BottomLeft {
       flex: 1;
       display: flex;
-      justify-content: right;
-    }
-
-    .MiddleRight {
-      flex: 1
+      justify-content: left;
     }
 
     .BottomRight {
-      height: 125px;
+      height: 90px;
     }
   }
 }
@@ -65,8 +60,8 @@
   padding: 20px;
   list-style: none;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  top: 0;
+  right: 0;
 
   a {
     text-decoration: none;
@@ -79,7 +74,7 @@
 
     .Badge {
       width: fit-content;
-      font-size: 30px;
+      font-size: 20px;
       font-family: "Suisse Intl", serif;
       font-weight: 300;
       padding: 0 20px;
@@ -87,7 +82,7 @@
       background-color: $white;
       border-radius: 200px;
       transition: 0.1s;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       border: $border-width solid $black;
 
       &:hover {
@@ -102,8 +97,8 @@
 .IntroText {
   margin: 0;
   padding: 20px;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 800;
   font-family: "Suisse Intl", serif;
 
@@ -116,7 +111,7 @@
 
 .Search {
   position: absolute;
-  top: 50%;
+  top: 30%;
   width: 100vw;
   display: flex;
   // border-top: 1px solid $black;
@@ -136,12 +131,12 @@
 .Title {
   text-align: right;
   padding: 10px;
-  font-size: 80px;
+  font-size: 50px;
   font-weight: 800;
   font-family: "Suisse Intl", serif;
 }
 
 .Logo {
-  width: 250px;
+  width: 120px;
   padding: 20px;
 }

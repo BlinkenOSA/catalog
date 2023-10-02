@@ -6,12 +6,9 @@ import {motion} from 'framer-motion';
 import RotatingText from "./parts/RotatingText";
 
 /**
- * Page responsible for displaying the search results
- *
- * @param {Object} params
- * @param {func} params.onSelectFacetGroup Handling of selecting a particular group.
+ * Page responsible for displaying the index splash page.
  */
-const IndexPage = () => {
+const IndexPage = ({isMobile=false}) => {
     const menuVariants = {
         visible: {
             transition: {
