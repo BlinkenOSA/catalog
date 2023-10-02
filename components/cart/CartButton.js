@@ -9,8 +9,8 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
     const alert = useAlert()
 
     const isFolderItem = () => {
-        if (record.hasOwnProperty('archival_level')) {
-            if (record['archival_level'] === 'Folder/Item') {
+        if (record.hasOwnProperty('description_level')) {
+            if (record['description_level'] === 'Folder' || record['description_level'] === 'Item') {
                 return true
             }
         }
@@ -33,10 +33,12 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
     const handleChange = (checked) => {
         const getSortingCode = () => {
             if (isFolderItem()) {
-                const [fonds, subfonds, series] = record['series_reference_code'].trim().split('-')
-                const container = record['container_number'].toString()
-                const folder = record['folder_number'].toString()
-                const sequence = record['sequence_number'].toString()
+                const fonds = record['fonds_sort'].toString()
+                const subfonds = record['subfonds_sort'].toString()
+                const series = record['series_sort'].toString()
+                const container = record['container_number_sort'].toString()
+                const folder = record['folder_number_sort'].toString()
+                const sequence = record['sequence_number_sort'].toString()
                 return `${fonds.padStart(4, 0)}-${subfonds.padStart(4, 0)}-${series.padStart(4, 0)}-${container.padStart(4, 0)}-${folder.padStart(4, 0)}-${sequence.padStart(4, 0)}`
             } else {
                 return record['title']
@@ -45,8 +47,10 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
 
         const getContainerCode = () => {
             if (isFolderItem()) {
-                const [fonds, subfonds, series] = record['series_reference_code'].trim().split('-')
-                const container = record['container_number'].toString()
+                const fonds = record['fonds_sort'].toString()
+                const subfonds = record['subfonds_sort'].toString()
+                const series = record['series_sort'].toString()
+                const container = record['container_number_sort'].toString()
                 return `HU OSA ${fonds}-${subfonds}-${series}-${container}`
             } else {
                 return ''
@@ -55,7 +59,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
 
         const getType = () => {
             if (isFolderItem()) {
-                return `${record['container_type']} #${record['container_number']}`
+                return `${record['container_type']} #${record['container_number_sort']}`
             } else {
                 return `${record['primary_type']}${record['extent'] ? `, ${record['extent']}` : ''}`
             }
