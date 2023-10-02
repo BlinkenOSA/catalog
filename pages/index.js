@@ -24,29 +24,22 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 export async function getServerSideProps(context) {
   const params = context.query
   const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : makeSolrParams({qf: 'identifier_search'})
+  let data = []
 
-  // SOLR Basic Authentication
-  let headers = new Headers();
-  headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+  if (Object.entries(params).length > 0) {
+    // SOLR Basic Authentication
+    let headers = new Headers();
+    headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
 
-  const res = await fetch(`${SOLR_API}?` + solrParams, {
-    headers: headers
-  })
-  const data = await res.json()
-
-  if (Object.entries(params).length === 0) {
-    const [tagDataRes, newContentIsadRes] = await Promise.all([
-      fetch(`${API}collection-specific-tags/`),
-      fetch(`${API}newly-added-content/isad`)
-    ]);
-
-    const [badgeData, newIsadData] = await Promise.all([
-      tagDataRes.json(), newContentIsadRes.json()
-    ])
-    return { props: { data, badgeData, newIsadData } }
+    const res = await fetch(`${SOLR_API}?` + solrParams, {
+      headers: headers
+    })
+    data = await res.json()
   } else {
-    return { props: { data } }
+    data = []
   }
+
+  return { props: { data } }
 }
 
 
@@ -76,7 +69,7 @@ const Index = ({data, badgeData, newIsadData}) => {
     }
 
     if (selectedFacetGroup === '') {
-        if (Object.entries(router.query).length === 0) {
+        if (data.length === 0) {
           return (
             <IndexPageNew
               badgeData={badgeData}
