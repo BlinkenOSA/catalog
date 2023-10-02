@@ -21,7 +21,7 @@ const FacetSearch = ({selectedFacetGroup, onSearch}) => {
             <div className={style.SearchBox}>
                 <input
                     className={style.SearchInput}
-                    placeholder={'Type something'}
+                    placeholder={`Search in filters`}
                     value={value}
                     onChange={(e) => setValue(e.target.value)}
                 />
