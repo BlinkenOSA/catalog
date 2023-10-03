@@ -31,6 +31,12 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
     }
 
     const renderButtons = () => {
+        const DESCRIPTION_LEVELS = {
+            'F': 'Fonds',
+            'SF': 'Subfonds',
+            'S': 'Series'
+        }
+
         return (
             <div className={style.Buttons}>
                 {
@@ -42,7 +48,6 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
                         onLanguageChange={setLanguage}
                     />
                 }
-                <PrimaryTypeButton primaryType={'Archival Unit'} />
                 <Button text={'Show full record'} link={`/catalog/${data['catalog_id']}`}/>
             </div>
         )

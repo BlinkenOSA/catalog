@@ -80,6 +80,11 @@
       margin-top: 10px;
       display: flex;
       gap: 10px;
+
+      .Divider {
+        border-left: 1px solid $button-background;
+        margin-left: 4px;
+      }
     }
   }
 
