@@ -23,11 +23,10 @@ const ResearchersStatement = () => {
                     <div>
                         <ol type={"I"}>
                             <li>
-                                On the fair and lawful use of documents containing personal data in Vera and Donald Blinken
-                                Open Society Archives
+                                On the fair and lawful use of documents containing personal data in Blinken OSA Archivum.
                                 <p>
                                     I have read and understand the following rules and statements (a. – f.)
-                                    regarding Vera and Donald Blinken Open Society Archives (OSA).
+                                    regarding Blinken OSA Archivum (OSA).
                                 </p>
                                 <ol type={'a'}>
                                     <li>

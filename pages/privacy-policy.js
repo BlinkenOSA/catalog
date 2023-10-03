@@ -22,8 +22,8 @@ const PrivacyPolicy = () => {
                 <div className={style.StaticContent}>
                     <div>
                         <p>
-                            The website Blinken OSA Catalog is operated by the Vera and Donald Blinken Open Society
-                            Archives (Blinken OSA), an organizational unit of Central European University (in
+                            The website Blinken OSA Catalog is operated by the Blinken OSA Arhcivum,
+                            an organizational unit of Central European University (in
                             Hungarian: Közép-európai Egyetem), as part of its
                             domain <a href={'https://www.osaarchivum.org'} target={'_blank'}>www.osaarchivum.org</a>.
                             Blinken OSA informs its visitors herewith about its data processing practices, the

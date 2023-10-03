@@ -8,7 +8,7 @@ const FooterMobile = () => {
     return (
         <div className={style.Footer}>
             <div className={style.FooterInstiution}>
-                Vera and Donald Blinken Open Society Archives
+                Blinken OSA Archivum
             </div>
             <div className={style.FooterContent}>
                 <ul>
