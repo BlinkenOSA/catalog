@@ -4,7 +4,7 @@
   width: 50%;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: 100px;
+  top: calc(#{$header-height} + #{$breadcrumb-height});
   align-self: flex-start;
 
   &.Mobile {
@@ -126,44 +126,6 @@
     font-size: 15px;
     line-height: 18px;
     vertical-align: top;
-  }
-}
-
-.Info {
-  font-family: "Suisse Intl", serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  padding: 0;
-
-  h1 {
-    padding: 0;
-    font-family: "Suisse Intl Condensed", serif;
-    font-size: 26px;
-    font-weight: 400;
-    margin-top: 0;
-  }
-
-  .InfoFace {
-    font-family: 'Suisse Intl Mono', serif;
-    font-weight: 400;
-    font-size: 40px;
-    text-align: center;
-  }
-
-  .InfoMainText {
-    font-family: 'Suisse Intl Mono', serif;
-    font-weight: 400;
-    font-size: 24px;
-    text-align: center;
-  }
-
-  .InfoText {
-    font-family: 'Suisse Intl', serif;
-    font-weight: 400;
-    font-size: 16px;
-    padding: 5px 20px 20px 20px;
-    text-align: left;
   }
 }
 

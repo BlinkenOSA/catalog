@@ -4,13 +4,13 @@ import {fetcher} from "../../../../utils/fetcherFunctions";
 import Loader from "../../../layout/Loader";
 import LanguageButton from "../../search/parts/LanguageButton";
 import {useState} from "react";
-import PrimaryTypeButton from "../../search/parts/PrimaryTypeButton";
 import Button from "../../search/parts/Button";
 import DateDistribution from "./DateDistribution";
 import parse from "html-react-parser";
+import DrawerInfoPanel from "./DrawerInfoPanel";
 
 
-const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
+const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, onTreeOpenClick, onThemeSelect, theme, isMobile}) => {
     const {data, error} = useSWR(archivalUnitID !== 0 ? `archival-units-tree-quick-view/${archivalUnitID}/` : undefined, fetcher);
     const [language, setLanguage] = useState('EN')
 
@@ -126,43 +126,6 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
         }
     }
 
-    const renderInfo = () => {
-        return (
-            <div className={style.Info}>
-                <div className={style.InfoText}>
-                  <p>
-                    Our traditional archival holdings comprise approximately 7,500 linear meters of records.
-                    Based on their provenance as well as their focus, OSA holdings are divided into three main groups.
-                  </p>
-                  <h1>Communism, the Cold War, and their Afterlife</h1>
-                  <p>
-                    Fonds include the extensive collection of the Radio
-                    Free Europe/Radio Liberty (RFE/RL) Research Institute, background and reference material accumulated
-                    over 45 years of activity. The collection is an essential source on the post-war political,
-                    social, and economic history of the region. We also hold the personal papers of a range of
-                    political, cultural, and counter-culture figures from the Cold War era to the present, and
-                    several series of Soviet, Polish and Hungarian underground literature which constitute a major
-                    international collection of samizdat materials.
-                  </p>
-                  <h1>Human Rights</h1>
-                  <p>
-                    Includes fonds created by non-governmental and supra-governmental organizations,
-                    as well as individuals active in post-war Central and Eastern Europe documenting human rights
-                    violations and war crimes. Most important among these fonds are the UN Expert Commission on
-                    Investigating War Crimes in the Former Yugoslavia, the International Helsinki Federation for
-                    Human Rights (IHF), Index on Censorship, as well as the Physicians for Human Rights (PHR).
-                  </p>
-                  <h1>Open Society Foundations Network and the CEU</h1>
-                  <p>
-                    As the official archives of the Open Society
-                    Foundations network and the CEU, OSA is responsible for the long-term preservation of and access
-                    to network records. We also supply records management services to network entities and offices.
-                  </p>
-                </div>
-            </div>
-        )
-    }
-
     if (isMobile) {
         return (
             <div className={open ? `${style.Drawer} ${style.Mobile}` : `${style.Drawer} ${style.Closed} ${style.Mobile}`}>
@@ -182,7 +145,7 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, isMobile}) => {
                     open ?
                         <div className={style.Window}>
                             {data ? renderContent() : <Loader/>}
-                        </div> : renderInfo()
+                        </div> : <DrawerInfoPanel theme={theme} onThemeSelect={onThemeSelect} onClick={onTreeOpenClick} />
                 }
             </div>
         )

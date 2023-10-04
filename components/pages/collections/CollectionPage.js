@@ -14,6 +14,7 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
 
     const [openNodes, setOpenNodes] = useState([]);
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
+    const [theme, setTheme] = useState(undefined)
 
     useEffect(() => {
         if (activeUnit && activeUnitID) {
@@ -158,11 +159,31 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
                     open={openNodes.includes(archivalUnit['key'])}
                     onOpenClose={onOpenClose}
                     onTreeNodeClick={onSelectArchivalUnit}
+                    theme={theme}
                     hasChildren={archivalUnit['children'].length > 0}
                 />
             )
         } else {
             return ''
+        }
+    }
+
+    const handleTreeOpenAction = (action) => {
+        if (action === 'openAll') {
+            const nodes = [];
+            data.forEach((fonds) => {
+                if (fonds['children'].length > 0) {
+                    nodes.push(fonds['key'])
+                    fonds['children'].forEach((subfonds) => {
+                        if (subfonds['children'].length > 0) {
+                            nodes.push(subfonds['key'])
+                        }
+                    })
+                }
+            })
+            setOpenNodes(nodes)
+        } else {
+            setOpenNodes([])
         }
     }
 
@@ -232,6 +253,9 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
                             archivalUnitID={selectedArchivalUnit}
                             open={selectedArchivalUnit !== 0}
                             onClose={onSelectArchivalUnit}
+                            onTreeOpenClick={handleTreeOpenAction}
+                            theme={theme}
+                            onThemeSelect={setTheme}
                         />
                     }
                 </div>

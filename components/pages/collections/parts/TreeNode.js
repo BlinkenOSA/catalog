@@ -11,7 +11,7 @@ import style from "./TreeNode.module.scss";
  * @param {string} params.classType The type of class should be used to display
  * @param {boolean} params.hasChildren Node has children?
  */
-const TreeNode = ({open, selected=false, archivalUnit, onOpenClose, onTreeNodeClick, classType, hasChildren=false}) => {
+const TreeNode = ({open, selected=false, archivalUnit, onOpenClose, onTreeNodeClick, classType, theme, hasChildren=false}) => {
     const key = archivalUnit['key'];
 
     /**
@@ -79,9 +79,17 @@ const TreeNode = ({open, selected=false, archivalUnit, onOpenClose, onTreeNodeCl
         }
     }
 
+    const getMainClassName = () => {
+        if (!theme || archivalUnit['themes'].includes(theme)) {
+            return selected ? `${style[classType]} ${style.Selected}` : style[classType]
+        } else {
+            return selected ? `${style[classType]} ${style.Selected} ${style.NotActive}` : `${style[classType]} ${style.NotActive}`
+        }
+    }
+    
     return (
         <React.Fragment>
-            <div key={archivalUnit['key']} className={selected ? `${style[classType]} ${style.Selected}` : style[classType]}>
+            <div key={archivalUnit['key']} className={getMainClassName()}>
                 <div className={style.Spacer} />
                 {renderOpenClosePart()}
                 {renderIcon()}

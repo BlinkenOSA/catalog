@@ -1,5 +1,10 @@
 @import "../../../../styles/variables";
 
+.NotActive {
+  opacity: .1;
+  //color: $form-background;
+}
+
 .Fonds {
   display: flex;
   min-height: 30px;

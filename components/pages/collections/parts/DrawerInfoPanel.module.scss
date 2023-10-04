@@ -1,0 +1,44 @@
+@import "../../../../styles/variables";
+
+.Info {
+  font-family: "Suisse Intl", serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 0;
+
+  h1 {
+    padding: 0;
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 0;
+  }
+
+  .Header {
+    height: 50px;
+    background-color: $form-background;
+    border-bottom: 1px solid $black;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+
+    .ActionButtons {
+      width: 200px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .ThemeFilter {
+      flex: 1;
+    }
+  }
+
+  .InfoText {
+    font-family: 'Suisse Intl', serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 5px 20px 20px 20px;
+    text-align: left;
+  }
+}
