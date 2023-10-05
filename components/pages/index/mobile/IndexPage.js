@@ -106,11 +106,14 @@ const IndexPage = () => {
                           className={style.IntroText}
                           variants={longTextVariants}
                           transition={{ delay: 1 }}>
-                            10,000 linear meters, 17,000 hours of audiovisual, and 15 TB of digital records, as
-                            well as 150,000 photographs and 19,000 library items on three areas of interest:<br/><br/>
-                            <span>Communism, the Cold War, and their Afterlives</span>&nbsp;
-                            <span>Human Rights and Social Justice</span>&nbsp;
-                            <span>Central European University and the Open Society Foundations Network</span>.
+                            10,000 linear meters, 17,000 hours of audiovisual, and 15 TB of digital records,
+                            as well as 150,000 photographs, 6000+ documentary film titles and 19,000 library items on
+                            four main areas of interest:
+                            <br/><br/>
+                            <span>Communism and Cold War, and their Afterlives in Europe</span>&nbsp;
+                            <span>Human Rights and Social Justice globally</span>&nbsp;the&nbsp;
+                            <span>Central European University in Budapest and Vienna</span>&nbsp;and the&nbsp;
+                            <span>Open Society Foundations Network worldwide</span>.
                         </motion.p>
                     </div>
                     <div className={style.BottomRight}>
