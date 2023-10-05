@@ -1,39 +1,77 @@
 @import "../../../styles/variables";
 
-.Tree {
-  font-family: 'Suisse Intl', serif;
-  font-weight: 400;
-  font-size: 16px;
-  padding: 15px 20px;
+.Grid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-template-rows: auto;
+  grid-gap: 1px;
+  background-color: $black;
 
   &.Mobile {
-    padding: 10px 5px;
-  }
-}
+    grid-template-columns: auto auto auto;
 
-.TreeOpen {
-  font-family: 'Suisse Intl', serif;
-  font-weight: 400;
-  font-size: 16px;
-  padding: 15px 20px;
-  width: 50%;
-  border-right: $border-width solid #000;
-}
+    .GridItem {
+      .Title {
+        font-size: 14px;
 
-.Item {
-  display: flex;
-  cursor: pointer;
-  min-height: 30px;
-  align-items: center;
-
-  .ItemIcon {
-    width: 30px;
-    height: 30px;
+        .Number {
+          font-size: 10px;
+        }
+      }
+    }
   }
 
-  div {
-    width: 100%;
-    padding: 5px;
-    border-radius: 3px;
+  .GridItem {
+    background-color: $background;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    &:hover {
+      .BookBackground {
+        .Book {
+          background-color: $yellow;
+        }
+      }
+
+      .Title {
+        color: $white;
+        background-color: $black;
+      }
+    }
+
+    .BookBackground {
+      flex: 2;
+      display: flex;
+
+      .Book {
+        flex: 1;
+        height: 100%;
+        border-right: 1px solid $black;
+        max-width: 20px;
+        background-color: $form-background;
+        transition: 0.2s ease;
+      }
+    }
+
+    .Title {
+      border-top: 1px solid $black;
+      flex: 1;
+      padding: 5px 20px;
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 18px;
+      font-weight: 400;
+      align-items: center;
+      display: flex;
+      min-height: 80px;
+      transition: 0.2s ease;
+
+      .Number {
+        font-family: "Suisse Intl Mono", serif;
+        font-weight: 400;
+        font-size: 12px;
+      }
+    }
   }
 }

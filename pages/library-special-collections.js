@@ -19,6 +19,7 @@ export async function getServerSideProps(context) {
   const solrParams = makeSolrParams(params)
 
   solrParams.append('facet.sort', 'index')
+  solrParams.append('fq', 'record_origin_facet:Library')
 
   // SOLR Basic Authentication
   let headers = new Headers();
@@ -34,6 +35,7 @@ export async function getServerSideProps(context) {
 
 const LibrarySpecialCollections = ({data}) => {
     const libraryCollectionsFacet = data['facet_counts']['facet_fields']['library_collection_facet']
+    const total = data['response']['numFound']
 
     return (
         <Layout>
@@ -46,7 +48,7 @@ const LibrarySpecialCollections = ({data}) => {
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
                         <h1>Library Special Collections</h1>
                     </div>
-                    <LibraryCollectionPage data={libraryCollectionsFacet} isMobile={true} />
+                    <LibraryCollectionPage data={libraryCollectionsFacet} total={total} isMobile={true} />
                 </div>
             </Media>
             <Media greaterThanOrEqual="md">
@@ -55,7 +57,7 @@ const LibrarySpecialCollections = ({data}) => {
                     <div className={style.PageTitle}>
                         <h1>Library Special Collections</h1>
                     </div>
-                    <LibraryCollectionPage data={libraryCollectionsFacet} />
+                    <LibraryCollectionPage data={libraryCollectionsFacet} total={total} />
                 </div>
             </Media>
         </Layout>
