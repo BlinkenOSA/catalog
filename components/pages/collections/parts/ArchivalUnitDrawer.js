@@ -31,12 +31,6 @@ const ArchivalUnitDrawer = ({open, archivalUnitID, onClose, onTreeOpenClick, onT
     }
 
     const renderButtons = () => {
-        const DESCRIPTION_LEVELS = {
-            'F': 'Fonds',
-            'SF': 'Subfonds',
-            'S': 'Series'
-        }
-
         return (
             <div className={style.Buttons}>
                 {

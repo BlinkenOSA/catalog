@@ -40,5 +40,7 @@
     font-size: 16px;
     padding: 5px 20px 20px 20px;
     text-align: left;
+    max-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - 51px);
+    overflow-y: auto;
   }
 }
