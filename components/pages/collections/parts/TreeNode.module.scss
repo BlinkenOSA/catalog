@@ -8,6 +8,7 @@
 .Fonds {
   display: flex;
   min-height: 30px;
+  transition: 0.3s ease;
 
   .Spacer {
     display: none;
@@ -22,6 +23,7 @@
 .FondsLast {
   display: flex;
   min-height: 30px;
+  transition: 0.3s ease;
 
   .Spacer {
     display: none;
@@ -30,6 +32,7 @@
 
 .FondsSubfonds {
   display: flex;
+  transition: 0.3s ease;
 
   .Opener, .Line {
     background-image: url("/icons/TreeLineBg.svg");
@@ -39,10 +42,12 @@
 
 .FondsSubfondsLast {
   display: flex;
+  transition: 0.3s ease;
 }
 
 .FondsLastSubfonds {
   display: flex;
+  transition: 0.3s ease;
 
   .Opener, .Line {
     background-image: url("/icons/TreeLineBg.svg");
@@ -56,6 +61,7 @@
 
 .FondsLastSubfondsLast {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     background-image: none;
@@ -64,6 +70,7 @@
 
 .FondsLastSubfondsLastSeries {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     width: 60px;
@@ -78,6 +85,7 @@
 
 .FondsLastSubfondsLastSeriesLast {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     width: 60px;
@@ -87,6 +95,7 @@
 
 .FondsLastSubfondsSeries {
   display: flex;
+  transition: 0.3s ease;
 
   .Opener, .Line {
     background-image: url("/icons/TreeLineBg.svg");
@@ -101,6 +110,7 @@
 
 .FondsLastSubfondsSeriesLast {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     width: 60px;
@@ -110,6 +120,7 @@
 
 .FondsSeries {
   display: flex;
+  transition: 0.3s ease;
 
   .Opener, .Line {
     background-image: url("/icons/TreeLineBg.svg");
@@ -119,10 +130,12 @@
 
 .FondsSeriesLast {
   display: flex;
+  transition: 0.3s ease;
 }
 
 .FondsLastSeries {
   display: flex;
+  transition: 0.3s ease;
 
   .Opener, .Line {
     background-image: url("/icons/TreeLineBg.svg");
@@ -136,6 +149,7 @@
 
 .FondsLastSeriesLast {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     background-image: none;
@@ -144,6 +158,7 @@
 
 .FondsSubfondsSeries {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     width: 60px;
@@ -158,6 +173,7 @@
 
 .FondsSubfondsSeriesLast {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     width: 60px;
@@ -167,6 +183,7 @@
 
 .FondsSubfondsLastSeries {
   display: flex;
+  transition: 0.3s ease;
 
   .Spacer {
     flex-shrink: 0;
@@ -181,7 +198,8 @@
 
 .FondsSubfondsLastSeriesLast {
   display: flex;
-
+  transition: 0.3s ease;
+  
   .Spacer {
     flex-shrink: 0;
     width: 60px;
