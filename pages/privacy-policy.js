@@ -2,7 +2,6 @@ import React from "react";
 import style from "./pages.module.scss";
 import Layout from "../components/layout/Layout";
 import Head from "next/head";
-import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 
 export const getStaticProps = async () => {
     return { props: {} }
@@ -14,7 +13,6 @@ const PrivacyPolicy = () => {
             <Head>
                 <title>Blinken OSA Archivum - Privacy Policy</title>
             </Head>
-            <BreadcrumbSearch module={'staticPage'} />
             <div className={style.Page}>
                 <div className={style.PageTitle}>
                     <h1>Privacy Policy</h1>

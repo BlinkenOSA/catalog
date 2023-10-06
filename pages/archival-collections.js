@@ -24,7 +24,6 @@ const ArchivalCollections = ({data}) => {
                 <title>Blinken OSA Archivum - Archival Collections</title>
             </Head>
             <Media lessThan="md">
-                <BreadcrumbSearchMobile module={'collections'} />
                 <div className={`${style.Page} ${style.Mobile}`}>
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
                         <h1>Archival Collections</h1>
@@ -37,7 +36,6 @@ const ArchivalCollections = ({data}) => {
                 </div>
             </Media>
             <Media greaterThanOrEqual="md">
-                <BreadcrumbSearch module={'collections'} />
                 <div className={style.Page}>
                     <div className={style.PageTitle}>
                         <h1>Archival Collections</h1>

@@ -4,7 +4,7 @@
   width: 50%;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  top: calc(#{$header-height} + #{$breadcrumb-height});
+  top: calc(#{$header-height});
   align-self: flex-start;
 
   &.Mobile {
@@ -25,7 +25,7 @@
 
 .Window {
   margin-bottom: 20px;
-  max-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height}));
+  max-height: calc(100vh - #{$header-height});
   overflow-y: scroll;
 
   .CloseButton {

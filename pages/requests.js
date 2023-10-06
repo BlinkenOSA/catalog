@@ -19,7 +19,6 @@ const RequestsPage = () => {
                 <title>Blinken OSA Archivum - Requests</title>
             </Head>
             <Media lessThan="md">
-              <BreadcrumbSearchMobile module={'staticPage'} />
               <div className={`${style.Page} ${style.Mobile}`}>
                 <div className={`${style.PageTitle} ${style.Mobile}`}>
                   <h1>Requests</h1>
@@ -28,7 +27,6 @@ const RequestsPage = () => {
               </div>
             </Media>
             <Media greaterThanOrEqual="md">
-              <BreadcrumbSearch module={'staticPage'} />
               <div className={style.Page}>
                   <div className={style.PageTitle}>
                       <h1>Requests</h1>
