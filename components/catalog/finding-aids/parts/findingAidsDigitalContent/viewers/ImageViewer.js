@@ -7,17 +7,19 @@ import {useWindowSize} from 'react-use';
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
-const ImageViewer = ({id, isGallery=false, isMobile}) => {
+const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
     const manifestUrl = `${API}finding-aids-image-manifest/${id}/manifest.json`;
 
     const {width, height} = useWindowSize();
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
 
     const getHeight = () => {
+        const realHeight = height - 159;
+
         if (isMobile) {
-            return fullScreenEnabled ? height : 300;
+            return fullScreenEnabled ? height : realHeight;
         } else {
-            return fullScreenEnabled ? height : 500;
+            return fullScreenEnabled ? height : realHeight;
         }
     }
 

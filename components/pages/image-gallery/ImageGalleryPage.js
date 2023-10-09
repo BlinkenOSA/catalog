@@ -3,14 +3,14 @@ import dynamic from "next/dynamic";
 import FilterMenu from "./parts/FilterMenu";
 import {useEffect, useState} from "react";
 import ImageMetadata from "./parts/ImageMetadata";
+import GalleryFooter from "../../layout/gallery/GalleryFooter";
 
 const ImageGalleryPage = ({data}) => {
-	const records = data['response']['docs']
 	const [selectedImage, setSelectedImage] = useState('')
 	const [selectedImageMetadata, setSelectedImageMetadata] = useState({})
 
 	useEffect(() => {
-		setSelectedImageMetadata(records.filter(r => r['id'] === selectedImage)[0])
+		setSelectedImageMetadata(data.filter(r => r['id'] === selectedImage)[0])
 	}, [selectedImage])
 
 	const ImageGalleryThumbnails = dynamic(() => import('./parts/ImageGalleryThumbnails'), {
@@ -25,15 +25,19 @@ const ImageGalleryPage = ({data}) => {
 		<div className={style.ImageGalleryPage}>
 			<div className={style.ImageGalleryViewer}>
 				<div className={style.Content}>
-					<ImageViewer id={selectedImage} isGallery={true} />
-					<ImageMetadata metadata={selectedImageMetadata} />
+					<ImageMetadata metadata={selectedImageMetadata}/>
+					{
+						selectedImage !== '' &&
+						<ImageViewer id={selectedImage} isGallery={true} />
+					}
 				</div>
 			</div>
 			<div className={style.ImageGalleryThumbnails}>
 				<div className={style.FilterBar}>
 					<FilterMenu />
 				</div>
-				<ImageGalleryThumbnails records={records} selectedImage={selectedImage} onSelect={setSelectedImage} />
+				<ImageGalleryThumbnails records={data} selectedImage={selectedImage} onSelect={setSelectedImage} />
+				<GalleryFooter />
 			</div>
 		</div>
 	)

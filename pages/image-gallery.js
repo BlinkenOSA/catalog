@@ -8,6 +8,7 @@ import {useMeasure} from "react-use";
 import {makeSolrParams} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
 import dynamic from "next/dynamic";
+import GalleryLayout from "../components/layout/gallery/GalleryLayout";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
 
@@ -27,14 +28,18 @@ export async function getServerSideProps(context) {
 	})
 
 	const data = await res.json()
-	return { props: { data } }
+	if (data.hasOwnProperty('response')) {
+		return { props: { data: data['response']['docs'] } }
+	} else {
+		return { props: { data } }
+	}
 }
 
 const ImageGallery = ({data}) => {
 	const [ref] = useMeasure();
 
 	return (
-		<Layout>
+		<GalleryLayout>
 			<Head>
 				<title>Blinken OSA Archivum - Image Gallery</title>
 			</Head>
@@ -45,10 +50,10 @@ const ImageGallery = ({data}) => {
 				module={'image-gallery'}
 				isMobile={false}
 			/>
-			<div className={`${style.Page} ${style.FullWidth}`}>
+			<div className={`${style.Page}`}>
 				<ImageGalleryPage data={data} />
 			</div>
-		</Layout>
+		</GalleryLayout>
 	)
 }
 

@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import style from "./Layout.module.scss";
-import { Media } from "../../utils/media";
+import style from "../Layout.module.scss";
+import { Media } from "../../../utils/media";
 
-import Header from "./desktop/Header";
-import Footer from "./desktop/Footer";
-import FooterMobile from "./mobile/FooterMobile";
+import Header from "../desktop/Header";
+import Footer from "../desktop/Footer";
+import FooterMobile from "../mobile/FooterMobile";
 import dynamic from "next/dynamic";
 
-const HeaderMobile = dynamic(() => import("./mobile/HeaderMobile"), {
+const HeaderMobile = dynamic(() => import("../mobile/HeaderMobile"), {
     ssr: false,
 });
 
@@ -32,7 +32,6 @@ const Layout = ({children}) => {
                 <div className={style.ContentWrap}>
                     {children}
                 </div>
-                <Footer />
             </Media>
         </React.Fragment>
     )
