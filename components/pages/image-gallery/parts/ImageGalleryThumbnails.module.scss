@@ -1,3 +1,5 @@
+@import "../../../../styles/variables";
+
 .Grid {
   display: flex;
   flex-wrap: wrap;
@@ -10,8 +12,17 @@
 
   figure {
     cursor: pointer;
-    margin: 10px;
+    margin: 8px;
     position: relative;
+    border: 1px solid transparent;
+
+    &.Selected {
+      border: 1px solid $black;
+
+      img {
+        filter: grayscale(0);
+      }
+    }
 
     i {
       display: block;

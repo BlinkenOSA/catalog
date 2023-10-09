@@ -135,6 +135,10 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
             return ''
         }
 
+        if (module === 'image-gallery') {
+            return ''
+        }
+
         if (Object.keys(selectedFacets).length === 0 && query === '') {
             return (
                 <div className={style.SearchText}>
@@ -177,6 +181,10 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
     const renderLeftSideContent = () => {
         if (module === 'staticPage' || module === 'collections' || module === 'detail') {
             return <BackButton />
+        }
+
+        if (module === 'image-gallery') {
+            return ''
         }
 
         return (
