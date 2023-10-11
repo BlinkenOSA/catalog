@@ -5,6 +5,10 @@ import {useState} from "react";
 import TreeNode from "./parts/TreeNode";
 import ArchivalUnitDrawer from "./parts/ArchivalUnitDrawer";
 import {useRouter} from "next/router";
+import useSWR from "swr";
+import {fetcher} from "../../../utils/fetcherFunctions";
+
+const API = process.env.NEXT_PUBLIC_AMS_API;
 
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
@@ -14,7 +18,9 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
 
     const [openNodes, setOpenNodes] = useState([]);
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
-    const [theme, setTheme] = useState(undefined)
+    const [theme, setTheme] = useState('1')
+
+    // const { data, error } = useSWR(`${API}archival-units-tree/all/${theme}/`, fetcher)
 
     useEffect(() => {
         if (activeUnit && activeUnitID) {
@@ -159,7 +165,6 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
                     open={openNodes.includes(archivalUnit['key'])}
                     onOpenClose={onOpenClose}
                     onTreeNodeClick={onSelectArchivalUnit}
-                    theme={theme}
                     hasChildren={archivalUnit['children'].length > 0}
                 />
             )
@@ -244,9 +249,6 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
         } else {
             return (
                 <div style={{display: 'flex'}}>
-                    <div className={showArchiveUnitDrawer ? style.TreeOpen : style.Tree}>
-                        {renderTree()}
-                    </div>
                     {
                         showArchiveUnitDrawer &&
                         <ArchivalUnitDrawer
@@ -258,6 +260,9 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
                             onThemeSelect={setTheme}
                         />
                     }
+                    <div className={showArchiveUnitDrawer ? style.TreeOpen : style.Tree}>
+                        {renderTree()}
+                    </div>
                 </div>
             )
         }

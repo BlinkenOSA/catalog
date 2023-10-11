@@ -16,7 +16,7 @@
   }
 
   .Header {
-    height: 50px;
+    min-height: 50px;
     background-color: $form-background;
     border-bottom: 1px solid $black;
     display: flex;
@@ -24,13 +24,9 @@
     padding: 0 20px;
 
     .ActionButtons {
-      width: 200px;
       display: flex;
       gap: 10px;
-    }
 
-    .ThemeFilter {
-      flex: 1;
     }
   }
 

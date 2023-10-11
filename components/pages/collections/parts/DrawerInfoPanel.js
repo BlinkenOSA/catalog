@@ -1,18 +1,15 @@
 import style from "./DrawerInfoPanel.module.scss";
 import Button from "../../search/parts/Button";
-import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai'
-import ThemeFilter from "./ThemeFilter";
 
-const DrawerInfoPanel = ({onClick, theme, onThemeSelect}) => {
+const DrawerInfoPanel = ({theme, onThemeSelect}) => {
     return (
         <div className={style.Info}>
             <div className={style.Header}>
                 <div className={style.ActionButtons}>
-                    <Button text={<><AiOutlinePlus/> Open All</>} onClick={() => onClick('openAll')} />
-                    <Button text={<><AiOutlineMinus/> Close All</>} onClick={() => onClick('closeAll')} />
-                </div>
-                <div className={style.ThemeFilter}>
-                    <ThemeFilter value={theme} onSelect={onThemeSelect} />
+                    <Button active={theme === 'all'} text={'All'} onClick={() => onThemeSelect('all')} />
+                    <Button active={theme === '1'} text={'Communism and Cold War'} onClick={() => onThemeSelect('1')} />
+                    <Button active={theme === '2'} text={'Human Rights and Social Justice'} onClick={() => onThemeSelect('2')} />
+                    <Button active={theme === '3'} text={'CEU and Open Society Network'} onClick={() => onThemeSelect('3')} />
                 </div>
             </div>
             <div className={style.InfoText}>

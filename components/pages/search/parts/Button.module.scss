@@ -25,6 +25,11 @@
     align-items: center;
     gap: 5px;
   }
+
+  &.Active {
+    background-color: $yellow;
+    color: $black;
+  }
 }
 
 .ButtonWithLink:hover {
@@ -52,6 +57,11 @@
     display: inline-flex;
     align-items: center;
     gap: 5px;
+  }
+
+  &.Active {
+    background-color: $yellow;
+    color: $black;
   }
 }
 
