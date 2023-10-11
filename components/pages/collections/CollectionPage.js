@@ -18,7 +18,7 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
 
     const [openNodes, setOpenNodes] = useState([]);
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
-    const [theme, setTheme] = useState('1')
+    const [theme, setTheme] = useState(1)
 
     // const { data, error } = useSWR(`${API}archival-units-tree/all/${theme}/`, fetcher)
 
@@ -92,21 +92,26 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
         const detectVisible = () => {
             let fondsKey, subfondsKey;
             const key = archivalUnit['key'];
-            switch (archivalUnit['level']) {
-                case 'F':
-                    return true;
-                case 'SF':
-                    fondsKey = key.slice(0, key.indexOf('-'))
-                    return openNodes.includes(fondsKey);
-                case 'S':
-                    if (archivalUnit['subfonds']) {
-                        fondsKey = key.slice(0, key.indexOf('-'))
-                        subfondsKey = key.slice(0, key.lastIndexOf('-'))
-                        return openNodes.includes(fondsKey) && openNodes.includes(subfondsKey);
-                    } else {
+
+            if (theme === 0 || archivalUnit['themes'].includes(theme)) {
+                switch (archivalUnit['level']) {
+                    case 'F':
+                        return true;
+                    case 'SF':
                         fondsKey = key.slice(0, key.indexOf('-'))
                         return openNodes.includes(fondsKey);
-                    }
+                    case 'S':
+                        if (archivalUnit['subfonds']) {
+                            fondsKey = key.slice(0, key.indexOf('-'))
+                            subfondsKey = key.slice(0, key.lastIndexOf('-'))
+                            return openNodes.includes(fondsKey) && openNodes.includes(subfondsKey);
+                        } else {
+                            fondsKey = key.slice(0, key.indexOf('-'))
+                            return openNodes.includes(fondsKey);
+                        }
+                }
+            } else {
+                return false;
             }
         }
 

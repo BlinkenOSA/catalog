@@ -8,7 +8,7 @@ export const API = process.env.NEXT_PUBLIC_AMS_API;
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`${API}archival-units-tree/all/1/`)
+  const res = await fetch(`${API}archival-units-tree/all/`)
   const data = await res.json()
 
   // Pass data to the page via props

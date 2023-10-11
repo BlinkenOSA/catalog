@@ -2,14 +2,21 @@ import style from "./DrawerInfoPanel.module.scss";
 import Button from "../../search/parts/Button";
 
 const DrawerInfoPanel = ({theme, onThemeSelect}) => {
+    const themeOptions = [
+        { value: 'all', label: 'All'},
+        { value: 'Communism & Cold War', label: 'Communism, the Cold War, and their Afterlives'},
+        { value: 'Human Rights', label: 'Human Rights and Social Justice'},
+        { value: 'Civil Society', label: 'CEU and the Open Society Foundations Network'}
+    ]
+
     return (
         <div className={style.Info}>
             <div className={style.Header}>
                 <div className={style.ActionButtons}>
-                    <Button active={theme === 'all'} text={'All'} onClick={() => onThemeSelect('all')} />
-                    <Button active={theme === '1'} text={'Communism and Cold War'} onClick={() => onThemeSelect('1')} />
-                    <Button active={theme === '2'} text={'Human Rights and Social Justice'} onClick={() => onThemeSelect('2')} />
-                    <Button active={theme === '3'} text={'CEU and Open Society Network'} onClick={() => onThemeSelect('3')} />
+                    <Button active={theme === 0} text={'All'} onClick={() => onThemeSelect(0)} />
+                    <Button active={theme === 1} text={'Communism and Cold War'} onClick={() => onThemeSelect(1)} />
+                    <Button active={theme === 2} text={'Human Rights and Social Justice'} onClick={() => onThemeSelect(2)} />
+                    <Button active={theme === 3} text={'CEU and Open Society Network'} onClick={() => onThemeSelect(3)} />
                 </div>
             </div>
             <div className={style.InfoText}>
