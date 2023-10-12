@@ -5,7 +5,7 @@ import style from "./IsadContentPage.module.scss";
 import CartButton from "../../../cart/CartButton";
 import {useCart} from "react-use-cart";
 import React, {useState} from "react";
-import AvailabilityButton from "../../../results/parts/buttons/AvailabilityButton";
+import AvailabilityButton from "../../../pages/search/results/parts/buttons/AvailabilityButton";
 import PrimaryTypeButton from "../../../pages/search/parts/PrimaryTypeButton";
 import IsadSearchBar from "./parts/IsadSearchBar";
 import IsadFilter from "./parts/IsadFilter";

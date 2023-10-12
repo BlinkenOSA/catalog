@@ -4,7 +4,7 @@ import Loader from "../../layout/Loader";
 import React, {useRef, useState} from "react";
 import CartButton from "../../cart/CartButton";
 import {useCart} from "react-use-cart";
-import AvailabilityButton from "../../results/parts/buttons/AvailabilityButton";
+import AvailabilityButton from "../../pages/search/results/parts/buttons/AvailabilityButton";
 import FindingAidsMetadataPage from "./FindingAidsMetadataPage";
 import FindingAidsLocation from "./FindingAidsLocation";
 import dynamic from "next/dynamic";

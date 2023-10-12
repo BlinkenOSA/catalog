@@ -1,7 +1,7 @@
 import style from "./LibraryPage.module.scss";
 import CartButton from "../../cart/CartButton";
 import {useCart} from "react-use-cart";
-import AvailabilityButton from "../../results/parts/buttons/AvailabilityButton";
+import AvailabilityButton from "../../pages/search/results/parts/buttons/AvailabilityButton";
 import PrimaryTypeButton from "../../pages/search/parts/PrimaryTypeButton";
 import Loader from "../../layout/Loader";
 import React from "react";
@@ -10,7 +10,7 @@ import {libraryFieldConfig} from "./config/libraryFieldConfig";
 import {filmLibraryFieldConfig} from "./config/filmLibraryFieldConfig";
 import LibraryHoldings from "./desktop/LibraryHoldings";
 import LibraryHoldingsMobile from "./mobile/LibraryHoldingsMobile";
-import Title from "../../results/parts/metadata/Title";
+import Title from "../../pages/search/results/parts/metadata/Title";
 
 
 const LibraryPage = ({solrData, data, type, isMobile}) => {

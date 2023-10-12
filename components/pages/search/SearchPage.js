@@ -2,9 +2,9 @@ import React from "react";
 import style from "./SearchPage.module.scss";
 import FacetMenu from "../../facets/desktop/FacetMenu";
 import Loader from "../../layout/Loader";
-import ResultItem from "../../results/ResultItem";
+import ResultItem from "./results/ResultItem";
 import {useRouter} from "next/router";
-import NotFound from "../../results/NotFound";
+import NotFound from "./results/NotFound";
 import {defaultLimit, defaultOffset} from "../../../config/appConfig";
 import {Media} from "../../../utils/media"
 
