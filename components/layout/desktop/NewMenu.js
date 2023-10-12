@@ -33,7 +33,7 @@ const NewMenu = ({onMenuOpen}) => {
                     </li>
                 </a>
                 <a href={'/requests'} style={{zIndex: 4}}>
-                    <li className={style.MenuItem}>
+                    <li className={style.MenuItem} style={{borderRight: "1px solid #FFF"}}>
                         <div className={style.Image}><Image src="/icons/Cart.svg" height={15} width={15} /></div>
                         <div className={style.Text}>Requests</div>
                     </li>
