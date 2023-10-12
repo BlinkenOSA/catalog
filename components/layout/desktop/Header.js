@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import dynamic from "next/dynamic";
 import {Collapse} from "react-collapse";
 import CollectionsMenu from "./CollectionsMenu";
+import NewMenu from "./NewMenu";
 
 const Menu = dynamic(() => import('./Menu'), {
     ssr: false,
@@ -32,7 +33,7 @@ const Header = () => {
                     <SearchBar />
                 </div>
                 <div className={style.Menu}>
-                    <Menu onMenuOpen={handleMenuOpen}/>
+                    <NewMenu onMenuOpen={handleMenuOpen}/>
                 </div>
             </div>
             <Collapse isOpened={collectionsMenuOpen}>

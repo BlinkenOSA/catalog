@@ -3,15 +3,17 @@
 .Footer {
   width: 100%;
   height: $footer-height-mobile;
-  background-color: $black;
+  background-color: $form-background;
   font-family: 'Suisse Intl Condensed', serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 12px;
-  color: $white;
+  color: $black;
+  border-top: 1px solid $black;
 
   .FooterInstiution {
     display: block;
     padding: 15px;
+    font-size: 16px;
   }
 
   .FooterContent {
@@ -26,7 +28,7 @@
       list-style: none;
 
       li {
-        color: $white;
+        color: $black;
         margin-bottom: 15px;
       }
     }

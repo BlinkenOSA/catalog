@@ -3,7 +3,8 @@
 .Footer {
   width: 100%;
   height: $footer-height;
-  background-color: $black;
+  background-color: $form-background;
+  border-top: 1px solid $black;
 }
 
 .FooterContent {
@@ -13,18 +14,77 @@
   max-width: $max-width;
   margin: 0 auto;
   height: 100%;
-}
-
-.FooterContent ul {
-  padding: 0;
-  margin: 0;
   display: flex;
-  justify-content: space-between;
-  list-style: none;
   align-items: center;
-  height: 100%;
+  gap: 5px;
+  color: $black;
 
-  li {
-    color: $white;
+  ul {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .Offset {
+    width: $left-width;
+  }
+
+  .InfoWrap {
+    flex: 1;
+    margin-left: 10px;
+
+    .Institution {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .Info {
+      display: flex;
+
+      li {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .Menu {
+    flex: 1;
+    font-size: 24px;
+    text-align: right;
+    margin-right: 10px;
+
+    a {
+      text-decoration: none;
+      align-self: flex-end;
+
+      &:last-child {
+        .Badge {
+          margin-bottom: 0;
+        }
+      }
+
+      .Badge {
+        width: fit-content;
+        font-size: 20px;
+        font-family: "Suisse Intl", serif;
+        font-weight: 300;
+        padding: 0 20px;
+        color: $black;
+        background-color: $white;
+        border-radius: 200px;
+        transition: 0.1s;
+        margin-bottom: 10px;
+        border: $border-width solid $black;
+
+        &:hover {
+          cursor: pointer;
+          color: $black;
+          background-color: $yellow;
+        }
+      }
+    }
   }
 }

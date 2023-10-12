@@ -10,20 +10,14 @@ const Menu = ({onMenuOpen}) => {
 
     return (
       <React.Fragment>
-        <ul className={style.MenuList}>
+        <div className={style.MenuList}>
             <li>
                 <a onClick={() => onMenuOpen('collections')}>Collections</a>
             </li>
             <li>
                 <a href={'/requests'}>{totalUniqueItems > 0 ? `Requests (${totalUniqueItems})` : 'Requests'}</a>
             </li>
-            <li>
-                <a href={'/info'}>Help</a>
-            </li>
-            <li>
-                <a href={'/privacy-policy'}>Privacy Policy</a>
-            </li>
-        </ul>
+        </div>
       </React.Fragment>
     )
 }
