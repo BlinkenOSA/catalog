@@ -1,47 +1,57 @@
 @import "../../../styles/variables";
 
 .MenuList {
+  flex: 1;
+
   ul {
     display: flex;
-    gap: 10px;
     list-style: none;
     height: 32px;
+    align-items: center;
     padding: 0;
     margin: 0;
+    justify-content: flex-end;
 
     a {
       text-decoration: none;
-      background-color: $form-background;
       color: $white;
-      border-radius: 20px;
-      border-top: 1px solid $black;
-      border-bottom: 1px solid $black;
-      min-width: 32px;
-      display: inline-flex;
-      align-items: center;
-      z-index: 9;
 
       .MenuItem {
         display: flex;
+        background-color: $black;
         align-items: center;
-        margin: 0 auto;
+        height: 32px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-left: 1px solid $white;
 
-        div {
+        .Image {
+          width: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            filter: invert(100%) sepia(1%) saturate(4370%) hue-rotate(41deg) brightness(132%) contrast(89%);
+          }
+        }
+
+        .Text {
           color: $black;
-          padding: 0 5px;
-          font-size: 16px;
-          opacity: 1;
+          white-space:nowrap;
+          max-width: 0;
+          opacity: 0;
+          padding-left: 5px;
+          transition: max-width .5s, opacity .2s, color .9s;
         }
       }
 
       &:hover {
-        background-color: $yellow;
-        border-bottom: 1px solid $black;
-
         .MenuItem {
-          div {
+          .Text {
+            color: $white;
+            max-width: 200px;
             opacity: 1;
-            width: auto;
           }
         }
       }

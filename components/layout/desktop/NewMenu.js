@@ -14,28 +14,28 @@ const NewMenu = ({onMenuOpen}) => {
       <React.Fragment>
         <div className={style.MenuList}>
             <ul>
-                <a href={'/archival-collections'} >
+                <motion.a href={'/archival-collections'} style={{zIndex: 1}}>
+                    <li className={style.MenuItem} style={{border: "none"}}>
+                        <div className={style.Image}><Image src="/icons/ArchivalUnitBlack.svg" height={20} width={20} /></div>
+                        <div className={style.Text}>Archival Collections</div>
+                    </li>
+                </motion.a>
+                <motion.a href={'/library-special-collections'} style={{zIndex: 2}}>
                     <li className={style.MenuItem}>
-                        <div>Archival Collections</div>
-                        <Image src="/icons/ArchivalUnitBlack.svg" height={20} width={20} />
+                        <div className={style.Image}><Image src="/icons/BookIconBlack.svg" height={20} width={20} /></div>
+                        <div className={style.Text}>Library Special Collections</div>
+                    </li>
+                </motion.a>
+                <a href={'/image-gallery'} style={{zIndex: 3}}>
+                    <li className={style.MenuItem}>
+                        <div className={style.Image}><Image src="/icons/TypeStillImage.svg" height={25} width={25} /></div>
+                        <div className={style.Text}>Digital Image Gallery</div>
                     </li>
                 </a>
-                <a href={'/library-special-collections'} >
+                <a href={'/requests'} style={{zIndex: 4}}>
                     <li className={style.MenuItem}>
-                        <div>Library Special Collections</div>
-                        <Image src="/icons/BookIconBlack.svg" height={20} width={20} />
-                    </li>
-                </a>
-                <a href={'/image-gallery'} >
-                    <li className={style.MenuItem}>
-                        <div>Digital Image Gallery</div>
-                        <Image src="/icons/TypeStillImage.svg" height={20} width={20} />
-                    </li>
-                </a>
-                <a href={'/requests'} >
-                    <li className={style.MenuItem}>
-                        <div>Requests</div>
-                        <Image src="/icons/Cart.svg" height={17} width={17} />
+                        <div className={style.Image}><Image src="/icons/Cart.svg" height={15} width={15} /></div>
+                        <div className={style.Text}>Requests</div>
                     </li>
                 </a>
             </ul>
