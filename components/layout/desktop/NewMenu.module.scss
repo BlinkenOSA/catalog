@@ -43,6 +43,14 @@
           opacity: 0;
           transition: max-width .6s, opacity .3s, color .9s;
         }
+
+        &.Active {
+          .Text {
+            color: $white;
+            max-width: 200px;
+            opacity: 1;
+          }
+        }
       }
 
       &:hover {
