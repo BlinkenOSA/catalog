@@ -44,7 +44,10 @@ const NewMenu = () => {
                 </a>
                 <a href={'/requests'} style={{zIndex: 4}}>
                     <li className={getClass('/requests')} style={{borderRight: "1px solid #FFF"}}>
-                        <div className={style.Image}><Image src="/icons/Cart.svg" height={15} width={15} /></div>
+                        <div className={style.Image}>
+                            <Image src="/icons/Cart.svg" height={15} width={15} />
+                            {totalUniqueItems > 0 && <div className={style.RequestItems}>{totalUniqueItems}</div>}
+                        </div>
                         <div className={style.Text}>Requests</div>
                     </li>
                 </a>

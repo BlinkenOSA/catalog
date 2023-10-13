@@ -4,9 +4,8 @@ import SearchBar from "./SearchBar";
 import dynamic from "next/dynamic";
 import {Collapse} from "react-collapse";
 import CollectionsMenu from "./CollectionsMenu";
-import NewMenu from "./NewMenu";
 
-const Menu = dynamic(() => import('./Menu'), {
+const NewMenu = dynamic(() => import('./NewMenu'), {
     ssr: false,
 })
 

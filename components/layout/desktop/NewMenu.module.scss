@@ -51,6 +51,19 @@
             opacity: 1;
           }
         }
+
+        .RequestItems {
+          top: -8px;
+          left: -3px;
+          text-align: center;
+          min-width: 14px;
+          height: 14px;
+          position: relative;
+          font-size: 10px;
+          color: $black;
+          background-color: $form-background;
+          border-radius: 7px;
+        }
       }
 
       &:hover {
