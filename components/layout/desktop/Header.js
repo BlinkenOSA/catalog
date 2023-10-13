@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import style from "./Header.module.scss";
 import SearchBar from "./SearchBar";
 import dynamic from "next/dynamic";
-import {Collapse} from "react-collapse";
-import CollectionsMenu from "./CollectionsMenu";
 
 const NewMenu = dynamic(() => import('./NewMenu'), {
     ssr: false,
@@ -13,13 +11,6 @@ const NewMenu = dynamic(() => import('./NewMenu'), {
  * Header of the page.
  */
 const Header = () => {
-    const [collectionsMenuOpen, setCollectionsMenuOpen] = useState(false)
-
-    const handleMenuOpen = () => {
-        console.log(collectionsMenuOpen)
-        setCollectionsMenuOpen(!collectionsMenuOpen)
-    }
-
     return (
         <div className={style.Header}>
             <div className={style.HeaderContent}>
@@ -32,12 +23,9 @@ const Header = () => {
                     <SearchBar />
                 </div>
                 <div className={style.Menu}>
-                    <NewMenu onMenuOpen={handleMenuOpen}/>
+                    <NewMenu />
                 </div>
             </div>
-            <Collapse isOpened={collectionsMenuOpen}>
-                <CollectionsMenu />
-            </Collapse>
         </div>
     )
 }
