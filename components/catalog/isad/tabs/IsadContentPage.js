@@ -186,6 +186,16 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 	}
 
 	const renderMenu = () => {
+		const recordNumber = () => {
+			let number = 0;
+			if (data) {
+				data.forEach(response => {
+					number += response['response']['docs'].length
+				})
+			}
+			return number;
+		}
+
 		const renderFilters = () => (
 			<React.Fragment>
 				<IsadFilter
@@ -226,6 +236,11 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 						isMobile={true}
 						filterOpen={filterOpen}
 					/>
+					<div className={style.Totals}>
+						{
+							recordNumber() > 0 ? `Showing 1 - ${recordNumber()} of ${numFound} records` : `No Hits`
+						}
+					</div>
 					<Collapse isOpened={filterOpen}>
 						{renderFilters()}
 					</Collapse>
@@ -240,6 +255,11 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 						onSearch={(value) => onFilter('seriesQuery', value)}
 					/>
 					{renderFilters()}
+					<div className={style.Totals}>
+						{
+							recordNumber() > 0 ? `Showing 1 - ${recordNumber()} of ${numFound} records` : `No Hits`
+						}
+					</div>
 				</div>
 			)
 		}

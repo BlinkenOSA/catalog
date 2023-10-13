@@ -13,9 +13,16 @@
   z-index: 10;
 
   &.Mobile {
+    top: $header-height-mobile + $breadcrumb-height;
     padding: 10px 10px 0 10px;
     flex-direction: column;
     height: unset;
+  }
+
+  .Totals {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 12px;
+    font-weight: 500;
   }
 }
 
