@@ -93,7 +93,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
         if (query && query !== '' && query !== '*') {
             return (
                 <div className={style.SelectedFacetButton}>
-                    <span>Search (All Fields)</span>
+                    <span>Search</span>
                     <AiOutlineRight size={14} />
                     {query}
                     <div className={style.SelectedFacetRemove} onClick={() => onQueryRemove()}>
@@ -189,7 +189,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
 
         return (
             <div className={style.Navigation}>
-                <span>Filter your search</span> <BiDownArrowAlt />
+                {!inverse && <><span>Filter your search</span> <BiDownArrowAlt /></>}
             </div>
         )
     }
