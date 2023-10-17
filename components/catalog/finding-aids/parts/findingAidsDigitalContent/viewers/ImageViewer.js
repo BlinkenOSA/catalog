@@ -2,19 +2,26 @@ import style from "./ImageViewer.module.scss";
 import {OpenSeadragonViewer} from "openseadragon-react-viewer";
 import {FaExpand, FaCompress} from "react-icons/fa";
 import Fullscreen from 'react-fullscreen-crossbrowser';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useWindowSize} from 'react-use';
-
-const API = process.env.NEXT_PUBLIC_AMS_API;
+import useSWR from "swr";
+import {fetcher} from "../../../../../../utils/fetcherFunctions";
+import Loader from "../../../../../layout/Loader";
 
 const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
-    const manifestUrl = `${API}finding-aids-image-manifest/${id}/manifest.json`;
+    const [manifestUrl, setManifestUrl] = useState('')
+
+    const {data} = useSWR(manifestUrl, fetcher)
+
+    useEffect(() => {
+        setManifestUrl(`finding-aids-image-manifest/${id}/manifest.json`)
+    }, [id])
 
     const {width, height} = useWindowSize();
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
 
     const getHeight = () => {
-        const realHeight = height - 159;
+        const realHeight = height - (57 + 42 + 71);
 
         if (isMobile) {
             return fullScreenEnabled ? height : realHeight;
@@ -30,7 +37,7 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
         showTitle: false,
         deepLinking: false,
         height: getHeight(),
-        containerId: `image-viewer-${isMobile ? 'mobile' : 'desktop'}`
+        containerId: `image-viewer-${id}-${isMobile ? 'mobile' : 'desktop'}`
     };
 
     const openSeadragonOptions = {
@@ -71,13 +78,13 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
                     <div className={style.FullScreenButton} onClick={() => fullScreenClick()}>
                         {fullScreenEnabled ? <FaCompress/> : <FaExpand/>}
                     </div>
+                    {data ?
                     <OpenSeadragonViewer
-                        id={id}
-                        manifestUrl={manifestUrl}
+                        manifest={data}
                         options={options}
                         openSeadragonOptions={openSeadragonOptions}
                         toolBarOptions={toolBarOptions}
-                    />
+                    /> : <Loader color='#000000'/>}
                 </div>
             </Fullscreen>
         )

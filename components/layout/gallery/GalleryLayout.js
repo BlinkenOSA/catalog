@@ -3,7 +3,6 @@ import style from "../Layout.module.scss";
 import { Media } from "../../../utils/media";
 
 import Header from "../desktop/Header";
-import Footer from "../desktop/Footer";
 import FooterMobile from "../mobile/FooterMobile";
 import dynamic from "next/dynamic";
 

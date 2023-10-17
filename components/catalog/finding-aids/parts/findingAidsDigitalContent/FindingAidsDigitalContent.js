@@ -1,9 +1,11 @@
 import React from "react";
 import dynamic from "next/dynamic";
-import ImageViewer from "./viewers/ImageViewer";
-
 
 const PDFViewer = dynamic(() => import("./viewers/PDFViewer"), {
+    ssr: false
+});
+
+const ImageViewer = dynamic(() => import("./viewers/ImageViewer"), {
     ssr: false
 });
 

@@ -20,7 +20,7 @@ const FilterMenu = ({inverse, selectedFacetGroup, onSelectFacetGroup}) => {
             Object.keys(galleryFacetConfig).map((key) => (
                 galleryFacetConfig[key]['type'] &&
                 <li
-                    className={inverse && selectedFacetGroup === key ? style.FacetSelected : undefined}
+                    className={selectedFacetGroup === key ? style.FacetSelected : undefined}
                     key={key}
                     onClick={() => onSelectFacetGroup(key)}
                 >

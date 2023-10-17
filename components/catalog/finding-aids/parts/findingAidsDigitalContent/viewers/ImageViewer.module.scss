@@ -4,6 +4,7 @@
 .IIIFViewer {
   position: relative;
   border-top: $border-width solid $black;
+  background-color: $button-background;
 
   :global .osrv-top-row-wrapper {
     display: none;

@@ -70,6 +70,21 @@
 
   li:hover {
     cursor: pointer;
+    color: $black;
+    background-color: $yellow;
+
+    .Button {
+      &:after {
+        background: $black;
+      }
+
+      &:before {
+        background: $black;
+      }
+    }
+  }
+
+  li.FacetSelected {
     color: $white;
     background-color: $black;
 
@@ -79,23 +94,8 @@
       }
 
       &:before {
-        background: $white;
-      }
-    }
-  }
-
-  li.FacetSelected {
-    color: $black;
-    background-color: $white;
-
-    .Button {
-      &:after {
-        background: $black;
-      }
-
-      &:before {
         width: 0;
-        background: $black;
+        background: $white;
       }
     }
   }

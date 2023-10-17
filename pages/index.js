@@ -14,6 +14,8 @@ import {Media} from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import {Buffer} from "buffer";
+import {facetConfig} from "../config/facetConfig";
+
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
@@ -149,6 +151,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                                             isMobile={true}
                                         />
                                         <FacetPageMobile
+                                            facetConfig={facetConfig}
                                             breadcrumbHeight={height}
                                             facets={data ? data['facet_counts']['facet_fields'] : {}}
                                             total={data ? data['response']['numFound'] : 0}
@@ -165,6 +168,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                             module={''}
                         />
                         <FacetPage
+                            facetConfig={facetConfig}
                             breadcrumbHeight={height}
                             facets={data ? data['facet_counts']['facet_fields'] : {}}
                             total={data ? data['response']['numFound'] : 0}

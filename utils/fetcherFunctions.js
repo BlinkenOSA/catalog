@@ -4,6 +4,7 @@ import {facetConfig} from "../config/facetConfig";
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 export const SOLR_FOLDERS_ITEMS_API = process.env.NEXT_PUBLIC_SOLR_FOLDERS_ITEMS;
+const SOLR_IMAGE_GALLERY_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
 
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
@@ -90,6 +91,9 @@ export const solrFetcher = (params) => {
     switch (solrCore) {
         case 'folders-items':
             solrAPI = SOLR_FOLDERS_ITEMS_API
+            break;
+        case 'image-gallery':
+            solrAPI = SOLR_IMAGE_GALLERY_API
             break;
         default:
             solrAPI = SOLR_API;

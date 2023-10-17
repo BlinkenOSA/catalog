@@ -29,13 +29,18 @@ export async function getServerSideProps(context) {
 
 	const data = await res.json()
 	if (data.hasOwnProperty('response')) {
-		return { props: { data: data['response']['docs'] } }
+		return {
+			props: {
+				data: data['response']['docs'],
+				facets: data['facet_counts']['facet_fields']
+			}
+		}
 	} else {
 		return { props: { data } }
 	}
 }
 
-const ImageGallery = ({data}) => {
+const ImageGallery = ({data, facets}) => {
 	const [ref] = useMeasure();
 
 	return (
@@ -51,7 +56,7 @@ const ImageGallery = ({data}) => {
 				isMobile={false}
 			/>
 			<div className={`${style.Page}`}>
-				<ImageGalleryPage data={data} />
+				<ImageGalleryPage data={data} facets={facets} />
 			</div>
 		</GalleryLayout>
 	)

@@ -1,0 +1,7 @@
+@import "../../../../styles/variables";
+
+.FacetPageWrapper {
+  width: 100%;
+  background-color: $background;
+  height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - 35px);
+}

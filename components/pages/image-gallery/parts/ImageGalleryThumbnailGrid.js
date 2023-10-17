@@ -1,7 +1,13 @@
-import React from 'react';
-import style from "./ImageGalleryThumbnails.module.scss";
+import React, {useEffect, useState} from 'react';
+import style from "./ImageGalleryThumbnailGrid.module.scss";
 
-const ImageGalleryThumbnails = ({records, selectedImage, onSelect}) => {
+const ImageGalleryThumbnailGrid = ({records, selectedImage, onSelect}) => {
+	const [images, setImages] = useState([])
+
+	useEffect(() => {
+		setImages(records)
+	}, [records])
+
 	const maxHeight = 200;
 
 	const getDimensionData = (record) => {
@@ -23,7 +29,7 @@ const ImageGalleryThumbnails = ({records, selectedImage, onSelect}) => {
 	return (
 		<div className={style.Grid}>
 			{
-				records.map((record, index) => {
+				images.map((record, index) => {
 					const dimensionData = getDimensionData(record);
 					if (dimensionData) {
 						return (
@@ -43,4 +49,4 @@ const ImageGalleryThumbnails = ({records, selectedImage, onSelect}) => {
 	)
 }
 
-export default ImageGalleryThumbnails;
+export default ImageGalleryThumbnailGrid;
