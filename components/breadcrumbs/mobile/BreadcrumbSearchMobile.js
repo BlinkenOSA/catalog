@@ -96,7 +96,7 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
         if (query && query !== '' && query !== '*') {
             return (
                 <div className={style.SelectedFacetButton}>
-                    <span>Search (All Fields)</span>
+                    <span>Search</span>
                     <AiOutlineRight size={14} />
                     {query}
                     <div className={style.SelectedFacetRemove} onClick={() => onQueryRemove()}>
