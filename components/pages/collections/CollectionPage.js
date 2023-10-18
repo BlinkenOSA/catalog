@@ -5,10 +5,6 @@ import {useState} from "react";
 import TreeNode from "./parts/TreeNode";
 import ArchivalUnitDrawer from "./parts/ArchivalUnitDrawer";
 import {useRouter} from "next/router";
-import useSWR from "swr";
-import {fetcher} from "../../../utils/fetcherFunctions";
-
-const API = process.env.NEXT_PUBLIC_AMS_API;
 
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
