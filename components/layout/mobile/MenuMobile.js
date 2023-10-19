@@ -25,7 +25,7 @@ const MenuMobile = () => {
                     <a className={style.Submenu} href={'/library-special-collections'}>Library Sepcial Collections</a>
                     <a className={style.Submenu} href={'/special-collections-in-film-library'}>Special Collections in Film Library</a>
                     <a href={'/requests'}>{totalUniqueItems > 0 ? `Requests (${totalUniqueItems})` : 'Requests'}</a>
-                    <a href={'/info'}>Infos</a>
+                    <a href={'/help'}>Infos</a>
                     <a href={'/privacy-policy'}>Privacy Policy</a>
                 </div>
             </div>

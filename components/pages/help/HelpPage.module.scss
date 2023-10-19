@@ -1,0 +1,110 @@
+@import "../../../styles/variables";
+
+.ContentWrapper {
+  display: flex;
+
+  .Questions {
+    flex: 1;
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+    font-size: 18px;
+    position: sticky;
+    position: -webkit-sticky;
+    top: $header-height;
+    align-self: flex-start;
+    min-height: calc(100vh - (#{$header-height} + #{$page-title-height} + #{$footer-height} - 1px));
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      height: 35px;
+      border-bottom: $border-width solid $black;
+      font-size: 16px;
+      line-height: 35px;
+
+      span {
+        padding-left: 10px;
+      }
+
+      div {
+        float: right;
+      }
+
+      .Button {
+        position: relative;
+        top: 17px;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+        transform: translate(-50%, -50%) rotate(0deg);
+        cursor: pointer;
+        z-index: 100;
+        transition: 0.8s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 1px;
+          width: 50%;
+          background: $black;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 50%;
+          width: 1px;
+          background: $black;
+        }
+      }
+    }
+
+    li:hover {
+      cursor: pointer;
+      color: $white;
+      background-color: $black;
+
+      .Button {
+        &:after {
+          background: $white;
+        }
+
+        &:before {
+          background: $white;
+        }
+      }
+    }
+
+    li.Selected {
+      color: $black;
+      background-color: $yellow;
+
+      .Button {
+        &:after {
+          background: $black;
+        }
+
+        &:before {
+          width: 0;
+          background: $black;
+        }
+      }
+    }
+  }
+
+
+  .Content {
+    flex: 2;
+    border-left: 1px solid $black;
+  }
+}

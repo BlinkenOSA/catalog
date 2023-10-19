@@ -39,6 +39,7 @@ const SearchBar = () => {
     return (
         <div className={style.SearchBox}>
             <input
+                placeholder={'Search the catalog...'}
                 className={style.SearchInput}
                 value={searchValue || ''}
                 onKeyDown={handleKeyDown}

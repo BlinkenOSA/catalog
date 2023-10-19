@@ -5,7 +5,7 @@
   max-width: $max-width;
   border-left: $border-width solid $black;
   border-right: $border-width solid $black;
-  min-height: calc(100vh - (#{$header-height} + #{$breadcrumb-height} + #{$footer-height}));
+  min-height: calc(100vh - (#{$header-height} + #{$footer-height}));
 
   &.FullWidth {
     max-width: unset;
