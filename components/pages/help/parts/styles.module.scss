@@ -35,5 +35,81 @@
     &:last-child {
       margin: 0;
     }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dotted $black;
+    }
+  }
+
+  .Identifier {
+    font-family: "Suisse Intl Mono", serif;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .IdentifierParts {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    .Identifier {
+      width: 200px;
+    }
+  }
+}
+
+.UnitButtonsWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .UnitButton {
+    height: 25px;
+    background-color: $background;
+    border: 1px solid $black;
+    border-radius: 13px;
+    text-align: center;
+    color: $black;
+    font-family: 'Suisse Intl', serif;
+    font-size: 10px;
+    line-height: 25px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    display: inline-block;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+
+  .Arrow {
+    padding: 4px 10px 0 10px;
+  }
+}
+
+.ButtonWithText {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  div {
+    width: 200px;
+    display: flex;
+    align-items: flex-start;
+
+    img {
+      margin: 0;
+    }
+  }
+
+  p {
+    flex: 1;
   }
 }

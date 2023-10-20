@@ -2,18 +2,20 @@ import style from "./HelpPage.module.scss";
 import React, {useEffect, useState} from "react";
 import Terminology from "./parts/Terminology";
 import Catalog from "./parts/Catalog";
+import Organization from "./parts/Organization";
+import Identifiers from "./parts/Identifiers";
+import Request from "./parts/Request";
 
 const HelpPage = ({defaultSelected}) => {
     const [selectedQuestion, setSelectedQuestion] = useState(defaultSelected)
 
     const helpMenuItems = [
-        {key: 'catalog', label: 'What\'s in the catalog?'},
-        {key: 'hierarchy', label: 'How is the content organized?'},
-        {key: 'reference_code', label: 'How to identify records?'},
+        {key: 'catalog', label: 'What is in the catalog?'},
+        {key: 'organisation', label: 'How are the materials organized?'},
+        {key: 'identifiers', label: 'How records are identified?'},
+        {key: 'request', label: 'Request and access rights'},
         {key: 'search', label: 'Search & filter'},
         {key: 'record', label: 'Opening a record'},
-        {key: 'access', label: 'Access rights'},
-        {key: 'request', label: 'How can I request materials?'},
         {key: 'pages', label: 'Pages in the catalog'},
         {key: 'terminology', label: 'Terminology'},
     ]
@@ -36,8 +38,14 @@ const HelpPage = ({defaultSelected}) => {
         switch (selectedQuestion) {
             case 'catalog':
                 return <Catalog />
+            case 'organisation':
+                return <Organization />
             case 'terminology':
                 return <Terminology />
+            case 'identifiers':
+                return <Identifiers />
+            case 'request':
+                return <Request />
             default:
                 break;
         }
