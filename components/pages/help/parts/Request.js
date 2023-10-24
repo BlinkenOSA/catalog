@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import style from "./styles.module.scss"
 import CartButton from "../../../cart/CartButton";
 import Image from "next/image";
+import AvailabilityButton from "../../search/results/parts/buttons/AvailabilityButton";
+import AccessRightsButton from "../../search/parts/AccessRightsButton";
 
 
 const Request = () => {
@@ -69,17 +71,60 @@ const Request = () => {
               Blinken OSA Archivum aims to digitize the majority of their holdings allowing for researchers to access
               them easier, without the need to present personally in the research room.
             </p>
-            <h2>Access Rights</h2>
+            <h2>Access rights</h2>
             <p>
               Based on their legal status or the permission of the donor materials in the catalog can be available with
               or without restriction. Non restricted materials are available for research purposes either personally or
               served digitally, restricted materials can be accessed only personally at the research room in
               Blinken OSA Archivum.
             </p>
-            <h2>Access Use Cases</h2>
+            <h2>Access use cases</h2>
             <p>
-              
+              The following badges are helping you determine how certain materials can be accessed:
             </p>
+            <div className={style.BadgeExplanation}>
+              <div className={style.Badges}>
+                <AvailabilityButton record={{record_origin: 'Library'}}/>
+              </div>
+              <p>
+                These materials existing only in analog format, you can only access them personally in our research room.
+              </p>
+            </div>
+
+            <div className={style.BadgeExplanation}>
+              <div className={style.Badges}>
+
+                <div style={{display: "flex", gap: '10px'}}>
+                  <AvailabilityButton record={{record_origin: 'Library'}}/>
+                  <AccessRightsButton record={{access_rights: 'Restricted'}}/>
+                </div>
+              </div>
+              <p>
+                These materials existing only in analog format and their access rights is set to 'restricted', because
+                of the nature of their content, or legal reasons. You may access them personally in our research room, but
+                extra precautionary measures are required. The research room will help you assist in these.
+              </p>
+            </div>
+
+            <div className={style.BadgeExplanation}>
+              <div className={style.Badges}>
+                <AvailabilityButton record={{record_origin: 'Archives', digital_version_exists: true, digital_version_barcode: 'HU_OSA_00000001'}}/>
+              </div>
+              <p>
+                These materials available in analog form but they are also digitized. When you request these types of
+                materials, they will be served as digital files through our Research Cloud.
+              </p>
+            </div>
+
+            <div className={style.BadgeExplanation}>
+              <div className={style.Badges}>
+                <AvailabilityButton record={{record_origin: 'Archives', digital_version_exists: true, digital_version_online: true}}/>
+              </div>
+              <p>
+                These materials available in analog form but they are also digitized and can be directly accessed in the
+                catalog on the record's page in a digital viewer.
+              </p>
+            </div>
           </div>
         </React.Fragment>
     )

@@ -1,8 +1,10 @@
 import style from "./styles.module.scss"
+import React from "react";
 
 const Terminology = () => {
     return (
         <>
+            <div className={style.Title}>The following terms are used throughout our system</div>
             <div className={style.Text}>
                 <h2>Fonds</h2>
                 <p>
@@ -39,11 +41,31 @@ const Terminology = () => {
                     side by side, and used as a loose cover to keep documents and other flat materials together,
                     especially for purposes of filing</p>
                 <h2>Item</h2>
-                <p>A thing that can be distinguished from a group and that is complete in itself.</p>
+                <p>
+                    thing that can be distinguished from a group and that is complete in itself.
+                </p>
                 <h2>Folder / Item list</h2>
                 <p>
                     That part of a completed finding aid or a rudimentary finding aid that lists the folder titles
                     in a collection.
+                </p>
+                <h2>Subject</h2>
+                <p>
+                    A person, corporation / institution or a term is being discussed, described, or dealt with in a
+                    described archival holding.
+                </p>
+                <h2>Contributor</h2>
+                <p>
+                    A person, corporation / institution who took part in creating the archival holding.
+                    Authors, crew members, publishers, producers.
+                </p>
+                <h2>Geo Location</h2>
+                <p>
+                    The spatial coverage of a record. It can be a country, a city or any other geographical location.
+                </p>
+                <h2>Request</h2>
+                <p>
+                    A single reference transaction, although more than one item may be retrieved.
                 </p>
             </div>
         </>

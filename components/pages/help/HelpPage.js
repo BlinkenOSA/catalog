@@ -5,6 +5,9 @@ import Catalog from "./parts/Catalog";
 import Organization from "./parts/Organization";
 import Identifiers from "./parts/Identifiers";
 import Request from "./parts/Request";
+import Search from "./parts/Search";
+import Pages from "./parts/Pages";
+import Record from "./parts/Record";
 
 const HelpPage = ({defaultSelected}) => {
     const [selectedQuestion, setSelectedQuestion] = useState(defaultSelected)
@@ -16,7 +19,7 @@ const HelpPage = ({defaultSelected}) => {
         {key: 'request', label: 'Request and access rights'},
         {key: 'search', label: 'Search & filter'},
         {key: 'record', label: 'Opening a record'},
-        {key: 'pages', label: 'Pages in the catalog'},
+        {key: 'pages', label: 'Other pages in the catalog'},
         {key: 'terminology', label: 'Terminology'},
     ]
 
@@ -46,6 +49,12 @@ const HelpPage = ({defaultSelected}) => {
                 return <Identifiers />
             case 'request':
                 return <Request />
+            case 'search':
+                return <Search />
+            case 'record':
+                return <Record />
+            case 'pages':
+                return <Pages />
             default:
                 break;
         }

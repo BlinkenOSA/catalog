@@ -113,3 +113,38 @@
     flex: 1;
   }
 }
+
+.BadgeExplanation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  .Badges {
+    width: 300px
+  }
+
+  p {
+    flex: 1;
+  }
+}
+
+.ShowButton {
+  display: inline-block;
+  border: 1px solid $black;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 22px;
+  font-weight: 100;
+  text-transform: uppercase;
+  font-size: 28px;
+  text-align: center;
+  background-color: $white;
+  font-family: "Suisse Intl", serif;
+  width: 170px;
+
+
+  &:hover {
+    cursor: pointer;
+    background-color: $yellow;
+  }
+}
