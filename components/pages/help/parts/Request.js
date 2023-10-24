@@ -66,11 +66,19 @@ const Request = () => {
             </p>
             <h2>Analog or Digital</h2>
             <p>
-
+              Blinken OSA Archivum aims to digitize the majority of their holdings allowing for researchers to access
+              them easier, without the need to present personally in the research room.
             </p>
             <h2>Access Rights</h2>
             <p>
-
+              Based on their legal status or the permission of the donor materials in the catalog can be available with
+              or without restriction. Non restricted materials are available for research purposes either personally or
+              served digitally, restricted materials can be accessed only personally at the research room in
+              Blinken OSA Archivum.
+            </p>
+            <h2>Access Use Cases</h2>
+            <p>
+              
             </p>
           </div>
         </React.Fragment>
