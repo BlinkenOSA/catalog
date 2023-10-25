@@ -23,10 +23,11 @@ const MenuMobile = () => {
                     <a href={'#'}>Collections</a>
                     <a className={style.Submenu} href={'/archival-collections'}>Archival Collections</a>
                     <a className={style.Submenu} href={'/library-special-collections'}>Library Sepcial Collections</a>
-                    <a className={style.Submenu} href={'/special-collections-in-film-library'}>Special Collections in Film Library</a>
+                    <a className={style.Submenu} href={'/image-gallery'}>Digital Image Gallery</a>
+                    <a href={'/registration'}>Researcher Registration</a>
                     <a href={'/requests'}>{totalUniqueItems > 0 ? `Requests (${totalUniqueItems})` : 'Requests'}</a>
-                    <a href={'/help'}>Infos</a>
                     <a href={'/privacy-policy'}>Privacy Policy</a>
+                    <a href={'/help'}>Help</a>
                 </div>
             </div>
         </React.Fragment>
