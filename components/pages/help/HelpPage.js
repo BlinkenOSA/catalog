@@ -9,8 +9,9 @@ import Search from "./parts/Search";
 import Pages from "./parts/Pages";
 import Record from "./parts/Record";
 
-const HelpPage = ({defaultSelected}) => {
+const HelpPage = ({defaultSelected, isMobile}) => {
     const [selectedQuestion, setSelectedQuestion] = useState(defaultSelected)
+    const [drawerOpen, setDrawerOpen] = useState(false)
 
     const helpMenuItems = [
         {key: 'catalog', label: 'What is in the catalog?'},
@@ -28,7 +29,7 @@ const HelpPage = ({defaultSelected}) => {
             return (
                 <li
                     key={item['key']}
-                    onClick={() => setSelectedQuestion(item['key'])}
+                    onClick={() => onClickQuestion(item['key'])}
                     className={selectedQuestion === item['key'] ? style.Selected : ''}
                 >
                     <span>{item['label']}</span>
@@ -36,6 +37,11 @@ const HelpPage = ({defaultSelected}) => {
                 </li>
             )
         })
+    }
+
+    const onClickQuestion = (key) => {
+        setSelectedQuestion(key)
+        setDrawerOpen(true)
     }
 
     const renderContent = () => {
@@ -61,15 +67,35 @@ const HelpPage = ({defaultSelected}) => {
         }
     }
 
+    const onClose = () => {
+        setDrawerOpen(false)
+    }
+
     return (
-        <div className={style.ContentWrapper}>
-            <div className={style.Questions}>
-                <ul>{renderQuestions()}</ul>
+            isMobile ?
+                <div>
+                    <div className={style.ContentWrapper}>
+                        <div className={style.Questions}>
+                            <ul>{renderQuestions()}</ul>
+                        </div>
+                    </div>
+                    <div className={drawerOpen ? style.MobileInfoWrapper : `${style.MobileInfoWrapper} ${style.Closed}`}>
+                        <div className={style.CloseButton} onClick={onClose}>
+                            <span> </span>
+                            <span> </span>
+                        </div>
+                        {renderContent()}
+                    </div>
+                </div>
+            :
+            <div className={style.ContentWrapper}>
+                <div className={style.Questions}>
+                    <ul>{renderQuestions()}</ul>
+                </div>
+                <div className={style.Content}>
+                    {renderContent()}
+                </div>
             </div>
-            <div className={style.Content}>
-                {renderContent()}
-            </div>
-        </div>
     )
 }
 

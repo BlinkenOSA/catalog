@@ -20,6 +20,7 @@ const Help = ({data}) => {
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
                         <h1>Help</h1>
                     </div>
+                    <HelpPage isMobile={true} defaultSelected={''} />
                 </div>
             </Media>
             <Media greaterThanOrEqual="md">
