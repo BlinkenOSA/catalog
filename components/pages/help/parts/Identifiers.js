@@ -8,9 +8,9 @@ const Identifiers = () => {
             <div className={style.Title}>Identifiying archival records</div>
             <div className={style.Text}>
               <p>
-                Every record in an archive has a unique identifier which helps to clearly identify the material. These
-                identifiers are called "Call number" or "Reference code". Blinken OSA Archivum uses the following
-                scheme for archival materials:
+                Each record in an archive has a unique identifier that helps to uniquely identify the material.
+                These identifiers are called 'call number' or 'reference code'. Blinken OSA Archivum uses
+                the following scheme for archival material:
               </p>
               <p>
                 Let's see an example of the following archival record:
@@ -71,7 +71,7 @@ const Identifiers = () => {
             <div className={style.Text}>
               <p>
                 Film Library records are identified with their own call number, which is a combination of
-                the suffix FL Record and a unique number.
+                the suffix 'FL Record' and a unique number.
               </p>
               <p>
                 As an example, see the documentary film:

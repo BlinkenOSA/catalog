@@ -10,17 +10,20 @@ const Search = () => {
             <div className={style.Title}>Query search</div>
             <div className={style.Text}>
                 <p>
-                    By searching the search term you entered is going through all types of records in the catalog.
-                    After searching you have the chance to filter the search results with the pre-defined filters (also
-                    known as facets). It's important to mention, that currently our catalog is searching only in the
-                    metadata fields, it DOES NOT include full-text search in digital objects (documents, audio and video files).
-                    The search engine is language aware it tries to do search regarding the language rules of the currently
-                    supported languages, which are: english, Hungarian,
+                    When you search, the search term you enter is searched through all types of records in the catalogue.
+                    After the search, you have the option of filtering the search results using the predefined
+                    filters (also known as facets). It's important to note that our catalog currently only
+                    searches metadata fields, it DOES NOT include full text search in digital objects
+                    (documents, audio and video files). The search engine is language-aware, it tries to search
+                    according to the language rules of the currently supported languages, which are: English,
+                    Hungarian, Russian, Polish
                 </p>
                 <p>
-                    The results of a search are sorted by the relevancy score of the search engine. Each field counts with
-                    a different weight when the search engine calculates relevancy. When you search the archives,
-                    the query term is searching through the following metadata fields with the weights displayed in brackets:
+
+                    The results of a search are sorted according to the relevance score of the search engine.
+                    Each field has a different weight when the search engine calculates relevance.
+                    When you search the archives, the query term will search the following metadata fields,
+                    with the weights in parentheses:
                     <ul>
                         <li>Title (in all supported language) [100]</li>
                         <li>Contents summary (in all supported language) [100]</li>
@@ -34,15 +37,15 @@ const Search = () => {
             <div className={style.Title}>Filtering the results</div>
             <div className={style.Text}>
                 <p>
-                    Following the search, you have the option to filter the resultset with the pre-defined filter options.
-                    Please be aware that these filters are only showing you filter values from records, where these
-                    values were assigned by the cataloguer. Despite our effort trying to describe materials as detailed
-                    as we can, only a smaller amount of records are using these extra metadata fields.
+                    Once your search is complete, you can filter the results using the pre-defined filter options.
+                    Please note that these filters will only show you filter values from records where these values
+                    have been assigned by the cataloguer. Despite our efforts to describe materials in as much detail
+                    as possible, only a small number of records use these additional metadata fields.
                 </p>
                 <p>
-                    Just as an example. If you see that in your query resultset there are only 5 records mentioning a
-                    certain person as subject, it only means, that out of the results, 5 records has this person record
-                    assigned as subject.
+                    Just an example. If you see that there are only 5 records in your query result set that mention
+                    a particular person as a subject, this simply means that of the results, 5 records have that
+                    person record assigned as a subject.
                 </p>
                 <p>
                     The following filters can be selected:
@@ -51,9 +54,9 @@ const Search = () => {
                 <p>The type / physical nature of a record. These are the same values that are explained in this chapter.</p>
                 <h2>Creation Date</h2>
                 <p>
-                    A slider helping you to select the date range of creation date. Since this data is mandatory for each
-                    record, this filter covers all the records in the catalog. A chart helps you visaulize the distribution
-                    of creation date values.
+                    A slider that allows you to select the date range of the creation date. As this data is mandatory
+                    for each record, this filter covers all records in the catalogue. A graph helps you to visualise
+                    the distribution of the creation date values.
                 </p>
                 <h2>Language</h2>
                 <p>
@@ -81,19 +84,19 @@ const Search = () => {
                 </p>
                 <h2>Availability</h2>
                 <p>
-                    As discussed in the 'Request and access rights' section, these values are helping you to differentiate
-                    the various access methods for the records when you request them.
+                    As discussed in the 'Request and access rights' section, these values help you to differentiate
+                    between the various access methods to the records when you request them.
                 </p>
                 <p>
-                    If you click the <FiInfo /> icon next to the filter (where applicable) a short explanatory
-                    data sheet (fed from Wikidata) will appear. Some filters are exising as a large list, some of them
-                    can also be searched with a quick search box displayed on the top of the filter list.
+                    If you click on the <FiInfo /> icon next to the filter (where applicable) a short explanatory
+                    datasheet (fed from Wikidata) will appear. Some filters are exising as a large list, some of them
+                    can also be searched with a quick searchbox displayed on the top of the filter list.
                 </p>
                 <p>
-                    When you selected all the filters, click the button on the top right
-                    corner: <div className={style.ShowButton}>Show</div> or once again to the selected filter to
-                    close the filter window and get back the resultset. Filters can be removed one by one clicking on
-                    the <AiOutlineClose size={14} /> icon in the header, where selected filters will displayed.
+                    When you have selected all the filters, click on the button at the top right
+                    corner: <div className={style.ShowButton}>Show</div> or click again on the selected filter to
+                    close the filter window and return to the results list. Filters can be removed one at a time
+                    by clicking on the <AiOutlineClose size={14} /> icon in the header, where selected filters are displayed.
                 </p>
             </div>
         </React.Fragment>

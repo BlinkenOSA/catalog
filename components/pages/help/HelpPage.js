@@ -27,6 +27,7 @@ const HelpPage = ({defaultSelected}) => {
         return helpMenuItems.map(item => {
             return (
                 <li
+                    key={item['key']}
                     onClick={() => setSelectedQuestion(item['key'])}
                     className={selectedQuestion === item['key'] ? style.Selected : ''}
                 >

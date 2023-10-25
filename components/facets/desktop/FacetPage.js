@@ -7,7 +7,6 @@ import ResultCounter from "./ResultCounter";
 import {useRouter} from "next/router";
 import {addFacet, removeFacet} from "../../../utils/facetFunctions";
 import {createParams} from "../../../utils/urlParamFunctions";
-import {facetConfig} from "../../../config/facetConfig";
 import FacetDateRange from "./FacetDateRange";
 
 /**
@@ -19,8 +18,10 @@ import FacetDateRange from "./FacetDateRange";
  * @param {func} params.onShowButtonClick Handling clicking the Show button.
  * @param {Object} params.facets Facet results of the search query.
  * @param {number} params.total Total number of results.
+ * @param {Object} params.facetConfig Facetconfig object.
  */
-const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick, facets, total, breadcrumbHeight}) => {
+const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
+                       facets, total, facetConfig, breadcrumbHeight}) => {
     const [selectedFacetObject, setSelectedFacetObject] = useState('')
 
     const router = useRouter();

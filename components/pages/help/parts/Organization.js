@@ -10,13 +10,13 @@ const Catalog = () => {
             <div className={style.Title}>Organization of the records in the archive</div>
             <div className={style.Text}>
               <p>
-                To better understand your findings it's worth to familiarize yourself with the organisation principles
-                of Blinken OSA's archival materials. To be able to effectively manage and organize large amount of
-                archival materials, hierarchical description and grouping of the material is used.
-                Hierarchical description is a technique of writing contextual and structural information
-                about an archival resource by describing the collection from general to specific, starting with
-                the whole, then proceeding to the components. In Blinken OSA Archivum the description levels above are
-                used:
+                  To better understand your findings, it's worth familiarising yourself with the principles of
+                  organisation of Blinken OSA's archival material. In order to effectively manage and organise
+                  large amounts of archival material, hierarchical description and grouping of the material is
+                  used. Hierarchical description is a technique for writing contextual and structural
+                  information about an archival resource by describing the collection from the general to the
+                  specific, starting with the whole and then proceeding to the components. Blinken OSA Archivum
+                  uses the following levels of description:
               </p>
               <p>
                 <div className={style.UnitButtonsWrap}>
