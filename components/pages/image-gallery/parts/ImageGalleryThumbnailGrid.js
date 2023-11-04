@@ -2,14 +2,6 @@ import React, {useEffect, useState} from 'react';
 import style from "./ImageGalleryThumbnailGrid.module.scss";
 
 const ImageGalleryThumbnailGrid = ({records, selectedImage, onSelect}) => {
-	const [images, setImages] = useState([])
-
-	useEffect(() => {
-		setImages(records)
-	}, [records])
-
-	const maxHeight = 200;
-
 	const getDimensionData = (record) => {
 		if (record.hasOwnProperty('digital_version_technical_metadata') && record['digital_version_technical_metadata']) {
 			const imageData = JSON.parse(record['digital_version_technical_metadata'])
@@ -29,7 +21,7 @@ const ImageGalleryThumbnailGrid = ({records, selectedImage, onSelect}) => {
 	return (
 		<div className={style.Grid}>
 			{
-				images.map((record, index) => {
+				records.map((record, index) => {
 					const dimensionData = getDimensionData(record);
 					if (dimensionData) {
 						return (

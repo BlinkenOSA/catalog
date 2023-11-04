@@ -2,6 +2,16 @@
 
 .FacetPageWrapper {
   width: 100%;
-  background-color: $background;
+  background-color: $form-background;
   height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - 35px);
+  display: flex;
+
+  .FacetValues {
+    flex: 1;
+  }
+
+  .FacetInfo {
+    flex: 1;
+    border-right: 1px solid $black;
+  }
 }

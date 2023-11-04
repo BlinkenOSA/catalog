@@ -3775,10 +3775,10 @@ react-fast-compare@^3.0.1:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-fullscreen-crossbrowser@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-fullscreen-crossbrowser/-/react-fullscreen-crossbrowser-1.1.0.tgz#ff36d30198fd2f0bed307ca08a3653cb113f31cf"
-  integrity sha512-XSBxUOtJq3kHT0H2CJzVlTmpUc6r/hH4wxtk69suiZVrouz2HM1reqb7m+vwpSfRC3ToC/n3Q0PlWoMC1eWyEQ==
+react-fullscreen-crossbrowser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/react-fullscreen-crossbrowser/-/react-fullscreen-crossbrowser-1.1.3.tgz#8ced462247911caa83a50ee0b85f3590c4a82d18"
+  integrity sha512-z1iOYRnciP+rcgH5t+TDAeFmUmBUAwK5hRkiTg0Rn7VbI0YYcgRRcIVM2hT3fDla7kcT+bXRuIEpZO+54r0P+w==
 
 react-i18next@^11.18.0:
   version "11.18.6"

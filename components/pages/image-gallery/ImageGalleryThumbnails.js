@@ -2,11 +2,12 @@ import style from "./ImageGalleryThumbnails.module.scss";
 import FilterMenu from "./parts/FilterMenu";
 import ImageGalleryThumbnailGrid from "./parts/ImageGalleryThumbnailGrid";
 import GalleryFooter from "../../layout/gallery/GalleryFooter";
-import ImageGalleryFacets from "./parts/ImageGalleryFacets";
 import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
 import {useState} from "react";
+import FacetPage from "../../facets/desktop/FacetPage";
+import React from "react";
 
-const ImageGalleryThumbnails = ({data, facets, selectedImage, onImageSelect}) => {
+const ImageGalleryThumbnails = ({data, facets, total, selectedImage, onImageSelect}) => {
     const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
 
     const handleFacetGroupSelect = (facetGroupKey) => {
@@ -15,6 +16,14 @@ const ImageGalleryThumbnails = ({data, facets, selectedImage, onImageSelect}) =>
         } else {
             setSelectedFacetGroup(facetGroupKey)
         }
+    }
+
+    const onSelectFacetGroup = (group) => {
+        setSelectedFacetGroup(group)
+    }
+
+    const onShowButtonClick = () => {
+        setSelectedFacetGroup('')
     }
 
     return (
@@ -34,11 +43,14 @@ const ImageGalleryThumbnails = ({data, facets, selectedImage, onImageSelect}) =>
                         onSelect={onImageSelect} />
                     <GalleryFooter />
                 </>
-                : <ImageGalleryFacets
-                    facets={facets}
-                    selectedFacetGroup={selectedFacetGroup}
+                : <FacetPage
                     facetConfig={galleryFacetConfig}
-                />
+                    facets={facets ? facets : {}}
+                    total={total}
+                    selectedFacetGroup={selectedFacetGroup}
+                    onSelectFacetGroup={onSelectFacetGroup}
+                    onShowButtonClick={onShowButtonClick}
+                  />
             }
         </>
     )

@@ -11,6 +11,7 @@ import DropDown from "./parts/DropDown";
 import Pagination from "./parts/Pagination";
 import {defaultLimit} from "../../../config/appConfig";
 import dynamic from "next/dynamic";
+import Button from "../../pages/search/parts/Button";
 
 const BackButton = dynamic(() => import("../parts/BackButton"), {
     ssr: false,
@@ -136,7 +137,12 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
         }
 
         if (module === 'image-gallery') {
-            return ''
+            return (
+              <div className={style.ImageSearchText}>
+                  <span>Search the image gallery</span> <BiUpArrowAlt />
+                  <span>or select a thumbnail from the image gallery</span> <BiDownArrowAlt/>
+              </div>
+            )
         }
 
         if (Object.keys(selectedFacets).length === 0 && query === '') {
@@ -184,7 +190,12 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
         }
 
         if (module === 'image-gallery') {
-            return ''
+            return (
+                <div className={style.ImageNavigation}>
+                    <Button text={'Previous'} onClick={() => {}} />
+                    <Button text={'Next'} onClick={() => {}} />
+                </div>
+            )
         }
 
         return (

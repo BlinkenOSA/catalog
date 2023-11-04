@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import ImageMetadata from "./parts/ImageMetadata";
 
 
-const ImageGalleryPage = ({data, facets}) => {
+const ImageGalleryPage = ({data, facets, total}) => {
 	const [selectedImage, setSelectedImage] = useState('')
 	const [selectedImageMetadata, setSelectedImageMetadata] = useState({})
 
@@ -40,6 +40,7 @@ const ImageGalleryPage = ({data, facets}) => {
 				<ImageGalleryThumbnails
 					data={data}
 					facets={facets}
+					total={total}
 					onImageSelect={onImageSelect}
 					selectedImage={selectedImage}
 				/>

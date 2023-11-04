@@ -32,7 +32,8 @@ export async function getServerSideProps(context) {
 		return {
 			props: {
 				data: data['response']['docs'],
-				facets: data['facet_counts']['facet_fields']
+				facets: data['facet_counts']['facet_fields'],
+				total: data['response']['numFound']
 			}
 		}
 	} else {
@@ -40,7 +41,7 @@ export async function getServerSideProps(context) {
 	}
 }
 
-const ImageGallery = ({data, facets}) => {
+const ImageGallery = ({data, facets, total}) => {
 	const [ref] = useMeasure();
 
 	return (
@@ -56,7 +57,7 @@ const ImageGallery = ({data, facets}) => {
 				isMobile={false}
 			/>
 			<div className={`${style.Page}`}>
-				<ImageGalleryPage data={data} facets={facets} />
+				<ImageGalleryPage data={data} facets={facets} total={total} />
 			</div>
 		</GalleryLayout>
 	)

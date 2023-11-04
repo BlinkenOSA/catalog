@@ -27,14 +27,23 @@
   height: 100%;
   max-width: $max-width;
   display: flex;
+  gap: 20px;
   min-height: 40px;
+}
+
+.ImageNavigation {
+  display: inline-flex;
+  font-size: 12px;
+  flex: 3;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .Navigation {
   display: inline-flex;
   font-size: 12px;
   width: $left-width + 2px;
-  margin-top: 12px;
+  align-items: center;
 
   span {
     margin-right: 3px;
@@ -52,11 +61,18 @@
   }
 }
 
+.ImageSearchText {
+  display: inline-flex;
+  font-size: 12px;
+  flex: 4;
+  align-items: center;
+}
+
 .SearchText {
   display: inline-flex;
   font-size: 12px;
   flex: 1;
-  margin-top: 12px;
+  align-items: center;
 
   span {
     margin-right: 2px;
