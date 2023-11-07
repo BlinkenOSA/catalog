@@ -41,9 +41,11 @@ const ImageGalleryThumbnails = ({data, facets, total, selectedImage, onImageSele
                         records={data}
                         selectedImage={selectedImage}
                         onSelect={onImageSelect} />
+                    <div style={{flex: 1}}/>
                     <GalleryFooter />
                 </>
                 : <FacetPage
+                    type={'gallery'}
                     facetConfig={galleryFacetConfig}
                     facets={facets ? facets : {}}
                     total={total}

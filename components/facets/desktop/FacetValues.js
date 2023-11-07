@@ -155,11 +155,11 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
     };
 
     return (
-        <div id={selectedFacetGroup} className={cssStyle.FacetValues}>
-            <FacetSearch selectedFacetGroup={selectedFacetGroup} onSearch={handleSearch}/>
+        <div id={selectedFacetGroup} className={type === 'gallery' ? `${cssStyle.FacetValues} ${cssStyle.Gallery}` : cssStyle.FacetValues}>
+            <FacetSearch type={type} selectedFacetGroup={selectedFacetGroup} onSearch={handleSearch}/>
             <List
                 ref={listRef}
-                height={height - (57 + 44 + 37)}
+                height={type === 'gallery' ? height - (57 + 44 + 121 + 37 + 37) : height - (57 + 44 + 37)}
                 itemCount={facetValuesDisplay.length}
                 itemSize={getRowHeight}
                 width={'100%'}

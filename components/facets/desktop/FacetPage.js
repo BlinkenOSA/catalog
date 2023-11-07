@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import {addFacet, removeFacet} from "../../../utils/facetFunctions";
 import {createParams} from "../../../utils/urlParamFunctions";
 import FacetDateRange from "./FacetDateRange";
+import FacetWordCloud from "./FacetWordCloud";
 
 /**
  * The facet management page. Displays when a user clicks on a facet group.
@@ -21,7 +22,7 @@ import FacetDateRange from "./FacetDateRange";
  * @param {Object} params.facetConfig Facetconfig object.
  */
 const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
-                       facets, total, facetConfig, breadcrumbHeight}) => {
+                       facets, total, facetConfig, breadcrumbHeight=0, type='normal'}) => {
     const [selectedFacetObject, setSelectedFacetObject] = useState('')
 
     const router = useRouter();
@@ -91,8 +92,8 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
         setSelectedFacetObject(value)
     };
 
-    const renderFacetValues = (type) => {
-        switch (type) {
+    const renderFacetValues = (facetType) => {
+        switch (facetType) {
             case 'list':
             case 'wiki':
                 return (
@@ -113,13 +114,70 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                     onFacetActionClick={onFacetActionClick}
                     selectedFacetGroup={selectedFacetGroup}
                     selectedFacetValues={getSelectedFacetValues()}
+                    type={type}
                   />
+                )
+            case 'wordcloud':
+                return (
+                    <FacetWordCloud
+                        facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                        onFacetActionClick={onFacetActionClick}
+                    />
                 )
         }
     }
 
-    return (
-        <React.Fragment>
+    if (type === 'gallery') {
+        switch (selectedFacetGroup) {
+            case 'year_created':
+                return (
+                    <div className={style.FacetPageWrapperGallery}>
+                        <div className={style.FacetDateGallery}>
+                            <div className={style.FacetSelection}>
+                                {renderFacetValues(facetConfig[selectedFacetGroup]['type'])}
+                            </div>
+                            <div className={style.FacetDescription}>
+                                <FacetHelper
+                                    type={type}
+                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                                    onFacetActionClick={onFacetActionClick}
+                                    selectedFacetGroup={selectedFacetGroup}
+                                    selectedFacetObject={selectedFacetObject}
+                                    selectedFacetValues={getSelectedFacetValues()}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )
+            case 'keyword':
+                return (
+                    <div className={style.FacetPageWrapperGallery}>
+                        {renderFacetValues(facetConfig[selectedFacetGroup]['type'])}
+                    </div>
+                )
+            default:
+                return (
+                    <div className={style.FacetPageWrapperGallery}>
+                        <div className={style.FacetContentGallery}>
+                            <div className={style.FacetSelection}>
+                                {renderFacetValues(facetConfig[selectedFacetGroup]['type'])}
+                            </div>
+                            <div className={style.FacetDescription}>
+                                <FacetHelper
+                                    type={type}
+                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                                    onFacetActionClick={onFacetActionClick}
+                                    selectedFacetGroup={selectedFacetGroup}
+                                    selectedFacetObject={selectedFacetObject}
+                                    selectedFacetValues={getSelectedFacetValues()}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )
+        }
+    } else {
+        return (
             <div className={style.FacetPageWrapper}>
                 <div className={style.FacetPage}>
                     <FacetMenu
@@ -148,8 +206,8 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                     </div>
                 </div>
             </div>
-        </React.Fragment>
-    )
+        )
+    }
 }
 
 export default FacetPage;

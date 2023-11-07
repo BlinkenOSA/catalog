@@ -2,6 +2,7 @@ import {AiOutlineSearch, AiOutlineCloseCircle} from "react-icons/ai";
 import React, {useState, useEffect} from "react";
 import style from "./FacetSearch.module.scss"
 import {facetConfig} from "../../../config/facetConfig";
+import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
 
 /**
  * Displays a search box on top of the FacetValues list.
@@ -9,16 +10,17 @@ import {facetConfig} from "../../../config/facetConfig";
  * @param {Object} params
  * @param {func} params.onSearch Function to call when search is fired.
  */
-const FacetSearch = ({selectedFacetGroup, onSearch}) => {
+const FacetSearch = ({selectedFacetGroup, onSearch, type}) => {
     const [value, setValue] = useState('');
+    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
 
     useEffect(() => {
         onSearch(value)
     }, [value]);
 
     return (
-        facetConfig[selectedFacetGroup]['search'] ?
-            <div className={style.SearchBox}>
+        fc[selectedFacetGroup]['search'] ?
+            <div className={type === 'gallery' ? `${style.SearchBox} ${style.Gallery}` : style.SearchBox}>
                 <input
                     className={style.SearchInput}
                     placeholder={`Search in filters`}

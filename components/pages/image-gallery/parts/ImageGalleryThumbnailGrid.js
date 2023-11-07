@@ -21,20 +21,25 @@ const ImageGalleryThumbnailGrid = ({records, selectedImage, onSelect}) => {
 	return (
 		<div className={style.Grid}>
 			{
-				records.map((record, index) => {
-					const dimensionData = getDimensionData(record);
-					if (dimensionData) {
-						return (
-							<figure
-								className={selectedImage === record['id'] ? style.Selected : ''}
-								key={index}
-								onClick={() => onSelect(record['id'])}
-								style={{ flexGrow: dimensionData['flexGrow'], flexBasis: `${dimensionData['flexBasis']}px` }}>
-								<i style={{ paddingBottom: `${dimensionData['paddingBottom']}%` }} />
-								<img src={dimensionData['imageURL']} alt="placeholder"/>
-							</figure>
-						)
-					}
+				records.map((response, idx) => {
+					return response['response']['docs'].map((record, index) => {
+						const dimensionData = getDimensionData(record);
+						if (dimensionData) {
+							return (
+								<figure
+									className={selectedImage === record['id'] ? style.Selected : ''}
+									key={index}
+									onClick={() => onSelect(record['id'])}
+									style={{
+										flexGrow: dimensionData['flexGrow'],
+										flexBasis: `${dimensionData['flexBasis']}px`
+									}}>
+									<i style={{paddingBottom: `${dimensionData['paddingBottom']}%`}}/>
+									<img src={dimensionData['imageURL']} alt="placeholder"/>
+								</figure>
+							)
+						}
+					})
 				})
 			}
 		</div>

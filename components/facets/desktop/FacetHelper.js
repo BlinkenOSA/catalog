@@ -5,6 +5,7 @@ import RecordType from "../facetHelpers/RecordType";
 import DateCreated from "../facetHelpers/DateCreated";
 import Availability from "../facetHelpers/Availability";
 import WikiFacet from "../facetHelpers/WikiFacet";
+import Keyword from "./FacetWordCloud";
 
 
 /**
@@ -17,7 +18,8 @@ import WikiFacet from "../facetHelpers/WikiFacet";
  * @param {Object} params.selectedFacetValues The selected facet values.
  * @param {function} params.onFacetActionClick The handler of facet value change.
  */
-const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, selectedFacetValues, onFacetActionClick}) => {
+const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
+                         selectedFacetValues, onFacetActionClick, type='normal'}) => {
     const getContent = () => {
         switch (selectedFacetGroup) {
             case 'record_origin':
@@ -32,12 +34,10 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject, sele
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'contributor'} />
             case 'geo_wikidata':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'geo'} />
-            case 'keyword':
-                return <WikiFacet selectedFacetObject={selectedFacetObject} type={'keyword'} />
             case 'language_wikidata':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'language'} />
             case 'year_created':
-                return <DateCreated facetValues={facetValues} />
+                return <DateCreated type={type} facetValues={facetValues} />
             default:
                 break;
         }

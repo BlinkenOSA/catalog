@@ -1,14 +1,14 @@
-import Layout from "../components/layout/Layout";
 import Head from "next/head";
 import React from "react";
 import style from "./pages.module.scss";
 import ImageGalleryPage from "../components/pages/image-gallery/ImageGalleryPage";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import {useMeasure} from "react-use";
-import {makeSolrParams} from "../utils/fetcherFunctions";
+import {makeSolrParams, solrFetcher} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
-import dynamic from "next/dynamic";
 import GalleryLayout from "../components/layout/gallery/GalleryLayout";
+import useSWRInfinite from "swr/infinite";
+import {useRouter} from "next/router";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
 
@@ -28,21 +28,26 @@ export async function getServerSideProps(context) {
 	})
 
 	const data = await res.json()
-	if (data.hasOwnProperty('response')) {
-		return {
-			props: {
-				data: data['response']['docs'],
-				facets: data['facet_counts']['facet_fields'],
-				total: data['response']['numFound']
-			}
-		}
-	} else {
-		return { props: { data } }
-	}
+	return { props: { initialData: data } }
 }
 
-const ImageGallery = ({data, facets, total}) => {
+const ImageGallery = ({initialData}) => {
 	const [ref] = useMeasure();
+
+	const router = useRouter();
+	const {id, query, ...selectedFacets} = router.query;
+
+	const getKey = (index) => {
+		return {
+			solrCore: 'image-gallery',
+			query: query,
+			offset: index * 50,
+			limit: 50,
+			...selectedFacets
+		}
+	}
+
+	const { data, size, setSize } = useSWRInfinite(getKey, solrFetcher, {fallbackData: [initialData]})
 
 	return (
 		<GalleryLayout>
@@ -50,14 +55,17 @@ const ImageGallery = ({data, facets, total}) => {
 				<title>Blinken OSA Archivum - Image Gallery</title>
 			</Head>
 			<BreadcrumbSearch
-				total={0}
+				total={data?.[0]?.['response']['numFound']}
 				reference={ref}
 				inverse={false}
 				module={'image-gallery'}
 				isMobile={false}
 			/>
 			<div className={`${style.Page}`}>
-				<ImageGalleryPage data={data} facets={facets} total={total} />
+				<ImageGalleryPage
+					data={data}
+					facets={data?.[0]?.['facet_counts']['facet_fields']}
+					total={data?.[0]?.['response']['numFound']} />
 			</div>
 		</GalleryLayout>
 	)

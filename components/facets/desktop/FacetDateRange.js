@@ -13,7 +13,8 @@ import 'rc-slider/assets/index.css';
  * @param {function} params.onFacetActionClick The handler of facet value change.
  * @param {Object} params.selectedFacetValues The selected facet values.
  */
-const FacetDateRange = ({facetValues, selectedFacetGroup, selectedFacetValues, onFacetActionClick}) => {
+const FacetDateRange = ({facetValues, selectedFacetGroup, selectedFacetValues, onFacetActionClick,
+                            type="normal"}) => {
     const [values, setValues] = useState([1900, 1990])
     const [limits, setLimits] = useState([1950, 2000])
 
@@ -45,10 +46,13 @@ const FacetDateRange = ({facetValues, selectedFacetGroup, selectedFacetValues, o
     }
 
     return (
-        <div className={style.FacetDateRange}>
-            <div className={style.Title}>
-                Creation Date
-            </div>
+        <div className={type === 'gallery' ? `${style.FacetDateRange} ${style.Gallery}` : style.FacetDateRange}>
+            {
+                type === 'normal' &&
+                <div className={style.Title}>
+                    Creation Date
+                </div>
+            }
             <div className={style.Values}>
                 <div className={style.FromValue}>
                     From: {values[0]}

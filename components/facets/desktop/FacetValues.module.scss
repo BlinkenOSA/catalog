@@ -8,6 +8,10 @@
   font-size: 18px;
   height: 100%;
 
+  &.Gallery {
+    width: unset;
+  }
+
   .FacetValueButton {
     align-items: center;
     color: $white;

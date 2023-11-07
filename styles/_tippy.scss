@@ -1,0 +1,13 @@
+@import "_variables.scss";
+
+div.tippy-box {
+  font-family: "Suisse Intl", serif;
+  background-color: $background !important;
+  color: $black;
+  border-radius: 0;
+  border: 1px solid #000;
+}
+
+.tippy-arrow {
+  display: none;
+}

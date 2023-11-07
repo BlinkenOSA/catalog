@@ -5,11 +5,16 @@ import ImageMetadata from "./parts/ImageMetadata";
 
 
 const ImageGalleryPage = ({data, facets, total}) => {
-	const [selectedImage, setSelectedImage] = useState('')
+	const [selectedImage, setSelectedImage] = useState(data?.[0]?.['response']['docs'][0]['id'])
 	const [selectedImageMetadata, setSelectedImageMetadata] = useState({})
 
 	useEffect(() => {
-		setSelectedImageMetadata(data.filter(r => r['id'] === selectedImage)[0])
+		data.forEach(d => {
+			const results = d['response']['docs'].filter(r => r['id'] === selectedImage)
+			if (results.length > 0) {
+				setSelectedImageMetadata(results[0])
+			}
+		})
 	}, [selectedImage])
 
 	const ImageGalleryThumbnails = dynamic(() => import('./ImageGalleryThumbnails'), {
@@ -33,7 +38,7 @@ const ImageGalleryPage = ({data, facets, total}) => {
 			<div className={style.ImageGalleryViewer}>
 				<div className={style.Content}>
 					<ImageMetadata metadata={selectedImageMetadata}/>
-					{selectedImage !== '' && <ImageViewer id={selectedImage} isGallery={true} />}
+					{selectedImage && data.length > 0 && <ImageViewer id={selectedImage} isGallery={true} />}
 				</div>
 			</div>
 			<div className={style.ImageGalleryThumbnails}>

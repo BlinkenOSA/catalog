@@ -137,12 +137,22 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
         }
 
         if (module === 'image-gallery') {
-            return (
-              <div className={style.ImageSearchText}>
-                  <span>Search the image gallery</span> <BiUpArrowAlt />
-                  <span>or select a thumbnail from the image gallery</span> <BiDownArrowAlt/>
-              </div>
-            )
+            if (Object.keys(selectedFacets).length === 0 && query === '') {
+                return (
+                    <div className={style.ImageSearchText}>
+                        <span>Search the image gallery</span> <BiUpArrowAlt/>
+                        <span>or select a thumbnail from the image gallery</span> <BiDownArrowAlt/>
+                    </div>
+                )
+            } else {
+                return (
+                    <div className={`${style.SelectedFacets} ${style.Gallery}`}>
+                        {renderQueryButton()}
+                        {renderSelectedFacets(selectedFacetsDates)}
+                        {renderSelectedFacets(selectedFacets)}
+                    </div>
+                )
+            }
         }
 
         if (Object.keys(selectedFacets).length === 0 && query === '') {
@@ -192,8 +202,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
         if (module === 'image-gallery') {
             return (
                 <div className={style.ImageNavigation}>
-                    <Button text={'Previous'} onClick={() => {}} />
-                    <Button text={'Next'} onClick={() => {}} />
+                    Showing {total} images
                 </div>
             )
         }
@@ -210,7 +219,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
      */
     return (
         <div ref={reference} className={inverse ? style.BreadcrumbInverseWrapper : style.BreadcrumbWrapper}>
-            <div className={style.BreadcrumbContent}>
+            <div className={module === 'image-gallery' ? `${style.BreadcrumbContent} ${style.Gallery}` : style.BreadcrumbContent}>
                 {renderLeftSideContent()}
                 {renderRightSideContent()}
             </div>

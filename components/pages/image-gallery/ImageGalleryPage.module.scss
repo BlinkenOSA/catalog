@@ -2,11 +2,13 @@
 
 .ImageGalleryPage {
   display: flex;
-  min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - #{$footer-height});
+  min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height});
 
   .ImageGalleryThumbnails {
     flex: 4;
     border-left: 1px solid $black;
+    display: flex;
+    flex-direction: column;
   }
 
   .ImageGalleryViewer {

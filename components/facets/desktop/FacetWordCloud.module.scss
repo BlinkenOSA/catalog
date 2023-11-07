@@ -1,0 +1,17 @@
+@import "../../../styles/variables";
+
+.WordCloud {
+  flex: 1;
+
+  text {
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      fill: $yellow;
+    }
+  }
+}

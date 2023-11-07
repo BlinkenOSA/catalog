@@ -9,6 +9,11 @@
   top: calc(#{$header-height} + #{$breadcrumb-height});
   z-index: 999;
 
+  &.Gallery {
+    width: 100%;
+    top: calc(#{$header-height} + #{$breadcrumb-height} + 36px);
+  }
+
   .SearchInput {
     font-family: "Suisse Intl Mono", serif;
     font-weight: 400;
