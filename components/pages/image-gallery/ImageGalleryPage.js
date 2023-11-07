@@ -29,7 +29,7 @@ const ImageGalleryPage = ({initialData}) => {
 				<div className={style.Title}>Digital Image Gallery</div>
 				<div className={style.Text}>
 					<p>
-						See the constantly growing amount of digital images of the Blinken OSA Archivum. Currently there
+						Explore the constantly growing amount of digital images of the Blinken OSA Archivum. Currently there
 						are {total} images in our digital image collection. Select an image on the right side to see it in high quality
 						with deep level zooming thanks to the <a href={'https://iiif.io/'} target={'_new'}>IIIF framework</a>.
 					</p>
@@ -41,6 +41,10 @@ const ImageGalleryPage = ({initialData}) => {
 					<div style={{marginTop: '10px',marginRight: '10px'}}>
 						<Button text={'Show full record'} link={`#`}/>
 					</div>
+					<br/>
+					<p>
+						Start your image exploring journey now!
+					</p>
 				</div>
 			</div>
 		)
