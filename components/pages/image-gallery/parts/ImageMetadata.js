@@ -1,9 +1,14 @@
 import style from "./ImageMetadata.module.scss"
 import Button from "../../search/parts/Button";
+import useSWR from "swr";
+import {solrFetcher} from "../../../../utils/fetcherFunctions";
 
-const ImageMetadata = ({metadata}) => {
+const ImageMetadata = ({selectedImage}) => {
+  const { data, error } = useSWR({query: `id:${selectedImage}`}, solrFetcher);
 
   const renderData = () => {
+    const metadata = data['response']['docs'][0]
+
     return (
       <div className={style.MetadataWrapper}>
         <div style={{flex: 1}}>
@@ -15,10 +20,17 @@ const ImageMetadata = ({metadata}) => {
         </div>
       </div>
     )
-
   }
 
-  return ( metadata ? renderData() : '' )
+  const renderEmpty = () => {
+    return (
+      <div className={style.MetadataWrapper} >
+        <div className={style.Data}>Select an image from the right side</div>
+      </div>
+    )
+  }
+
+  return ( selectedImage && data ? renderData() : renderEmpty())
 }
 
 export default ImageMetadata;

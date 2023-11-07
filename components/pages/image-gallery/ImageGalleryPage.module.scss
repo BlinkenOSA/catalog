@@ -24,4 +24,30 @@
       top: calc(#{$header-height} + #{$breadcrumb-height});
     }
   }
+
+  .Title {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+    padding: 10px;
+    background-color: #BFBFBF;
+    border-bottom: 1px solid #000000;
+  }
+
+  .Text {
+    font-family: "Suisse Intl", serif;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 20px;
+
+    p {
+      margin-top: 0;
+    }
+
+    a {
+      color: $black;
+      text-decoration: underline;
+    }
+  }
 }

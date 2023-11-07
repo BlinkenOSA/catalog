@@ -25,7 +25,7 @@ const BackButton = dynamic(() => import("../parts/BackButton"), {
  *                        detail one.
  * @param {boolean} params.inverse Define if the menu is in inverse (dark) display mode.
  */
-const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup}) => {
+const BreadcrumbSearch = ({reference, module, inverse}) => {
     const router = useRouter();
     const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(router.query)
 
@@ -201,9 +201,7 @@ const BreadcrumbSearch = ({reference, module, inverse, total, onSelectFacetGroup
 
         if (module === 'image-gallery') {
             return (
-                <div className={style.ImageNavigation}>
-                    Showing {total} images
-                </div>
+                <div className={style.ImageNavigation}/>
             )
         }
 

@@ -21,7 +21,7 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
 
     const getHeight = () => {
-        const realHeight = height - (57 + 42 + 71);
+        const realHeight = height - (57 + 42 + 72);
 
         if (isMobile) {
             return fullScreenEnabled ? height : realHeight;

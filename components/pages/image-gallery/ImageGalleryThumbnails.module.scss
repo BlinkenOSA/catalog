@@ -10,3 +10,81 @@
   z-index: 10;
   background-color: $background;
 }
+
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  &:after {
+    content: '';
+    flex-grow: 999999999;
+  }
+
+  figure {
+    cursor: pointer;
+    margin: 8px;
+    position: relative;
+    border: 1px solid transparent;
+
+    &.Selected {
+      border: 1px solid $black;
+
+      img {
+        filter: grayscale(0);
+      }
+    }
+
+    i {
+      display: block;
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      vertical-align: bottom;
+      filter: grayscale(1);
+      -webkit-transition: all .4s ease;
+      -moz-transition: all .4s ease;
+      -o-transition: all .4s ease;
+      transition: all .4s ease;
+    }
+  }
+
+  figure:hover {
+    img {
+      filter: grayscale(0);
+    }
+  }
+
+  .MoreButtonWrapper {
+    margin: 8px;
+    min-width: 200px;
+    min-height: 120px;
+    background-color: $background;
+    display: flex;
+    align-items: center;
+
+    .MoreButton {
+      margin: 0 auto;
+      width: 150px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 18px;
+      font-weight: 100;
+      text-transform: uppercase;
+      font-size: 16px;
+      text-align: center;
+      color: $black;
+      background-color: $background;
+      border: 1px solid $black;
+      font-family: "Suisse Intl", serif;
+
+      &:hover {
+        color: $black;
+        cursor: pointer;
+        background-color: $yellow;
+      }
+    }
+  }
+}

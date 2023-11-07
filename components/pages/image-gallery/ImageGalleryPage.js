@@ -2,24 +2,12 @@ import style from "./ImageGalleryPage.module.scss";
 import dynamic from "next/dynamic";
 import {useEffect, useState} from "react";
 import ImageMetadata from "./parts/ImageMetadata";
+import ImageGalleryThumbnails from "./ImageGalleryThumbnails";
+import Button from "../search/parts/Button";
 
 
-const ImageGalleryPage = ({data, facets, total}) => {
-	const [selectedImage, setSelectedImage] = useState(data?.[0]?.['response']['docs'][0]['id'])
-	const [selectedImageMetadata, setSelectedImageMetadata] = useState({})
-
-	useEffect(() => {
-		data.forEach(d => {
-			const results = d['response']['docs'].filter(r => r['id'] === selectedImage)
-			if (results.length > 0) {
-				setSelectedImageMetadata(results[0])
-			}
-		})
-	}, [selectedImage])
-
-	const ImageGalleryThumbnails = dynamic(() => import('./ImageGalleryThumbnails'), {
-		ssr: false
-	})
+const ImageGalleryPage = ({initialData}) => {
+	const [selectedImage, setSelectedImage] = useState('')
 
 	const ImageViewer = dynamic(() => import('../../catalog/finding-aids/parts/findingAidsDigitalContent/viewers/ImageViewer'), {
 		ssr: false
@@ -33,19 +21,48 @@ const ImageGalleryPage = ({data, facets, total}) => {
 		}
 	}
 
+	const renderImageGalleryText = () => {
+		const total = initialData['response']['numFound']
+
+		return (
+			<div>
+				<div className={style.Title}>Digital Image Gallery</div>
+				<div className={style.Text}>
+					<p>
+						See the constantly growing amount of digital images of the Blinken OSA Archivum. Currently there
+						are {total} images in our digital image collection. Select an image on the right side to see it in high quality
+						with deep level zooming thanks to the <a href={'https://iiif.io/'} target={'_new'}>IIIF framework</a>.
+					</p>
+					<p>
+						Use the search box to search in the descriptions or use the pre-defined filters to narrow the results of
+						your search. If you would like to see the full archival description of an image, select an image to open
+						it in the viewer and click the button in the header. See the example below:
+					</p>
+					<div style={{marginTop: '10px',marginRight: '10px'}}>
+						<Button text={'Show full record'} link={`#`}/>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
 	return (
 		<div className={style.ImageGalleryPage}>
 			<div className={style.ImageGalleryViewer}>
 				<div className={style.Content}>
-					<ImageMetadata metadata={selectedImageMetadata}/>
-					{selectedImage && data.length > 0 && <ImageViewer id={selectedImage} isGallery={true} />}
+					{
+						selectedImage ?
+						  <>
+								<ImageMetadata selectedImage={selectedImage} />
+								<ImageViewer id={selectedImage} isGallery={true} />
+							</> :
+							renderImageGalleryText()
+					}
 				</div>
 			</div>
 			<div className={style.ImageGalleryThumbnails}>
 				<ImageGalleryThumbnails
-					data={data}
-					facets={facets}
-					total={total}
+					initialData={initialData}
 					onImageSelect={onImageSelect}
 					selectedImage={selectedImage}
 				/>

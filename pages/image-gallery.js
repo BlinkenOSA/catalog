@@ -15,6 +15,8 @@ const SOLR_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
+const PER_PAGE = 50;
+
 export async function getServerSideProps(context) {
 	const params = context.query
 	const solrParams = makeSolrParams(params)
@@ -34,38 +36,19 @@ export async function getServerSideProps(context) {
 const ImageGallery = ({initialData}) => {
 	const [ref] = useMeasure();
 
-	const router = useRouter();
-	const {id, query, ...selectedFacets} = router.query;
-
-	const getKey = (index) => {
-		return {
-			solrCore: 'image-gallery',
-			query: query,
-			offset: index * 50,
-			limit: 50,
-			...selectedFacets
-		}
-	}
-
-	const { data, size, setSize } = useSWRInfinite(getKey, solrFetcher, {fallbackData: [initialData]})
-
 	return (
 		<GalleryLayout>
 			<Head>
 				<title>Blinken OSA Archivum - Image Gallery</title>
 			</Head>
 			<BreadcrumbSearch
-				total={data?.[0]?.['response']['numFound']}
 				reference={ref}
 				inverse={false}
 				module={'image-gallery'}
 				isMobile={false}
 			/>
 			<div className={`${style.Page}`}>
-				<ImageGalleryPage
-					data={data}
-					facets={data?.[0]?.['facet_counts']['facet_fields']}
-					total={data?.[0]?.['response']['numFound']} />
+				<ImageGalleryPage initialData={initialData} />
 			</div>
 		</GalleryLayout>
 	)
