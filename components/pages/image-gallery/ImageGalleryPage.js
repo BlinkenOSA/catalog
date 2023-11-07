@@ -29,21 +29,21 @@ const ImageGalleryPage = ({initialData}) => {
 				<div className={style.Title}>Digital Image Gallery</div>
 				<div className={style.Text}>
 					<p>
-						Explore the constantly growing amount of digital images of the Blinken OSA Archivum. Currently there
-						are {total} images in our digital image collection. Select an image on the right side to see it in high quality
-						with deep level zooming thanks to the <a href={'https://iiif.io/'} target={'_new'}>IIIF framework</a>.
+						Explore the Blinken OSA Archivum's ever-growing collection of digital images. Our digital image collection
+						currently contains {total} images. Select an image on the right side to see it in high quality with
+						deep level zooming thanks to the <a href={'https://iiif.io/'} target={'_new'}>IIIF framework</a>.
 					</p>
 					<p>
-						Use the search box to search in the descriptions or use the pre-defined filters to narrow the results of
-						your search. If you would like to see the full archival description of an image, select an image to open
-						it in the viewer and click the button in the header. See the example below:
+						Use the search box to search in the descriptions. You can also use the predefined filters to narrow down
+						your search results. To see the full archive description of an image, select an image to open it in the
+						viewer and click the button in the header. See the example below:
 					</p>
 					<div style={{marginTop: '10px',marginRight: '10px'}}>
 						<Button text={'Show full record'} link={`#`}/>
 					</div>
 					<br/>
 					<p>
-						Start your image exploring journey now!
+						Start your image discovery journey now!
 					</p>
 				</div>
 			</div>
