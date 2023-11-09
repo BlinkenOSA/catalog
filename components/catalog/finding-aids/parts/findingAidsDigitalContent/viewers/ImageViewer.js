@@ -68,7 +68,7 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
     }
 
         return (
-
+            <Fullscreen enabled={fullScreenEnabled} onChange={(isFullscreenEnabled) => setFullScreenEnabled(isFullscreenEnabled)}>
                 <div className={getClass()} style={{height: getHeight()}}>
                     <div className={style.FullScreenButton} onClick={() => fullScreenClick()}>
                         {fullScreenEnabled ? <FaCompress/> : <FaExpand/>}
@@ -81,6 +81,7 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
                         toolBarOptions={toolBarOptions}
                     /> : <Loader color='#000000'/>}
                 </div>
+            </Fullscreen>
         )
 }
 
