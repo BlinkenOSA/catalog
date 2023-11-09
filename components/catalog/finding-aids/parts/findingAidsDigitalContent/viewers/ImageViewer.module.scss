@@ -30,13 +30,20 @@
     border: 0;
     padding: 0;
     margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height:100vh;
+    z-index: 2147483647;
 
     :global .osrv-top-row-wrapper {
       color: $black;
       background: rgba($form-background, 0.6);
       border-bottom: 1px solid $black;
       display: flex;
-      z-index: 1;
+      z-index: 9999;
 
       .osrv-work-title {
         color: $black;

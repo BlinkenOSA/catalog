@@ -10,7 +10,7 @@ import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
  * @param {Object} params
  * @param {func} params.onSearch Function to call when search is fired.
  */
-const FacetSearch = ({selectedFacetGroup, onSearch, type}) => {
+const FacetSearch = ({selectedFacetGroup, onSearch, type, breadcrumbHeight}) => {
     const [value, setValue] = useState('');
     const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
 
@@ -20,7 +20,10 @@ const FacetSearch = ({selectedFacetGroup, onSearch, type}) => {
 
     return (
         fc[selectedFacetGroup]['search'] ?
-            <div className={type === 'gallery' ? `${style.SearchBox} ${style.Gallery}` : style.SearchBox}>
+            <div
+              className={type === 'gallery' ? `${style.SearchBox} ${style.Gallery}` : style.SearchBox}
+              style={type === 'gallery' ? {top: 59 + breadcrumbHeight + 36} : {top: 59 + breadcrumbHeight}}
+            >
                 <input
                     className={style.SearchInput}
                     placeholder={`Search in filters`}

@@ -1,6 +1,7 @@
 import cssStyle from "./FacetValues.module.scss";
 import FacetSearch from "./FacetSearch";
 import {facetConfig} from "../../../config/facetConfig";
+import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
 import {useCallback, useRef, useEffect, useState} from "react";
 import {useDeepCompareEffect, useWindowSize} from "react-use";
 import { VariableSizeList as List } from 'react-window';
@@ -16,8 +17,9 @@ import { FiInfo } from 'react-icons/fi';
  * @param {function} params.onFacetActionClick The handler of facet value change.
  * @param {function} params.onSelectFacetValue The function handling the facet selection.
  */
-const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
+const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues, breadcrumbHeight,
                       onFacetActionClick, onSelectFacetValue, type}) => {
+    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
 
     const [facetValuesOriginal, setFacetValuesOriginal] = useState([])
     const [facetValuesDisplay, setFacetValuesDisplay] = useState([])
@@ -70,8 +72,8 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
      * @param {Object} facet The object of the clicked facet.
      */
     const handleFacetSelect = (facet) => {
-        if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
-            if (facetConfig[selectedFacetGroup]['info']) {
+        if (fc[selectedFacetGroup].hasOwnProperty('info')) {
+            if (fc[selectedFacetGroup]['info']) {
                 onSelectFacetValue(facet)
                 setFacetValueClicked(facet['value'])
             } else {
@@ -88,8 +90,8 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
      * @param {Object} facet The object of the clicked facet.
      */
     const handleFacetDeselect = (facet) => {
-        if (facetConfig[selectedFacetGroup].hasOwnProperty('info')) {
-            if (facetConfig[selectedFacetGroup]['info']) {
+        if (fc[selectedFacetGroup].hasOwnProperty('info')) {
+            if (fc[selectedFacetGroup]['info']) {
                 setFacetValueClicked('')
                 onFacetActionClick(facet['value'], 'remove')
             }
@@ -156,10 +158,10 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues,
 
     return (
         <div id={selectedFacetGroup} className={type === 'gallery' ? `${cssStyle.FacetValues} ${cssStyle.Gallery}` : cssStyle.FacetValues}>
-            <FacetSearch type={type} selectedFacetGroup={selectedFacetGroup} onSearch={handleSearch}/>
+            <FacetSearch breadcrumbHeight={breadcrumbHeight} type={type} selectedFacetGroup={selectedFacetGroup} onSearch={handleSearch}/>
             <List
                 ref={listRef}
-                height={type === 'gallery' ? height - (57 + 44 + 121 + 37 + 37) : height - (57 + 44 + 37)}
+                height={type === 'gallery' ? height - (57 + 44 + 37 + 33) : height - (57 + 44 + 37)}
                 itemCount={facetValuesDisplay.length}
                 itemSize={getRowHeight}
                 width={'100%'}

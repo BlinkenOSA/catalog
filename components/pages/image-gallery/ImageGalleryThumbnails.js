@@ -9,7 +9,7 @@ import {useRouter} from "next/router";
 import useSWRInfinite from "swr/infinite";
 import {solrFetcher} from "../../../utils/fetcherFunctions";
 
-const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect}) => {
+const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect, breadcrumbHeight}) => {
     const router = useRouter();
     const {id, query, ...selectedFacets} = router.query;
 
@@ -104,7 +104,7 @@ const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect}) => 
 
     return (
         <>
-            <div className={style.FilterBar}>
+            <div className={style.FilterBar} style={{top: 59 + breadcrumbHeight}}>
                 <FilterMenu
                     selectedFacetGroup={selectedFacetGroup}
                     onSelectFacetGroup={handleFacetGroupSelect}
@@ -119,6 +119,7 @@ const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect}) => 
                 </>
                 : <FacetPage
                     type={'gallery'}
+                    breadcrumbHeight={breadcrumbHeight}
                     facetConfig={galleryFacetConfig}
                     facets={data?.[0]?.['facet_counts']['facet_fields']}
                     total={data?.[0]?.['response']['numFound']}

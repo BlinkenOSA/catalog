@@ -6,7 +6,7 @@
   border-bottom: 1px solid $black;
   position: sticky;
   position: -webkit-sticky;
-  top: calc(#{$header-height} + #{$breadcrumb-height});
+  // top: calc(#{$header-height} + #{$breadcrumb-height});
   z-index: 10;
   background-color: $background;
 }

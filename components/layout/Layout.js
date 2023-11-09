@@ -17,7 +17,7 @@ const HeaderMobile = dynamic(() => import("./mobile/HeaderMobile"), {
  * @param {Object} params
  * @param {React.ReactChildren} params.children
  */
-const Layout = ({module, children}) => {
+const Layout = ({children}) => {
     return (
         <React.Fragment>
             <Media lessThan="md">

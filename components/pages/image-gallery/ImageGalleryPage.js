@@ -1,17 +1,12 @@
 import style from "./ImageGalleryPage.module.scss";
-import dynamic from "next/dynamic";
-import {useEffect, useState} from "react";
-import ImageMetadata from "./parts/ImageMetadata";
+import {useState} from "react";
 import ImageGalleryThumbnails from "./ImageGalleryThumbnails";
 import Button from "../search/parts/Button";
+import ImageViewerPage from "./ImageViewerPage";
 
 
-const ImageGalleryPage = ({initialData}) => {
+const ImageGalleryPage = ({initialData, breadcrumbHeight}) => {
 	const [selectedImage, setSelectedImage] = useState('')
-
-	const ImageViewer = dynamic(() => import('../../catalog/finding-aids/parts/findingAidsDigitalContent/viewers/ImageViewer'), {
-		ssr: false
-	})
 
 	const onImageSelect = (id) => {
 		if (selectedImage === id) {
@@ -53,19 +48,15 @@ const ImageGalleryPage = ({initialData}) => {
 	return (
 		<div className={style.ImageGalleryPage}>
 			<div className={style.ImageGalleryViewer}>
-				<div className={style.Content}>
+				<div className={style.Content} style={{top: 59 + breadcrumbHeight}}>
 					{
-						selectedImage ?
-						  <>
-								<ImageMetadata selectedImage={selectedImage} />
-								<ImageViewer id={selectedImage} isGallery={true} />
-							</> :
-							renderImageGalleryText()
+						selectedImage ? <ImageViewerPage selectedImage={selectedImage}/> : renderImageGalleryText()
 					}
 				</div>
 			</div>
 			<div className={style.ImageGalleryThumbnails}>
 				<ImageGalleryThumbnails
+					breadcrumbHeight={breadcrumbHeight}
 					initialData={initialData}
 					onImageSelect={onImageSelect}
 					selectedImage={selectedImage}

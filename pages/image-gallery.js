@@ -34,7 +34,7 @@ export async function getServerSideProps(context) {
 }
 
 const ImageGallery = ({initialData}) => {
-	const [ref] = useMeasure();
+	const [ref, {height}] = useMeasure();
 
 	return (
 		<GalleryLayout>
@@ -48,7 +48,9 @@ const ImageGallery = ({initialData}) => {
 				isMobile={false}
 			/>
 			<div className={`${style.Page}`}>
-				<ImageGalleryPage initialData={initialData} />
+				<ImageGalleryPage
+					breadcrumbHeight={height}
+					initialData={initialData} />
 			</div>
 		</GalleryLayout>
 	)

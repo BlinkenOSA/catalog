@@ -35,7 +35,7 @@
 .FacetPageWrapperGallery {
   width: 100%;
   background-color: $black;
-  min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - 35px);
+  min-height: calc(100vh - #{$header-height} - #{$breadcrumb-height} - 36px);
   display: flex;
   flex-direction: column;
 

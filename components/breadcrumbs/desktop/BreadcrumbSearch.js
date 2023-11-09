@@ -1,17 +1,16 @@
 import React, {useState} from "react";
 import style from "./BreadcrumbSearch.module.scss";
-import {BiDownArrowAlt, BiLeftArrowAlt, BiRightArrowAlt, BiUpArrowAlt} from "react-icons/bi";
+import {BiDownArrowAlt, BiUpArrowAlt} from "react-icons/bi";
 import {useRouter} from "next/router";
 import { AiOutlineClose, AiOutlineRight, AiOutlineLeft } from "react-icons/ai";
-import { BiSlider } from "react-icons/bi";
 import {createParams, processParams} from "../../../utils/urlParamFunctions";
 import {facetConfig} from "../../../config/facetConfig";
+import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
 import {removeFacet} from "../../../utils/facetFunctions";
 import DropDown from "./parts/DropDown";
 import Pagination from "./parts/Pagination";
 import {defaultLimit} from "../../../config/appConfig";
 import dynamic from "next/dynamic";
-import Button from "../../pages/search/parts/Button";
 
 const BackButton = dynamic(() => import("../parts/BackButton"), {
     ssr: false,
@@ -25,9 +24,13 @@ const BackButton = dynamic(() => import("../parts/BackButton"), {
  *                        detail one.
  * @param {boolean} params.inverse Define if the menu is in inverse (dark) display mode.
  */
-const BreadcrumbSearch = ({reference, module, inverse}) => {
+const BreadcrumbSearch = ({reference, module, total, inverse}) => {
     const router = useRouter();
-    const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(router.query)
+    const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(
+      router.query, module === 'image-gallery' ? 'gallery' : 'normal'
+    )
+
+    const fc = module === 'image-gallery' ? galleryFacetConfig : facetConfig
 
     /**
      * Removing the facet from the url and from the selectedFacets.
@@ -52,7 +55,7 @@ const BreadcrumbSearch = ({reference, module, inverse}) => {
      */
     const renderSelectedFacetButton = (key, facetGroup, facetValue) => (
         <div key={key} className={style.SelectedFacetButton}>
-            <span>{facetConfig[facetGroup]['title']}</span>
+            <span>{fc[facetGroup]['title']}</span>
             <AiOutlineRight size={14} />
             {facetValue}
             <div className={style.SelectedFacetRemove} onClick={() => onFacetRemove(facetGroup, facetValue)}>
@@ -201,7 +204,9 @@ const BreadcrumbSearch = ({reference, module, inverse}) => {
 
         if (module === 'image-gallery') {
             return (
-                <div className={style.ImageNavigation}/>
+                <div className={
+                    Object.keys(selectedFacets).length === 0 && query === '' ? style.ImageNavigation : `${style.ImageNavigation} ${style.FacetsExists}`}
+                />
             )
         }
 

@@ -1,4 +1,5 @@
 import {facetConfig} from "../config/facetConfig";
+import {galleryFacetConfig} from "../config/galleryFacetConfig";
 
 export const createParams = (query, limit, offset, selectedFacets) => {
     const {id, ...restOfTheFacets} = selectedFacets;
@@ -22,7 +23,9 @@ export const createParams = (query, limit, offset, selectedFacets) => {
 }
 
 
-export const processParams = (params) => {
+export const processParams = (params, type='normal') => {
+    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
+
     let newParams = {};
     const { query, qf, filterQuery, limit, offset, sort, ...rest } = params;
 
@@ -42,8 +45,8 @@ export const processParams = (params) => {
     }
 
     // Handle selectedFacets
-    Object.keys(facetConfig).forEach((key) => {
-        if (facetConfig[key]['type'] === 'date') {
+    Object.keys(fc).forEach((key) => {
+        if (fc[key]['type'] === 'date') {
             addToSelectedFacets('selectedFacetsDates', key)
         } else {
             addToSelectedFacets('selectedFacets', key)

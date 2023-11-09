@@ -6,6 +6,7 @@ import DateCreated from "../facetHelpers/DateCreated";
 import Availability from "../facetHelpers/Availability";
 import WikiFacet from "../facetHelpers/WikiFacet";
 import Keyword from "./FacetWordCloud";
+import Series from "../facetHelpers/Series";
 
 
 /**
@@ -20,6 +21,7 @@ import Keyword from "./FacetWordCloud";
  */
 const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
                          selectedFacetValues, onFacetActionClick, type='normal'}) => {
+
     const getContent = () => {
         switch (selectedFacetGroup) {
             case 'record_origin':
@@ -38,6 +40,8 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'language'} />
             case 'year_created':
                 return <DateCreated type={type} facetValues={facetValues} />
+            case 'series':
+                return <Series type={type} selectedFacetObject={selectedFacetObject} />
             default:
                 break;
         }
@@ -51,7 +55,8 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
         }
     }
 
-    const truncate = (input) => input.length > 20 ? `${input.substring(0, 20)}...` : input;
+    const MAX_LENGTH = type === 'gallery' ? 35 : 20
+    const truncate = (input) => input.length > MAX_LENGTH ? `${input.substring(0, MAX_LENGTH)}...` : input;
 
     const renderButton = () => (
         selectedFacetObject['value'] &&
@@ -73,6 +78,7 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
             case 'keyword':
             case 'language_wikidata':
             case 'contributor_wikidata':
+            case 'series':
                 return renderButton()
             default:
                 break;

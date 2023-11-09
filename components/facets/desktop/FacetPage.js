@@ -23,6 +23,7 @@ import FacetWordCloud from "./FacetWordCloud";
  */
 const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                        facets, total, facetConfig, breadcrumbHeight=0, type='normal'}) => {
+
     const [selectedFacetObject, setSelectedFacetObject] = useState('')
 
     const router = useRouter();
@@ -43,6 +44,10 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
             addFacetValue(value)
         } else {
             removeFacetValue(value)
+        }
+
+        if (type === 'gallery') {
+            onShowButtonClick()
         }
     }
 
@@ -96,6 +101,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
         switch (facetType) {
             case 'list':
             case 'wiki':
+            case 'series':
                 return (
                   <FacetValues
                     breadcrumbHeight={breadcrumbHeight}

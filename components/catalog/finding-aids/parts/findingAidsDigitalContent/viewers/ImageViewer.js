@@ -21,13 +21,8 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
     const [fullScreenEnabled, setFullScreenEnabled] = useState(false)
 
     const getHeight = () => {
-        const realHeight = height - (57 + 42 + 72);
-
-        if (isMobile) {
-            return fullScreenEnabled ? height : realHeight;
-        } else {
-            return fullScreenEnabled ? height : realHeight;
-        }
+        const realHeight = height - (57 + 42 + 73 + 73);
+        return fullScreenEnabled ? height : realHeight;
     }
 
     const options = {
@@ -73,7 +68,7 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
     }
 
         return (
-            <Fullscreen enabled={fullScreenEnabled} onChange={(isFullscreenEnabled) => setFullScreenEnabled(isFullscreenEnabled)}>
+
                 <div className={getClass()} style={{height: getHeight()}}>
                     <div className={style.FullScreenButton} onClick={() => fullScreenClick()}>
                         {fullScreenEnabled ? <FaCompress/> : <FaExpand/>}
@@ -86,7 +81,6 @@ const ImageViewer = ({id, isGallery = false, isMobile, metadata}) => {
                         toolBarOptions={toolBarOptions}
                     /> : <Loader color='#000000'/>}
                 </div>
-            </Fullscreen>
         )
 }
 

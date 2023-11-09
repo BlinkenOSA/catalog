@@ -16,8 +16,6 @@ const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer =
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
     const [theme, setTheme] = useState(isMobile ? 0 : 1)
 
-    // const { data, error } = useSWR(`${API}archival-units-tree/all/${theme}/`, fetcher)
-
     useEffect(() => {
         if (activeUnit && activeUnitID) {
             let nodes = []

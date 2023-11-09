@@ -36,6 +36,11 @@
   flex: 3;
   align-items: center;
   justify-content: space-between;
+
+  &.FacetsExists {
+    flex: unset;
+    width: 265px;
+  }
 }
 
 .Navigation {
