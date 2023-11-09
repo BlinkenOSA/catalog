@@ -15,7 +15,19 @@
   }
 
   :global div[data-testid="toolbar-wrapper"] {
-    position: relative;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 100%;
+  }
+
+  :global nav.osrv-toolbar-wrapper {
+    margin-right: 10px;
+    gap: 5px;
+
+    button {
+      margin-right: 0;
+    }
   }
 
   &.Gallery {
@@ -55,8 +67,8 @@
     cursor: pointer;
     position: absolute;
     z-index: 12;
-    bottom: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
     width: 25px;
     height: 25px;
     border-radius: 13px;
@@ -65,6 +77,8 @@
     svg {
       padding-top: 5px;
       padding-left: 5px;
+      width: 15px;
+      height: 15px;
       fill: $white;
     }
 
