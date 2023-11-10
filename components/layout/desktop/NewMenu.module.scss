@@ -41,13 +41,15 @@
           white-space:nowrap;
           max-width: 0;
           opacity: 0;
-          transition: max-width .6s, opacity .3s, color .9s;
+          visibility: hidden;
+          transition: max-width .6s, opacity .3s, color .9s, visibility .3s;
         }
 
         &.Active {
           .Text {
             color: $white;
             max-width: 200px;
+            visibility: visible;
             opacity: 1;
           }
         }
@@ -72,6 +74,7 @@
             color: $white;
             max-width: 200px;
             opacity: 1;
+            visibility: visible;
           }
         }
       }
