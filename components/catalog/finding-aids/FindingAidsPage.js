@@ -98,7 +98,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                             !isMobile &&
                             <PageNavigation primaryType={solrData['primary_type']} onSelect={handleSelectSection}/>
                         }
-                        <div ref={digitalContentRef} style={isMobile ? {minHeight: 300} : {minHeight: 400}}>
+                        <div ref={digitalContentRef} className={style.DigitalContent} style={isMobile ? {minHeight: 300} : {minHeight: 400}}>
                             <FindingAidsDigitalContent id={id} data={metadata} isMobile={isMobile}/>
                         </div>
                     </React.Fragment>

@@ -16,6 +16,7 @@ const API = process.env.NEXT_PUBLIC_AMS_API;
 const ImageViewerV2 = ({id, isGallery = false, isMobile, metadata}) => {
     const {width, height} = useWindowSize();
 
+    // Disable canvas right click
     useEffect(() => {
         function handleContextMenu(e) {
             e.preventDefault(); // prevents the default right-click menu from appearing
