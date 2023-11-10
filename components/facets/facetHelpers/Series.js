@@ -17,7 +17,7 @@ const Series = ({selectedFacetObject}) => {
     const renderData = () => {
         if (data) {
             return (
-                <div>
+                <>
                     <h2>{data['title']}</h2>
                     <p>
                       {data['scope_and_content_abstract']}
@@ -30,7 +30,7 @@ const Series = ({selectedFacetObject}) => {
                     <p>
                       {data['archival_history']}
                     </p>
-                </div>
+                </>
             )
         }
     }
@@ -43,7 +43,7 @@ const Series = ({selectedFacetObject}) => {
                     These are the archival collections where digital images are existing.
                 </p>
             </div>
-            <div className={style.FacetExplanation}>
+            <div className={`${style.FacetExplanation} ${style.Gallery}`}>
               {renderData()}
             </div>
         </div>

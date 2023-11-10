@@ -11,6 +11,11 @@
   .FacetExplanation {
     padding: 10px 10px 10px 15px;
 
+    &.Gallery {
+      max-height: calc(100vh - $header-height - $breadcrumb-height - 36px - 180px);
+      overflow-y: scroll;
+    }
+
     p {
       margin: 0;
 
