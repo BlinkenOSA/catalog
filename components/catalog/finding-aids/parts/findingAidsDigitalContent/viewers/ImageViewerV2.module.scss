@@ -1,0 +1,71 @@
+@import "../../../../../../styles/variables";
+
+.ImageViewerWrapper {
+  border-top: 1px solid $black;
+
+  .Loader {
+    display: none;
+  }
+
+  &.Gallery {
+    border: unset;
+  }
+
+  :global button[data-testid="openseadragon-button"] {
+    width: 25px;
+    height: 25px;
+
+    &:hover {
+      background-color: $yellow;
+
+      svg {
+        stroke: $black;
+
+        path {
+          stroke: $black;
+        }
+      }
+
+      svg[aria-labelledby="rotateRight-svg-title"] {
+        path {
+          fill: #000000;
+        }
+
+        path[stroke-linecap="round"] {
+          fill: none
+        }
+      }
+
+      svg[aria-labelledby="rotateLeft-svg-title"] {
+        path {
+          fill: #000000;
+        }
+
+        path[stroke-linecap="round"] {
+          fill: none
+        }
+      }
+
+      svg[aria-labelledby="reset-svg-title"] {
+        path {
+          fill: #000000;
+        }
+      }
+    }
+
+    &:focus {
+      background-color: $black;
+    }
+  }
+}
+
+.ImageViewerWrapper:not(:has(header)) {
+  padding: 10px;
+  font-family: "Suisse Intl Condensed", serif;
+  font-weight: 400;
+  font-size: 16px;
+
+  .Loader {
+    display: block;
+  }
+}

@@ -5,7 +5,7 @@ const PDFViewer = dynamic(() => import("./viewers/PDFViewer"), {
     ssr: false
 });
 
-const ImageViewer = dynamic(() => import("./viewers/ImageViewer"), {
+const ImageViewer = dynamic(() => import("./viewers/ImageViewerV2"), {
     ssr: false
 });
 
