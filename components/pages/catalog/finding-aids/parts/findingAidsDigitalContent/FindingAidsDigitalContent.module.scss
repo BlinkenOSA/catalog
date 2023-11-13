@@ -1,0 +1,23 @@
+@import "../../../../../../styles/variables";
+
+// Openseadragon css
+.IIIFViewer {
+  height: 500px;
+
+  :global #openseadragon-controls button {
+    width: 25px;
+    height: 25px;
+    filter: none;
+
+    &:hover {
+      background-color: $yellow;
+
+      svg {
+        fill: $black;
+        stroke: $black;
+      }
+    }
+  }
+}
+
+

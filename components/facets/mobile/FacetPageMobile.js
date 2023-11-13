@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import {useRouter} from "next/router";
 import {addFacet, removeFacet} from "../../../utils/facetFunctions";
 import {createParams} from "../../../utils/urlParamFunctions";
-import {facetConfig} from "../../../config/facetConfig";
 import {Collapse} from "react-collapse";
 import dynamic from "next/dynamic";
 import ResultCounterMobile from "./ResultCounterMobile";
@@ -22,12 +21,12 @@ const FacetValuesMobile = dynamic(() => import("./FacetValuesMobile"), {
  * @param {Object} params.facets Facet results of the search query.
  * @param {number} params.total Total number of results.
  */
-const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) => {
+const FacetPageMobile = ({ facetConfig, selectedFacetGroupInitial, onShowButtonClick, facets, total, breadcrumbHeight, type='normal'}) => {
     const router = useRouter();
     const {query, limit, offset, ...selectedFacets} = router.query;
 
     const [selectedFacet, setSelectedFacet] = useState({})
-    const [selectedFacetGroup, setSelectedFacetGroup] = useState('record_origin')
+    const [selectedFacetGroup, setSelectedFacetGroup] = useState(selectedFacetGroupInitial)
     const [infoOpen, setInfoOpen] = useState(false);
 
     /**
@@ -102,19 +101,22 @@ const FacetPageMobile = ({ onShowButtonClick, facets, total, breadcrumbHeight}) 
     }
 
     const renderFacetValues = (key) => {
-        const type = facetConfig[key]['type']
-        switch (type) {
+        const facetType = facetConfig[key]['type']
+        switch (facetType) {
             case 'list':
             case 'wiki':
+            case 'wordcloud':
+            case 'series':
                 return (
                   <FacetValuesMobile
+                    facetConfig={facetConfig}
                     breadcrumbHeight={breadcrumbHeight}
                     facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
                     selectedFacetGroup={key}
                     selectedFacetValues={getSelectedFacetValues()}
                     onFacetActionClick={onFacetActionClick}
                     onFacetInfoClick={onFacetInfoClick}
-                    type={type}
+                    type={facetType}
                   />)
             case 'date':
                 return (

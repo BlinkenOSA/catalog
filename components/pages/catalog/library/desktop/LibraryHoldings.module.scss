@@ -1,0 +1,33 @@
+@import "../../../../../styles/variables";
+
+.Row {
+  display: flex;
+  padding: 10px 20px;
+
+  .Category {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 18px;
+    width: 350px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .Table {
+    font-family: 'Suisse Works', serif;
+    font-weight: 400;
+    font-size: 12px;
+    flex: 1;
+
+    table {
+      width: 100%;
+      max-width: 100%;
+
+      th, td {
+        padding: 10px;
+        background-color: $white;
+        text-align: center;
+      }
+    }
+  }
+}

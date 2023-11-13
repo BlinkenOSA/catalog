@@ -8,7 +8,7 @@ import {useWindowSize} from "react-use";
 /**
  * Search bar in the header.
  */
-const SearchBarMobile = () => {
+const SearchBarMobile = ({type}) => {
     const {width, height} = useWindowSize();
 
     const router = useRouter();
@@ -27,7 +27,7 @@ const SearchBarMobile = () => {
     const handleSearch = () => {
         if (searchValue && searchValue.trim() !== '') {
             router.replace({
-                pathname: '/',
+                pathname: type === 'gallery' ? '/image-gallery' : '/',
                 query: createParams(searchValue, limit, offset, selectedFacets),
             }, undefined, {shallow: false});
         }

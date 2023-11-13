@@ -11,6 +11,8 @@ import DropDownMobile from "./parts/DropDownMobile";
 import PaginationMobile from "./parts/PaginationMobile";
 import {defaultLimit} from "../../../config/appConfig";
 import dynamic from "next/dynamic";
+import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
+import {truncate} from "../../../utils/truncate";
 
 const BackButton = dynamic(() => import("../parts/BackButton"), {
     ssr: false,
@@ -25,11 +27,15 @@ const BackButton = dynamic(() => import("../parts/BackButton"), {
  *                        detail one.
  * @param {boolean} params.inverse Define if the menu is in inverse (dark) display mode.
  */
-const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFacetGroup}) => {
+const BreadcrumbSearchMobile = ({reference, defaultFacetOpen, module='normal', inverse, total, onSelectFacetGroup}) => {
     const router = useRouter();
-    const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(router.query)
+    const {query, limit, offset, selectedFacets, selectedFacetsDates} = processParams(
+        router.query, module === 'image-gallery' ? 'gallery' : 'normal'
+    )
 
     const [selectedFacetsOpen, setSelectedFacetsOpen] = useState(true);
+
+    const fc = module === 'image-gallery' ? galleryFacetConfig : facetConfig
 
     /**
      * Removing the facet from the url and from the selectedFacets.
@@ -54,9 +60,9 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
      */
     const renderSelectedFacetButton = (key, facetGroup, facetValue) => (
         <div key={key} className={style.SelectedFacetButton}>
-            <span>{facetConfig[facetGroup]['title']}</span>
+            <span>{fc[facetGroup]['title']}</span>
             <AiOutlineRight size={14} />
-            {facetValue}
+            {truncate(facetValue, 30)}
             <div className={style.SelectedFacetRemove} onClick={() => onFacetRemove(facetGroup, facetValue)}>
                 <AiOutlineClose size={14} />
             </div>
@@ -146,7 +152,7 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
             )
         } else {
             return (
-                <div className={style.FilterButton} onClick={() => onSelectFacetGroup('record_origin')}>
+                <div className={style.FilterButton} onClick={() => onSelectFacetGroup(defaultFacetOpen)}>
                     <BiSlider />
                 </div>
             )
@@ -159,6 +165,14 @@ const BreadcrumbSearchMobile = ({reference, module, inverse, total, onSelectFace
     const renderLeftSideContent = () => {
         if (module === 'staticPage' || module === 'collections' || module === 'detail') {
             return <BackButton />
+        }
+
+        if (module === 'image-gallery') {
+            return (
+                <div className={style.Navigation}>
+                    <span>Filter your search</span> <BiRightArrowAlt />
+                </div>
+            )
         }
 
         if (inverse) {

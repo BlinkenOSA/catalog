@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import {solrFetcher} from "../../../../utils/fetcherFunctions";
-import IsadInsightsDates from "../../../catalog/isad/tabs/parts/insights/IsadInsightsDates";
+import IsadInsightsDates from "../../catalog/isad/tabs/parts/insights/IsadInsightsDates";
 import Loader from "../../../layout/Loader";
 
 const DateDistribution = ({descriptionLevel, archivalUnitID}) => {

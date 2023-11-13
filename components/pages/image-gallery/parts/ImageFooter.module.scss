@@ -9,6 +9,11 @@
   display: flex;
   align-items: center;
 
+  &.Mobile {
+    height: unset;
+    min-height: 100px;
+  }
+
   .Buttons {
     display: flex;
     flex: 1;

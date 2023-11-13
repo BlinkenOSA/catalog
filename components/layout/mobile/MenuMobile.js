@@ -19,6 +19,7 @@ const MenuMobile = () => {
                 <span> </span>
             </div>
             <div className={menuOpen ? `${style.Menu} ${style.Opened}` : style.Menu}>
+                <div style={{flex: 1}}></div>
                 <div className={style.MenuList}>
                     <a href={'#'}>Collections</a>
                     <a className={style.Submenu} href={'/archival-collections'}>Archival Collections</a>
@@ -29,6 +30,7 @@ const MenuMobile = () => {
                     <a href={'/privacy-policy'}>Privacy Policy</a>
                     <a href={'/help'}>Help</a>
                 </div>
+                <div style={{flex: 1}}></div>
             </div>
         </React.Fragment>
     )

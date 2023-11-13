@@ -6,9 +6,9 @@ import {useMeasure} from "react-use";
 import style from "../pages.module.scss"
 import { Media } from "../../utils/media";
 import BreadcrumbSearchMobile from "../../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
-import IsadPage from "../../components/catalog/isad/IsadPage";
-import LibraryPage from "../../components/catalog/library/LibraryPage";
-import FindingAidsPage from "../../components/catalog/finding-aids/FindingAidsPage";
+import IsadPage from "../../components/pages/catalog/isad/IsadPage";
+import LibraryPage from "../../components/pages/catalog/library/LibraryPage";
+import FindingAidsPage from "../../components/pages/catalog/finding-aids/FindingAidsPage";
 import {Buffer} from "buffer";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;

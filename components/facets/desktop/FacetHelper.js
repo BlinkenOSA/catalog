@@ -7,6 +7,7 @@ import Availability from "../facetHelpers/Availability";
 import WikiFacet from "../facetHelpers/WikiFacet";
 import Keyword from "./FacetWordCloud";
 import Series from "../facetHelpers/Series";
+import {truncate} from "../../../utils/truncate";
 
 
 /**
@@ -56,14 +57,13 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
     }
 
     const MAX_LENGTH = type === 'gallery' ? 35 : 20
-    const truncate = (input) => input.length > MAX_LENGTH ? `${input.substring(0, MAX_LENGTH)}...` : input;
 
     const renderButton = () => (
         selectedFacetObject['value'] &&
         <div className={style.ButtonWrapper}>
             <span className={style.Button} onClick={() => handleClick()}>
                 {selectedFacetValues.includes(selectedFacetObject['value']) ? 'Remove ' : 'Add '}
-                '{truncate(selectedFacetObject['value'])}' Filter
+                '{truncate(selectedFacetObject['value'], 20)}' Filter
             </span>
         </div>
     )

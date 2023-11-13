@@ -1,0 +1,65 @@
+@import "../../../../styles/variables";
+
+.Page {
+  margin: 0 auto;
+
+  .Header {
+    display: flex;
+    height: 250px;
+    border-bottom: $border-width solid $black;
+
+    &.Mobile {
+      display: block;
+      height: unset;
+    }
+
+    .HeaderData {
+      flex: 1;
+      padding: 20px;
+
+      &.Mobile {
+        padding: 10px;
+      }
+
+      .Title {
+        font-family: "Suisse Works", serif;
+        font-weight: 400;
+        font-size: 28px;
+        margin-top: 10px;
+      }
+
+      .Buttons {
+        display: inline-flex;
+        gap: 6px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+    }
+
+    .Thumbnail {
+      width: 300px;
+      display: flex;
+      justify-content: right;
+      align-items: flex-start;
+
+      &.Mobile {
+        width: unset;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+
+      div {
+        display: flex;
+      }
+    }
+  }
+
+  .MetadataGroup {
+    border-bottom: $border-width solid $black;
+  }
+
+  .MetadataGroup:empty {
+    border-bottom: 0;
+  }
+}
+

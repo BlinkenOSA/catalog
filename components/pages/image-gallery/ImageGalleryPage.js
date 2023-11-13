@@ -3,9 +3,10 @@ import {useState} from "react";
 import ImageGalleryThumbnails from "./ImageGalleryThumbnails";
 import Button from "../search/parts/Button";
 import ImageViewerPage from "./ImageViewerPage";
+import FacetHelperMobile from "../../facets/mobile/FacetHelperMobile";
 
 
-const ImageGalleryPage = ({initialData, breadcrumbHeight}) => {
+const ImageGalleryPage = ({initialData, breadcrumbHeight, isMobile=false}) => {
 	const [selectedImage, setSelectedImage] = useState('')
 
 	const onImageSelect = (id) => {
@@ -45,25 +46,58 @@ const ImageGalleryPage = ({initialData, breadcrumbHeight}) => {
 		)
 	}
 
-	return (
-		<div className={style.ImageGalleryPage}>
-			<div className={style.ImageGalleryViewer}>
-				<div className={style.Content} style={{top: 59 + breadcrumbHeight}}>
-					{
-						selectedImage ? <ImageViewerPage selectedImage={selectedImage}/> : renderImageGalleryText()
-					}
+	if (isMobile) {
+		return (
+			<>
+				<div className={style.ImageGalleryPage}>
+					<div className={`${style.ImageGalleryThumbnails} ${style.Mobile}`}>
+						<ImageGalleryThumbnails
+							breadcrumbHeight={breadcrumbHeight}
+							initialData={initialData}
+							onImageSelect={onImageSelect}
+							selectedImage={selectedImage}
+							isMobile={true}
+						/>
+					</div>
+				</div>
+				<div className={selectedImage !== '' ? `${style.Drawer}` : `${style.Drawer} ${style.Closed}`}>
+					<div className={style.Window}>
+						<div className={style.CloseButton} onClick={() => setSelectedImage('')}>
+							<span> </span>
+							<span> </span>
+						</div>
+						{
+							selectedImage &&
+							<div style={{display: 'flex', flexDirection: 'column', height: '100vh'}}>
+								<ImageViewerPage selectedImage={selectedImage} isMobile={true}/>
+							</div>
+						}
+					</div>
+				</div>
+			</>
+		)
+	} else {
+		return (
+			<div className={style.ImageGalleryPage}>
+				<div className={style.ImageGalleryViewer}>
+					<div className={style.Content} style={{top: 59 + breadcrumbHeight}}>
+						{
+							selectedImage ? <ImageViewerPage selectedImage={selectedImage}/> : renderImageGalleryText()
+						}
+					</div>
+				</div>
+				<div className={style.ImageGalleryThumbnails}>
+					<ImageGalleryThumbnails
+						breadcrumbHeight={breadcrumbHeight}
+						initialData={initialData}
+						onImageSelect={onImageSelect}
+						selectedImage={selectedImage}
+					/>
 				</div>
 			</div>
-			<div className={style.ImageGalleryThumbnails}>
-				<ImageGalleryThumbnails
-					breadcrumbHeight={breadcrumbHeight}
-					initialData={initialData}
-					onImageSelect={onImageSelect}
-					selectedImage={selectedImage}
-				/>
-			</div>
-		</div>
-	)
+
+		)
+	}
 }
 
 export default ImageGalleryPage;

@@ -9,7 +9,7 @@ import {fetcher} from "../../../utils/fetcherFunctions";
  * @param {Object} params
  * @param {Object} params.selectedFacetObject Selected facet object
  */
-const Series = ({selectedFacetObject}) => {
+const Series = ({selectedFacetObject, isMobile=false}) => {
     const {data, error} = useSWR(
       selectedFacetObject.hasOwnProperty('value') ? [`image-gallery/archival-unit/`,  {'full_title': selectedFacetObject['value']}] : undefined, fetcher
     );
@@ -43,7 +43,7 @@ const Series = ({selectedFacetObject}) => {
                     These are the archival collections where digital images are existing.
                 </p>
             </div>
-            <div className={`${style.FacetExplanation} ${style.Gallery}`}>
+            <div className={`${style.FacetExplanation} ${style.Gallery} ${isMobile ? style.Mobile : ''}`}>
               {renderData()}
             </div>
         </div>

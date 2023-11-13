@@ -1,0 +1,93 @@
+@import "../../../../styles/variables";
+
+.Row {
+  display: flex;
+  padding: 10px 20px;
+  border-bottom: $border-width solid $form-background;
+
+  .Category {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 18px;
+    width: 250px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    flex-shrink: 0;
+  }
+
+  .Label {
+    font-family: "Suisse Works", serif;
+    font-size: 16px;
+    font-weight: 500;
+    width: 250px;
+    padding-right: 20px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .Value {
+    font-family: "Suisse Intl", serif;
+    font-size: 16px;
+    flex: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    a {
+      color: $black;
+      text-decoration: underline;
+    }
+
+    p:first-child {
+      margin-top: 0;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    p:empty {
+      display: none;
+    }
+  }
+
+  &.Mobile {
+    padding: 5px 10px;
+    gap: 5px;
+
+    .Category {
+      width: 100px;
+      flex-shrink: 0;
+    }
+
+    .ValueWrapper {
+      flex: 1;
+
+      .Label {
+        width: 100%;
+        padding: 0;
+      }
+    }
+  }
+}
+
+.Row:not(:first-child) {
+  .Category {
+    visibility: hidden;
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  &.Mobile {
+    .Category {
+      width: 100px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.Row:last-child {
+  border-bottom: none;
+}
+

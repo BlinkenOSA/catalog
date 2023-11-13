@@ -10,6 +10,10 @@
   background-color: $background;
   border-bottom: 1px solid $black;
 
+  &.Mobile {
+    min-height: 100px;
+  }
+
   .Data {
     flex: 1;
     font-family: "Suisse Intl Condensed", serif;

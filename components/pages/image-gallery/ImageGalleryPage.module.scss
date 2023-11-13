@@ -9,6 +9,10 @@
     border-left: 1px solid $black;
     display: flex;
     flex-direction: column;
+
+    &.Mobile {
+      border: unset;
+    }
   }
 
   .ImageGalleryViewer {
@@ -51,6 +55,63 @@
     a {
       color: $black;
       text-decoration: underline;
+    }
+  }
+}
+
+.Drawer {
+  align-self: flex-start;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  background-color: $form-background;
+  position: fixed;
+  z-index: 20;
+  transition: left 0.5s ease;
+
+  &.Closed {
+    left: -100vw;
+  }
+
+  .Window {
+    margin-bottom: 20px;
+    max-height: 100vh;
+    overflow-y: scroll;
+
+    .CloseButton {
+      position: absolute;
+      top: 12px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      color: $black;
+      z-index: 999;
+
+      span {
+        display: block;
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        background-color: $black;
+        left: 0;
+      }
+
+      span:nth-child(1) {
+        top: 10px;
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+
+      span:nth-child(2) {
+        top: 10px;
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+      }
     }
   }
 }

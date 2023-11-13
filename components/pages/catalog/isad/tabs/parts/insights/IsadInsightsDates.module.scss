@@ -1,0 +1,34 @@
+@import "../../../../../../../styles/variables";
+
+.InsightDateWrapper {
+  flex: 1;
+  padding: 10px 20px 0 20px;
+  border-right: $border-width solid $black;
+  border-bottom: $border-width solid $black;
+
+  &.BorderLess {
+    border-right: none;
+    border-bottom: $border-width solid $form-background;
+  }
+
+  .TitleDrawer {
+    font-family: "Suisse Works", serif;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 10px;
+  }
+
+  .Title {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .Tooltip {
+    padding: 10px;
+    background-color: $background;
+    color: $black;
+    border: $border-width solid $black;
+  }
+}

@@ -5,6 +5,8 @@ import RecordType from "../facetHelpers/RecordType";
 import DateCreated from "../facetHelpers/DateCreated";
 import Availability from "../facetHelpers/Availability";
 import WikiFacet from "../facetHelpers/WikiFacet";
+import Series from "../facetHelpers/Series";
+import {truncate} from "../../../utils/truncate";
 
 
 /**
@@ -17,7 +19,8 @@ import WikiFacet from "../facetHelpers/WikiFacet";
  * @param {Object} params.selectedFacetValues The selected facet values.
  * @param {function} params.onFacetActionClick The handler of facet value change.
  */
-const FacetHelperMobile = ({facetValues, selectedFacetGroup, selectedFacetObject, selectedFacetValues, onFacetActionClick}) => {
+const FacetHelperMobile = ({facetValues, selectedFacetGroup, selectedFacetObject,
+                               selectedFacetValues, onFacetActionClick}) => {
     const getContent = () => {
         switch (selectedFacetGroup) {
             case 'record_origin':
@@ -34,6 +37,8 @@ const FacetHelperMobile = ({facetValues, selectedFacetGroup, selectedFacetObject
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'geo'} />
             case 'year_created':
                 return <DateCreated facetValues={facetValues} />
+            case 'series':
+                return <Series selectedFacetObject={selectedFacetObject} isMobile={true} />
             default:
                 break;
         }
@@ -47,14 +52,12 @@ const FacetHelperMobile = ({facetValues, selectedFacetGroup, selectedFacetObject
         }
     }
 
-    const truncate = (input) => input.length > 20 ? `${input.substring(0, 20)}...` : input;
-
     const renderButton = () => (
         selectedFacetObject['value'] &&
         <div className={style.ButtonWrapper}>
             <span className={style.Button} onClick={() => handleClick()}>
                 {selectedFacetValues.includes(selectedFacetObject['value']) ? 'Remove ' : 'Add '}
-                '{truncate(selectedFacetObject['value'])}' Filter
+                '{truncate(selectedFacetObject['value'], 20)}' Filter
             </span>
         </div>
     )

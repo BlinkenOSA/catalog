@@ -1,6 +1,6 @@
 import style from "./ImageGalleryThumbnails.module.scss";
 import FilterMenu from "./parts/FilterMenu";
-import GalleryFooter from "../../layout/gallery/GalleryFooter";
+import GalleryFooter from "../../layout/GalleryFooter";
 import {galleryFacetConfig} from "../../../config/galleryFacetConfig";
 import {useState} from "react";
 import FacetPage from "../../facets/desktop/FacetPage";
@@ -9,7 +9,7 @@ import {useRouter} from "next/router";
 import useSWRInfinite from "swr/infinite";
 import {solrFetcher} from "../../../utils/fetcherFunctions";
 
-const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect, breadcrumbHeight}) => {
+const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect, breadcrumbHeight, isMobile=false}) => {
     const router = useRouter();
     const {id, query, ...selectedFacets} = router.query;
 
@@ -102,34 +102,43 @@ const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect, brea
         )
     }
 
-    return (
-        <>
-            <div className={style.FilterBar} style={{top: 59 + breadcrumbHeight}}>
-                <FilterMenu
-                    selectedFacetGroup={selectedFacetGroup}
-                    onSelectFacetGroup={handleFacetGroupSelect}
-                />
-            </div>
-            {
-                selectedFacetGroup === '' ?
-                <>
-                    {renderThumbnails()}
-                    <div style={{flex: 1}}/>
-                    <GalleryFooter />
-                </>
-                : <FacetPage
-                    type={'gallery'}
-                    breadcrumbHeight={breadcrumbHeight}
-                    facetConfig={galleryFacetConfig}
-                    facets={data?.[0]?.['facet_counts']['facet_fields']}
-                    total={data?.[0]?.['response']['numFound']}
-                    selectedFacetGroup={selectedFacetGroup}
-                    onSelectFacetGroup={onSelectFacetGroup}
-                    onShowButtonClick={onShowButtonClick}
-                  />
-            }
-        </>
-    )
+    if (isMobile) {
+        return (
+            <>
+                {renderThumbnails()}
+                <div style={{flex: 1}}/>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <div className={style.FilterBar} style={{top: 59 + breadcrumbHeight}}>
+                    <FilterMenu
+                        selectedFacetGroup={selectedFacetGroup}
+                        onSelectFacetGroup={handleFacetGroupSelect}
+                    />
+                </div>
+                {
+                    selectedFacetGroup === '' ?
+                        <>
+                            {renderThumbnails()}
+                            <div style={{flex: 1}}/>
+                            <GalleryFooter />
+                        </>
+                        : <FacetPage
+                            type={'gallery'}
+                            breadcrumbHeight={breadcrumbHeight}
+                            facetConfig={galleryFacetConfig}
+                            facets={data?.[0]?.['facet_counts']['facet_fields']}
+                            total={data?.[0]?.['response']['numFound']}
+                            selectedFacetGroup={selectedFacetGroup}
+                            onSelectFacetGroup={onSelectFacetGroup}
+                            onShowButtonClick={onShowButtonClick}
+                        />
+                }
+            </>
+        )
+    }
 }
 
 export default ImageGalleryThumbnails;

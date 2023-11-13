@@ -1,0 +1,107 @@
+import style from "./FindingAidsLocation.module.scss";
+import Loader from "../../../layout/Loader";
+import TreeNode from "./parts/treeNode/TreeNode";
+import {Collapse} from 'react-collapse';
+import Button from "../../search/parts/Button";
+import {useState} from "react";
+
+const FindingAidsLocation = ({data, language, onTreeNodeClick, isMobile}) => {
+    const [locationOpen, setLocationOpen] = useState(true)
+
+    const locationLabel = {
+        'EN': 'Hierarchy',
+        'HU': 'Hierarchia',
+        'RU': 'Иерархия'
+    }
+
+    const locationButtonText = {
+        'EN': `${locationOpen ? 'Close' : 'Open'} hierarchy info`,
+        'HU': `Hierarchia Információ ${locationOpen ? 'Bezárása' : 'Kinyitása'}`,
+        'RU': `${locationOpen ? 'Закрыть' : 'Открыть'} информация`
+    }
+
+    const getClassType = (record, isLast=false) => {
+        switch (record['level']) {
+            case 'F':
+                return 'FondsLast'
+            case 'SF':
+                return 'FondsLastSubfondsLast'
+            case 'S':
+                if (record['has_subfonds']) {
+                    return 'FondsLastSubfondsLastSeriesLast'
+                } else {
+                    return 'FondsLastSeriesLast'
+                }
+            case 'container':
+                if (record['has_subfonds']) {
+                    return 'ContainerWithSubfondsLast'
+                } else {
+                    return 'ContainerWithoutSubfondsLast'
+                }
+            case 'folder':
+            case 'item':
+                if (record['key'] === 'placeholder') {
+                    if (record['has_subfonds']) {
+                        return 'FolderPlaceholderWithSubfonds'
+                    } else {
+                        return 'FolderPlaceholderWithoutSubfonds'
+                    }
+                } else {
+                    if (record['has_subfonds']) {
+                        return isLast ? 'FolderWithSubfondsLast' : 'FolderWithSubfonds'
+                    } else {
+                        return isLast ? 'FolderWithoutSubfondsLast' : 'FolderWithoutSubfonds'
+                    }
+                }
+        }
+    }
+
+    const onClick = () => {
+        setLocationOpen(!locationOpen)
+    }
+
+    const handleTreeNodeClick = (id) => {
+        onTreeNodeClick(id)
+    }
+
+    if (data) {
+        return (
+            <div className={style.LocationTree}>
+                <div className={isMobile ? `${style.Row} ${style.Mobile}` : style.Row}>
+                    <div className={style.Category}>{locationLabel[language]}</div>
+                    <div className={style.Value}>
+                        <Button
+                            text={locationButtonText[language]}
+                            onClick={onClick}
+                        />
+                    </div>
+                </div>
+                <Collapse isOpened={locationOpen} >
+                    <div className={isMobile ? `${style.Tree} ${style.Mobile}` : style.Tree}>
+                        {
+                            data.map((record, index) => (
+                                <TreeNode
+                                    onTreeNodeClick={handleTreeNodeClick}
+                                    key={index}
+                                    data={record}
+                                    selected={record['active']}
+                                    classType={getClassType(record, index+1 === data.length)}
+                                    open={true}
+                                    isMobile={isMobile}
+                                />
+                            ))
+                        }
+                    </div>
+                </Collapse>
+            </div>
+        )
+    } else {
+        return (
+            <div className={style.LocationTree}>
+                <Loader height={'200px'}/>
+            </div>
+        )
+    }
+}
+
+export default FindingAidsLocation

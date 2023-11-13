@@ -10,7 +10,7 @@ const NewMenu = dynamic(() => import('./NewMenu'), {
 /**
  * Header of the page.
  */
-const Header = () => {
+const Header = ({type='normal'}) => {
     return (
         <div className={style.Header}>
             <div className={style.HeaderContent}>
@@ -20,7 +20,7 @@ const Header = () => {
                     </div>
                 </a>
                 <div className={style.SearchBar}>
-                    <SearchBar />
+                    <SearchBar type={type}/>
                 </div>
                 <div className={style.Menu}>
                     <NewMenu />

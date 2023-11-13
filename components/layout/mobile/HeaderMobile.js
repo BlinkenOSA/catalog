@@ -8,7 +8,7 @@ import MenuMobile from "./MenuMobile";
 /**
  * Header of the page.
  */
-const HeaderMobile = () => {
+const HeaderMobile = ({type='normal'}) => {
     const { totalUniqueItems } = useCart();
 
     return (
@@ -29,7 +29,7 @@ const HeaderMobile = () => {
                     </div>
                 </div>
                 <div className={style.SearchBar}>
-                    <SearchBarMobile />
+                    <SearchBarMobile type={type} />
                 </div>
             </div>
         </React.Fragment>

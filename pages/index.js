@@ -101,12 +101,12 @@ const Index = ({data, badgeData, newIsadData}) => {
                             (className, renderChildren) => {
                                 return renderChildren ?
                                     <BreadcrumbSearchMobile
+                                        defaultFacetOpen={'primary_type'}
                                         total={data ? data['response']['numFound'] : 0}
                                         reference={ref}
                                         inverse={false}
                                         module={''}
                                         onSelectFacetGroup={onSelectFacetGroup}
-                                        isMobile={true}
                                     /> : '';
                             }
                         }
@@ -120,7 +120,6 @@ const Index = ({data, badgeData, newIsadData}) => {
                                         reference={ref}
                                         inverse={false}
                                         module={''}
-                                        isMobile={false}
                                     /> : '';
                             }
                         }
@@ -144,6 +143,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                                     <React.Fragment>
                                         <BreadcrumbSearchMobile
                                             reference={ref}
+                                            defaultFacetOpen={'primary_type'}
                                             total={data ? data['response']['numFound'] : 0}
                                             inverse={true}
                                             module={''}
@@ -155,6 +155,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                                             breadcrumbHeight={height}
                                             facets={data ? data['facet_counts']['facet_fields'] : {}}
                                             total={data ? data['response']['numFound'] : 0}
+                                            selectedFacetGroupInitial={selectedFacetGroup}
                                             onShowButtonClick={onShowButtonClick}
                                         />
                                     </React.Fragment> : '';

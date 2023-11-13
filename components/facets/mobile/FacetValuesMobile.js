@@ -1,6 +1,5 @@
 import cssStyle from "./FacetValuesMobile.module.scss";
 import FacetSearchMobile from "./FacetSearchMobile";
-import {facetConfig} from "../../../config/facetConfig";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {useDeepCompareEffect, useWindowSize} from "react-use";
 import { VariableSizeList as List } from 'react-window';
@@ -15,8 +14,9 @@ import { FiInfo } from 'react-icons/fi';
  * @param {Object} params.selectedFacetValues The selected facet values.
  * @param {function} params.onFacetActionClick The handler of facet value change.
  */
-const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues,
-                      onFacetActionClick, onFacetInfoClick, type}) => {
+const FacetValuesMobile = ({facetConfig, facetValues, selectedFacetGroup, selectedFacetValues,
+                      onFacetActionClick, onFacetInfoClick, type, facetPageType}) => {
+
     const [facetValuesOriginal, setFacetValuesOriginal] = useState([])
     const [facetValuesDisplay, setFacetValuesDisplay] = useState([])
     const [facetValueClicked, setFacetValueClicked] = useState('')
@@ -131,7 +131,7 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
                         {facet['value']} <span className={cssStyle.Count}>({facet['number']})</span>
                     </div>
                 </div>
-                { facet['wiki_id'] !== '' &&
+                { (facet['wiki_id'] !== '' || facetConfig[selectedFacetGroup]['type'] === 'series') &&
                     <div onClick={() => {onFacetInfoClick(facet)}}
                         className={cssStyle.InfoButton}>
                         <FiInfo />
@@ -147,7 +147,7 @@ const FacetValuesMobile = ({facetValues, selectedFacetGroup, selectedFacetValues
             {facetConfig[selectedFacetGroup]['search'] && <FacetSearchMobile onSearch={handleSearch}/>}
             <List
                 ref={listRef}
-                height={Math.min(400, 40 * facetValuesDisplay.length + 2)}
+                height={Math.min(400, 40 * (facetValuesDisplay.length === 1 ? 2 : facetValuesDisplay.length) + 2)}
                 itemCount={facetValuesDisplay.length}
                 itemSize={getRowHeight}
                 width={'100%'}

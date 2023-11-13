@@ -7,7 +7,7 @@ import {createParams} from "../../../utils/urlParamFunctions";
 /**
  * Search bar in the header.
  */
-const SearchBar = () => {
+const SearchBar = ({type}) => {
     const router = useRouter();
     const {query, limit, offset, ...selectedFacets} = router.query;
 
@@ -24,7 +24,7 @@ const SearchBar = () => {
     const handleSearch = () => {
         if (searchValue && searchValue.trim() !== '') {
             router.replace({
-                pathname: '/',
+                pathname: type === 'gallery' ? '/image-gallery' : '/',
                 query: createParams(searchValue, limit, offset, selectedFacets),
             }, undefined, {shallow: false});
         }
@@ -39,7 +39,7 @@ const SearchBar = () => {
     return (
         <div className={style.SearchBox}>
             <input
-                placeholder={'Search the catalog...'}
+                placeholder={type === 'gallery' ? 'Search the images...' : 'Search the catalog...'}
                 className={style.SearchInput}
                 value={searchValue || ''}
                 onKeyDown={handleKeyDown}

@@ -1,0 +1,202 @@
+@import "../../../../../../../styles/variables";
+
+.PDFViewerFullScreen {
+  flex: 1;
+  overflow: hidden;
+  border-top: $border-width solid $black;
+  height: 100%;
+
+  :global .rpv-core__inner-page {
+    background-color: $button-background;
+  }
+}
+
+.PDFViewer {
+  flex: 1;
+  overflow: hidden;
+  border-top: $border-width solid $black;
+  height: 464px;
+
+  :global .rpv-core__inner-page {
+    background-color: $button-background;
+  }
+}
+
+.ToolBarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 35px;
+  border-top: $border-width solid $black;
+  font-family: "Suisse Intl Condensed", serif;
+  font-size: 12px;
+  background-color: $background;
+
+  .ToolBar {
+    align-items: center;
+    display: flex;
+    height: 100%;
+
+    .Divider {
+      background-color: $black;
+      width: 2px;
+      height: 70%;
+    }
+
+    .PageInputBox {
+      :global .rpv-core__textbox {
+        border: 1px solid $button-background;
+        border-radius: 0;
+        height: 25px;
+        width: 50px;
+        text-align: center;
+      }
+    }
+  }
+
+  .Button {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border-radius: 13px;
+    margin: 0 5px;
+    background-color: $black;
+    color: $white;
+
+    &:hover {
+      color: $black;
+      background-color: $yellow;
+    }
+  }
+
+  .Button.Disabled {
+    background-color: $button-background;
+    pointer-events: none;
+  }
+
+  .ZoomIn {
+    &::after {
+      content: ' ';
+      position: absolute;
+      width:25px;
+      height:25px;
+      background: linear-gradient(#FFF 0 0), linear-gradient(#FFF 0 0);
+      background-position:center;
+      background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+      background-repeat:no-repeat;
+
+    }
+
+    &:hover::after {
+      background: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+      background-position:center;
+      background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+      background-repeat:no-repeat;
+    }
+  }
+
+  .ZoomOut {
+    &::after {
+      content: ' ';
+      position: absolute;
+      width:25px;
+      height:25px;
+      background: linear-gradient(#FFF 0 0);
+      background-position:center;
+      background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+      background-repeat:no-repeat;
+
+    }
+
+    &:hover::after {
+      background: linear-gradient(#000 0 0);
+      background-position:center;
+      background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+      background-repeat:no-repeat;
+    }
+  }
+
+  .Previous {
+    &::after, &::before {
+      position: relative;
+      content: "";
+      display: block;
+      box-sizing: border-box;
+    }
+
+    &::after {
+      width: 8px;
+      height: 8px;
+      border-bottom: 1px solid;
+      border-left: 1px solid;
+      transform: rotate(45deg);
+      top: 8px;
+      left: 5px;
+    }
+
+    &::before {
+      width: 16px;
+      height: 1px;
+      top: 12px;
+      left: 5px;
+      background: currentColor;
+    }
+
+    &:hover::after {
+      border-bottom: 1px solid $black;
+      border-left: 1px solid $black;
+    }
+
+    &:hover::before {
+      background: $black;
+    }
+  }
+
+  .Next {
+    &::after, &::before {
+      content: "";
+      display: block;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    &::after {
+      width: 8px;
+      height: 8px;
+      border-top: 1px solid;
+      border-right: 1px solid;
+      transform: rotate(45deg);
+      top: 8px;
+      left: 12px;
+    }
+
+    &::before {
+      width: 16px;
+      height: 1px;
+      top: 12px;
+      left: 4px;
+      background: currentColor
+    }
+
+    &:hover::after {
+      border-top: 1px solid $black;
+      border-right: 1px solid $black;
+    }
+
+    &:hover::before {
+      background: $black;
+    }
+  }
+
+  .FullScreen {
+    font-size: 18px;
+    display: flex;
+    line-height: 31px;
+    text-align: center;
+
+    span {
+      flex: 1;
+      height: 100%;
+    }
+  }
+}

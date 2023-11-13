@@ -1,12 +1,12 @@
 import style from "./ImageHeader.module.scss"
 import Button from "../../search/parts/Button";
 
-const ImageHeader = ({data}) => {
+const ImageHeader = ({data, isMobile=false}) => {
   const renderData = () => {
     const metadata = data['response']['docs'][0]
 
     return (
-      <div className={style.MetadataWrapper}>
+      <div className={isMobile ? `${style.MetadataWrapper} ${style.Mobile}` : style.MetadataWrapper}>
         <div style={{flex: 1}}>
           <div className={style.Data}>{metadata['reference_code']}</div>
           <div className={style.Data}>{metadata['title']}</div>

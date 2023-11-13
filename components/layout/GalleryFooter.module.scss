@@ -1,0 +1,71 @@
+@import "../../styles/variables";
+
+.Footer {
+  width: 100%;
+  background-color: $form-background;
+  font-family: 'Suisse Intl Condensed', serif;
+  font-weight: 400;
+  font-size: 17px;
+  border-top: 1px solid $black;
+  color: $black;
+
+  .FooterInstiution {
+    display: block;
+    padding: 15px;
+  }
+
+  .FooterContent {
+    display: flex;
+    gap: 5px;
+    padding: 0 15px;
+
+    ul {
+      flex: 1;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+
+      li {
+        color: $black;
+        margin-bottom: 15px;
+      }
+    }
+
+    .Menu {
+      flex: 1;
+      align-self: center;
+      margin-left: 30px;
+
+      a {
+        text-decoration: none;
+        align-self: flex-end;
+
+        &:last-child {
+          .Badge {
+            margin-bottom: 0;
+          }
+        }
+
+        .Badge {
+          width: fit-content;
+          font-size: 17px;
+          font-family: "Suisse Intl", serif;
+          font-weight: 300;
+          padding: 0 20px;
+          color: $black;
+          background-color: $white;
+          border-radius: 200px;
+          transition: 0.1s;
+          margin-bottom: 10px;
+          border: $border-width solid $black;
+
+          &:hover {
+            cursor: pointer;
+            color: $black;
+            background-color: $yellow;
+          }
+        }
+      }
+    }
+  }
+}
