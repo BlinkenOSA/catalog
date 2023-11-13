@@ -54,6 +54,16 @@
     align-items: center;
     margin-bottom: 10px;
 
+    &.Mobile {
+      align-items: flex-start;
+      flex-direction: column;
+
+      .Identifier {
+        flex: 1;
+        width: unset;
+      }
+    }
+
     .Identifier {
       width: 200px;
     }
@@ -64,6 +74,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.Mobile {
+    flex-direction: column;
+  }
 
   .UnitButton {
     height: 25px;
@@ -99,6 +113,11 @@
   align-items: center;
   margin-bottom: 10px;
 
+  &.Mobile {
+    display: block;
+    margin-bottom: 20px;
+  }
+
   div {
     width: 200px;
     display: flex;
@@ -118,6 +137,11 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+
+  &.Mobile {
+    align-items: unset;
+    flex-direction: column;
+  }
 
   .Badges {
     width: 300px

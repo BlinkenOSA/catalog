@@ -6,7 +6,6 @@ import Organization from "./parts/Organization";
 import Identifiers from "./parts/Identifiers";
 import Request from "./parts/Request";
 import Search from "./parts/Search";
-import Pages from "./parts/Pages";
 import Record from "./parts/Record";
 
 const HelpPage = ({defaultSelected, isMobile}) => {
@@ -14,13 +13,12 @@ const HelpPage = ({defaultSelected, isMobile}) => {
     const [drawerOpen, setDrawerOpen] = useState(false)
 
     const helpMenuItems = [
-        {key: 'catalog', label: 'What is in the catalog?'},
-        {key: 'organisation', label: 'How are the materials organized?'},
-        {key: 'identifiers', label: 'How records are identified?'},
-        {key: 'request', label: 'Request and access rights'},
-        {key: 'search', label: 'Search & filter'},
-        {key: 'record', label: 'Opening a record'},
-        {key: 'pages', label: 'Other pages in the catalog'},
+        {key: 'catalog', label: 'Blinken OSA Archivum’s Catalog'},
+        {key: 'organisation', label: 'Organization of Records'},
+        {key: 'identifiers', label: 'Identifying records'},
+        {key: 'request', label: 'Request and access'},
+        {key: 'search', label: 'Refining your search'},
+        {key: 'record', label: 'Interpreting your search results'},
         {key: 'terminology', label: 'Terminology'},
     ]
 
@@ -47,21 +45,19 @@ const HelpPage = ({defaultSelected, isMobile}) => {
     const renderContent = () => {
         switch (selectedQuestion) {
             case 'catalog':
-                return <Catalog />
+                return <Catalog isMobile={isMobile}/>
             case 'organisation':
-                return <Organization />
+                return <Organization isMobile={isMobile}/>
             case 'terminology':
-                return <Terminology />
+                return <Terminology isMobile={isMobile} />
             case 'identifiers':
-                return <Identifiers />
+                return <Identifiers isMobile={isMobile}/>
             case 'request':
-                return <Request />
+                return <Request isMobile={isMobile} />
             case 'search':
-                return <Search />
+                return <Search isMobile={isMobile} />
             case 'record':
-                return <Record />
-            case 'pages':
-                return <Pages />
+                return <Record isMobile={isMobile} />
             default:
                 break;
         }

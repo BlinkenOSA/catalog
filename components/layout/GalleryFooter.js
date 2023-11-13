@@ -31,9 +31,9 @@ const GalleryFooter = () => {
                                 Privacy Policy
                             </li>
                         </a>
-                        <a href={'/info'}>
+                        <a href={'/researchers-guide'}>
                             <li className={style.Badge}>
-                                Help
+                                Researcher's Guide
                             </li>
                         </a>
                     </ul>

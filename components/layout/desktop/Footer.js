@@ -35,9 +35,9 @@ const Footer = () => {
                                 Privacy Policy
                             </li>
                         </a>
-                        <a href={'/help'}>
+                        <a href={'/researchers-guide'}>
                             <li className={style.Badge}>
-                                Help
+                                Researcher's Guide
                             </li>
                         </a>
                     </ul>

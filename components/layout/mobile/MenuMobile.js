@@ -28,7 +28,7 @@ const MenuMobile = () => {
                     <a href={'/registration'}>Researcher Registration</a>
                     <a href={'/requests'}>{totalUniqueItems > 0 ? `Requests (${totalUniqueItems})` : 'Requests'}</a>
                     <a href={'/privacy-policy'}>Privacy Policy</a>
-                    <a href={'/help'}>Help</a>
+                    <a href={'/researchers-guide'}>Researcher's Guide</a>
                 </div>
                 <div style={{flex: 1}}></div>
             </div>

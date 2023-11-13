@@ -9,16 +9,16 @@ export const getStaticProps = async () => {
     return { props: {data: {defaultSelected: 'catalog'}}}
 }
 
-const Help = ({data}) => {
+const ResearchersGuide = ({data}) => {
     return (
         <Layout>
             <Head>
-                <title>Blinken OSA Archivum - Help</title>
+                <title>Blinken OSA Archivum - Researcher's Guide</title>
             </Head>
             <Media lessThan="md">
                 <div className={`${style.Page} ${style.Mobile}`}>
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
-                        <h1>Help</h1>
+                        <h1>Researcher's Guide</h1>
                     </div>
                     <HelpPage isMobile={true} defaultSelected={''} />
                 </div>
@@ -26,7 +26,7 @@ const Help = ({data}) => {
             <Media greaterThanOrEqual="md">
                 <div className={style.Page}>
                     <div className={style.PageTitle}>
-                        <h1>Help</h1>
+                        <h1>Researcher's Guide</h1>
                     </div>
                     <HelpPage defaultSelected={data['defaultSelected']} />
                 </div>
@@ -35,4 +35,4 @@ const Help = ({data}) => {
     )
 }
 
-export default Help
+export default ResearchersGuide

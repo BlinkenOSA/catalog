@@ -2,7 +2,7 @@ import React from 'react';
 import style from "./styles.module.scss"
 
 
-const Identifiers = () => {
+const Identifiers = ({isMobile}) => {
     return (
         <React.Fragment>
             <div className={style.Title}>Identifiying archival records</div>
@@ -13,7 +13,7 @@ const Identifiers = () => {
                 the following scheme for archival material:
               </p>
               <p>
-                Let's see an example of the following archival record:
+                Take for example the following archival record:
               </p>
               <p style={{textAlign: 'center'}}>
                 <a href={'/catalog/KxYz0dP9'}>
@@ -25,31 +25,31 @@ const Identifiers = () => {
                   consists of the following parts:
               </p>
               <p>
-                <div className={style.IdentifierParts}>
+                <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA</div>
                   <div style={{flex: 1}}>Identifier suffix consisting of the country code of Hungary (HU) and the institutional abbreviation
-                    of Blinken OSA.</div>
+                    of Blinken OSA Archivum.</div>
                 </div>
-                <div className={style.IdentifierParts}>
+                <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331</div>
                   <div style={{flex: 1}}>Fonds number. The name of the fonds: Interviews Relating to Chernobyl</div>
                 </div>
-                <div className={style.IdentifierParts}>
+                <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0</div>
                   <div style={{flex: 1}}>Subfonds number.</div>
                 </div>
-                <div className={style.IdentifierParts}>
+                <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0-2</div>
                   <div style={{flex: 1}}>Series number. The name of the series: Interviews with Chernobyl Survivors</div>
                 </div>
-                <div className={style.IdentifierParts}>
+                <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0-2:7</div>
                   <div style={{flex: 1}}>Container number. The 7th container of the series. In this case the original containers were VHS tapes.</div>
                 </div>
-                <div className={style.IdentifierParts}>
+                <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0-2:7/2</div>
                   <div style={{flex: 1}}>Folder or item number. These are the smallest archival units. In this case, since these are programs
-                  on a VHS tape, this refers to the 2nd recording on that particular tape.</div>
+                  on VHS tape, this refers to the 2nd recording on that particular tape.</div>
                 </div>
               </p>
             </div>
@@ -60,7 +60,7 @@ const Identifiers = () => {
                 letters and numbers used to identify an item and to facilitate storage and retrieval.
               </p>
               <p>
-                As an example, see the book record:
+                See, for example, the book record:
               </p>
               <p style={{textAlign: 'center'}}>
                 <a href={'/catalog/PYJaKbXD'}>Lenin : a biography [1948] by Shub, David</a><br/>
@@ -74,7 +74,7 @@ const Identifiers = () => {
                 the suffix 'FL Record' and a unique number.
               </p>
               <p>
-                As an example, see the documentary film:
+                For example, see the documentary film:
               </p>
               <p style={{textAlign: 'center'}}>
                 <a href={'/catalog/yovKPWX7'}>100 Flowers Hidden Deep</a><br/>

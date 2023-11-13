@@ -4,6 +4,7 @@ import { useCart } from "react-use-cart";
 import Image from "next/image";
 import {motion} from "framer-motion";
 import {useRouter} from "next/router";
+import {PiQuestionThin} from "react-icons/pi";
 
 /**
  * Top right static menu
@@ -42,7 +43,13 @@ const NewMenu = () => {
                         <div className={style.Text}>Digital Image Gallery</div>
                     </li>
                 </a>
-                <a href={'/requests'} style={{zIndex: 4}}>
+                <a href={'/researchers-guide'} style={{zIndex: 4}}>
+                    <li className={getClass('/researchers-guide')}>
+                        <div className={style.Image}><PiQuestionThin size={20}/></div>
+                        <div className={style.Text}>Researcher's Guide</div>
+                    </li>
+                </a>
+                <a href={'/requests'} style={{zIndex: 5}}>
                     <li className={getClass('/requests')} style={{borderRight: "1px solid #FFF"}}>
                         <div className={style.Image}>
                             <Image src="/icons/Cart.svg" height={15} width={15} />
