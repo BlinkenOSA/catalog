@@ -20,19 +20,19 @@ const HeaderMobile = dynamic(() => import("./mobile/HeaderMobile"), {
 const Layout = ({children}) => {
     return (
         <React.Fragment>
-            <Media lessThan="md">
-                <HeaderMobile />
-                <div className={style.ContentWrapMobile}>
-                    {children}
-                </div>
-                <FooterMobile />
-            </Media>
             <Media greaterThanOrEqual="md">
                 <Header />
                 <div className={style.ContentWrap}>
                     {children}
                 </div>
                 <Footer />
+            </Media>
+            <Media lessThan="md">
+              <HeaderMobile />
+              <div className={style.ContentWrapMobile}>
+                {children}
+              </div>
+              <FooterMobile />
             </Media>
         </React.Fragment>
     )

@@ -73,19 +73,19 @@ const Index = ({data, badgeData, newIsadData}) => {
     if (data.length === 0) {
         return (
             <>
-                <Media lessThan="md">
-                    <IndexPageMobile
-                        badgeData={badgeData}
-                        newIsadData={newIsadData}
-                        onSelectFacetGroup={onSelectFacetGroup}
-                    />
-                </Media>
                 <Media greaterThanOrEqual="md">
                     <IndexPageDesktop
                         badgeData={badgeData}
                         newIsadData={newIsadData}
                         onSelectFacetGroup={onSelectFacetGroup}
                     />
+                </Media>
+                <Media lessThan="md">
+                  <IndexPageMobile
+                    badgeData={badgeData}
+                    newIsadData={newIsadData}
+                    onSelectFacetGroup={onSelectFacetGroup}
+                  />
                 </Media>
             </>
         )
@@ -96,21 +96,6 @@ const Index = ({data, badgeData, newIsadData}) => {
                     <Head>
                         <title>Blinken OSA Archivum - Catalog</title>
                     </Head>
-                    <Media lessThan="md">
-                        {
-                            (className, renderChildren) => {
-                                return renderChildren ?
-                                    <BreadcrumbSearchMobile
-                                        defaultFacetOpen={'primary_type'}
-                                        total={data ? data['response']['numFound'] : 0}
-                                        reference={ref}
-                                        inverse={false}
-                                        module={''}
-                                        onSelectFacetGroup={onSelectFacetGroup}
-                                    /> : '';
-                            }
-                        }
-                    </Media>
                     <Media greaterThanOrEqual="md">
                         {
                             (className, renderChildren) => {
@@ -123,6 +108,21 @@ const Index = ({data, badgeData, newIsadData}) => {
                                     /> : '';
                             }
                         }
+                    </Media>
+                    <Media lessThan="md">
+                      {
+                        (className, renderChildren) => {
+                          return renderChildren ?
+                            <BreadcrumbSearchMobile
+                              defaultFacetOpen={'primary_type'}
+                              total={data ? data['response']['numFound'] : 0}
+                              reference={ref}
+                              inverse={false}
+                              module={''}
+                              onSelectFacetGroup={onSelectFacetGroup}
+                            /> : '';
+                        }
+                      }
                     </Media>
                     <SearchPage
                         data={data}

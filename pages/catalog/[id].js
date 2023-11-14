@@ -159,16 +159,6 @@ const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarch
             <Head>
                 <title>Blinken OSA Archivum - Catalog</title>
             </Head>
-            <Media lessThan="md">
-                <BreadcrumbSearchMobile
-                    reference={ref}
-                    inverse={false}
-                    module={'detail'}
-                />
-                <div className={`${style.Page} ${style.Mobile}`}>
-                    {renderPage(true)}
-                </div>
-            </Media>
             <Media greaterThanOrEqual="md">
                 <BreadcrumbSearch
                     reference={ref}
@@ -179,7 +169,16 @@ const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarch
                     {renderPage(false)}
                 </div>
             </Media>
-
+            <Media lessThan="md">
+                <BreadcrumbSearchMobile
+                  reference={ref}
+                  inverse={false}
+                  module={'detail'}
+                />
+                <div className={`${style.Page} ${style.Mobile}`}>
+                    {renderPage(true)}
+                </div>
+            </Media>
         </Layout>
     )
 }

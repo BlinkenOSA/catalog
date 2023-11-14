@@ -55,6 +55,10 @@
 
     &:focus {
       background-color: $black;
+
+      &:hover {
+        background-color: $yellow;
+      }
     }
   }
 }

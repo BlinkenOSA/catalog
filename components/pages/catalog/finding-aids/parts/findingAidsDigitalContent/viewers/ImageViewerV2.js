@@ -77,7 +77,7 @@ const ImageViewerV2 = ({id, isGallery = false, isMobile=false}) => {
     }
 
     return (
-        <div id={`imageviewer-${id}`} className={isGallery ? `${style.ImageViewerWrapper} ${style.Gallery}` : style.ImageViewerWrapper}>
+        <div id={isMobile ? `imageviewer-mobile-${id}` : `imageviewer-desktop-${id}`} className={isGallery ? `${style.ImageViewerWrapper} ${style.Gallery}` : style.ImageViewerWrapper}>
             <Viewer iiifContent={iiifContent} options={options} />
             <div className={style.Loader}><Loader /></div>
         </div>
