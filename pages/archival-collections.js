@@ -39,6 +39,7 @@ const ArchivalCollections = ({data}) => {
                         <h1>Archival Collections</h1>
                     </div>
                     <CollectionPage
+                        initialTheme={1}
                         showArchiveUnitDrawer={true}
                         data={data}
                     />

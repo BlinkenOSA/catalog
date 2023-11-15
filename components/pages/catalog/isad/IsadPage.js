@@ -54,7 +54,9 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
                     activeUnit={getActiveUnit()}
                     data={hierarchy}
                     language={language}
-                    isMobile={isMobile}/>
+                    isMobile={isMobile}
+                    initialTheme={0}
+                />
             case 'folders':
                 return <IsadContentPage
                     seriesID={ams_id}

@@ -9,12 +9,12 @@ import {useRouter} from "next/router";
 /**
  * Page responsible for displaying the hierarchical list of archival collections.
  */
-const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer = false, isMobile}) => {
+const CollectionPage = ({data, activeUnit, activeUnitID, showArchiveUnitDrawer = false, initialTheme, isMobile}) => {
     const router = useRouter();
 
     const [openNodes, setOpenNodes] = useState([]);
     const [selectedArchivalUnit, setSelectedArchivalUnit] = useState(0)
-    const [theme, setTheme] = useState(isMobile ? 0 : 1)
+    const [theme, setTheme] = useState(isMobile ? 0 : initialTheme)
 
     useEffect(() => {
         if (activeUnit && activeUnitID) {
