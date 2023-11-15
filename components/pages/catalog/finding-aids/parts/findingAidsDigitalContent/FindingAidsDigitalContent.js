@@ -14,13 +14,16 @@ const VideoViewer = dynamic(() => import("./viewers/VideoViewer"), {
 });
 
 const FindingAidsDigitalContent = ({id, data, isMobile}) => {
+    const identifier = data['access_copies'].map(ac => ac['identifier'])[0]
+    const fileNames = data['access_copies'].map(ac => ac['filename'])
+
     switch (data['primary_type']) {
         case 'Still Image':
             return <ImageViewer id={id} isMobile={isMobile} />
         case 'Textual':
             return <PDFViewer
-                archivalReferenceCode={data['archival_reference_code']}
-                id={data['digital_version_identifier']}
+                identifier={identifier}
+                fileNames={fileNames}
                 isMobile={isMobile} />
         case 'Moving Image':
             return <VideoViewer

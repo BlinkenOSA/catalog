@@ -1,4 +1,4 @@
-import getURL from "../../../../../../utils/digitalObjectFunctions";
+import {getURL} from "../../../../../../utils/digitalObjectFunctions";
 
 const IsadThumbnail = ({record}) => {
     const archivalReferenceCode = record['call_number']

@@ -2,15 +2,11 @@ const generateSeriesCodeFromReferenceCode = (referenceCode) => {
     return referenceCode.substring(0, referenceCode.indexOf(':'))
 }
 
-const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) => {
+export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) => {
     let storageURL = '';
     let extension = '';
 
     switch (type) {
-        case 'Textual':
-            storageURL = 'https://storage.osaarchivum.org/catalog/textual'
-            extension = 'pdf'
-            break;
         case 'Moving Image':
             storageURL = 'https://storage.osaarchivum.org/catalog/video'
             extension = 'm3u8'
@@ -28,18 +24,28 @@ const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) => {
         extension = 'jpg'
     }
 
-    const seriesCode = generateSeriesCodeFromReferenceCode(archivalID).replaceAll(' ', '_')
+    const seriesCode = generateSeriesCodeFromReferenceCode(archivalID)
+        .replaceAll(' ', '_')
+        .replaceAll('-', '_')
 
-    if (type === 'Still Image') {
-        if (isThumbnail) {
-            const urlComponent = encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`);
-            return `${storageURL}/${urlComponent}/full/150,/0/default.jpg`
-        } else {
-            return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
-        }
-    } else {
-        return `${storageURL}/${seriesCode}/${digitalVersionID}.${extension}`
+    switch (type) {
+        case 'Textual':
+            return getPdfURL(digitalVersionID, `${digitalVersionID}.jpg`)
+        case 'Still Image':
+            if (isThumbnail) {
+                const urlComponent = encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`);
+                return `${storageURL}/${urlComponent}/full/150,/0/default.jpg`
+            } else {
+                return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
+            }
+        default:
+            return `${storageURL}/${seriesCode}/${digitalVersionID}.${extension}`
     }
 }
 
-export default getURL;
+export const getPdfURL = (identifier, fileName) => {
+    const storageURL = 'https://storage.osaarchivum.org/catalog/textual'
+    const tokens = identifier.split("_").slice(0, 5);
+
+    return `${storageURL}/${tokens.join("_")}/${fileName}`
+}

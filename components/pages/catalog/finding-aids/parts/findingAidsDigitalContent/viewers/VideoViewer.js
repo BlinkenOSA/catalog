@@ -1,4 +1,4 @@
-import getURL from "../../../../../../../utils/digitalObjectFunctions";
+import {getURL} from "../../../../../../../utils/digitalObjectFunctions";
 import '@vime/core/themes/default.css';
 import {
     Player,

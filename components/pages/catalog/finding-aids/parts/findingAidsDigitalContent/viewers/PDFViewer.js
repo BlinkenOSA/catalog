@@ -3,13 +3,13 @@ import { toolbarPlugin } from '@react-pdf-viewer/toolbar';
 import style from "./PDFViewer.module.scss"
 import React, {useState} from "react";
 import { BiFullscreen, BiExitFullscreen } from 'react-icons/bi';
-import getURL from '../../../../../../../utils/digitalObjectFunctions';
+import {getPdfURL, getURL} from '../../../../../../../utils/digitalObjectFunctions';
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/full-screen/lib/styles/index.css';
 
 
-const PDFViewer = ({archivalReferenceCode, id}) => {
+const PDFViewer = ({identifier, fileNames}) => {
     const [fullScreen, setFullScreen] = useState(false)
 
     const toolbarPluginInstance = toolbarPlugin({
@@ -125,7 +125,7 @@ const PDFViewer = ({archivalReferenceCode, id}) => {
             </div>
             <div className={fullScreen ? `${style.PDFViewerFullScreen}`: style.PDFViewer}>
                 <Viewer
-                    fileUrl={getURL(archivalReferenceCode, id, 'Textual')}
+                    fileUrl={getPdfURL(identifier, fileNames[0])}
                     plugins={[
                         toolbarPluginInstance
                     ]}
