@@ -70,7 +70,11 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 						return parse(elementHighlight[`${field}_search_en`].join())
 					}
 				}
-				return rec[`${field}_original`] ? parse(rec[`${field}_original`]) : parse(rec[field])
+				if (rec[`${field}_original`]) {
+					return parse(rec[`${field}_original`])
+				} else {
+					return rec[field] ? parse(rec[field]) : rec[field]
+				}
 			}
 		}
 
