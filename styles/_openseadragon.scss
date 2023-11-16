@@ -7,3 +7,24 @@ div.fullpage {
     }
   }
 }
+
+div.clover-iiif {
+  div.clover-canvases {
+    div {
+      div {
+        div {
+          background-color: $disabled-label;
+
+          button {
+            display: unset;
+            background-color: $black;
+          }
+        }
+
+        button {
+          display: none;
+        }
+      }
+    }
+  }
+}

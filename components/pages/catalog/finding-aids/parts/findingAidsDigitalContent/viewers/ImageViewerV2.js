@@ -76,9 +76,21 @@ const ImageViewerV2 = ({id, isGallery = false, isMobile=false}) => {
         canvasHeight: getCanvasHeight(),
     }
 
+    const customTheme = {
+        colors: {
+            accent: "#000",
+            accentMuted: "#F8F8F8",
+            accentAlt: "#808080"
+        },
+        font: {
+            sans: "'Suisse Intl', serif",
+            display: "'Suisse Intl', serif",
+        }
+    }
+
     return (
         <div id={isMobile ? `imageviewer-mobile-${id}` : `imageviewer-desktop-${id}`} className={isGallery ? `${style.ImageViewerWrapper} ${style.Gallery}` : style.ImageViewerWrapper}>
-            <Viewer iiifContent={iiifContent} options={options} />
+            <Viewer iiifContent={iiifContent} options={options} customTheme={customTheme} />
             <div className={style.Loader}><Loader /></div>
         </div>
     )
