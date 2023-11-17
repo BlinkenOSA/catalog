@@ -64,8 +64,8 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
             case 'scope_and_content_narrative_original':
             case 'archival_history':
             case 'archival_history_original':
-            case 'system_of_arrangement':
-            case 'system_of_arrangement_original':
+            case 'system_of_arrangement_information':
+            case 'system_of_arrangement_information_original':
             case 'administrative_history':
             case 'administrative_history_original':
             case 'physical_characteristics':
