@@ -70,6 +70,8 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
             case 'administrative_history_original':
             case 'physical_characteristics':
             case 'physical_characteristics_original':
+            case 'note':
+            case 'note_original':
                 return parse(record[fieldName])
             default:
                 return renderValue(record[fieldName])

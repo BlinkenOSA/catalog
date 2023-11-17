@@ -47,6 +47,8 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
             case 'physical_description_original':
             case 'physical_condition':
             case 'physical_condition_original':
+            case 'note':
+            case 'note_original':
                 return parse(record[fieldName])
             case 'duration':
                 let d = []
