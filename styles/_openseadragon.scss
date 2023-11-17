@@ -9,6 +9,34 @@ div.fullpage {
 }
 
 div.clover-iiif {
+  div[role="radiogroup"] {
+    button[type="button"] {
+      figcaption {
+        span {
+          font-family: "Suisse Intl", serif;
+          font-size: 14px;
+        }
+      }
+    }
+
+    button[aria-checked="true"] {
+      figure {
+        div:before {
+          font-family: "Suisse Intl Condensed", serif;
+        }
+      }
+    }
+
+    button[data-state="checked"] {
+      figcaption {
+        span {
+          font-weight: 800;
+        }
+      }
+    }
+  }
+
+
   div.clover-canvases {
     div {
       div {
@@ -18,6 +46,10 @@ div.clover-iiif {
           button {
             display: unset;
             background-color: $black;
+          }
+
+          span {
+            font-family: "Suisse Intl Condensed", serif;
           }
         }
 
