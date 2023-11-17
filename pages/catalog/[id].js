@@ -10,6 +10,7 @@ import IsadPage from "../../components/pages/catalog/isad/IsadPage";
 import LibraryPage from "../../components/pages/catalog/library/LibraryPage";
 import FindingAidsPage from "../../components/pages/catalog/finding-aids/FindingAidsPage";
 import {Buffer} from "buffer";
+import DigitalRepositoryPage from "../../components/pages/digital-repository/DigitalRepositoryPage";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
@@ -21,6 +22,23 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
+
+    if (id.includes('osa:')) {
+        return {
+            props: {
+                solrData: {
+                    response: {
+                        docs: [
+                            {
+                                id: id,
+                                record_origin: 'Digital Repository'
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    }
 
     // Fetch data from solr
     const solrParams = new URLSearchParams({
@@ -148,6 +166,8 @@ const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarch
                           isMobile={isMobile}
                         />
                     }
+                case 'Digital Repository':
+                    return <DigitalRepositoryPage id={record['id']} />
                 default:
                     return '';
             }

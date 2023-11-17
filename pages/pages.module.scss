@@ -94,3 +94,38 @@
     }
   }
 }
+
+.Placeholder {
+  width: 40%;
+  margin: 0 auto 20px auto;
+  border: 1px solid $black;
+  height: 200px;
+  background-color: $form-background;
+  display: flex;
+  align-items: center;
+
+  .PlaceholderText {
+    flex: 1;
+    text-align: center;
+    font-family: "Suisse Intl Condensed", serif !important;
+    font-size: 50px !important;
+    font-weight: 400 !important;
+    text-transform: uppercase;
+    color: $button-background
+  }
+}
+
+.PlaceholderParagraph {
+  text-align: center;
+  width: 60%;
+  margin: 0 auto;
+  font-size: 20px !important;
+}
+
+.Button {
+  text-align: center;
+
+  div {
+    padding: 0 10px !important;
+  }
+}
