@@ -130,7 +130,7 @@ const Content = {
                 'EN': 'Physical Condition',
                 'HU': 'Fizikai Állapot'
             },
-            field: 'physical_description',
+            field: 'physical_condition',
             bilingual: true,
             link: {}
         },

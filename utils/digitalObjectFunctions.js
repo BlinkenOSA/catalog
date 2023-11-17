@@ -16,7 +16,7 @@ export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) 
             extension = 'mp3'
             break;
         case 'Still Image':
-            storageURL = 'https://iiif.osaarchivum.org/iiif/2'
+            storageURL = 'https://iiif2.osaarchivum.org/iiif/2'
             extension = 'jpg'
     }
 

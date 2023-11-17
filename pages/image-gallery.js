@@ -81,7 +81,8 @@ const ImageGallery = ({initialData}) => {
 	return (
 		<GalleryLayout>
 			<Head>
-				<title>Blinken OSA Archivum - Image Gallery</title>
+				<title>Blinken OSA Archivum - Digital Image Gallery</title>
+
 			</Head>
 			<Media lessThan="md">
 				<BreadcrumbSearchMobile
