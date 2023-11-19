@@ -10,15 +10,7 @@ import {initialValues, submitData, validationSchema} from "../registrationFuncit
 import {howDoYouKnowOptions, occupationOptions, occupationTypeOptions, publishOptions} from "../options";
 import {useAlert} from "react-alert";
 import {useRouter} from "next/router";
-import * as Yup from "yup";
 
-const validation = Yup.object().shape({
-  first_name: Yup.string().required('Required'),
-  last_name: Yup.string().required('Required'),
-  agree_archival_materials_usage: Yup.boolean().oneOf([true], 'You should accept the conditions'),
-  agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement"),
-  // captcha: Yup.string().required('Required!')
-})
 
 const RegistrationForm = () => {
     const alert = useAlert()
@@ -29,7 +21,7 @@ const RegistrationForm = () => {
             <div className={style.Form}>
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={validation}
+                    validationSchema={validationSchema}
                     onSubmit={(values, actions) => {
                       submitData(values, actions, router, alert)
                     }}
