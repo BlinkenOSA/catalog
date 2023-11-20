@@ -51,17 +51,22 @@ const CartForm = ({isMobile = false}) => {
         )
     })
 
-    const handleSubmit = (values, {resetForm}) => {
+    const handleSubmit = (values, {resetForm, setErrors}) => {
+        const a = alert.show(`Submitting request...`);
         setIsSubmitting(true)
         return axios.post(
-          `${API}request/`,
-          values
+            `${API}request/`,
+            values
         ).then(res => {
-          const {data} = res;
-          setIsSubmitting(false)
-          emptyCart();
-          resetForm();
-          alert.show(`Request successful! Please check your mailbox for confirmation!`);
+            const {data} = res;
+            setIsSubmitting(false)
+            emptyCart();
+            resetForm();
+            alert.show(`Request successful! Please check your mailbox for confirmation!`);
+        }).catch((error) => {
+            alert.remove(a)
+            setIsSubmitting(false)
+            setErrors(error.response.data)
         })
     }
 
