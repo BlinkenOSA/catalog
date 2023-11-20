@@ -7,7 +7,6 @@ const InputField = ({ field, form, label, required, subLabel, ...props }) => {
 
     const errors = getIn(form.errors, name)
     const touched = getIn(form.touched, name)
-    console.log(errors)
 
     return (
         <div className={style.Field}>

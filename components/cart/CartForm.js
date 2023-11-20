@@ -8,6 +8,7 @@ import CaptchaField from "../form/CaptchaField";
 import axios from "axios";
 import {useAlert} from "react-alert";
 import dynamic from "next/dynamic";
+import {useState} from "react";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
@@ -16,8 +17,10 @@ const CartList = dynamic(() => import('./CartList'), {
 })
 
 const CartForm = ({isMobile = false}) => {
-    const {isEmpty, items} = useCart();
+    const {isEmpty, items, emptyCart} = useCart();
     const alert = useAlert()
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     const isWeekday = (date) => {
         const day = date.getDay();
@@ -36,18 +39,29 @@ const CartForm = ({isMobile = false}) => {
         captcha: Yup.string().required('Required'),
         items: Yup.array().of(
             Yup.object().shape({
-                volume: Yup.string().required('Required')
+                id: Yup.string(),
+                origin: Yup.string(),
+                type: Yup.string(),
+                volume: Yup.string()
+                    .when('primary_type', {
+                        is: 'Continuing Resource',
+                        then: Yup.string().required('Required')
+                    })
             })
         )
     })
 
-    const handleSubmit = (values, actions) => {
+    const handleSubmit = (values, {resetForm}) => {
+        setIsSubmitting(true)
         return axios.post(
           `${API}request/`,
           values
         ).then(res => {
-          const {data} = res
-          alert.show(`Request successful!`);
+          const {data} = res;
+          setIsSubmitting(false)
+          emptyCart();
+          resetForm();
+          alert.show(`Request successful! Please check your mailbox for confirmation!`);
         })
     }
 
@@ -102,7 +116,7 @@ const CartForm = ({isMobile = false}) => {
                             />
                             {!isEmpty && <CaptchaField/>}
                             <div className={style.SubmitButtonWrapper}>
-                                <button className={style.FormButton} type="submit" disabled={isEmpty}>
+                                <button className={style.FormButton} type="submit" disabled={isEmpty || isSubmitting}>
                                     Send Request
                                 </button>
                             </div>
