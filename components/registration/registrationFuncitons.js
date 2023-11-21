@@ -36,10 +36,14 @@ export const initialValues = {
     agree_researcher_statement: false
 }
 
-export const submitData = (formData, actions, router, alert) => {
+export const submitData = (formData, actions, router, alert, setIsSubmitting) => {
     if (formData.hasOwnProperty('publish')) {
         formData['publish'] = formData['publish'] === 'Yes'
     }
+
+    const submitting = alert.show('Submitting registration data...')
+
+    setIsSubmitting(true)
 
     return axios.post(
         `${API}register-researcher/`,
@@ -47,13 +51,15 @@ export const submitData = (formData, actions, router, alert) => {
     )
     .then(res => {
         const {data} = res
+        alert.remove(submitting)
         alert.show(`Registration successful!`);
-        setTimeout(function () {
-            router.push('/requests')
-        }, 2000);
+        actions.resetForm();
+        setIsSubmitting(false)
     })
     .catch((error) => {
         const {status, statusText, data} = error.response
+        setIsSubmitting(false)
+        alert.remove(submitting)
         if (data && data.hasOwnProperty('message')) {
             alert.show(`${status} ${statusText} - ${data['message']}`);
         } else {

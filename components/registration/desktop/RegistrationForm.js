@@ -10,11 +10,14 @@ import {initialValues, submitData, validationSchema} from "../registrationFuncit
 import {howDoYouKnowOptions, occupationOptions, occupationTypeOptions, publishOptions} from "../options";
 import {useAlert} from "react-alert";
 import {useRouter} from "next/router";
+import {useState} from "react";
 
 
 const RegistrationForm = () => {
     const alert = useAlert()
     const router = useRouter();
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     return (
         <div className={style.RegistrationFormWrapper}>
@@ -23,7 +26,7 @@ const RegistrationForm = () => {
                     initialValues={initialValues}
                     validationSchema={validationSchema}
                     onSubmit={(values, actions) => {
-                      submitData(values, actions, router, alert)
+                      submitData(values, actions, router, alert, setIsSubmitting)
                     }}
                 >
                     {({values}) => (
@@ -180,13 +183,11 @@ const RegistrationForm = () => {
                                     </span>
                                 </CheckboxField>
                                 <div className={style.SubmitButtonWrapper}>
-                                    <button type="submit">Register</button>
+                                    <button type="submit" disabled={isSubmitting}>Register</button>
                                 </div>
-                                <a href={'/forgot-card-number'}>
                                   <div className={style.SubmitButtonWrapper} style={{marginTop: '10px'}}>
                                     <button type="button" className={style.ForgotButton} >Forgot Card Number</button>
                                   </div>
-                                </a>
                                 <CaptchaField />
                             </div>
                         </Form>
