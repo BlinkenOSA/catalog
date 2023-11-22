@@ -1,0 +1,264 @@
+@import "../../../styles/variables";
+
+.ContentWrapper {
+  display: flex;
+
+  .Collections {
+      flex: 1;
+      font-family: "Suisse Intl Condensed", serif;
+      font-weight: 400;
+      font-size: 18px;
+      align-self: flex-start;
+      min-height: calc(100vh - (#{$header-height} + #{$page-title-height} + #{$footer-height} - 1px));
+      border-right: 1px solid $black;
+
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
+      min-height: 35px;
+      border-bottom: $border-width solid $black;
+      font-size: 16px;
+      line-height: 35px;
+      display: flex;
+      align-items: center;
+
+      span {
+        flex: 1;
+        display: inline-block;
+        padding-left: 10px;
+      }
+
+      div {
+        width: 30px;
+      }
+
+      .Button {
+        position: relative;
+        top: 17px;
+        right: -10px;
+        width: 30px;
+        height: 30px;
+        transform: translate(-50%, -50%) rotate(0deg);
+        cursor: pointer;
+        z-index: 1;
+        transition: 0.8s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 1px;
+          width: 50%;
+          background: $black;
+        }
+
+        &:before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          height: 50%;
+          width: 1px;
+          background: $black;
+        }
+      }
+    }
+
+    li:hover {
+      cursor: pointer;
+      color: $white;
+      background-color: $black;
+
+      .Button {
+        &:after {
+          background: $white;
+        }
+
+        &:before {
+          background: $white;
+        }
+      }
+    }
+
+    li.Selected {
+      color: $black;
+      background-color: $yellow;
+
+      .Button {
+        &:after {
+          background: $black;
+        }
+
+        &:before {
+          width: 0;
+          background: $black;
+        }
+      }
+    }
+
+    li:last-child {
+      border-bottom: unset;
+    }
+  }
+
+  .Content {
+      position: sticky;
+      position: -webkit-sticky;
+      top: $header-height;
+      flex: 1;
+      align-self: flex-start;
+
+      &.Mobile {
+        border-top: 1px solid $black;
+      }
+
+      .Description {
+        font-family: "Suisse Intl", serif;
+        font-weight: 400;
+        font-size: 16px;
+        padding: 20px 20px 5px 20px;
+        text-align: left;
+        border-bottom: 1px solid $black;
+      }
+
+      .InfoGraphHeader {
+        display: flex;
+        border-bottom: 1px solid $black;
+
+        .BookBackground {
+          flex: 1;
+          background-color: $background;
+          min-height: 150px;
+          display: flex;
+          justify-content: flex-end;
+
+          .Book {
+            flex: 1;
+            height: 100%;
+            border-left: 1px solid $black;
+            max-width: 20px;
+            background-color: $background;
+            transition: 0.2s ease;
+
+            &.Active {
+              background-color: $form-background;
+            }
+
+            &:first-child {
+              border-left: unset;
+            }
+          }
+        }
+
+        .TitleWrap {
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border-right: 1px solid $black;
+          flex: 1;
+
+          .Title {
+            text-align: center;
+            font-family: "Suisse Intl Condensed", serif;
+            font-size: 18px;
+            font-weight: 400;
+          }
+
+          .NumberOfItems {
+            font-family: "Suisse Intl Mono", serif;
+            font-weight: 400;
+            font-size: 12px;
+          }
+        }
+      }
+  }
+
+  .ButtonWrapper {
+    text-align: center;
+    margin-top: 20px;
+
+    .Badge {
+      width: fit-content;
+      font-size: 14px;
+      font-family: "Suisse Intl", serif;
+      font-weight: 300;
+      padding: 10px 20px;
+      color: $white;
+      background-color: $black;
+      border-radius: 200px;
+      text-transform: uppercase;
+      transition: 0.1s;
+      margin: 10px auto 20px auto;
+
+      &:hover {
+        cursor: pointer;
+        color: $black;
+        background-color: $yellow;
+      }
+    }
+  }
+}
+
+.MobileInfoWrapper {
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  background-color: $background;
+  position: fixed;
+  z-index: 20;
+  transition: left 0.5s ease;
+  overflow-y: scroll;
+
+  &.Closed {
+    left: -100vw;
+  }
+
+  .CloseButton {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    color: $black;
+    z-index: 100;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      background-color: $black;
+      left: 0;
+    }
+
+    span:nth-child(1) {
+      top: 10px;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      top: 10px;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}

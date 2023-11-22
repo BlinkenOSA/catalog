@@ -1,5 +1,5 @@
 import style from './LibraryCollectionDrawer.module.scss'
-import {libraryCollections} from "../libraryCollections";
+import {libraryCollections} from "../../../../config/libraryCollections";
 
 const LibraryCollectionDrawer = ({open, collectionID, onClose, isMobile}) => {
     const renderContent = () => {
