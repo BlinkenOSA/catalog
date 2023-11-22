@@ -1,13 +1,12 @@
 import Layout from "../components/layout/Layout";
 import Head from "next/head";
 import style from "./pages.module.scss";
-import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import React from "react";
 import { Media } from "../utils/media";
-import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import LibraryCollectionPage from "../components/pages/library-collections/LibraryCollectionPage";
 import {makeSolrParams} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
+import LibraryCollectionPageV2 from "../components/pages/library-collections/LibraryCollectionPageV2";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 
@@ -47,7 +46,7 @@ const LibrarySpecialCollections = ({data}) => {
                     <div className={`${style.PageTitle} ${style.Mobile}`}>
                         <h1>Library Special Collections</h1>
                     </div>
-                    <LibraryCollectionPage data={libraryCollectionsFacet} total={total} isMobile={true} />
+                    <LibraryCollectionPageV2 data={libraryCollectionsFacet} total={total} isMobile={true} />
                 </div>
             </Media>
             <Media greaterThanOrEqual="md">
@@ -55,7 +54,7 @@ const LibrarySpecialCollections = ({data}) => {
                     <div className={style.PageTitle}>
                         <h1>Library Special Collections</h1>
                     </div>
-                    <LibraryCollectionPage data={libraryCollectionsFacet} total={total} />
+                    <LibraryCollectionPageV2 data={libraryCollectionsFacet} total={total} />
                 </div>
             </Media>
         </Layout>
