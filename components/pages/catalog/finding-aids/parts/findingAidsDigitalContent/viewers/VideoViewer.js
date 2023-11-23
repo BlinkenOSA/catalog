@@ -1,4 +1,4 @@
-import {getURL} from "../../../../../../../utils/digitalObjectFunctions";
+import {getURL, getVideoURL} from "../../../../../../../utils/digitalObjectFunctions";
 import '@vime/core/themes/default.css';
 import {
     Player,
@@ -17,7 +17,7 @@ import {
 } from '@vime/react';
 import style from "./VideoViewer.module.scss"
 
-const VideoViewer = ({archivalReferenceCode, id, isMobile}) => {
+const VideoViewer = ({identifier, isMobile}) => {
     return (
         <div className={isMobile ? `${style.VideoViewer} ${style.Mobile}` : style.VideoViewer}>
             <div className={style.VideoPlayer}>
@@ -27,7 +27,7 @@ const VideoViewer = ({archivalReferenceCode, id, isMobile}) => {
                 >
                     <Hls version="latest">
                         <source
-                            data-src={getURL(archivalReferenceCode, id, "Moving Image")}
+                            data-src={getVideoURL(identifier)}
                             type="application/x-mpegURL"
                         />
                     </Hls>

@@ -27,8 +27,7 @@ const FindingAidsDigitalContent = ({id, data, isMobile}) => {
                 isMobile={isMobile} />
         case 'Moving Image':
             return <VideoViewer
-                archivalReferenceCode={data['archival_reference_code']}
-                id={data['digital_version_identifier']}
+                identifier={identifier}
                 isMobile={isMobile} />
         case 'Audio':
             return <VideoViewer
