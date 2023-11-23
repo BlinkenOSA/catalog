@@ -77,9 +77,10 @@ export async function getServerSideProps(context) {
                     }
                 }
             case 'Archives':
-                const {ams_id} = record;
-                if (record['primary_type'] === 'Archival Unit') {
+                const { tab } = context.query;
+                const { ams_id } = record;
 
+                if (record['primary_type'] === 'Archival Unit') {
                     const statsParams = new URLSearchParams({
                         q: `${record['description_level'].toLowerCase()}_id:${ams_id}`
                     })
@@ -99,7 +100,8 @@ export async function getServerSideProps(context) {
                             solrData,
                             metadata,
                             hierarchy,
-                            insights
+                            insights,
+                            defaultTab: tab ? tab : null
                         }
                     }
                 } else {
@@ -129,7 +131,7 @@ export async function getServerSideProps(context) {
     } }
 }
 
-const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarchy, insights}) => {
+const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarchy, insights, defaultTab}) => {
     const [ref] = useMeasure();
 
     const renderPage = (isMobile) => {
@@ -157,7 +159,9 @@ const CatalogPage = ({solrData, libraryData, filmLibraryData, metadata, hierarch
                           metadata={metadata}
                           hierarchy={hierarchy}
                           insights={insights}
-                          isMobile={isMobile}/>
+                          defaultTab={defaultTab}
+                          isMobile={isMobile}
+                        />
                     } else {
                         return <FindingAidsPage
                           solrData={record}

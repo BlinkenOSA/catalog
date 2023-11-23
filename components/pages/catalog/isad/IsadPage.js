@@ -8,13 +8,21 @@ import CollectionPage from "../../collections/CollectionPage";
 import IsadContentPage from "./tabs/IsadContentPage";
 import isadTabConfig from "./config/isadTabConfig";
 import InsightsPage from "./tabs/InsightsPage";
+import {useRouter} from "next/router";
+import {getURLAnchor, getURLWithoutAnchor} from "../../../../utils/urlAnchorFunctions";
 
 
-const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
+const IsadPage = ({solrData, metadata, hierarchy, insights, defaultTab='context', isMobile}) => {
     const { id, ams_id } = solrData;
-
     const [language, setLanguage] = useState('EN');
-    const [selectedView, setSelectedView] = useState('context')
+    const router = useRouter();
+
+    const detectDefaultView = () => {
+        const tabIndexes = ['context', 'hierarchy', 'statistics', 'content']
+        return tabIndexes.includes(defaultTab) ? defaultTab : 'context'
+    }
+
+    const [selectedView, setSelectedView] = useState(detectDefaultView())
 
     const getTitle = () => {
         if (language === 'EN') {
@@ -67,6 +75,16 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
         }
     }
 
+    const handleTabClick = (tab) => {
+        setSelectedView(tab)
+        router.push({
+            pathname: getURLWithoutAnchor(router.asPath, router.query),
+            query: {
+                tab: tab
+            }
+        }, '', {shallow: true})
+    }
+
     const renderTabName = (tab) => {
         return isadTabConfig[tab].hasOwnProperty(language) ? isadTabConfig[tab][language] : isadTabConfig[tab]['EN']
     }
@@ -98,25 +116,25 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, isMobile}) => {
                 </div>
                 <div className={isMobile ? `${style.Tabs} ${style.Mobile}` : style.Tabs}>
                     <div
-                        onClick={() => setSelectedView('context')}
+                        onClick={() => handleTabClick('context')}
                         className={selectedView === 'context' ? style.Active : ''}>
                         {renderTabName('context')}
                     </div>
                     <div
-                        onClick={() => setSelectedView('hierarchy')}
+                        onClick={() => handleTabClick('hierarchy')}
                         className={selectedView === 'hierarchy' ? style.Active : ''}>
                         {renderTabName('hierarchy')}
                     </div>
                     <div
-                      onClick={() => setSelectedView('insights')}
-                      className={selectedView === 'insights' ? style.Active : ''}>
+                      onClick={() => handleTabClick('statistics')}
+                      className={selectedView === 'statistics' ? style.Active : ''}>
                         {renderTabName('insights')}
                     </div>
                     {
                         metadata['description_level'] === 'Series' &&
                         <div
-                            onClick={() => setSelectedView('folders')}
-                            className={selectedView === 'folders' ? style.Active : ''}>
+                            onClick={() => handleTabClick('content')}
+                            className={selectedView === 'content' ? style.Active : ''}>
                             {isMobile ? renderTabName('folders-mobile') : renderTabName('folders')}
                         </div>
                     }
