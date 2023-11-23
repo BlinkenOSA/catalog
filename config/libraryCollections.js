@@ -31,9 +31,9 @@ export const libraryCollections = [
         'description': 'Alfred A. Reisch (1931-2013) was a political scientist. His books reflect his interest in international relations, diplomatic and Cold War history, foreign, military, national security, and minority affairs.'
     }, {
         'label': 'HU OSA 318 - Donation of the International Helsinki Federation for Human Rights',
-        'description': ''
+        'description': 'The library of IHF reflects the topics and geographical diversity of the archival records. In addition to general reference works and monographs it contains plenty of yearbooks, regional and institutional reports, and other ephemera.'
     }, {
-        'label': 'HU OSA 361 - Donation of Hegedüs András',
+        'label': 'HU OSA 361 - Donation of András Hegedüs',
         'description': 'András Hegedüs (1922-1999) was a Hungarian politician and sociologist, who served as Chairman of the Council of Ministers from 1955 to 1956. A series of multilingual publications shows the diversity of his research interest in Cold War history, the structure of socialist society, and sociology.'
     }, {
         'label': 'HU OSA 368 - Donation of István Kemény',
