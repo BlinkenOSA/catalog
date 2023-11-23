@@ -79,6 +79,13 @@ const IndexPage = ({isMobile=false}) => {
                                     Researcher Registration
                                 </motion.li>
                             </a>
+                            <a href={'/researchers-guide'}>
+                                <motion.li
+                                    variants={menuItemVariants}
+                                    className={style.Badge}>
+                                    Researcher's Guide
+                                </motion.li>
+                            </a>
                             <a href={'privacy-policy'}>
                                 <motion.li
                                   variants={menuItemVariants}
