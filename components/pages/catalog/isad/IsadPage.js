@@ -52,7 +52,7 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, defaultTab='context'
                     data={metadata}
                     language={language}
                     isMobile={isMobile}/>
-            case 'insights':
+            case 'statistics':
                 return <InsightsPage
                     data={insights}
                 />
@@ -65,7 +65,7 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, defaultTab='context'
                     isMobile={isMobile}
                     initialTheme={0}
                 />
-            case 'folders':
+            case 'content':
                 return <IsadContentPage
                     seriesID={ams_id}
                     language={language}
