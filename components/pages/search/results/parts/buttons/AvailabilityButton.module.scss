@@ -9,6 +9,9 @@
     .Barcode {
       padding-left: 10px;
       border-left: 1px solid $white;
+      -webkit-user-select: all; /* Safari */
+      -ms-user-select: all; /* IE 10 and IE 11 */
+      user-select: all; /* Standard syntax */
     }
   }
 }
