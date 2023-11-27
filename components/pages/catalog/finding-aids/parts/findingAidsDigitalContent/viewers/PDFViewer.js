@@ -132,7 +132,7 @@ const PDFViewer = ({identifier, fileNames}) => {
                     theme={{
                         theme: 'dark',
                     }}
-                    defaultScale={SpecialZoomLevel.PageFit}
+                    defaultScale={SpecialZoomLevel.ActualSize}
                 />
             </div>
         </div>
