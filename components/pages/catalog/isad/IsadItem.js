@@ -112,7 +112,7 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
                     exists = true
                 }
             } else {
-                if (record[fieldName] !== "" && record[fieldName] !== null) {
+                if (record[fieldName] !== "" && record[fieldName] !== null && record[fieldName] !== "<p></p>") {
                     exists = true
                 }
             }
