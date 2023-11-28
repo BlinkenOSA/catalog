@@ -4,7 +4,7 @@ import Button from "../../../parts/Button";
 const AvailabilityButton = ({record}) => {
     const renderDigitalVersionButton = () => (
         <div className={style.DigitalVersion}>
-            <span className={style.Label}>Digital Version Available</span>
+            <span className={style.Label}>Available digitally</span>
             <span className={style.Barcode}>{record['digital_version_barcode']}</span>
         </div>
     )
