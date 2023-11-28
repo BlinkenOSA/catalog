@@ -69,6 +69,7 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, defaultTab='context'
                 return <IsadContentPage
                     seriesID={ams_id}
                     language={language}
+                    originalLocale={metadata['original_locale']}
                     isMobile={isMobile}/>
             default:
                 return ''

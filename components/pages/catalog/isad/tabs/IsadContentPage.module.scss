@@ -102,6 +102,11 @@
     flex: 1;
     padding: 10px 10px 10px 0;
 
+    .TitleAndDescriptionWrapper {
+      display: flex;
+      gap: 20px;
+    }
+
     .Title {
       font-family: "Suisse Works", serif;
       font-size: 16px;

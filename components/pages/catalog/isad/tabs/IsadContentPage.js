@@ -16,7 +16,7 @@ import parse from "html-react-parser";
 import filterPlaceholders from "./config/filterPlaceholders";
 import AccessRightsButton from "../../../search/parts/AccessRightsButton";
 
-const IsadContentPage = ({seriesID, language, isMobile}) => {
+const IsadContentPage = ({seriesID, language, originalLocale, isMobile}) => {
 	const { inCart } = useCart();
 
 	const [filterOpen, setFilterOpen] = useState(false);
@@ -45,8 +45,8 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 	const highlights = data?.[0]?.['highlighting']
 
 	const renderData = (rec, lang='EN') => {
-		const getHighlightedField = (field) => {
-			if (lang === 'EN') {
+		const getHighlightedField = (field, lng = lang) => {
+			if (lng === 'EN') {
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
 					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
@@ -60,8 +60,8 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 			} else {
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
-					if (elementHighlight.hasOwnProperty(`${field}_search_${lang.toLowerCase()}`)) {
-						return parse(elementHighlight[`${field}_search_${lang.toLowerCase()}`].join())
+					if (elementHighlight.hasOwnProperty(`${field}_search_${lng.toLowerCase()}`)) {
+						return parse(elementHighlight[`${field}_search_${lng.toLowerCase()}`].join())
 					}
 					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
 						return parse(elementHighlight[`${field}_search_general`].join())
@@ -86,30 +86,78 @@ const IsadContentPage = ({seriesID, language, isMobile}) => {
 			}
 		}
 
-		return (
-			<div>
-				<a href={`/catalog/${rec['id']}`}>
-					<div className={style.Title}>
-						{getHighlightedField('title')}
-						{rec['date_created'] && `, ${rec['date_created']}`}
+		const detectSecondLanguage = () => {
+			return originalLocale !== null && rec['title_original']
+		}
+
+		if (isMobile) {
+			return (
+				<div>
+					<a href={`/catalog/${rec['id']}`}>
+						<div className={style.Title}>
+							{getHighlightedField('title')}
+							{rec['date_created'] && `, ${rec['date_created']}`}
+						</div>
+					</a>
+					<div className={style.Description}>
+						{ getHighlightedField('contents_summary') }
 					</div>
-				</a>
-				<div className={style.Description}>
-					{ getHighlightedField('contents_summary') }
+					<div className={style.Info}>
+						{ rec['info'] }
+						{ getNotes() }
+					</div>
+					<div className={style.Buttons}>
+						{isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
+						<AvailabilityButton record={rec} />
+						<AccessRightsButton record={rec} />
+						<div className={style.Divider} />
+						<PrimaryTypeButton primaryType={rec['primary_type']} />
+					</div>
 				</div>
-				<div className={style.Info}>
-					{ rec['info'] }
-					{ getNotes() }
+			)
+		} else {
+			return (
+				<div>
+					<div className={style.TitleAndDescriptionWrapper}>
+						<div style={{flex: 1}}>
+							<a href={`/catalog/${rec['id']}`}>
+								<div className={style.Title}>
+									{getHighlightedField('title', 'EN')}
+									{rec['date_created'] && `, ${rec['date_created']}`}
+								</div>
+							</a>
+							<div className={style.Description}>
+								{ getHighlightedField('contents_summary', 'EN') }
+							</div>
+						</div>
+						{ detectSecondLanguage() &&
+							<div style={{flex: 1}}>
+								<a href={`/catalog/${rec['id']}`}>
+									<div className={style.Title}>
+										{getHighlightedField('title', originalLocale)}
+										{rec['date_created'] && `, ${rec['date_created']}`}
+									</div>
+								</a>
+								<div className={style.Description}>
+									{getHighlightedField('contents_summary', originalLocale)}
+								</div>
+							</div>
+						}
+					</div>
+					<div className={style.Info}>
+						{ rec['info'] }
+						{ getNotes() }
+					</div>
+					<div className={style.Buttons}>
+						{isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
+						<AvailabilityButton record={rec} />
+						<AccessRightsButton record={rec} />
+						<div className={style.Divider} />
+						<PrimaryTypeButton primaryType={rec['primary_type']} />
+					</div>
 				</div>
-				<div className={style.Buttons}>
-					{isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
-					<AvailabilityButton record={rec} />
-					<AccessRightsButton record={rec} />
-					<div className={style.Divider} />
-					<PrimaryTypeButton primaryType={rec['primary_type']} />
-				</div>
-			</div>
-		)
+			)
+		}
 	}
 
 	const onFilter = (filter, value) => {
