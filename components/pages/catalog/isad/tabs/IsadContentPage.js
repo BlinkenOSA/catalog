@@ -87,7 +87,7 @@ const IsadContentPage = ({seriesID, language, originalLocale, isMobile}) => {
 		}
 
 		const detectSecondLanguage = () => {
-			return originalLocale !== null && rec['title_original']
+			return originalLocale !== null && rec['title_original']  && rec['contents_summary_original']
 		}
 
 		if (isMobile) {
@@ -123,6 +123,9 @@ const IsadContentPage = ({seriesID, language, originalLocale, isMobile}) => {
 							<a href={`/catalog/${rec['id']}`}>
 								<div className={style.Title}>
 									{getHighlightedField('title', 'EN')}
+									{
+										rec['title_original'] && ` (${getHighlightedField('title_original', 'EN')})`
+									}
 									{rec['date_created'] && `, ${rec['date_created']}`}
 								</div>
 							</a>
