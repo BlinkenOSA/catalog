@@ -64,6 +64,10 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
             return ''
         }
 
+        if (result['digital_version_online']) {
+            return ''
+        }
+
         return (
             <CartButton
                 inCart={inCart(result['id'])}

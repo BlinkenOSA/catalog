@@ -70,11 +70,14 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                     <div className={isMobile ? `${style.HeaderData} ${style.Mobile}` : style.HeaderData}>
                         { getTitle(metadata) }
                         <div className={style.Buttons}>
-                            <CartButton
-                                record={solrData}
-                                inCart={inCart(id)}
-                                name={id}
-                            />
+                            {
+                                !solrData['digital_version_online'] &&
+                                <CartButton
+                                    record={solrData}
+                                    inCart={inCart(id)}
+                                    name={id}
+                                />
+                            }
                             {
                               metadata['original_locale'] !== null &&
                               <LanguageButton

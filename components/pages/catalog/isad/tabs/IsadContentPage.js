@@ -107,7 +107,7 @@ const IsadContentPage = ({seriesID, language, originalLocale, isMobile}) => {
 						{ getNotes() }
 					</div>
 					<div className={style.Buttons}>
-						{isMobile && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
+						{isMobile && !rec['digital_version_online'] && <CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />}
 						<AvailabilityButton record={rec} />
 						<AccessRightsButton record={rec} />
 						<div className={style.Divider} />
@@ -218,9 +218,12 @@ const IsadContentPage = ({seriesID, language, originalLocale, isMobile}) => {
 			} else {
 				return (
 					<div className={isBoxRow(rec, index) ? style.Record : `${style.Record} ${style.InContainer}`} key={index}>
-						<div className={style.CartButton}>
-							<CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />
-						</div>
+						{
+							!rec['digital_version_online'] &&
+							<div className={style.CartButton}>
+								<CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />
+							</div>
+						}
 						<a href={`/catalog/${rec['id']}`}>
 							<div className={style.CallNumber}>
 								{renderThumbnail(rec)}
