@@ -13,6 +13,10 @@ const VideoViewer = dynamic(() => import("./viewers/VideoViewer"), {
     ssr: false
 });
 
+const AudioPlayer = dynamic(() => import("./viewers/AudioPlayer"), {
+    ssr: false
+});
+
 const FindingAidsDigitalContent = ({id, data, isMobile}) => {
     const identifier = data['access_copies'].map(ac => ac['identifier'])[0]
     const fileNames = data['access_copies'].map(ac => ac['filename'])
@@ -30,9 +34,9 @@ const FindingAidsDigitalContent = ({id, data, isMobile}) => {
                 identifier={identifier}
                 isMobile={isMobile} />
         case 'Audio':
-            return <VideoViewer
-                archivalReferenceCode={data['archival_reference_code']}
-                id={data['digital_version_identifier']}
+            return <AudioPlayer
+                data={data}
+                identifier={identifier}
                 isMobile={isMobile} />
     }
 }

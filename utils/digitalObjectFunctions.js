@@ -54,6 +54,17 @@ export const getVideoURL = (identifier, isThumbnail=false) => {
     }
 }
 
+export const getAudioURL = (identifier, isThumbnail=false) => {
+    const storageURL = 'https://storage.osaarchivum.org/catalog/audio'
+    const tokens = identifier.split("_").slice(0, 5);
+
+    if (isThumbnail) {
+        return `${storageURL}/${tokens.join("_")}/${identifier}.jpg`
+    } else {
+        return `${storageURL}/${tokens.join("_")}/${identifier}.mp3`
+    }
+}
+
 export const getPdfURL = (identifier, fileName, isThumbnail=false) => {
     const storageURL = 'https://storage.osaarchivum.org/catalog/textual'
     const tokens = identifier.split("_").slice(0, 5);

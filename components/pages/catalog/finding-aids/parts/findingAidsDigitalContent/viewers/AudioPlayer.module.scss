@@ -1,0 +1,72 @@
+@import "../../../../../../../styles/variables";
+
+.AudioViewer {
+  border-top: $border-width solid $black;
+  background-color: $form-background;
+  display: flex;
+  height: 200px;
+
+  .Thumbnail {
+    width: 200px;
+    border-right: 1px solid $black;
+  }
+
+  .PlayerWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .PlayerTop {
+      color: $black;
+      flex: 1;
+      height: 100px;
+      background-color: $form-background;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      padding: 10px;
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 18px;
+
+      .Title {
+
+      }
+    }
+
+    .AudioPlayer {
+      width: 100%;
+      margin: 0 auto;
+      height: 52px;
+    }
+  }
+
+  vm-player {
+    --vm-click-to-play-z-index: 999;
+    --vm-player-bg: #BFBFBFF;
+    --vm-player-border-radius: 0;
+    --vm-player-font-family: 'Suisse Intl', serif;
+    --vm-tooltip-bg: #000;
+    --vm-tooltip-font-size: 12px;
+    --vm-controls-bg: #BFBFBFF;
+    --vm-control-padding: 4px;
+    --vm-control-border-radius: 20px;
+    --vm-control-bg: #000;
+    --vm-control-icon-size: 17px;
+    --vm-control-focus-color: #000;
+    --vm-control-focus-bg: #FFEB42;
+    --vm-controls-border-radius: 0;
+    --vm-time-color: #000;
+    --vm-time-font-size: 12px;
+    --vm-tooltip-z-index: 999;
+    --vm-slider-value-color: #FFEB42;
+    --vm-slider-thumb-bg: #000;
+  }
+
+  &.Mobile {
+    height: 200px;
+
+    .AudioPlayer {
+      width: 100%;
+    }
+  }
+}

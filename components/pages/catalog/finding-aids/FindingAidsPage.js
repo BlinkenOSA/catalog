@@ -1,7 +1,7 @@
 import style from "./FindingAidsPage.module.scss";
 import PrimaryTypeButton from "../../search/parts/PrimaryTypeButton";
 import Loader from "../../../layout/Loader";
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import CartButton from "../../../cart/CartButton";
 import {useCart} from "react-use-cart";
 import AvailabilityButton from "../../search/results/parts/buttons/AvailabilityButton";
@@ -28,6 +28,24 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
     const metadataRef = useRef();
 
     const [language, setLanguage] = useState('EN');
+    const [digitalContentHeight, setDigitalContentHeight] = useState(0)
+
+    useEffect(() => {
+        switch(metadata['primary_type']) {
+            case 'Still Image':
+                setDigitalContentHeight(isMobile ? 300 : 500)
+                break;
+            case 'Textual':
+                setDigitalContentHeight(isMobile ? 300 : 500)
+                break;
+            case 'Moving Image':
+                setDigitalContentHeight(isMobile ? 300 : 400)
+                break;
+            case 'Audio':
+                setDigitalContentHeight(200)
+                break;
+        }
+    }, [])
 
     const getTitle = () => {
         if (language === 'EN') {
@@ -54,7 +72,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                 window.scrollTo({top: 203, behavior: "smooth"})
                 break;
             case 'metadata':
-                window.scrollTo({top: 705, behavior: "smooth"})
+                window.scrollTo({top: 203 + digitalContentHeight, behavior: "smooth"})
                 break;
         }
     }
@@ -101,7 +119,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                             !isMobile &&
                             <PageNavigation primaryType={solrData['primary_type']} onSelect={handleSelectSection}/>
                         }
-                        <div ref={digitalContentRef} className={style.DigitalContent} style={isMobile ? {minHeight: 300} : {minHeight: 400}}>
+                        <div ref={digitalContentRef} className={style.DigitalContent} style={{minHeight: {digitalContentHeight}}}>
                             <FindingAidsDigitalContent id={id} data={metadata} isMobile={isMobile}/>
                         </div>
                     </React.Fragment>
