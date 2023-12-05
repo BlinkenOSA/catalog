@@ -11,35 +11,10 @@ import CartButton from "../../../cart/CartButton";
 import { useCart } from "react-use-cart";
 import SearchHighglights from "./parts/SearchHighglights";
 import AccessRightsButton from "../parts/AccessRightsButton";
+import ResultThumbnail from "../parts/ResultThumbnail";
 
 const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
     const { inCart } = useCart();
-
-    const renderThumbnail = () => {
-        switch (result['record_origin']) {
-            case 'Library':
-                return (
-                  <div className={style.ResultItemThumbnail}>
-                      {
-                          result['thumbnail'] &&
-                          <a href={`/catalog/${result['id']}`}>
-                              <div>
-                                  <img
-                                    alt={`Book cover of ${result['title']}`}
-                                    style={{maxHeight: '220px', maxWidth: '200px'}}
-                                    src={`${result['thumbnail']}`}
-                                  />
-                              </div>
-                          </a>
-                      }
-                  </div>
-                )
-            case 'Archives':
-                return '';
-            default:
-                break;
-        }
-    }
 
     const renderAvailabilityButton = () => {
         if (result['primary_type'] !== 'Archival Unit') {
@@ -123,7 +98,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                     </div>
                 </div>
             </div>
-            {!isMobile && renderThumbnail()}
+            <ResultThumbnail record={result} isMobile={isMobile} />
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import {getPdfURL, getURL, getVideoURL} from "../../../../../../utils/digitalObjectFunctions";
+import style from "./IsadThumbnail.module.scss";
 
-const IsadThumbnail = ({record}) => {
+const IsadThumbnail = ({record, isMobile=false}) => {
     const archivalReferenceCode = record['call_number']
 
     const getThumbnailURL = () => {
@@ -16,13 +17,29 @@ const IsadThumbnail = ({record}) => {
         }
     }
 
+    const getIconClass = () => {
+        switch(record['primary_type']) {
+            case 'Textual':
+            case 'Still Image':
+                return style.Textual;
+            case 'Moving Image':
+                return style.MovingImage;
+            case 'Audio':
+                return style.MovingImage;
+        }
+    }
+
     return (
         <div style={{paddingBottom: '10px'}}>
-            <img
-                width={150}
-                alt={'thumbnail'}
-                src={getThumbnailURL()}
-            />
+            <div className={isMobile ? `${style.Thumbnail} ${style.Mobile}` : style.Thumbnail}>
+                <div className={getIconClass()}>
+                    <img
+                      width={isMobile ? 100 : 150}
+                      alt={'thumbnail'}
+                      src={getThumbnailURL()}
+                    />
+                </div>
+            </div>
         </div>
     )
 }
