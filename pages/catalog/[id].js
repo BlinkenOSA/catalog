@@ -22,28 +22,17 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 
 export async function getServerSideProps(context) {
     const { id } = context.params;
+    let solrParams;
 
     if (id.includes('osa:')) {
-        return {
-            props: {
-                solrData: {
-                    response: {
-                        docs: [
-                            {
-                                id: id,
-                                record_origin: 'Digital Repository'
-                            }
-                        ]
-                    }
-                }
-            }
-        }
+        solrParams = new URLSearchParams({
+            q: `guid:${id}`
+        })
+    } else {
+        solrParams = new URLSearchParams({
+            q: `id:${id}`
+        })
     }
-
-    // Fetch data from solr
-    const solrParams = new URLSearchParams({
-        q: `id:${id}`
-    })
 
     // SOLR Basic Authentication
     let headers = new Headers();
@@ -52,9 +41,22 @@ export async function getServerSideProps(context) {
     const res = await fetch(`${SOLR_API}?` + solrParams, {
         headers: headers
     })
+
+    if (!res.ok) {
+        return {
+            notFound: true
+        }
+    }
+
     const solrData = await res.json()
 
     if (solrData) {
+        if (solrData['response']['numFound'] === 0) {
+            return {
+                notFound: true
+            }
+        }
+
         const record = solrData['response']['docs'][0]
 
         switch (record['record_origin']) {
