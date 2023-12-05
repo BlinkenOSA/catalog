@@ -21,7 +21,7 @@ const ResultThumbnail = ({record, isMobile}) => {
 		switch(record['primary_type']) {
 			case 'Textual':
 			case 'Still Image':
-				return style.Textual;
+				return ''
 			case 'Moving Image':
 				return style.MovingImage;
 			case 'Audio':
