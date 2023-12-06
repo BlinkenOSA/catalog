@@ -1,6 +1,9 @@
 import axios from 'axios';
 import {processParams} from "./urlParamFunctions";
 import {facetConfig} from "../config/facetConfig";
+import {galleryFacetConfig} from "../config/galleryFacetConfig";
+import {base} from "next/dist/build/webpack/config/blocks/base";
+
 export const API = process.env.NEXT_PUBLIC_AMS_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 export const SOLR_FOLDERS_ITEMS_API = process.env.NEXT_PUBLIC_SOLR_FOLDERS_ITEMS;
@@ -18,8 +21,10 @@ export const fetcher = (url, params) => {
     ).then(res => res.data);
 };
 
-export const makeSolrParams = (params) => {
-    const {query, filterQuery, limit, offset, sort, qf, selectedFacets, selectedFacetsDates} = processParams(params)
+export const makeSolrParams = (params, type='normal') => {
+    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
+
+    const {query, filterQuery, limit, offset, sort, qf, cursorMark, selectedFacets, selectedFacetsDates} = processParams(params, type)
     let baseParams = new URLSearchParams();
 
     // Add query
@@ -29,8 +34,8 @@ export const makeSolrParams = (params) => {
     filterQuery && baseParams.append('fq', filterQuery)
 
     // Process facet filters
-    Object.keys(facetConfig).forEach(key => {
-        if (facetConfig[key]['type'] === 'date') {
+    Object.keys(fc).forEach(key => {
+        if (fc[key]['type'] === 'date') {
             if (selectedFacetsDates.hasOwnProperty(key)) {
                 let date = '';
                 if (Array.isArray(selectedFacetsDates[key])) {
@@ -79,23 +84,29 @@ export const makeSolrParams = (params) => {
         baseParams.append('qf', qf)
     }
 
+    if (cursorMark) {
+        baseParams.append('cursorMark', cursorMark)
+    }
+
     return baseParams
 }
 
 export const solrFetcher = (params) => {
     let solrAPI;
     const { solrCore } = params;
-
-    const solrParams = makeSolrParams(params);
+    let solrParams;
 
     switch (solrCore) {
         case 'folders-items':
+            solrParams = makeSolrParams(params);
             solrAPI = SOLR_FOLDERS_ITEMS_API
             break;
         case 'image-gallery':
+            solrParams = makeSolrParams(params, 'gallery');
             solrAPI = SOLR_IMAGE_GALLERY_API
             break;
         default:
+            solrParams = makeSolrParams(params);
             solrAPI = SOLR_API;
             break;
     }
