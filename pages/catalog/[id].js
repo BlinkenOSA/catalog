@@ -107,9 +107,10 @@ export async function getServerSideProps(context) {
                         }
                     }
                 } else {
+                    const identifier = record['id']
                     const [metadataRes, hierarchyRes] = await Promise.all([
-                        fetch(`${API}finding-aids/${id}/`),
-                        fetch(`${API}finding-aids-location/${id}/`),
+                        fetch(`${API}finding-aids/${identifier}/`),
+                        fetch(`${API}finding-aids-location/${identifier}/`),
                     ])
                     const [metadata, hierarchy, insights] = await Promise.all([
                         metadataRes.json(), hierarchyRes.json()
