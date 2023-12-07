@@ -21,6 +21,15 @@ export const fetcher = (url, params) => {
     ).then(res => res.data);
 };
 
+export const catalogAPIFetcher = (url, params) => {
+    return axios.get(
+        `${url}`,
+        {
+            params: params,
+        }
+    ).then(res => res.data);
+}
+
 export const makeSolrParams = (params, type='normal') => {
     const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
 

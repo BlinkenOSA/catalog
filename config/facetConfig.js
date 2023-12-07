@@ -19,5 +19,6 @@ export const facetConfig = {
     library_collection: { title: 'Library Collection', search: true, info: false, type: undefined },
     author: { title: 'Author', search: true, info: false, type: undefined },
     director: { title: 'Director', search: true, info: false, type: undefined },
+    digital_collection: { title: 'Digital Collection', search: true, info: false, type: undefined }
 }
 

@@ -8,7 +8,8 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 
 export default async function handler(req, res) {
 	let done = false;
-	let solrData = [];
+	let index = 1;
+	let solrData;
 	const {series_id, ...params} = req.query;
 
 	params['filterQuery'] = `series_id:${series_id}`
@@ -35,8 +36,15 @@ export default async function handler(req, res) {
 		if (params['cursorMark'] === results['nextCursorMark']) {
 			done = true
 		}
-		solrData.push(results)
+
+		if (index === 1) {
+			solrData = results;
+		} else {
+			solrData['response']['docs'].push(...results['response']['docs'])
+		}
+
 		params['cursorMark'] = results['nextCursorMark']
+		index += 1;
 	}
 	return res.status(200).json(solrData)
 }
