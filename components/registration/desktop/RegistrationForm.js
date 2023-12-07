@@ -64,22 +64,25 @@ const RegistrationForm = () => {
                                 <Field
                                     name="address"
                                     label="Street"
-                                    subLabel={'Address Abroad'}
+                                    required={true}
+                                    subLabel={'Permanent Address'}
                                     component={InputField}
                                 />
                                 <Field
                                     name="city"
                                     label="City"
-                                    subLabel={'Address Abroad'}
+                                    required={true}
+                                    subLabel={'Permanent Address'}
                                     component={InputField}
                                 />
                                 <SelectField
                                     name="country"
                                     label="Country"
-                                    subLabel={'Address Abroad'}
+                                    subLabel={'Permanent Address'}
                                     selectAPI={'research/country/select/'}
                                     allowClear={true}
                                     showSearch={true}
+                                    required={true}
                                     optionFilterProp={'label'}
                                     labelProperty={'country'}
                                     valueProperty={'id'}
