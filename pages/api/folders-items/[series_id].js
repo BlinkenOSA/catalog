@@ -10,10 +10,18 @@ export default async function handler(req, res) {
 	let done = false;
 	let index = 1;
 	let solrData;
-	const {series_id, ...params} = req.query;
+	const {series_id, start, offset, tab, view, ...params} = req.query;
 
-	params['filterQuery'] = `series_id:${series_id}`
-	params['cursorMark'] = '*'
+	const containerFrom = start ? Number(start) : 1;
+
+	params['filterQuery'] = `series_id:${series_id} AND container_number_sort:[${containerFrom} TO *]`
+
+	if (view === 'all') {
+		params['cursorMark'] = '*'
+	} else {
+		params['limit'] = 20
+		params['offset'] = offset
+	}
 
 	const getData = () => {
 		const solrParams = makeSolrParams(params)
@@ -30,21 +38,27 @@ export default async function handler(req, res) {
 		).then(res => res.data);
 	}
 
-	while (!done) {
+	if (view === 'all') {
+		while (!done) {
+			const results = await getData()
+
+			if (params['cursorMark'] === results['nextCursorMark']) {
+				done = true
+			}
+
+			if (index === 1) {
+				solrData = results;
+			} else {
+				solrData['response']['docs'].push(...results['response']['docs'])
+			}
+
+			params['cursorMark'] = results['nextCursorMark']
+			index += 1;
+		}
+		return res.status(200).json(solrData)
+	} else {
 		const results = await getData()
-
-		if (params['cursorMark'] === results['nextCursorMark']) {
-			done = true
-		}
-
-		if (index === 1) {
-			solrData = results;
-		} else {
-			solrData['response']['docs'].push(...results['response']['docs'])
-		}
-
-		params['cursorMark'] = results['nextCursorMark']
-		index += 1;
+		return res.status(200).json(results)
 	}
-	return res.status(200).json(solrData)
+
 }

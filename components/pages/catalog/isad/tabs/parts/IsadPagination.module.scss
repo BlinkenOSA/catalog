@@ -1,0 +1,122 @@
+@import "../../../../../../styles/variables";
+
+.PaginationWrapper {
+  display: flex;
+  flex: 2;
+  gap: 10px;
+
+  .GoButton {
+    align-self: center;
+  }
+
+  .ShowAllButton {
+    align-self: center;
+    border-left: 1px solid $black;
+    padding-left: 10px;
+  }
+
+  .Meter {
+    flex: 1;
+    border-left: 1px solid $black;
+    padding-left: 10px;
+
+    .MeterBackground {
+      background-color: $button-background;
+      height: 100%;
+
+      .MeterMarker {
+        background-color: $yellow;
+        height: 100%;
+      }
+    }
+  }
+
+  .Label {
+    font-family: "Suisse Intl Condensed", serif;
+    font-size: 12px;
+    font-weight: 500;
+    align-self: center;
+  }
+
+  .StepButtons {
+    border-left: 1px solid $black;
+    padding-left: 10px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+
+    .PaginationText {
+      font-family: "Suisse Intl Condensed", serif;
+      font-size: 12px;
+      font-weight: 500;
+      align-self: center;
+      width: 160px;
+      text-align: center;
+    }
+  }
+}
+
+.ContainerNumberInputWrapper {
+  border: $border-width solid $black;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 120px;
+  height: 32px;
+  display: flex;
+
+  .ContainerNumberInput {
+    font-family: "Suisse Intl Mono", serif;
+    font-weight: 400;
+    font-size: 14px;
+    height: 32px - 2 * $border-width;
+    width: 100%;
+    margin: 0;
+    padding: 0 10px;
+    background-color: $background;
+    border: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+  }
+
+  button {
+    display: flex;
+    outline: none;
+    -webkit-appearance: none;
+    background-color: $background;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    flex-shrink: 0;
+
+    &:hover {
+      color: $black;
+      background-color: $yellow;
+    }
+  }
+
+  .PlusButton {
+    border-left: 1px solid $black;
+  }
+
+  .MinusButton {
+    border-right: 1px solid $black;
+  }
+
+  .ContainerNumberInput:focus-visible {
+    outline: 0;
+  }
+}

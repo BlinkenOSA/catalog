@@ -1,5 +1,5 @@
 import useSWRInfinite from 'swr/infinite'
-import {catalogAPIFetcher, solrFetcher} from "../../../../../utils/fetcherFunctions";
+import {solrFetcher} from "../../../../../utils/fetcherFunctions";
 import Loader from "../../../../layout/Loader";
 import style from "./IsadContentPage.module.scss";
 import CartButton from "../../../../cart/CartButton";
@@ -15,33 +15,34 @@ import {Collapse} from 'react-collapse';
 import parse from "html-react-parser";
 import filterPlaceholders from "./config/filterPlaceholders";
 import AccessRightsButton from "../../../search/parts/AccessRightsButton";
-import useSWR from "swr";
-import IsadPagination from "./parts/IsadPagination";
 
-const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, originalLocale, isMobile}) => {
+const IsadContentPage = ({seriesID, language, originalLocale, isMobile}) => {
 	const { inCart } = useCart();
 
-	const [filterOpen, setFilterOpen] = useState(!isMobile);
+	const [filterOpen, setFilterOpen] = useState(false);
 
 	const router = useRouter();
-	const {id, seriesQuery, start, size, view, ...selectedSeriesFacets} = router.query;
+	const {id, seriesQuery, ...selectedSeriesFacets} = router.query;
 
-	const getParams = () => {
+	const PER_PAGE = 50;
+
+	const getKey = (index) => {
 		return {
+			solrCore: 'folders-items',
 			query: seriesQuery,
 			filterQuery: `series_id:${seriesID}`,
-			start: start,
-			size: size,
-			view: view,
+			offset: index * PER_PAGE,
+			limit: PER_PAGE,
 			...selectedSeriesFacets
 		}
 	}
 
-	const {data, isLoading} = useSWR([`folders-items/${seriesID}`, getParams()], ([url, params]) => catalogAPIFetcher(url, params))
-
-	const numFound = data?.['response']['numFound']
-	const facets = data ? data['facet_counts']['facet_fields'] : {}
-	const highlights = data?.['highlighting']
+	const { data, size, setSize } = useSWRInfinite(getKey, solrFetcher, {initialSize: 1})
+	const isEmpty = data?.[0]?.['response']['docs'].length === 0;
+	const isReachingEnd = isEmpty || (data && data[data.length - 1]?.['response']['docs'].length < PER_PAGE);
+	const numFound = data?.[0]?.['response']['numFound']
+	const facets = data?.[0]?.['facet_counts']['facet_fields']
+	const highlights = data?.[0]?.['highlighting']
 
 	const renderData = (rec, lang='EN') => {
 		const getHighlightedField = (field, lng = lang) => {
@@ -163,15 +164,14 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 	}
 
 	const onFilter = (filter, value) => {
-		delete router.query['view']
 		if (value !== '') {
 			router.replace({
-				query: {...router.query, [filter]: value, start: 1}
+				query: {...router.query, [filter]: value}
 			}, undefined, {shallow: true})
 		} else {
 			delete router.query[filter]
 			router.replace({
-				query: {...router.query, start: 1}
+				query: {...router.query}
 			}, undefined, {shallow: true})
 		}
 	}
@@ -244,6 +244,16 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 	}
 
 	const renderMenu = () => {
+		const recordNumber = () => {
+			let number = 0;
+			if (data) {
+				data.forEach(response => {
+					number += response['response']['docs'].length
+				})
+			}
+			return number;
+		}
+
 		const renderFilters = () => (
 			<React.Fragment>
 				<IsadFilter
@@ -284,6 +294,11 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 						isMobile={true}
 						filterOpen={filterOpen}
 					/>
+					<div className={style.Totals}>
+						{
+							recordNumber() > 0 ? `Showing 1 - ${recordNumber()} of ${numFound} records` : `No Hits`
+						}
+					</div>
 					<Collapse isOpened={filterOpen}>
 						{renderFilters()}
 					</Collapse>
@@ -292,40 +307,50 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		} else {
 			return (
 				<div className={style.SeriesSearch}>
-					<div className={style.SearchRow}>
-						<IsadSearchBar
-							placeholder={filterPlaceholders['search'][language]}
-							seriesQuery={seriesQuery}
-							onSearch={(value) => onFilter('seriesQuery', value)}
-							onFilter={() => setFilterOpen(!filterOpen)}
-							filterOpen={filterOpen}
-						/>
-						<IsadPagination
-							numFound={numFound}
-							containerCount={containerCount}
-							folderItemCount={folderItemCount}
-							containerNumber={start}
-						/>
+					<IsadSearchBar
+						placeholder={filterPlaceholders['search'][language]}
+						seriesQuery={seriesQuery}
+						onSearch={(value) => onFilter('seriesQuery', value)}
+					/>
+					{renderFilters()}
+					<div className={style.Totals}>
+						{
+							recordNumber() > 0 ? `Showing 1 - ${recordNumber()} of ${numFound} records` : `No Hits`
+						}
 					</div>
-					<Collapse isOpened={filterOpen}>
-						<div className={style.FilterRow}>
-							{renderFilters()}
-						</div>
-					</Collapse>
 				</div>
 			)
 		}
 	}
 
-	return (
-		<React.Fragment>
-			{ renderMenu() }
-			<div className={style.RecordsWrapper}>
-					{data && !isLoading ? renderDocs(data['response']['docs']) : <Loader />}
-			</div>
-		</React.Fragment>
-	)
-
+	if (data) {
+		return (
+			<React.Fragment>
+				{
+					(numFound > 10 || seriesQuery !== '' || Object.keys(selectedSeriesFacets).length > 0) && renderMenu()
+				}
+				<div className={style.RecordsWrapper}>
+					{
+						data.map((response, index) => {
+							return renderDocs(response['response']['docs'])
+						})
+					}
+				</div>
+				{
+					!isReachingEnd &&
+					<div className={style.MoreButtonWrapper}>
+						<div
+							className={style.MoreButton}
+							onClick={() => setSize(size + 1)}>
+							Load More ...
+						</div>
+					</div>
+				}
+			</React.Fragment>
+		)
+	} else {
+		return <Loader/>
+	}
 }
 
 export default IsadContentPage;

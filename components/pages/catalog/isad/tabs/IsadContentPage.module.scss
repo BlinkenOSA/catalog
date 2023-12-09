@@ -1,22 +1,36 @@
 @import "../../../../../styles/variables";
 
 .SeriesSearch {
-  padding: 0 10px;
-  height: 50px;
+  min-height: 50px;
   background-color: $form-background;
   border-bottom: $border-width solid $black;
   display: flex;
-  align-items: center;
-  gap: 10px;
   position: sticky;
   top: $header-height + $breadcrumb-height;
   z-index: 10;
+  flex-direction: column;
 
   &.Mobile {
     top: $header-height-mobile + $breadcrumb-height;
     padding: 10px 10px 0 10px;
+    gap: 10px;
     flex-direction: column;
+    align-items: center;
     height: unset;
+  }
+
+  .SearchRow {
+    padding: 0 10px;
+    display: flex;
+    gap: 10px;
+    height: 40px;
+    align-items: flex-end;
+  }
+
+  .FilterRow {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
   }
 
   .Totals {

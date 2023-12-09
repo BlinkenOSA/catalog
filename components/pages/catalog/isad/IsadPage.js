@@ -69,6 +69,8 @@ const IsadPage = ({solrData, metadata, hierarchy, insights, defaultTab='context'
                 return <IsadContentPage
                     seriesID={ams_id}
                     language={language}
+                    containerCount={metadata['container_count']}
+                    folderItemCount={metadata['folder_item_count']}
                     originalLocale={metadata['original_locale']}
                     isMobile={isMobile}/>
             default:

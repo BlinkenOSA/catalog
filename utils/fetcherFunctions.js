@@ -5,6 +5,7 @@ import {galleryFacetConfig} from "../config/galleryFacetConfig";
 import {base} from "next/dist/build/webpack/config/blocks/base";
 
 export const API = process.env.NEXT_PUBLIC_AMS_API;
+export const CATALOG_API = process.env.NEXT_PUBLIC_CATALOG_APP_API;
 export const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 export const SOLR_FOLDERS_ITEMS_API = process.env.NEXT_PUBLIC_SOLR_FOLDERS_ITEMS;
 const SOLR_IMAGE_GALLERY_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
@@ -14,7 +15,7 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
 export const fetcher = (url, params) => {
     return axios.get(
-        `${API}${url}`,
+        `${url}`,
         {
             params: params,
         }
@@ -23,7 +24,7 @@ export const fetcher = (url, params) => {
 
 export const catalogAPIFetcher = (url, params) => {
     return axios.get(
-        `${url}`,
+        `${CATALOG_API}${url}`,
         {
             params: params,
         }

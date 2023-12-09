@@ -59,7 +59,6 @@ const IsadSearchBar = ({onSearch, onFilter, seriesQuery, isMobile, filterOpen, .
                 <AiOutlineSearch/>
             </button>
             {
-                isMobile &&
                 <button
                     onClick={() => handleFilter()}
                     className={filterOpen ? `${style.FilterButton} ${style.Open}`: style.FilterButton}
