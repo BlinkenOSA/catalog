@@ -29,6 +29,7 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 		const num = number > containerCount ? containerCount : number
 
 		window.scrollTo(0, 0)
+		delete router.query['offset']
 		router.replace({
 			query: {...router.query, start: num}
 		}, undefined, {shallow: true})
@@ -139,7 +140,7 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 		)
 	}
 
-	const handleClick = () => {
+	const handleGoClick = () => {
 		onContainerChange(startingContainer)
 	}
 
@@ -187,7 +188,7 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 				</div>
 				{renderContainerButton()}
 				<div className={style.GoButton}>
-					<Button text={'GO'} onClick={handleClick} />
+					<Button text={'GO'} onClick={handleGoClick} />
 				</div>
 				{renderStepButtons()}
 				<div className={style.ShowAllButton}>
