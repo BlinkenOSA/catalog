@@ -275,14 +275,22 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 
 		if (isMobile) {
 			return (
-				<div className={`${style.SeriesSearch} ${style.Mobile}`}>
+				<div className={isMobile ? `${style.SeriesSearch} ${style.Mobile}` : style.SeriesSearch}>
 					<IsadSearchBar
 						placeholder={filterPlaceholders['search'][language]}
 						seriesQuery={seriesQuery}
 						onSearch={(value) => onFilter('seriesQuery', value)}
 						onFilter={() => setFilterOpen(!filterOpen)}
-						isMobile={true}
+						isMobile={isMobile}
 						filterOpen={filterOpen}
+					/>
+					<IsadPagination
+						numFound={numFound}
+						recordsCount={data ? data['response']['docs'].length : []}
+						containerCount={containerCount}
+						folderItemCount={folderItemCount}
+						containerNumber={start}
+						isMobile={isMobile}
 					/>
 					<Collapse isOpened={filterOpen}>
 						{renderFilters()}
@@ -302,6 +310,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 						/>
 						<IsadPagination
 							numFound={numFound}
+							recordsCount={data ? data['response']['docs'].length : []}
 							containerCount={containerCount}
 							folderItemCount={folderItemCount}
 							containerNumber={start}

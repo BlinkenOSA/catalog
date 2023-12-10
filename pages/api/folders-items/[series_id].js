@@ -9,7 +9,6 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 export default async function handler(req, res) {
 	let done = false;
 	let index = 1;
-	let solrData;
 	const {series_id, start, offset, tab, view, ...params} = req.query;
 
 	const containerFrom = start ? Number(start) : 1;
@@ -39,6 +38,7 @@ export default async function handler(req, res) {
 	}
 
 	if (view === 'all') {
+		let solrData = {};
 		while (!done) {
 			const results = await getData()
 

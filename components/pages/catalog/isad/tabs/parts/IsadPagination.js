@@ -4,7 +4,7 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import {useRouter} from "next/router";
 import Button from "../../../../search/parts/Button";
 
-const IsadPagination = ({containerNumber=1, containerCount, numFound, isMobile=false}) => {
+const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFound, isMobile=false}) => {
 	const router = useRouter();
 	const {offset, view} = router.query;
 
@@ -123,13 +123,17 @@ const IsadPagination = ({containerNumber=1, containerCount, numFound, isMobile=f
 					onClick={handlePreviousClick}
 					disabled={view === 'all' || getOffset() === 0}
 				/>
-				<div className={style.PaginationText}>
-					{`Showing ${getOffset() + 1} to ${getPageTo()} of ${total} entries`}
+				<div className={isMobile ? `${style.PaginationText} ${style.Mobile}` : style.PaginationText}>
+					{
+						isMobile ?
+						`${getOffset() + 1} / ${getPageTo()} of ${total}` :
+						`Showing ${getOffset() + 1} to ${getPageTo()} of ${total} entries`
+					}
 				</div>
 				<Button
 					text={'Next >'}
 					onClick={handleNextClick}
-					disabled={view === 'all'}
+					disabled={view === 'all' || getOffset() + DEFAULT_SIZE > total}
 				/>
 			</div>
 		)
@@ -143,40 +147,67 @@ const IsadPagination = ({containerNumber=1, containerCount, numFound, isMobile=f
 		if (view === 'all') {
 			return 100
 		} else {
-			return DEFAULT_SIZE / total >= 100 ? 100 : (DEFAULT_SIZE / total) * 100
+			return recordsCount >= total ? 100 : (recordsCount / total) * 100
 		}
 	}
 
 	const calcLeftPercentage = () => {
-		return (getOffset() / total) * 100
+		if (view === 'all') {
+			return 0
+		} else {
+			return (getOffset() / recordsCount) * 100
+		}
 	}
 
-	return (
-		<div className={style.PaginationWrapper}>
-			<div className={style.Label}>
-				From container:
-			</div>
-			{renderContainerButton()}
-			<div className={style.GoButton}>
-				<Button text={'GO'} onClick={handleClick} />
-			</div>
-			{renderStepButtons()}
-			<div className={style.ShowAllButton}>
-				<Button text={view === 'all' ? 'Show Paginated' : 'Show All'} onClick={handleShowAll} />
-			</div>
-			<div className={style.Meter}>
-				<div className={style.MeterBackground}>
-					<div
-						className={style.MeterMarker}
-						style={{
-							width: `${calcWidthPercentage()}%`,
-							transform: `translateX(${calcLeftPercentage()}%)`
-						}}
-					/>
+	if (isMobile) {
+		return (
+			<div className={`${style.PaginationWrapper} ${style.Mobile}`}>
+				{renderStepButtons()}
+				<div className={style.ShowAllButton}>
+					<Button text={view === 'all' ? 'Show Paginated' : 'Show All'} onClick={handleShowAll} />
+				</div>
+				<div className={style.Meter}>
+					<div className={style.MeterBackground}>
+						<div
+							className={style.MeterMarker}
+							style={{
+								width: `${calcWidthPercentage()}%`,
+								transform: `translateX(${calcLeftPercentage()}%)`
+							}}
+						/>
+					</div>
 				</div>
 			</div>
-		</div>
-	)
+		)
+	} else {
+		return (
+			<div className={style.PaginationWrapper}>
+				<div className={style.Label}>
+					From container:
+				</div>
+				{renderContainerButton()}
+				<div className={style.GoButton}>
+					<Button text={'GO'} onClick={handleClick} />
+				</div>
+				{renderStepButtons()}
+				<div className={style.ShowAllButton}>
+					<Button text={view === 'all' ? 'Show Paginated' : 'Show All'} onClick={handleShowAll} />
+				</div>
+				<div className={style.Meter}>
+					<div className={style.MeterBackground}>
+						<div
+							className={style.MeterMarker}
+							style={{
+								width: `${calcWidthPercentage()}%`,
+								transform: `translateX(${calcLeftPercentage()}%)`
+							}}
+						/>
+					</div>
+				</div>
+			</div>
+		)
+	}
+
 }
 
 export default IsadPagination;
