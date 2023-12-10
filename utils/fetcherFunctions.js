@@ -15,7 +15,7 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
 export const fetcher = (url, params) => {
     return axios.get(
-        `${url}`,
+        `${API}${url}`,
         {
             params: params,
         }
