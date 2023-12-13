@@ -113,7 +113,7 @@ const RegistrationForm = () => {
                                 />
                                 <SelectField
                                     name="occupation"
-                                    label="Occupation"
+                                    label="Affiliation"
                                     required={true}
                                     selectOptions={occupationOptions}
                                 />
