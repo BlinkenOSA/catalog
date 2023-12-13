@@ -50,26 +50,26 @@ const RegistrationForm = () => {
                                     component={InputField}
                                 />
                                 <Field
-                                    name="address_hun"
+                                    name="address_hungary"
                                     label="Street"
                                     subLabel={'Address in Hungary'}
                                     component={InputField}
                                 />
                                 <Field
-                                    name="city_hun"
+                                    name="city_hungary"
                                     label="City"
                                     subLabel={'Address in Hungary'}
                                     component={InputField}
                                 />
                                 <Field
-                                    name="address"
+                                    name="address_abroad"
                                     label="Street"
                                     required={true}
                                     subLabel={'Permanent Address'}
                                     component={InputField}
                                 />
                                 <Field
-                                    name="city"
+                                    name="city_abroad"
                                     label="City"
                                     required={true}
                                     subLabel={'Permanent Address'}

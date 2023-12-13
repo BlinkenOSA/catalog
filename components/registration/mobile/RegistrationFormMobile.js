@@ -48,27 +48,29 @@ const RegistrationFormMobile = () => {
                                 component={InputField}
                             />
                             <Field
-                                name="address_hun"
+                                name="address_hungary"
                                 label="Street"
                                 subLabel={'Address in Hungary'}
                                 component={InputField}
                             />
                             <Field
-                                name="city_hun"
+                                name="city_hungary"
                                 label="City"
                                 subLabel={'Address in Hungary'}
                                 component={InputField}
                             />
                             <Field
-                                name="address"
+                                name="address_abroad"
                                 label="Street"
-                                subLabel={'Address Abroad'}
+                                subLabel={'Permanent Address'}
+                                required={true}
                                 component={InputField}
                             />
                             <Field
-                                name="city"
+                                name="city_abroad"
                                 label="City"
-                                subLabel={'Address Abroad'}
+                                required={true}
+                                subLabel={'Permanent Address'}
                                 component={InputField}
                             />
                             <SelectField
