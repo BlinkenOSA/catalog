@@ -67,12 +67,12 @@ export const getAudioURL = (identifier, isThumbnail=false) => {
 
 export const getPdfURL = (identifier, fileName, isThumbnail=false) => {
     const storageURL = 'https://storage.osaarchivum.org/catalog/textual'
-    const containerDIRtokens = identifier.split("_").slice(0, 5);
+    const containerDIRtokens = identifier.split("_").slice(0, 6);
     const tokens = identifier.split("_").slice(0, 5);
 
     if (isThumbnail) {
-        return `${storageURL}/${containerDIRtokens.join("_")}/${tokens.join("_")}/${identifier}.jpg`
+        return `${storageURL}/${tokens.join("_")}/${containerDIRtokens.join("_")}/${identifier}.jpg`
     } else {
-        return `${storageURL}/${containerDIRtokens.join("_")}/${tokens.join("_")}/${fileName}`
+        return `${storageURL}/${tokens.join("_")}/${containerDIRtokens.join("_")}/${fileName}`
     }
 }
