@@ -187,7 +187,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 			if (isBoxRow(rec, index)) {
 				return (
 					<div className={style.ContainerType}>
-						<span>{containerNumber}</span>
+						<div>{containerNumber}</div>
 					</div>
 				)
 			} else {

@@ -92,16 +92,15 @@
   .ContainerType {
     font-family: "Suisse Intl Condensed", serif;
     font-size: 14px;
-    width: 150px;
+    min-width: 150px;
     text-align: left;
     align-self: flex-start;
     border-bottom: $border-width solid $black;
     border-left: $border-width solid $black;
 
-    span {
-      padding-left: 10px;
+    div {
+      padding: 0 10px;
       line-height: 22px;
-      width: 100%;
       color: $black;
     }
   }
