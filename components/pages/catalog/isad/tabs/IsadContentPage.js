@@ -123,7 +123,12 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 								<div className={style.Title}>
 									{getHighlightedField('title', 'EN')}
 									{
-										rec['title_original'] && ` (${getHighlightedField('title_original', 'EN')})`
+										!detectSecondLanguage() &&
+										(
+											originalLocale === 'RU' ?
+											<span className={style.Russian}> ({getHighlightedField('title_original', 'EN')})</span> :
+											` (${getHighlightedField('title_original', 'EN')})`
+										)
 									}
 									{rec['date_created'] && `, ${rec['date_created']}`}
 								</div>
@@ -136,7 +141,11 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 							<div style={{flex: 1}}>
 								<a href={`/catalog/${rec['id']}`}>
 									<div className={style.Title}>
-										{getHighlightedField('title', originalLocale)}
+										{
+											originalLocale === 'RU' ?
+											<span className={style.Russian}>{getHighlightedField('title', originalLocale)}</span> :
+											getHighlightedField('title', originalLocale)
+										}
 										{rec['date_created'] && `, ${rec['date_created']}`}
 									</div>
 								</a>

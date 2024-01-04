@@ -43,9 +43,9 @@ $suisse-font-path: "/fonts";
 }
 
 @font-face {
-  src: url("#{$suisse-font-path}/SuisseWorks-Bold-WebXL.woff2") format("woff2");
+  src: url("#{$suisse-font-path}/SuisseWorks-Regular-WebXL.woff2") format("woff2");
   font-family: "Suisse Works";
-  font-weight: 700;
+  font-weight: 400;
 }
 
 @font-face {
@@ -55,8 +55,9 @@ $suisse-font-path: "/fonts";
 }
 
 @font-face {
-  src: url("#{$suisse-font-path}/SuisseWorks-Regular-WebXL.woff2") format("woff2");
+  src: url("#{$suisse-font-path}/SuisseWorks-Bold-WebXL.woff2") format("woff2");
   font-family: "Suisse Works";
-  font-weight: 400;
+  font-weight: 700;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&display=swap');
