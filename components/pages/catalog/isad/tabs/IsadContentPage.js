@@ -237,7 +237,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 							</div>
 						}
 						<a href={`/catalog/${rec['id']}`}>
-							<div className={style.CallNumber}>
+							<div className={rec['digital_version_online'] ? `${style.CallNumber} ${style.Online}` : style.CallNumber}>
 								{renderThumbnail(rec)}
 								{rec['call_number']}
 							</div>

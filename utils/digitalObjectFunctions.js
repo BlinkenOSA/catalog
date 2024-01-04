@@ -34,7 +34,7 @@ export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) 
         case 'Still Image':
             if (isThumbnail) {
                 const urlComponent = encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`);
-                return `${storageURL}/${urlComponent}/full/150,/0/default.jpg`
+                return `${storageURL}/${urlComponent}/full/200,/0/default.jpg`
             } else {
                 return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
             }

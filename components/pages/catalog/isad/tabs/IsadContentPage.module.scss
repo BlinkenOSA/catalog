@@ -109,6 +109,10 @@
     min-width: 170px;
     padding: 10px 20px 10px 0;
     text-align: center;
+
+    &.Online {
+      min-width: 250px;
+    }
   }
 
   .Data {

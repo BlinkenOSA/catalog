@@ -34,7 +34,7 @@ const IsadThumbnail = ({record, isMobile=false}) => {
             <div className={isMobile ? `${style.Thumbnail} ${style.Mobile}` : style.Thumbnail}>
                 <div className={getIconClass()}>
                     <img
-                      width={isMobile ? 100 : 150}
+                      width={isMobile ? 100 : 200}
                       alt={'thumbnail'}
                       src={getThumbnailURL()}
                     />
