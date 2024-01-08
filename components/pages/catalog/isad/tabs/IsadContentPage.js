@@ -123,7 +123,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 								<div className={style.Title}>
 									{getHighlightedField('title', 'EN')}
 									{
-										!detectSecondLanguage() &&
+										!detectSecondLanguage() && rec['title_original'] &&
 										(
 											originalLocale === 'RU' ?
 											<span className={style.Russian}> ({getHighlightedField('title_original', 'EN')})</span> :
