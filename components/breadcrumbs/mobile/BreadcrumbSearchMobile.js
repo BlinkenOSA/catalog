@@ -91,7 +91,7 @@ const BreadcrumbSearchMobile = ({reference, defaultFacetOpen, module='normal', i
      */
     const onQueryRemove = () => {
         router.replace({
-            query: createParams('', limit, 0, selectedFacets),
+            query: createParams('', limit, 0, {...selectedFacets, ...selectedFacetsDates}),
         }, undefined, {shallow: false})
     }
 
@@ -115,13 +115,13 @@ const BreadcrumbSearchMobile = ({reference, defaultFacetOpen, module='normal', i
 
     const onPerPageChange = (limit) => {
         router.replace({
-            query: createParams(query, limit, 0, selectedFacets),
+            query: createParams(query, limit, 0, {...selectedFacets, ...selectedFacetsDates}),
         }, undefined, {shallow: false})
     };
 
     const onChangePage = (offset) => {
         router.replace({
-            query: createParams(query, limit, offset, selectedFacets),
+            query: createParams(query, limit, offset, {...selectedFacets, ...selectedFacetsDates}),
         }, undefined, {shallow: false})
     };
 
