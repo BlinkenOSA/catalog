@@ -74,7 +74,7 @@ const LibraryCollectionPageV2 = ({data, total, isMobile}) => {
                 </div>
                 <div className={style.Description}>
                     {selectedCollectionInfo[0]['description']}
-                    <div className={style.ButtonWrapper}>
+                    <div className={style.ButtonWrapper} onClick={handleClick}>
                         <div className={style.Badge}>
                             See the collection
                         </div>

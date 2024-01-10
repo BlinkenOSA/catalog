@@ -16,7 +16,7 @@ export const facetConfig = {
     keyword: { title: 'Tags', search: true, info: true, type: undefined },
     record_origin: { title: 'Record Origin', search: false, info: true, type: 'list' },
     availability: { title: 'Availability', search: false, info: true, type: 'list' },
-    library_collection: { title: 'Library Collection', search: true, info: false, type: undefined },
+    library_collection: { title: 'Library Special Collection', search: true, info: false, type: undefined },
     author: { title: 'Author', search: true, info: false, type: undefined },
     director: { title: 'Director', search: true, info: false, type: undefined },
     digital_collection: { title: 'Digital Collection', search: true, info: false, type: undefined }
