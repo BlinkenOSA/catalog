@@ -9,6 +9,7 @@ import axios from "axios";
 import {useAlert} from "react-alert";
 import dynamic from "next/dynamic";
 import {useState} from "react";
+import ForgotCardNumberForm from "./ForgotCardNumberForm";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
@@ -21,6 +22,7 @@ const CartForm = ({isMobile = false}) => {
     const alert = useAlert()
 
     const [isSubmitting, setIsSubmitting] = useState(false)
+    const [forgotCardNumberShow, setForgotCardNumberShow] = useState(false)
 
     const isWeekday = (date) => {
         const day = date.getDay();
@@ -85,92 +87,96 @@ const CartForm = ({isMobile = false}) => {
     }
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
-            validationSchema={validationSchema}
-        >
-            { formik => (
-            <Form>
-                <div style={isMobile ? {display: "block"} : {display: 'flex'}}>
-                    <div className={isMobile ? `${style.CartFormWrapper} ${style.Mobile}` : style.CartFormWrapper}>
-                        <div className={style.Form}>
-                            <Field
-                                name="card_number"
-                                label="Researcher Card Number"
-                                disabled={isEmpty}
-                                required={true}
-                                component={InputField}
-                            />
-                            <Field
-                                name="email"
-                                label="Registered E-mail Address"
-                                type="email"
-                                disabled={isEmpty}
-                                required={true}
-                                component={InputField}
-                            />
-                            <DatePickerField
-                                name={"request_date"}
-                                label={"Request Date"}
-                                filterDate={isWeekday}
-                                disabled={isEmpty}
-                                required={true}
-                                minDate={new Date()}
-                                maxDate={getMaxDate()}
-                            />
-                            {!isEmpty && <CaptchaField/>}
-                            <div className={style.SubmitButtonWrapper}>
-                                <button className={style.FormButton} type="submit" disabled={isEmpty || isSubmitting}>
-                                    Send Request
-                                </button>
-                            </div>
-                            <div className={style.Registration}>
-                                <span>
-                                  If you don't own a Researcher Identification Card, please register using the
-                                  Research Registration form below.
-                                </span>
-                                {
-                                    isMobile ?
-                                    <div style={{textAlign: 'center'}}>
+        <>
+            <Formik
+                initialValues={initialValues}
+                onSubmit={handleSubmit}
+                validationSchema={validationSchema}
+            >
+                { formik => (
+                <Form>
+                    <div style={isMobile ? {display: "block"} : {display: 'flex'}}>
+                        <div className={isMobile ? `${style.CartFormWrapper} ${style.Mobile}` : style.CartFormWrapper}>
+                            <div className={style.Form}>
+                                <Field
+                                    name="card_number"
+                                    label="Researcher Card Number"
+                                    disabled={isEmpty}
+                                    required={true}
+                                    component={InputField}
+                                />
+                                <Field
+                                    name="email"
+                                    label="Registered E-mail Address"
+                                    type="email"
+                                    disabled={isEmpty}
+                                    required={true}
+                                    component={InputField}
+                                />
+                                <DatePickerField
+                                    name={"request_date"}
+                                    label={"Request Date"}
+                                    filterDate={isWeekday}
+                                    disabled={isEmpty}
+                                    required={true}
+                                    minDate={new Date()}
+                                    maxDate={getMaxDate()}
+                                />
+                                {!isEmpty && <CaptchaField/>}
+                                <div className={style.SubmitButtonWrapper}>
+                                    <button className={style.FormButton} type="submit" disabled={isEmpty || isSubmitting}>
+                                        Send Request
+                                    </button>
+                                </div>
+                                <div className={style.Registration}>
+                                    <span>
+                                      If you don't own a Researcher Identification Card, please register using the
+                                      Research Registration form below.
+                                    </span>
+                                    {
+                                        isMobile ?
+                                        <div style={{textAlign: 'center'}}>
+                                            <div>
+                                                <a href={'/registration'}>
+                                                    <button className={style.FormButton} type="button">
+                                                        Register
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div>
+                                                <button className={`${style.FormButton} ${style.ForgotButton}`}
+                                                        onClick={() => setForgotCardNumberShow(true)}
+                                                        type="button">
+                                                    Forgot card number
+                                                </button>
+                                            </div>
+                                        </div> :
                                         <div>
                                             <a href={'/registration'}>
                                                 <button className={style.FormButton} type="button">
                                                     Register
                                                 </button>
                                             </a>
-                                        </div>
-                                        <div>
-                                            <a href={'/forgot-card-number'}>
-                                                <button className={`${style.FormButton} ${style.ForgotButton}`}
-                                                        type="button">
-                                                    Forgot card number
-                                                </button>
-                                            </a>
-                                        </div>
-                                    </div> :
-                                    <div>
-                                        <a href={'/registration'}>
-                                            <button className={style.FormButton} type="button">
-                                                Register
-                                            </button>
-                                        </a>
-                                        <a href={'/forgot-card-number'}>
                                             <button className={`${style.FormButton} ${style.ForgotButton}`}
+                                                    onClick={() => setForgotCardNumberShow(true)}
                                                     type="button">
                                                 Forgot card number
                                             </button>
-                                        </a>
-                                    </div>
-                                }
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
+                        <CartList isMobile={isMobile}/>
                     </div>
-                    <CartList isMobile={isMobile}/>
-                </div>
-            </Form>
-            )}
-        </Formik>
+                </Form>
+                )}
+            </Formik>
+            <ForgotCardNumberForm
+              isMobile={isMobile}
+              open={forgotCardNumberShow}
+              onClose={() => setForgotCardNumberShow(false)}/>
+        </>
     )
 }
 

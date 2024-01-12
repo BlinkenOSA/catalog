@@ -188,9 +188,6 @@ const RegistrationForm = () => {
                                 <div className={style.SubmitButtonWrapper}>
                                     <button type="submit" disabled={isSubmitting}>Register</button>
                                 </div>
-                                  <div className={style.SubmitButtonWrapper} style={{marginTop: '10px'}}>
-                                    <button type="button" className={style.ForgotButton} >Forgot Card Number</button>
-                                  </div>
                                 <CaptchaField />
                             </div>
                         </Form>

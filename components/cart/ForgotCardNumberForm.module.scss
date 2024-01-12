@@ -1,0 +1,102 @@
+@import "../../styles/variables";
+
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+
+  &.Open {
+    display: block;
+  }
+
+  &.Closed {
+    display: none;
+  }
+}
+
+.ModalMain {
+  position:fixed;
+  background: white;
+  width: 400px;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  padding: 20px;
+  border: 1px solid $black;
+
+  &.Mobile {
+    width: 90%;
+  }
+
+  .Row {
+    display: flex;
+    gap: 20px
+  }
+
+  .Title {
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
+
+  .CloseButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    color: $black;
+    cursor: pointer;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 100%;
+      background-color: $black;
+      left: 0;
+    }
+
+    span:nth-child(1) {
+      top: 10px;
+      -webkit-transform: rotate(45deg);
+      -moz-transform: rotate(45deg);
+      -o-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      top: 10px;
+      -webkit-transform: rotate(-45deg);
+      -moz-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.FormButton {
+  width: 200px;
+  height: 36px;
+  background-color: $black;
+  border-radius: 18px;
+  font-family: "Suisse Intl", serif;
+  font-weight: 400;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: $white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+
+  &:hover {
+    background-color: $yellow;
+    color: $black;
+  }
+}

@@ -180,11 +180,6 @@ const RegistrationFormMobile = () => {
                             <div className={style.SubmitButtonWrapper}>
                                 <button type="submit">Register</button>
                             </div>
-                            <a href={'/forgot-card-number'}>
-                              <div className={style.SubmitButtonWrapper} style={{marginTop: '10px'}}>
-                                <button type="button" className={style.ForgotButton} >Forgot Card Number</button>
-                              </div>
-                            </a>
                             <div className={style.Captcha}>
                                 <CaptchaField />
                             </div>
