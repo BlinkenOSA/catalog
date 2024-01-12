@@ -42,7 +42,8 @@ const ForgotCardNumberForm = ({open, onClose, isMobile}) => {
 		email_confirm: Yup.string()
 			.email('Invalid email address')
 			.required('Required')
-			.oneOf([Yup.ref('email'), null], 'E-mail and confirmation must match')
+			.oneOf([Yup.ref('email'), null], 'E-mail and confirmation must match'),
+		captcha: Yup.string().required('Required'),
 	})
 
 	useEffect(() => {
