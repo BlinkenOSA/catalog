@@ -18,6 +18,8 @@ import {
 import style from "./VideoViewer.module.scss"
 
 const VideoViewer = ({identifier, isMobile}) => {
+    console.log(identifier)
+
     return (
         <div className={isMobile ? `${style.VideoViewer} ${style.Mobile}` : style.VideoViewer}>
             <div className={style.VideoPlayer}>
@@ -25,7 +27,7 @@ const VideoViewer = ({identifier, isMobile}) => {
                     viewType={ViewType.Video}
                     theme={'osa'}
                 >
-                    <Hls version="latest">
+                    <Hls version="v1.4.14">
                         <source
                             data-src={getVideoURL(identifier)}
                             type="application/x-mpegURL"
