@@ -86,7 +86,21 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		}
 
 		const detectSecondLanguage = () => {
-			return originalLocale !== null && rec['title_original']  && rec['contents_summary_original']
+			return rec['title_original']  && rec['contents_summary_original']
+		}
+
+		const getSecondLanguage = () => {
+			if (originalLocale) {
+				return originalLocale
+			} else {
+				let locale = ''
+				data['response']['docs'].forEach(rec => {
+					if (rec['original_locale']) {
+						locale = rec['original_locale']
+					}
+				})
+				return locale;
+			}
 		}
 
 		if (isMobile) {
@@ -142,15 +156,15 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 								<a href={`/catalog/${rec['id']}`}>
 									<div className={style.Title}>
 										{
-											originalLocale === 'RU' ?
-											<span className={style.Russian}>{getHighlightedField('title', originalLocale)}</span> :
-											getHighlightedField('title', originalLocale)
+											getSecondLanguage() === 'RU' ?
+											<span className={style.Russian}>{getHighlightedField('title', getSecondLanguage())}</span> :
+											getHighlightedField('title', getSecondLanguage())
 										}
 										{rec['date_created'] && `, ${rec['date_created']}`}
 									</div>
 								</a>
 								<div className={style.Description}>
-									{getHighlightedField('contents_summary', originalLocale)}
+									{getHighlightedField('contents_summary', getSecondLanguage())}
 								</div>
 							</div>
 						}
@@ -212,6 +226,20 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 			}
 		}
 
+		const renderCartButton = (record) => {
+			if (!record['digital_version_online']) {
+				if (record['access_rights'] !== 'Restricted') {
+					return (
+						<div className={style.CartButton}>
+							<CartButton record={record} inCart={inCart(record['id'])} name={record['id']} />
+						</div>
+					)
+				} else {
+					return (<div className={style.CartButton}> </div>)
+				}
+			}
+		}
+
 		return records.map((rec, index) => {
 			if (isMobile) {
 				return (
@@ -231,10 +259,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 				return (
 					<div className={isBoxRow(rec, index) ? style.Record : `${style.Record} ${style.InContainer}`} key={index}>
 						{
-							!rec['digital_version_online'] &&
-							<div className={style.CartButton}>
-								<CartButton record={rec} inCart={inCart(rec['id'])} name={rec['id']} />
-							</div>
+							renderCartButton(rec)
 						}
 						<a href={`/catalog/${rec['id']}`}>
 							<div className={rec['digital_version_online'] ? `${style.CallNumber} ${style.Online}` : style.CallNumber}>
