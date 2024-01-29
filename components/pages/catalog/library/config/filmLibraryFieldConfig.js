@@ -19,6 +19,9 @@ export const filmLibraryFieldConfig = [
                 label: 'Language',
                 fieldConfig: {'041': ['a'], '546': ['a']}
             }, {
+                label: 'Subtitles',
+                fieldConfig: {'041': ['j']}
+            }, {
                 label: 'Published',
                 fieldConfig: {'260': ['a', 'b', 'c', 'e', 'f']}
             }, {
