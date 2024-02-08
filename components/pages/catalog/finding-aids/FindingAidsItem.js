@@ -28,9 +28,17 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
                 let dates = []
 
                 if (record['date_to'] && record['date_from'] !== record['date_to']) {
-                    dates.push(`${record['date_from']}${record['date_to'] ? ` - ${record['date_to']}` : ''}`)
+                    if (record['date_ca_span'] && record['date_ca_span'] !== 0) {
+                        dates.push(`ca. ${record['date_from']}${record['date_to'] ? ` - ${record['date_to']}` : ''}`)
+                    } else {
+                        dates.push(`${record['date_from']}${record['date_to'] ? ` - ${record['date_to']}` : ''}`)
+                    }
                 } else {
-                    dates.push(`${record['date_from']}`)
+                    if (record['date_ca_span'] && record['date_ca_span'] !== 0) {
+                        dates.push(`ca. ${record['date_from']}`)
+                    } else {
+                        dates.push(`${record['date_from']}`)
+                    }
                 }
 
                 record['dates'].forEach(d => {
