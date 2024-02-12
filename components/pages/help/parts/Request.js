@@ -14,8 +14,7 @@ const Request = ({isMobile}) => {
             <div className={style.Title}>Registration</div>
             <div className={style.Text}>
                 <p>
-                    To request materials, you must first register as a researcher by completing our
-                    <a href={'/register'}>registration form</a>. Once you have submitted the form, the Research Room
+                    To request materials, you must first register as a researcher by completing our <a href={'/registration'}>registration form</a>. Once you have submitted the form, the Research Room
                     staff will check your details and approve your registration. If your registration is approved, your
                     virtual research card number will be sent to your mailbox. Please keep this number as you will need
                     it when requesting materials.
