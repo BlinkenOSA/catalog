@@ -62,6 +62,86 @@
         text-align: center;
       }
     }
+
+    :global .rpv-core__popover-body-arrow {
+      background-color: $background;
+      border-right: 1px solid $black;
+      border-bottom: 1px solid $black;
+      border-radius: 0;
+      top: -1px;
+      left: 5px;
+    }
+
+    :global .rpv-core__popover-body {
+      padding: 20px;
+      background-color: $background;
+      border: 1px solid $black;
+    }
+
+    :global .rpv-search__popover-input-counter {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 5px;
+      align-items: center;
+    }
+
+    :global .rpv-search__popover-label {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    :global .rpv-search__popover-footer {
+      display: flex;
+      margin-top: 30px;
+    }
+
+    :global .rpv-search__popover-footer-button {
+      flex: 1;
+      text-align: right;
+    }
+
+    :global .rpv-core__button {
+      cursor: pointer;
+      height: 25px;
+      background-color: #000000;
+      border-radius: 13px;
+      text-align: center;
+      color: #FFF;
+      font-family: "Suisse Intl", serif;
+      font-size: 10px;
+      line-height: 25px;
+      padding: 0 10px;
+      text-transform: uppercase;
+      display: inline-block;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+
+      &:hover {
+        color: $black;
+        background-color: $yellow;
+      }
+    }
+
+    :global .rpv-core__tooltip-body {
+      font-family: "Suisse Intl", serif;
+    }
+
+    :global .rpv-search__popover-label-checkbox {
+      accent-color: $black;
+    }
+
+    :global .rpv-core__textbox {
+      border: 1px solid $button-background;
+      border-radius: 0;
+      height: 25px;
+
+      &:focus-visible {
+        outline: unset;
+        border: 2px solid $black;
+      }
+    }
   }
 
   .Button {
@@ -201,12 +281,26 @@
   .FullScreen {
     font-size: 18px;
     display: flex;
-    line-height: 31px;
-    text-align: center;
 
     span {
       flex: 1;
       height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .Search {
+    font-size: 18px;
+    display: flex;
+
+    span {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

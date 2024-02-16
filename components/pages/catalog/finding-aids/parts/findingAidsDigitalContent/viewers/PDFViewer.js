@@ -1,8 +1,8 @@
-import { Viewer, SpecialZoomLevel } from '@react-pdf-viewer/core';
+import { Viewer } from '@react-pdf-viewer/core';
 import { toolbarPlugin } from '@react-pdf-viewer/toolbar';
 import style from "./PDFViewer.module.scss"
 import React, {useState} from "react";
-import { BiFullscreen, BiExitFullscreen } from 'react-icons/bi';
+import {BiFullscreen, BiExitFullscreen, BiSearch} from 'react-icons/bi';
 import {getPdfURL, getURL} from '../../../../../../../utils/digitalObjectFunctions';
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
@@ -35,11 +35,26 @@ const PDFViewer = ({identifier, fileNames}) => {
                         GoToNextPage,
                         GoToPreviousPage,
                         NumberOfPages,
+                        ShowSearchPopover,
                         ZoomIn,
                         ZoomOut,
                     } = props;
                     return (
                         <>
+                            <div style={{ padding: '0px 2px' }}>
+                              <ShowSearchPopover>
+                                {(props) => (
+                                  <div
+                                    className={`${style.Button} ${style.Search}`}
+                                    onClick={props.onClick}
+                                  >
+                                    <span>
+                                      <BiSearch size={17} />
+                                    </span>
+                                  </div>
+                                )}
+                              </ShowSearchPopover>
+                            </div>
                             <div style={{ padding: '0px 2px' }}>
                                 <ZoomOut>
                                     {(props) => (
@@ -105,7 +120,7 @@ const PDFViewer = ({identifier, fileNames}) => {
                                             onClick={props.onClick}
                                         >
                                             <span>
-                                                {fullScreen ? <BiExitFullscreen/> : <BiFullscreen/>}
+                                                {fullScreen ? <BiExitFullscreen size={17}/> : <BiFullscreen size={17}/>}
                                             </span>
                                         </div>
                                     )}
