@@ -17,9 +17,19 @@
   border-top: $border-width solid $black;
   height: 464px;
 
+  :global .rpv-core__doc-loading {
+    background-color: $button-background;
+  }
+
   :global .rpv-core__inner-page {
     background-color: $button-background;
   }
+}
+
+.Loader {
+  color: $black;
+  font-family: "Suisse Intl Condensed", serif;
+  font-size: 18px;
 }
 
 .ToolBarWrapper {

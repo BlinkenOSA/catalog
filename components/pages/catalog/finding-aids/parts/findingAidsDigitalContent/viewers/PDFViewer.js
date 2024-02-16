@@ -129,6 +129,11 @@ const PDFViewer = ({identifier, fileNames}) => {
                     plugins={[
                         toolbarPluginInstance
                     ]}
+                    renderLoader={(percentages) => (
+                      <div className={style.Loader}>
+                        Loading {Math.round(percentages)}% ...
+                      </div>
+                    )}
                     theme={{
                         theme: 'dark',
                     }}
