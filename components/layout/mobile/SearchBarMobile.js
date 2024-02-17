@@ -51,7 +51,7 @@ const SearchBarMobile = ({type}) => {
                 onClick={() => handleSearch()}
                 className={style.SearchButton}
             >
-                <AiOutlineSearch/>
+                <AiOutlineSearch size={25}/>
             </button>
         </div>
     )

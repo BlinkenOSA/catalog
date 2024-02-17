@@ -14,8 +14,18 @@
 .PDFViewer {
   flex: 1;
   overflow: hidden;
-  border-top: $border-width solid $black;
+  border: unset;
   height: 464px;
+
+  :global .rpv-default-layout__container {
+    border: unset;
+    border-top: $border-width solid $black;
+  }
+
+  :global .rpv-default-layout__toolbar {
+    border-bottom: $border-width solid $black;
+    z-index: 1;
+  }
 
   :global .rpv-core__doc-loading {
     background-color: $button-background;

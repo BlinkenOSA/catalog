@@ -1,0 +1,277 @@
+@import "../../../../../../../styles/variables";
+
+.PDFViewer {
+  flex: 1;
+  overflow: hidden;
+  border: unset;
+  height: 464px;
+
+  :global .rpv-default-layout__container {
+    border: unset;
+    border-top: $border-width solid $black;
+  }
+
+  :global .rpv-default-layout__toolbar {
+    border-bottom: $border-width solid $black;
+    z-index: 1;
+  }
+
+  :global .rpv-core__doc-loading {
+    background-color: $button-background;
+  }
+
+  :global .rpv-core__inner-page {
+    background-color: $button-background;
+  }
+
+  :global [data-testid="full-screen__enter-button"],
+  :global [data-testid="full-screen__exit-button-with-tooltip"] {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    border-radius: 13px;
+    background-color: $black;
+    color: $white;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+
+    &:hover {
+      color: $black;
+      background-color: $yellow;
+    }
+  }
+
+  :global [aria-controls="rpv-core__popver-body-toolbar-more-actions"] {
+    display: none;
+  }
+
+  :global .rpv-toolbar__left {
+    flex: 1;
+    padding-left: 14px;
+    display: flex;
+
+    // Search
+    :global .rpv-search__popover {
+      :global .rpv-search__popover-footer-button button {
+        cursor: pointer;
+        height: 25px;
+        border-radius: 13px;
+        margin: 0 5px;
+        background-color: $black;
+        color: $white;
+
+        &:hover {
+          color: $black;
+          background-color: $yellow;
+        }
+      }
+
+      :global .rpv-core__textbox {
+        border: 1px solid $button-background;
+        border-radius: 0;
+        height: 25px;
+        width: 100%;
+        padding-right: 35px;
+
+        &:focus-visible {
+          outline: unset;
+          border: 2px solid $black;
+        }
+      }
+
+      :global .rpv-search__popover-counter {
+        padding-right: 10px;
+      }
+    }
+  }
+
+  :global .rpv-toolbar__center {
+    flex: unset;
+  }
+
+  :global .rpv-toolbar__right {
+    flex: 1;
+    justify-content: flex-end;
+  }
+
+  :global .rpv-toolbar__item {
+    color: $black;
+    font-family: "Suisse Intl Condensed", serif;
+  }
+}
+
+.CurrentPageInput {
+  :global .rpv-core__textbox {
+    border: 1px solid $button-background;
+    border-radius: 0;
+    height: 25px;
+    width: 50px;
+    text-align: center;
+
+    &:focus-visible {
+      outline: unset;
+      border: 2px solid $black;
+    }
+  }
+}
+
+.Loader {
+  color: $black;
+  font-family: "Suisse Intl Condensed", serif;
+  font-size: 18px;
+}
+
+.Button {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  border-radius: 13px;
+  margin: 0 5px;
+  background-color: $black;
+  color: $white;
+
+  &:hover {
+    color: $black;
+    background-color: $yellow;
+  }
+}
+
+.Button.Disabled {
+  background-color: $button-background;
+  pointer-events: none;
+}
+
+.ZoomIn {
+  &::after {
+    content: ' ';
+    position: absolute;
+    width:25px;
+    height:25px;
+    background: linear-gradient(#FFF 0 0), linear-gradient(#FFF 0 0);
+    background-position:center;
+    background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+
+  }
+
+  &:hover::after {
+    background: linear-gradient(#000 0 0), linear-gradient(#000 0 0);
+    background-position:center;
+    background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+  }
+}
+
+.ZoomOut {
+  &::after {
+    content: ' ';
+    position: absolute;
+    width:25px;
+    height:25px;
+    background: linear-gradient(#FFF 0 0);
+    background-position:center;
+    background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+
+  }
+
+  &:hover::after {
+    background: linear-gradient(#000 0 0);
+    background-position:center;
+    background-size: 50% 1px,1px 50%; /*thickness = 2px, length = 50% (25px)*/
+    background-repeat:no-repeat;
+  }
+}
+
+.Previous {
+  &::after, &::before {
+    position: relative;
+    content: "";
+    display: block;
+    box-sizing: border-box;
+  }
+
+  &::after {
+    width: 8px;
+    height: 8px;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    transform: rotate(45deg);
+    top: 8px;
+    left: 5px;
+  }
+
+  &::before {
+    width: 16px;
+    height: 1px;
+    top: 12px;
+    left: 5px;
+    background: currentColor;
+  }
+
+  &:hover::after {
+    border-bottom: 1px solid $black;
+    border-left: 1px solid $black;
+  }
+
+  &:hover::before {
+    background: $black;
+  }
+}
+
+.Next {
+  &::after, &::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  &::after {
+    width: 8px;
+    height: 8px;
+    border-top: 1px solid;
+    border-right: 1px solid;
+    transform: rotate(45deg);
+    top: 8px;
+    left: 12px;
+  }
+
+  &::before {
+    width: 16px;
+    height: 1px;
+    top: 12px;
+    left: 4px;
+    background: currentColor
+  }
+
+  &:hover::after {
+    border-top: 1px solid $black;
+    border-right: 1px solid $black;
+  }
+
+  &:hover::before {
+    background: $black;
+  }
+}
+
+.Search {
+  font-size: 18px;
+  display: flex;
+
+  span {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.Divider {
+  background-color: $black;
+  width: 1px;
+  margin-left: 5px;
+  margin-right: 1px;
+}

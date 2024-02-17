@@ -44,14 +44,16 @@ const PDFViewer = ({identifier, fileNames}) => {
                             <div style={{ padding: '0px 2px' }}>
                               <ShowSearchPopover>
                                 {(props) => (
-                                  <div
-                                    className={`${style.Button} ${style.Search}`}
-                                    onClick={props.onClick}
-                                  >
-                                    <span>
-                                      <BiSearch size={17} />
-                                    </span>
-                                  </div>
+                                    <>
+                                      <div
+                                        className={`${style.Button} ${style.Search}`}
+                                        onClick={props.onClick}
+                                      >
+                                        <span>
+                                          <BiSearch size={17} />
+                                        </span>
+                                      </div>
+                                    </>
                                 )}
                               </ShowSearchPopover>
                             </div>
@@ -113,18 +115,18 @@ const PDFViewer = ({identifier, fileNames}) => {
                             </div>
                             <div className={style.Divider} />
                             <div style={{ padding: '0px 2px' }}>
-                                <EnterFullScreen>
-                                    {(props) => (
-                                        <div
-                                            className={`${style.Button} ${style.FullScreen} ${props.isDisabled && style.Disabled}`}
-                                            onClick={props.onClick}
-                                        >
-                                            <span>
-                                                {fullScreen ? <BiExitFullscreen size={17}/> : <BiFullscreen size={17}/>}
-                                            </span>
-                                        </div>
-                                    )}
-                                </EnterFullScreen>
+                                    <EnterFullScreen>
+                                        {(props) => (
+                                            <div
+                                                className={`${style.Button} ${style.FullScreen} ${props.isDisabled && style.Disabled}`}
+                                                onClick={props.onClick}
+                                            >
+                                                <span>
+                                                    {fullScreen ? <BiExitFullscreen size={17}/> : <BiFullscreen size={17}/>}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </EnterFullScreen>
                             </div>
                         </>
                     );

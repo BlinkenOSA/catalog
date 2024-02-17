@@ -1,7 +1,7 @@
 import React from "react";
 import dynamic from "next/dynamic";
 
-const PDFViewer = dynamic(() => import("./viewers/PDFViewer"), {
+const PDFViewer = dynamic(() => import("./viewers/PDFViewerV2"), {
     ssr: false
 });
 

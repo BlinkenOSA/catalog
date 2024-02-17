@@ -12,7 +12,7 @@
     border: 0;
     border-radius: 0;
     padding: 0 30px 0 10px;
-    width: 100%;
+    width: 81%;
     height: 34px;
   }
 
@@ -28,13 +28,18 @@
     height: 34px;
     width: 50px;
     font-size: 24px;
-    padding-top: 3px;
-    text-align: center;
+    display: flex;
+    align-items: center;
 
     &:hover {
       cursor: pointer;
       color: $black;
       background-color: $yellow;
+    }
+
+    svg {
+      flex: 1;
+      width: 30px;
     }
   }
 
