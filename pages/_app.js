@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }) {
             </Head>
             <CartProvider id={'osa-catalog-requests'}>
                 <AlertProvider template={AlertTemplate} {...options}>
-                    <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.js">
+                    <Worker workerUrl="https://catalog.osaarchivum.org/pdfjs-dist/pdf.worker.js">
                         <MediaContextProvider disableDynamicMediaQueries>
                             <Component {...pageProps} />
                         </MediaContextProvider>
