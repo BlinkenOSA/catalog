@@ -1,7 +1,6 @@
 import style from "./ResultItem.module.scss";
 import Subtitle from "./parts/metadata/Subtitle";
 import Title from "./parts/metadata/Title";
-import RecordType from "./parts/metadata/RecordType";
 import Publisher from "./parts/metadata/Publisher";
 import ParentUnits from "./parts/metadata/ParentUnits";
 import CallNumber from "./parts/metadata/CallNumber";
@@ -74,7 +73,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                     </a>
                 </div>
                 <div className={style.Subtitle}>
-                    <Subtitle result={result} />
+                    <Subtitle result={result} highlights={highlights} />
                 </div>
                 <div className={style.DescriptionWrap} >
                     <CallNumber label={'Call Number'} result={result} />

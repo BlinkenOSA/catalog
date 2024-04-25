@@ -1,4 +1,16 @@
-const Subtitle = ({result}) => {
+import parse from "html-react-parser";
+
+const Subtitle = ({result, highlights}) => {
+    const renderValue = (valueKey, suffix) => {
+        if (highlights && highlights.hasOwnProperty(result['id'])) {
+            if (highlights[result['id']].hasOwnProperty('creator_search')) {
+                const title = highlights[result['id']]['creator_search'].join(', ').toUpperCase()
+                return parse(`${suffix} ${title}`);
+            }
+        }
+        return result['valueKey']
+    }
+
     switch(result['record_origin']) {
         case 'Archives':
             switch (result['archival_level']) {
@@ -8,9 +20,9 @@ const Subtitle = ({result}) => {
                     return '';
             }
         case 'Film Library':
-            return result.hasOwnProperty('director') ? `directed by ${result['director'].join(', ').toUpperCase()}` : ''
+            return renderValue('director', 'directed by')
         case 'Library':
-            return result.hasOwnProperty('author') ? `by ${result['author'].join(', ').toUpperCase()}` : '';
+            return renderValue('author', 'by')
         default:
             return ''
     }

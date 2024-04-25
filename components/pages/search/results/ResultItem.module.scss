@@ -53,6 +53,13 @@
     font-size: 14px;
     font-weight: 700;
     padding-top: 2px;
+
+    em {
+      background: url('/images/highlight-brush.svg');
+      margin: -2px -6px;
+      padding: 2px  6px;
+      font-style: normal;
+    }
   }
 
   .DescriptionWrap {
