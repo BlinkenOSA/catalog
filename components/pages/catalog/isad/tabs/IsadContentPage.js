@@ -228,15 +228,11 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 
 		const renderCartButton = (record) => {
 			if (!record['digital_version_online']) {
-				if (record['access_rights'] !== 'Restricted') {
-					return (
-						<div className={style.CartButton}>
-							<CartButton record={record} inCart={inCart(record['id'])} name={record['id']} />
-						</div>
-					)
-				} else {
-					return (<div className={style.CartButton}> </div>)
-				}
+				return (
+					<div className={style.CartButton}>
+						<CartButton record={record} inCart={inCart(record['id'])} name={record['id']} />
+					</div>
+				)
 			}
 		}
 
