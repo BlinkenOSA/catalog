@@ -65,6 +65,16 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
             }
         }
 
+        const getRestriction = () => {
+            if (record.hasOwnProperty('access_rights')) {
+                if (record['access_rights'] === 'Restricted') {
+                    return true
+                }
+            }
+
+            return false
+        }
+
         if (checked) {
             let count;
 
@@ -87,6 +97,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
                 primary_type: record['primary_type'],
                 type: getType(),
                 series_name: record.hasOwnProperty('series_name') ? record['series_name'] : '',
+                restricted: getRestriction(),
                 price: 0
             }
 

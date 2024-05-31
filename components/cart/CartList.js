@@ -31,6 +31,12 @@ const CartList = ({isMobile=false}) => {
         }
     }
 
+    const renderRestricted = (item) => {
+        if (item['restricted']) {
+            return <div className={style.Restricted}>This is a restricted content. Further actions will be required!</div>
+        }
+    }
+
     const renderItems = (items) => (
         <FieldArray name="items" render={ arrayHelpers => (
             items.map((item, index) => (
@@ -47,11 +53,13 @@ const CartList = ({isMobile=false}) => {
                     <div>
                         <div className={style.CallNumber}>{item['call_number']}</div>
                         {renderTitle(item, index)}
+                        {renderRestricted(item)}
                     </div> :
                     <>
                         <div className={style.CallNumber}>{item['call_number']}</div>
                         <div style={{flex: 1}}>
                             {renderTitle(item, index)}
+                            {renderRestricted(item)}
                             {
                                 item['origin'] === 'Library' && item['type'].includes('Continuing Resource') &&
                                 <div style={{display: 'block'}}>
