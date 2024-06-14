@@ -16,7 +16,7 @@ const Header = ({type='normal'}) => {
             <div className={style.HeaderContent}>
                 <a href={'/'}>
                     <div className={style.Logo}>
-                        <img src={"/images/osa-logo-old-white.svg"} alt={"Blinken OSA Archivum"}/>
+                        <img src={"/images/osa-logo-white.svg"} alt={"Blinken OSA Archivum"}/>
                     </div>
                 </a>
                 <div className={style.SearchBar}>
