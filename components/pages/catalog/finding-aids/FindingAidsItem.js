@@ -2,6 +2,7 @@ import style from "./FindingAidsItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
 import FindingAidsItemWithWiki from "./parts/findingAidsDisplay/FindingAidsItemWithWiki";
+import Markdown from 'react-markdown'
 
 const FindingAidsItem = ({id, record, language, group, label, field, bilingual, links={}, isMobile, display='sameRow'}) => {
     const fieldName = language === 'EN' ? field : (bilingual ? `${field}_original` : field);
@@ -57,7 +58,7 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
             case 'physical_condition_original':
             case 'note':
             case 'note_original':
-                return parse(record[fieldName])
+                return <Markdown>{record[fieldName]}</Markdown>
             case 'duration':
                 let d = []
                 const duration = record['duration'].split(':')
