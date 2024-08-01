@@ -1,4 +1,3 @@
-import useSWRInfinite from 'swr/infinite'
 import {catalogAPIFetcher, solrFetcher} from "../../../../../utils/fetcherFunctions";
 import Loader from "../../../../layout/Loader";
 import style from "./IsadContentPage.module.scss";
@@ -17,6 +16,7 @@ import filterPlaceholders from "./config/filterPlaceholders";
 import AccessRightsButton from "../../../search/parts/AccessRightsButton";
 import useSWR from "swr";
 import IsadPagination from "./parts/IsadPagination";
+import Markdown from "react-markdown";
 
 const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, originalLocale, isMobile}) => {
 	const { inCart } = useCart();
@@ -49,13 +49,13 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
 					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
-						return parse(elementHighlight[`${field}_search_en`].join())
+						return <Markdown>{elementHighlight[`${field}_search_en`].join()}</Markdown>
 					}
 					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
 						return parse(elementHighlight[`${field}_search_general`].join())
 					}
 				}
-				return rec[field] ? parse(rec[field]) : rec[field]
+				return rec[field] ? <Markdown>{rec[field]}</Markdown> : rec[field]
 			} else {
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
@@ -70,9 +70,9 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 					}
 				}
 				if (rec[`${field}_original`]) {
-					return parse(rec[`${field}_original`])
+					return <Markdown>{rec[`${field}_original`]}</Markdown>
 				} else {
-					return rec[field] ? parse(rec[field]) : rec[field]
+					return rec[field] ? <Markdown>{rec[field]}</Markdown> : rec[field]
 				}
 			}
 		}
