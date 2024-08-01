@@ -133,7 +133,8 @@
         font-weight: 400;
       }
 
-      em {
+      em, code {
+        font-family: inherit;
         background: url('/images/highlight-brush.svg');
         margin: -2px -6px;
         padding: 2px  6px;
@@ -151,7 +152,8 @@
     .Description:not(:empty) {
       margin-top: 10px;
 
-      em {
+      em, code {
+        font-family: inherit;
         background: url('/images/highlight-brush.svg');
         margin: -2px -6px;
         padding: 2px  6px;

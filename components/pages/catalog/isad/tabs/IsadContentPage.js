@@ -44,15 +44,21 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 	const highlights = data?.['highlighting']
 
 	const renderData = (rec, lang='EN') => {
+		const getHighlightedMarkdown = (value) => {
+			let md = value.replaceAll('<em>', '`')
+			md = md.replaceAll('</em>', '`')
+			return md
+		}
+
 		const getHighlightedField = (field, lng = lang) => {
 			if (lng === 'EN') {
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
 					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
-						return <Markdown>{elementHighlight[`${field}_search_en`].join()}</Markdown>
+						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_en`].join())}</Markdown>
 					}
 					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
-						return parse(elementHighlight[`${field}_search_general`].join())
+						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_general`].join())}</Markdown>
 					}
 				}
 				return rec[field] ? <Markdown>{rec[field]}</Markdown> : rec[field]
@@ -60,13 +66,13 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
 					if (elementHighlight.hasOwnProperty(`${field}_search_${lng.toLowerCase()}`)) {
-						return parse(elementHighlight[`${field}_search_${lng.toLowerCase()}`].join())
+						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_${lng.toLowerCase()}`].join())}</Markdown>
 					}
 					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
-						return parse(elementHighlight[`${field}_search_general`].join())
+						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_general`].join())}</Markdown>
 					}
 					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
-						return parse(elementHighlight[`${field}_search_en`].join())
+						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_en`].join())}</Markdown>
 					}
 				}
 				if (rec[`${field}_original`]) {
