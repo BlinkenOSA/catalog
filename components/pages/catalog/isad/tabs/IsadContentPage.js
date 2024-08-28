@@ -83,6 +83,36 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 			}
 		}
 
+		const getHighlightedTitleField = (lng = lang) => {
+			if (lng === 'EN') {
+				if (highlights && highlights.hasOwnProperty(rec['id'])) {
+					const elementHighlight = highlights[rec['id']];
+					if (elementHighlight.hasOwnProperty(`title_search_en`)) {
+						return parse(elementHighlight[`title_search_en`].join())
+					}
+					if (elementHighlight.hasOwnProperty(`title_search_general`)) {
+						return parse(elementHighlight[`title_search_general`].join())
+					}
+				}
+				return rec['title'] ? parse(rec['title']) : rec['title']
+			} else {
+				if (highlights && highlights.hasOwnProperty(rec['id'])) {
+					const elementHighlight = highlights[rec['id']];
+					if (elementHighlight.hasOwnProperty(`title_search_${lng.toLowerCase()}`)) {
+						return parse(elementHighlight[`title_search_${lng.toLowerCase()}`].join())
+					}
+					if (elementHighlight.hasOwnProperty(`title_search_general`)) {
+						return parse(elementHighlight[`title_search_general`].join())
+					}
+				}
+				if (rec[`title_original`]) {
+					return parse(rec[`title_original`])
+				} else {
+					return rec['title'] ? parse(rec['title']) : rec['title']
+				}
+			}
+		}
+
 		const getNotes = () => {
 			if (lang === 'EN') {
 				return rec['note']
@@ -114,7 +144,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 				<div>
 					<a href={`/catalog/${rec['id']}`}>
 						<div className={style.Title}>
-							{getHighlightedField('title')}
+							{getHighlightedTitleField()}
 							{rec['date_created'] && `, ${rec['date_created']}`}
 						</div>
 					</a>
@@ -141,7 +171,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 						<div style={{flex: 1}}>
 							<a href={`/catalog/${rec['id']}`}>
 								<div className={style.Title}>
-									{getHighlightedField('title', 'EN')}
+									{getHighlightedTitleField( 'EN')}
 									{rec['date_created'] && `, ${rec['date_created']}`}
 								</div>
 							</a>
@@ -155,8 +185,8 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 									<div className={style.Title}>
 										{
 											getSecondLanguage() === 'RU' ?
-											<span className={style.Russian}>{getHighlightedField('title', getSecondLanguage())}</span> :
-											getHighlightedField('title', getSecondLanguage())
+											<span className={style.Russian}>{getHighlightedTitleField(getSecondLanguage())}</span> :
+											getHighlightedTitleField(getSecondLanguage())
 										}
 										{rec['date_created'] && `, ${rec['date_created']}`}
 									</div>
