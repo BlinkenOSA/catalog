@@ -1,6 +1,7 @@
 import style from "./IsadItem.module.scss";
 import React from "react";
 import parse from 'html-react-parser';
+import Markdown from "react-markdown";
 
 const IsadItem = ({id, record, language, group, label, field, bilingual, links='', display='sameRow', isMobile}) => {
     const fieldName = language === 'EN' ? field : (bilingual ? `${field}_original` : field);
@@ -58,21 +59,27 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
                 } else {
                     return ''
                 }
+            case 'carrier_estimated':
+            case 'carrier_estimated_original':
+            case 'archival_history':
+            case 'archival_history_original':
+            case 'administrative_history':
+            case 'administrative_history_original':
             case 'scope_and_content_abstract':
             case 'scope_and_content_abstract_original':
             case 'scope_and_content_narrative':
             case 'scope_and_content_narrative_original':
-            case 'archival_history':
-            case 'archival_history_original':
+            case 'appraisal':
+            case 'appraisal_original':
             case 'system_of_arrangement_information':
             case 'system_of_arrangement_information_original':
-            case 'administrative_history':
-            case 'administrative_history_original':
             case 'physical_characteristics':
             case 'physical_characteristics_original':
+            case 'publication_note':
+            case 'publication_note_original':
             case 'note':
             case 'note_original':
-                return parse(record[fieldName])
+                return <Markdown>{record[fieldName]}</Markdown>
             default:
                 return renderValue(record[fieldName])
         }
