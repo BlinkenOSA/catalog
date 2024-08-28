@@ -92,7 +92,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		}
 
 		const detectSecondLanguage = () => {
-			return rec['title_original']  && rec['contents_summary_original']
+			return rec['title_original']  && rec['original_locale']
 		}
 
 		const getSecondLanguage = () => {
@@ -142,14 +142,6 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 							<a href={`/catalog/${rec['id']}`}>
 								<div className={style.Title}>
 									{getHighlightedField('title', 'EN')}
-									{
-										!detectSecondLanguage() && rec['title_original'] &&
-										(
-											originalLocale === 'RU' ?
-											<span className={style.Russian}> ({getHighlightedField('title_original', 'EN')})</span> :
-											` (${getHighlightedField('title_original', 'EN')})`
-										)
-									}
 									{rec['date_created'] && `, ${rec['date_created']}`}
 								</div>
 							</a>
