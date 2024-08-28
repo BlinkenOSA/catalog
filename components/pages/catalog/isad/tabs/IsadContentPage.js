@@ -92,7 +92,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		}
 
 		const detectSecondLanguage = () => {
-			return rec['title_original']  && rec['original_locale']
+			return (rec['title_original'] || rec['contents_summary_original']) && rec['original_locale']
 		}
 
 		const getSecondLanguage = () => {
