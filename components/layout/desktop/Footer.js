@@ -19,7 +19,7 @@ const Footer = () => {
                         </ul>
                         <ul>
                             <li>Address:<br/>H-1051 Budapest, Arany János u. 32.</li>
-                            <li>E-mail:<br/>info@osaarchivum.org</li>
+                            <li>E-mail:<br/>archivum@ceu.edu</li>
                         </ul>
                     </div>
                 </div>
