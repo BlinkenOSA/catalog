@@ -71,9 +71,6 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
 						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_general`].join())}</Markdown>
 					}
-					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
-						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_en`].join())}</Markdown>
-					}
 				}
 				if (rec[`${field}_original`]) {
 					return <Markdown>{rec[`${field}_original`]}</Markdown>
