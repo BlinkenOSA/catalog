@@ -29,7 +29,6 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 	const getParams = () => {
 		return {
 			query: seriesQuery,
-			filterQuery: `series_id:${seriesID}`,
 			start: start,
 			size: size,
 			view: view,
@@ -39,9 +38,8 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 
 	const {data, isLoading} = useSWR([`folders-items/${seriesID}`, getParams()], ([url, params]) => catalogAPIFetcher(url, params))
 
-	const numFound = data?.['response']['numFound']
-	const facets = data ? data['facet_counts']['facet_fields'] : {}
-	const highlights = data?.['highlighting']
+	const numFound = data?.['estimatedTotalHits']
+	const facets = isLoading ? [] : data['facetDistribution']
 
 	const renderData = (rec, lang='EN') => {
 		const getHighlightedMarkdown = (value) => {
@@ -51,65 +49,22 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		}
 
 		const getHighlightedField = (field, lng = lang) => {
+			const {_formatted} = rec
+
 			if (lng === 'EN') {
-				if (highlights && highlights.hasOwnProperty(rec['id'])) {
-					const elementHighlight = highlights[rec['id']];
-					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
-						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_en`].join())}</Markdown>
-					}
-					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
-						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_general`].join())}</Markdown>
-					}
-				}
-				return rec[field] ? <Markdown>{rec[field]}</Markdown> : rec[field]
+				return <Markdown>{getHighlightedMarkdown(_formatted[field])}</Markdown>
 			} else {
-				if (highlights && highlights.hasOwnProperty(rec['id'])) {
-					const elementHighlight = highlights[rec['id']];
-					if (elementHighlight.hasOwnProperty(`${field}_search_${lng.toLowerCase()}`)) {
-						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_${lng.toLowerCase()}`].join())}</Markdown>
-					}
-					if (elementHighlight.hasOwnProperty(`${field}_search_general`)) {
-						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_general`].join())}</Markdown>
-					}
-					if (elementHighlight.hasOwnProperty(`${field}_search_en`)) {
-						return <Markdown>{getHighlightedMarkdown(elementHighlight[`${field}_search_en`].join())}</Markdown>
-					}
-				}
-				if (rec[`${field}_original`]) {
-					return <Markdown>{rec[`${field}_original`]}</Markdown>
-				} else {
-					return rec[field] ? <Markdown>{rec[field]}</Markdown> : rec[field]
-				}
+				return <Markdown>{getHighlightedMarkdown(_formatted[`${field}_original`])}</Markdown>
 			}
 		}
 
 		const getHighlightedTitleField = (lng = lang) => {
+			const {_formatted} = rec
+
 			if (lng === 'EN') {
-				if (highlights && highlights.hasOwnProperty(rec['id'])) {
-					const elementHighlight = highlights[rec['id']];
-					if (elementHighlight.hasOwnProperty(`title_search_en`)) {
-						return parse(elementHighlight[`title_search_en`].join())
-					}
-					if (elementHighlight.hasOwnProperty(`title_search_general`)) {
-						return parse(elementHighlight[`title_search_general`].join())
-					}
-				}
-				return rec['title'] ? parse(rec['title']) : rec['title']
+				return parse(_formatted[`title`])
 			} else {
-				if (highlights && highlights.hasOwnProperty(rec['id'])) {
-					const elementHighlight = highlights[rec['id']];
-					if (elementHighlight.hasOwnProperty(`title_search_${lng.toLowerCase()}`)) {
-						return parse(elementHighlight[`title_search_${lng.toLowerCase()}`].join())
-					}
-					if (elementHighlight.hasOwnProperty(`title_search_general`)) {
-						return parse(elementHighlight[`title_search_general`].join())
-					}
-				}
-				if (rec[`title_original`]) {
-					return parse(rec[`title_original`])
-				} else {
-					return rec['title'] ? parse(rec['title']) : rec['title']
-				}
+				return parse(_formatted[`title_original`])
 			}
 		}
 
@@ -229,11 +184,11 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 
 	const renderDocs = (records) => {
 		const isBoxRow = (rec, index) => {
-			return index === 0 || (index > 0 && rec['container_number_sort'] !== records[index - 1]['container_number_sort']);
+			return index === 0 || (index > 0 && rec['container_number'] !== records[index - 1]['container_number']);
 		}
 
 		const displayContainer = (rec, index) => {
-			const containerNumber = `${rec['container_type']} #${rec['container_number_sort']}`
+			const containerNumber = `${rec['container_type']} #${rec['container_number']}`
 
 			if (isBoxRow(rec, index)) {
 				return (
@@ -305,11 +260,11 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		const renderFilters = () => (
 			<React.Fragment>
 				<IsadFilter
-					facetName={'year_created'}
+					facetName={'year_created_facet'}
 					onSelect={onFilter}
 					facets={facets}
 					placeholder={filterPlaceholders['year_created'][language]}
-					value={selectedSeriesFacets.hasOwnProperty('year_created') ? selectedSeriesFacets['year_created'] : undefined}
+					value={selectedSeriesFacets.hasOwnProperty('year_created_facet') ? selectedSeriesFacets['year_created_facet'] : undefined}
 					isMobile={isMobile}
 				/>
 				<IsadFilter
@@ -344,7 +299,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 					/>
 					<IsadPagination
 						numFound={numFound}
-						recordsCount={data ? data['response']['docs'].length : []}
+						recordsCount={data ? data['estimatedTotalHits'] : []}
 						containerCount={containerCount}
 						folderItemCount={folderItemCount}
 						containerNumber={start}
@@ -368,7 +323,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 						/>
 						<IsadPagination
 							numFound={numFound}
-							recordsCount={data ? data['response']['docs'].length : []}
+							recordsCount={data ? data['hits'].length : []}
 							containerCount={containerCount}
 							folderItemCount={folderItemCount}
 							containerNumber={start}
@@ -388,7 +343,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		<React.Fragment>
 			{ renderMenu() }
 			<div className={style.RecordsWrapper}>
-					{data && !isLoading ? renderDocs(data['response']['docs']) : <Loader />}
+				{data && !isLoading ? renderDocs(data['hits']) : <Loader />}
 			</div>
 		</React.Fragment>
 	)

@@ -31,6 +31,20 @@ export const catalogAPIFetcher = (url, params) => {
     ).then(res => res.data);
 }
 
+export const makeSearchParams = (params, type='normal') => {
+    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
+    const {query, filterQuery, limit, offset, sort, qf, cursorMark, selectedFacets, selectedFacetsDates} = processParams(params, type)
+
+    const baseParams = {}
+
+    baseParams['q'] = query ? query : '*';
+
+    limit && (baseParams['limit'] = Number(limit));
+    offset && (baseParams['offset'] = Number(offset));
+
+    return baseParams
+}
+
 export const makeSolrParams = (params, type='normal') => {
     const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
 

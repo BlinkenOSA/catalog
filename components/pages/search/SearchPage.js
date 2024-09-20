@@ -19,8 +19,7 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
     const {limit, offset} = router.query;
 
     const renderResults = (isMobile=false) => {
-        const results = data['response']['docs']
-        const highlights = data['highlighting']
+        const results = data['hits']
 
         if (results.length > 0) {
             return results.map((result, index) => (
@@ -28,7 +27,6 @@ const SearchPage = ({data, onSelectFacetGroup}) => {
                     key={result['id']}
                     isMobile={isMobile}
                     result={result}
-                    highlights={highlights}
                     limit={limit ? Number(limit) : defaultLimit}
                     offset={offset ? Number(offset) : defaultOffset}
                     index={index}

@@ -52,7 +52,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
     }
 
     const renderSearchHighlights = () => {
-        return <SearchHighglights result={result} highlights={highlights}/>
+        return <SearchHighglights result={result}/>
     }
 
     const renderDividerButton = () => {
@@ -69,7 +69,7 @@ const ResultItem = ({result, highlights, limit, offset, index, isMobile}) => {
                 </div>
                 <div className={style.Title}>
                     <a href={`/catalog/${result['id']}`}>
-                        <Title result={result} highlights={highlights} />
+                        <Title result={result} />
                     </a>
                 </div>
                 <div className={style.Subtitle}>

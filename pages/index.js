@@ -5,7 +5,7 @@ import IndexPageDesktop from "../components/pages/index/desktop/IndexPage";
 import IndexPageMobile from "../components/pages/index/mobile/IndexPage";
 import React, {useEffect, useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
-import {makeSolrParams} from "../utils/fetcherFunctions";
+import {makeSearchParams, makeSolrParams} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
 import SearchPage from "../components/pages/search/SearchPage";
 import LayoutWithFacet from "../components/layout/LayoutWithFacet";
@@ -13,32 +13,37 @@ import {useDeepCompareEffect, useMeasure, useSessionStorage} from "react-use";
 import {Media} from "../utils/media";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
-import {Buffer} from "buffer";
 import {facetConfig} from "../config/facetConfig";
-
+import { MeiliSearch } from "meilisearch";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
-const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
-const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
-const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
+const SEARCH_API = process.env.NEXT_PUBLIC_SEARCH_API;
+const SEARCH_USER = process.env.NEXT_PUBLIC_SEARCH_API_KEY;
 
 export async function getServerSideProps(context) {
     const params = context.query
-    const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : makeSolrParams({qf: 'identifier_search'})
+    const searchParams = makeSearchParams(params)
+
+    const client = new MeiliSearch({
+        host: SEARCH_API,
+        apiKey: SEARCH_USER,
+    });
+
+    const index = client.index("catalog");
+
     let data = []
 
-    if (Object.entries(params).length > 0) {
-        // SOLR Basic Authentication
-        let headers = new Headers();
-        headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+    const {q, ...p} = searchParams
 
-        const res = await fetch(`${SOLR_API}?` + solrParams, {
-            headers: headers
+    if (Object.entries(params).length > 0) {
+        data = await index.search(q, {
+            ...p,
+            facets: ['language', 'subject', 'geo', 'year_created', 'primary_type', 'contributor', 'keyword'],
+            attributesToHighlight: ['title', 'title_original', 'contents_summary', 'contents_summary_original'],
         })
-        data = await res.json()
     } else {
-        data = []
+        data = {'estimatedTotalHits': 0}
     }
 
     return {props: {data}}
@@ -70,7 +75,7 @@ const Index = ({data, badgeData, newIsadData}) => {
         setSelectedFacetGroup('')
     }
 
-    if (data.length === 0) {
+    if (data['estimatedTotalHits'] === 0) {
         return (
             <>
                 <Media greaterThanOrEqual="md">
@@ -101,7 +106,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                             (className, renderChildren) => {
                                 return renderChildren ?
                                     <BreadcrumbSearch
-                                        total={data ? data['response']['numFound'] : 0}
+                                        total={data ? data['estimatedTotalHits'] : 0}
                                         reference={ref}
                                         inverse={false}
                                         module={''}
@@ -115,7 +120,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                           return renderChildren ?
                             <BreadcrumbSearchMobile
                               defaultFacetOpen={'primary_type'}
-                              total={data ? data['response']['numFound'] : 0}
+                              total={data ? data['estimatedTotalHits'] : 0}
                               reference={ref}
                               inverse={false}
                               module={''}
@@ -144,7 +149,7 @@ const Index = ({data, badgeData, newIsadData}) => {
                                         <BreadcrumbSearchMobile
                                             reference={ref}
                                             defaultFacetOpen={'primary_type'}
-                                            total={data ? data['response']['numFound'] : 0}
+                                            total={data ? data['estimatedTotalHits'] : 0}
                                             inverse={true}
                                             module={''}
                                             onSelectFacetGroup={onSelectFacetGroup}
@@ -153,8 +158,8 @@ const Index = ({data, badgeData, newIsadData}) => {
                                         <FacetPageMobile
                                             facetConfig={facetConfig}
                                             breadcrumbHeight={height}
-                                            facets={data ? data['facet_counts']['facet_fields'] : {}}
-                                            total={data ? data['response']['numFound'] : 0}
+                                            facets={data ? data['facetDistribution'] : {}}
+                                            total={data ? data['estimatedTotalHits'] : 0}
                                             selectedFacetGroupInitial={selectedFacetGroup}
                                             onShowButtonClick={onShowButtonClick}
                                         />
@@ -171,8 +176,8 @@ const Index = ({data, badgeData, newIsadData}) => {
                         <FacetPage
                             facetConfig={facetConfig}
                             breadcrumbHeight={height}
-                            facets={data ? data['facet_counts']['facet_fields'] : {}}
-                            total={data ? data['response']['numFound'] : 0}
+                            facets={data ? data['facetDistribution'] : {}}
+                            total={data ? data['estimatedTotalHits'] : 0}
                             selectedFacetGroup={selectedFacetGroup}
                             onSelectFacetGroup={onSelectFacetGroup}
                             onShowButtonClick={onShowButtonClick}

@@ -6,17 +6,15 @@ const IsadFilter = ({facetName, facets, placeholder, onSelect, value, isMobile})
     const [options, setOptions] = useState([])
 
     useEffect(() => {
-        if (facets.hasOwnProperty(`${facetName}_facet`)) {
+        if (facets.hasOwnProperty(`${facetName}`)) {
             let optArray = []
-            facets[`${facetName}_facet`].forEach((facet, index) => {
-                if (index % 2) {
-                    optArray.push(
-                        {
-                            label: `${facets[`${facetName}_facet`][index-1]} (${facet})` ,
-                            value: facets[`${facetName}_facet`][index-1]
-                        }
-                    )
-                }
+            Object.keys(facets[facetName]).forEach((facetKey, index) => {
+                optArray.push(
+                    {
+                        label: `${facetKey} (${facets[facetName][facetKey]})`,
+                        value: facetKey
+                    }
+                )
             })
             setOptions(optArray)
         }

@@ -105,7 +105,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                 return (
                   <FacetValues
                     breadcrumbHeight={breadcrumbHeight}
-                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                    facetValues={facets.hasOwnProperty(selectedFacetGroup) ? facets[selectedFacetGroup] : {}}
                     onFacetActionClick={onFacetActionClick}
                     selectedFacetGroup={selectedFacetGroup}
                     selectedFacetValues={getSelectedFacetValues()}
@@ -116,7 +116,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
             case 'date':
                 return (
                   <FacetDateRange
-                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                    facetValues={facets.hasOwnProperty(selectedFacetGroup) ? facets[selectedFacetGroup] : {}}
                     onFacetActionClick={onFacetActionClick}
                     selectedFacetGroup={selectedFacetGroup}
                     selectedFacetValues={getSelectedFacetValues()}
@@ -126,7 +126,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
             case 'wordcloud':
                 return (
                     <FacetWordCloud
-                        facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                        facetValues={facets.hasOwnProperty(selectedFacetGroup) ? facets[selectedFacetGroup] : {}}
                         onFacetActionClick={onFacetActionClick}
                     />
                 )

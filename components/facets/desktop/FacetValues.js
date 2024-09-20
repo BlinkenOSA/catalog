@@ -39,7 +39,16 @@ const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues, brea
             return value.indexOf('#Q') !== -1 ? `Q${value.split('#Q')[1]}` : ''
         }
 
-        let f = [];
+        let f = []
+
+        Object.keys(facetValues).forEach(key => {
+            f.push({
+                value: type === 'list' ? key : getWikiFacetValue(key),
+                wiki_id: getWikiFacetID(key),
+                number: facetValues[key]
+            })
+        })
+
         for (let i = 0; i < facetValues.length; i += 2) {
             f.push({
                 value: type === 'list' ? facetValues[i] : getWikiFacetValue(facetValues[i]),

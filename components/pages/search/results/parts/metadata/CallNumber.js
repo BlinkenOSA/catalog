@@ -3,14 +3,7 @@ import DescriptionValue from "../DescriptionValue";
 
 const CallNumber = ({label, result}) => {
     if (result['record_origin'] === 'Archives') {
-        switch (result['description_level']) {
-            case 'Folder':
-                return <DescriptionValue label={label} value={result['call_number']} />
-            case 'Item':
-                return <DescriptionValue label={label} value={result['call_number']} />
-            default:
-                return ''
-        }
+        return <DescriptionValue label={label} value={result['call_number']} />
     } else {
         return <DescriptionValue label={label} value={result['call_number']} />
     }
