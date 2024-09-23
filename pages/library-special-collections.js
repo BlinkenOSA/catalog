@@ -18,7 +18,7 @@ export async function getServerSideProps(context) {
   const solrParams = makeSolrParams(params)
 
   solrParams.append('facet.sort', 'index')
-  solrParams.append('fq', 'record_origin_facet:Library')
+  solrParams.append('fq', 'record_origin:Library')
 
   // SOLR Basic Authentication
   let headers = new Headers();

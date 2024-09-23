@@ -15,6 +15,8 @@ const DateCreated = ({facetValues, type}) => {
     })
     const [data, setData] = useState([])
 
+    console.log(facetValues)
+
     useEffect(() => {
         let d = [];
 

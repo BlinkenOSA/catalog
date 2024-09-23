@@ -29,8 +29,6 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
     const router = useRouter();
     const {query, limit, offset, ...selectedFacets} = router.query;
 
-    // console.log(facets)
-
     useEffect(() => {
         setSelectedFacetObject('')
     }, [selectedFacetGroup])

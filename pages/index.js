@@ -39,7 +39,7 @@ export async function getServerSideProps(context) {
     if (Object.entries(params).length > 0) {
         data = await index.search(q, {
             ...p,
-            facets: ['language', 'subject', 'geo', 'year_created', 'primary_type', 'contributor', 'keyword'],
+            facets: ['availability', 'language', 'subject', 'geo', 'year_created', 'primary_type', 'contributor', 'keyword'],
             attributesToHighlight: ['title', 'title_original', 'contents_summary', 'contents_summary_original'],
         })
     } else {

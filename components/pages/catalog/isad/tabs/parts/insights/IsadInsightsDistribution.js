@@ -100,8 +100,8 @@ const IsadInsightsDistribution = ({facets, isMobile}) => {
 
 	return (
 		<div className={isMobile ? `${style.DistributionWrapper} ${style.Mobile}` : style.DistributionWrapper}>
-			{renderDistributionBar(getData(primaryTypes, 'primary_type_facet'), 'Material types in this series')}
-			{renderDistributionGraph(getData(availabilityTypes, 'availability_facet'), 'Availability in this series')}
+			{renderDistributionBar(getData(primaryTypes, 'primary_type'), 'Material types in this series')}
+			{renderDistributionGraph(getData(availabilityTypes, 'availability'), 'Availability in this series')}
 		</div>
 	)
 
