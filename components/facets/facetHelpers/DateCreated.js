@@ -17,6 +17,7 @@ const DateCreated = ({facetValues, type}) => {
 
     useEffect(() => {
         let d = [];
+
         facetValues.map((value, index) => {
             if (index > 0) {
                 if (index % 2 === 0) {

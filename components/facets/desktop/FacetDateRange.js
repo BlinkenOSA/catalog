@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useDeepCompareEffect} from "react-use";
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import {firstObjectKey, lastObjectKey} from "../../../utils/objectKeyFunctions";
 
 /**
  * Displays the selectable facet values belonging to the selected facet group.
@@ -19,7 +20,9 @@ const FacetDateRange = ({facetValues, selectedFacetGroup, selectedFacetValues, o
     const [limits, setLimits] = useState([1950, 2000])
 
     useDeepCompareEffect(() => {
-        setLimits([facetValues[0] === '0' ? Number(facetValues[2]) : Number(facetValues[0]), Number(facetValues[facetValues.length-2])])
+        setLimits([firstObjectKey(facetValues) === '0' ?
+            Number(Object.keys(facetValues)[1]) : Number(firstObjectKey(facetValues)),
+            Number(lastObjectKey(facetValues))])
     }, [facetValues, selectedFacetGroup]);
 
     const getMarks = () => {
