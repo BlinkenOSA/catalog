@@ -14,16 +14,16 @@ const IsadInsightsDates = ({facets, isOnDrawer=false, isMobile=false}) => {
 	const [data, setData] = useState([]);
 
 	useDeepCompareEffect(() => {
-		if (facets.hasOwnProperty('year_created_facet')) {
-			if (facets['year_created_facet'].length > 1) {
-				const facetValues = facets['year_created_facet'];
+		if (facets.hasOwnProperty('year_created')) {
+			if (Object.keys(facets['year_created']).length > 1) {
+				const facetValues = facets['year_created'];
 				const f = [];
-				for (let i = 0; i < facetValues.length; i += 2) {
+				Object.keys(facetValues).forEach(key => {
 					f.push({
-						year: facetValues[i],
-						numberOfRecords: facetValues[i+1]
+						year: key,
+						numberOfRecords: facetValues[key]
 					})
-				}
+				})
 				setData(f);
 			}
 		}
@@ -41,8 +41,8 @@ const IsadInsightsDates = ({facets, isOnDrawer=false, isMobile=false}) => {
 		return null;
 	};
 
-	if (facets.hasOwnProperty('year_created_facet')) {
-		if (facets['year_created_facet'].length > 1) {
+	if (facets.hasOwnProperty('year_created')) {
+		if (Object.keys(facets['year_created']).length > 1) {
 			return (
 					<div className={isOnDrawer ? `${style.InsightDateWrapper} ${style.BorderLess}` : style.InsightDateWrapper}>
 						<div className={isOnDrawer ? style.TitleDrawer : style.Title}>Date distribution of the material in this archival unit</div>

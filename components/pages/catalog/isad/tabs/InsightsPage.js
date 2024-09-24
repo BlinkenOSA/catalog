@@ -7,7 +7,7 @@ import React from "react"
 
 const InsightsPage = ({data, isMobile}) => {
 	const renderParts = () => {
-		const facets = data['facet_counts']['facet_fields']
+		const facets = data['']
 
 		return (
 			<React.Fragment>
@@ -19,6 +19,8 @@ const InsightsPage = ({data, isMobile}) => {
 			</React.Fragment>
 		)
 	}
+
+	console.
 
 	return (
 		data ? renderParts() : <Loader/>

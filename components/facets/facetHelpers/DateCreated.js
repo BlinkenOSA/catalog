@@ -15,17 +15,11 @@ const DateCreated = ({facetValues, type}) => {
     })
     const [data, setData] = useState([])
 
-    console.log(facetValues)
-
     useEffect(() => {
-        let d = [];
+        const d = [];
 
-        facetValues.map((value, index) => {
-            if (index > 0) {
-                if (index % 2 === 0) {
-                    d.push({x: value, y: facetValues[index+1]})
-                }
-            }
+        Object.keys(facetValues).forEach(key => {
+            d.push({x: key, y: facetValues[key]})
         })
         setData(d);
     }, [facetValues])

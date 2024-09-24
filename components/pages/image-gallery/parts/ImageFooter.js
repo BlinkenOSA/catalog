@@ -10,7 +10,7 @@ const ImageMetadata = ({data, isMobile=false}) => {
       <div className={isMobile ? `${style.MetadataWrapper} ${style.Mobile}` : style.MetadataWrapper}>
         <div className={style.Buttons}>
         {
-          metadata['keyword_facet'].map((keyword, idx) => {
+          metadata['keyword'].map((keyword, idx) => {
             return <Button key={idx} text={keyword} />
           })
         }

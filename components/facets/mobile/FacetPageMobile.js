@@ -111,7 +111,7 @@ const FacetPageMobile = ({ facetConfig, selectedFacetGroupInitial, onShowButtonC
                   <FacetValuesMobile
                     facetConfig={facetConfig}
                     breadcrumbHeight={breadcrumbHeight}
-                    facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
+                    facetValues={facets.hasOwnProperty(`${key}`) ? facets[`${key}`] : []}
                     selectedFacetGroup={key}
                     selectedFacetValues={getSelectedFacetValues()}
                     onFacetActionClick={onFacetActionClick}
@@ -121,7 +121,7 @@ const FacetPageMobile = ({ facetConfig, selectedFacetGroupInitial, onShowButtonC
             case 'date':
                 return (
                   <FacetDateRangeMobile
-                    facetValues={facets.hasOwnProperty(`${key}_facet`) ? facets[`${key}_facet`] : []}
+                    facetValues={facets.hasOwnProperty(`${key}`) ? facets[`${key}`] : []}
                     selectedFacetGroup={key}
                     selectedFacetValues={getSelectedFacetValues()}
                     onFacetActionClick={onFacetActionClick}
@@ -174,7 +174,7 @@ const FacetPageMobile = ({ facetConfig, selectedFacetGroupInitial, onShowButtonC
                         <span> </span>
                     </div>
                     <FacetHelperMobile
-                      facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                      facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
                       onFacetActionClick={onFacetActionClick}
                       selectedFacetGroup={selectedFacetGroup}
                       selectedFacetObject={selectedFacet}

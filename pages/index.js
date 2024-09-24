@@ -39,8 +39,9 @@ export async function getServerSideProps(context) {
     if (Object.entries(params).length > 0) {
         data = await index.search(q, {
             ...p,
-            facets: ['availability', 'language', 'subject', 'geo', 'year_created', 'primary_type', 'contributor', 'keyword'],
-            attributesToHighlight: ['title', 'title_original', 'contents_summary', 'contents_summary_original'],
+            facets: ['availability', 'contributor', 'geo',  'keyword', 'language', 'primary_type', 'record_origin', 'subject', 'year_created'],
+            attributesToHighlight: ['title', 'title_original', 'contents_summary', 'contents_summary_original', 'subject', 'contributor'],
+            // matchingStrategy: 'frequency'
         })
     } else {
         data = {'estimatedTotalHits': 0}

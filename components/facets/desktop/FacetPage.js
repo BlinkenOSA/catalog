@@ -145,7 +145,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                             <div className={style.FacetDescription}>
                                 <FacetHelper
                                     type={type}
-                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
                                     onFacetActionClick={onFacetActionClick}
                                     selectedFacetGroup={selectedFacetGroup}
                                     selectedFacetObject={selectedFacetObject}
@@ -171,7 +171,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                             <div className={style.FacetDescription}>
                                 <FacetHelper
                                     type={type}
-                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
                                     onFacetActionClick={onFacetActionClick}
                                     selectedFacetGroup={selectedFacetGroup}
                                     selectedFacetObject={selectedFacetObject}
@@ -196,7 +196,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                     </div>
                     <div className={style.FacetDescription}>
                         <FacetHelper
-                            facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_facet`) ? facets[`${selectedFacetGroup}_facet`] : []}
+                            facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
                             onFacetActionClick={onFacetActionClick}
                             selectedFacetGroup={selectedFacetGroup}
                             selectedFacetObject={selectedFacetObject}
