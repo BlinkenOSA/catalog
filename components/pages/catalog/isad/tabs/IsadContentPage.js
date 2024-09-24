@@ -260,11 +260,11 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		const renderFilters = () => (
 			<React.Fragment>
 				<IsadFilter
-					facetName={'year_created_facet'}
+					facetName={'year_created'}
 					onSelect={onFilter}
 					facets={facets}
 					placeholder={filterPlaceholders['year_created'][language]}
-					value={selectedSeriesFacets.hasOwnProperty('year_created_facet') ? selectedSeriesFacets['year_created_facet'] : undefined}
+					value={selectedSeriesFacets.hasOwnProperty('year_created') ? selectedSeriesFacets['year_created'] : undefined}
 					isMobile={isMobile}
 				/>
 				<IsadFilter
