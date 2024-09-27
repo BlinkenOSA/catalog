@@ -7,7 +7,11 @@ const filterPlaceholders = {
 		'EN': 'Creation Year',
 		'HU': 'Keletkezés éve'
 	},
-  'subject': {
+	'contributor': {
+		'EN': 'Contributor',
+		'HU': 'Közreműködő'
+	},
+  	'subject': {
 		'EN': 'Subject',
 		'HU': 'Tárgy'
 	},

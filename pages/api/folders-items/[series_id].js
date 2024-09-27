@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 			attributesToHighlight: ['title', 'title_original', 'contents_summary', 'contents_summary_original'],
 			limit: initialLimit,
 			offset: offset ? Number(offset) : 0,
-			facets: ['subject', 'geo', 'year_created'],
+			facets: ['subject', 'geo', 'contributor', 'year_created'],
 			sort: ['container_number:asc', 'folder_number:asc', 'sequence_number:asc']
 		})
 		return data

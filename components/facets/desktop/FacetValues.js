@@ -19,7 +19,7 @@ import { FiInfo } from 'react-icons/fi';
  */
 const FacetValues = ({facetValues, selectedFacetGroup, selectedFacetValues, breadcrumbHeight,
                       onFacetActionClick, onSelectFacetValue, type}) => {
-    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
+    const fc = type === 'gallery' ? galleryFacetConfig : facetConfig;
 
     const [facetValuesOriginal, setFacetValuesOriginal] = useState([])
     const [facetValuesDisplay, setFacetValuesDisplay] = useState([])

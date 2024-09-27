@@ -31,13 +31,13 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
                 return <RecordType selectedFacetValue={selectedFacetObject['value']} />
             case 'availability':
                 return <Availability selectedFacetValue={selectedFacetObject['value']} />
-            case 'subject_wikidata':
+            case 'subject':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'subject'} />
-            case 'contributor_wikidata':
+            case 'contributor':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'contributor'} />
-            case 'geo_wikidata':
+            case 'geo':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'geo'} />
-            case 'language_wikidata':
+            case 'language':
                 return <WikiFacet selectedFacetObject={selectedFacetObject} type={'language'} />
             case 'year_created':
                 return <DateCreated type={type} facetValues={facetValues} />
@@ -73,11 +73,11 @@ const FacetHelper = ({facetValues, selectedFacetGroup, selectedFacetObject,
             case 'record_origin':
             case 'primary_type':
             case 'availability':
-            case 'geo_wikidata':
-            case 'subject_wikidata':
+            case 'geo':
+            case 'subject':
             case 'keyword':
-            case 'language_wikidata':
-            case 'contributor_wikidata':
+            case 'language':
+            case 'contributor':
             case 'series':
                 return renderButton()
             default:

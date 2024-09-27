@@ -100,7 +100,6 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
     const renderFacetValues = (facetType) => {
         switch (facetType) {
             case 'list':
-            case 'wiki':
             case 'series':
                 return (
                   <FacetValues
@@ -112,6 +111,18 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                     onSelectFacetValue={onSelectFacetValue}
                     type={type}
                   />
+                )
+            case 'wiki':
+                return (
+                    <FacetValues
+                        breadcrumbHeight={breadcrumbHeight}
+                        facetValues={facets.hasOwnProperty(`${selectedFacetGroup}_wikidata`) ? facets[`${selectedFacetGroup}_wikidata`] : {}}
+                        onFacetActionClick={onFacetActionClick}
+                        selectedFacetGroup={selectedFacetGroup}
+                        selectedFacetValues={getSelectedFacetValues()}
+                        onSelectFacetValue={onSelectFacetValue}
+                        type={type}
+                    />
                 )
             case 'date':
                 return (
@@ -133,6 +144,15 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
         }
     }
 
+    const getFacetValues = (facetType) => {
+        switch (facetType) {
+            case 'wiki':
+                return facets.hasOwnProperty(`${selectedFacetGroup}_wikidata`) ? facets[`${selectedFacetGroup}_wikidata`] : []
+            default:
+                return facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []
+        }
+    }
+
     if (type === 'gallery') {
         switch (selectedFacetGroup) {
             case 'year_created':
@@ -145,7 +165,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                             <div className={style.FacetDescription}>
                                 <FacetHelper
                                     type={type}
-                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
+                                    facetValues={getFacetValues(facetConfig[selectedFacetGroup]['type'])}
                                     onFacetActionClick={onFacetActionClick}
                                     selectedFacetGroup={selectedFacetGroup}
                                     selectedFacetObject={selectedFacetObject}
@@ -171,7 +191,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                             <div className={style.FacetDescription}>
                                 <FacetHelper
                                     type={type}
-                                    facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
+                                    facetValues={getFacetValues(facetConfig[selectedFacetGroup]['type'])}
                                     onFacetActionClick={onFacetActionClick}
                                     selectedFacetGroup={selectedFacetGroup}
                                     selectedFacetObject={selectedFacetObject}
@@ -196,7 +216,7 @@ const FacetPage = ({selectedFacetGroup, onSelectFacetGroup, onShowButtonClick,
                     </div>
                     <div className={style.FacetDescription}>
                         <FacetHelper
-                            facetValues={facets.hasOwnProperty(`${selectedFacetGroup}`) ? facets[`${selectedFacetGroup}`] : []}
+                            facetValues={getFacetValues(facetConfig[selectedFacetGroup]['type'])}
                             onFacetActionClick={onFacetActionClick}
                             selectedFacetGroup={selectedFacetGroup}
                             selectedFacetObject={selectedFacetObject}

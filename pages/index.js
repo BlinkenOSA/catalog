@@ -39,7 +39,16 @@ export async function getServerSideProps(context) {
     if (Object.entries(params).length > 0) {
         data = await index.search(q, {
             ...p,
-            facets: ['availability', 'contributor', 'geo',  'keyword', 'language', 'primary_type', 'record_origin', 'subject', 'year_created'],
+            facets: [
+                'availability',
+                'contributor', 'contributor_wikidata',
+                'geo', 'geo_wikidata',
+                'keyword',
+                'language', 'language_wikidata',
+                'primary_type',
+                'record_origin',
+                'subject', 'subject_wikidata',
+                'year_created'],
             attributesToHighlight: ['title', 'title_original', 'contents_summary', 'contents_summary_original', 'subject', 'contributor'],
             // matchingStrategy: 'frequency'
         })
@@ -76,7 +85,7 @@ const Index = ({data, badgeData, newIsadData}) => {
         setSelectedFacetGroup('')
     }
 
-    if (data['estimatedTotalHits'] === 0) {
+    if (Object.keys(router.query).length === 0) {
         return (
             <>
                 <Media greaterThanOrEqual="md">

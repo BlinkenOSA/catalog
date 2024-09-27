@@ -22,22 +22,19 @@ export const createParams = (query, limit, offset, selectedFacets) => {
     return params;
 }
 
-
 export const processParams = (params, type='normal') => {
     const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
-
     let newParams = {};
-    const { query, qf, filterQuery, limit, offset, sort, cursorMark, ...rest } = params;
+
+    const { query, limit, offset, sort, ...rest } = params;
 
     newParams['query'] = query ? query : ''
-    newParams['qf'] = qf
-    newParams['filterQuery'] = filterQuery
     newParams['limit'] = limit
     newParams['offset'] = offset
     newParams['sort'] = sort
+    newParams['filter'] = []
     newParams['selectedFacets'] = {}
     newParams['selectedFacetsDates'] = {}
-    newParams['cursorMark'] = cursorMark
 
     const addToSelectedFacets = (mainKey, key) => {
         if (rest.hasOwnProperty(key)) {
@@ -54,5 +51,5 @@ export const processParams = (params, type='normal') => {
         }
     })
 
-    return newParams;
+    return newParams
 }

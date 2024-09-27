@@ -276,6 +276,14 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 					isMobile={isMobile}
 				/>
 				<IsadFilter
+					facetName={'contributor'}
+					onSelect={onFilter}
+					facets={facets}
+					placeholder={filterPlaceholders['contributor'][language]}
+					value={selectedSeriesFacets.hasOwnProperty('contributor') ? selectedSeriesFacets['contributor'] : undefined}
+					isMobile={isMobile}
+				/>
+				<IsadFilter
 					facetName={'geo'}
 					onSelect={onFilter}
 					facets={facets}

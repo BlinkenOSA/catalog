@@ -33,12 +33,49 @@ export const catalogAPIFetcher = (url, params) => {
 
 export const makeSearchParams = (params, type='normal') => {
     const fc = type === 'gallery' ? galleryFacetConfig : facetConfig
-    const {query, filterQuery, limit, offset, sort, qf, cursorMark, selectedFacets, selectedFacetsDates} = processParams(params, type)
+    const {query, limit, offset, sort, selectedFacets, selectedFacetsDates} = processParams(params, type)
 
     const baseParams = {}
 
     baseParams['q'] = query ? query : '*';
 
+    // Process facet filters
+    const filters = []
+    Object.keys(fc).forEach(key => {
+        if (fc[key]['type'] === 'date') {
+            if (selectedFacetsDates.hasOwnProperty(key)) {
+                let date = '';
+                if (Array.isArray(selectedFacetsDates[key])) {
+                    date = selectedFacetsDates[key][0]
+                } else {
+                    date = selectedFacetsDates[key]
+                }
+                const years = date.split('-');
+                if (years.length === 2) {
+                    const yearFrom = Number(years[0])
+                    const yearTo = Number(years[1])
+                    if (Number.isInteger(yearFrom) && Number.isInteger(yearTo)) {
+                        filters.push(`year_created >= ${yearFrom} AND year_created <= ${yearTo}`)
+                    }
+                } else {
+                    const yearFrom = Number(years[0])
+                    filters.push(`year_created = ${yearFrom}`)
+                }
+            }
+        } else {
+            if (selectedFacets.hasOwnProperty(key)) {
+                if (Array.isArray(selectedFacets[key])) {
+                    selectedFacets[key].forEach(facetValue => {
+                        filters.push(`${key} = "${facetValue}"`)
+                    })
+                } else {
+                    filters.push(`${key} = "${selectedFacets[key]}"`)
+                }
+            }
+        }
+    })
+
+    filters.length > 0 && (baseParams['filter'] = filters.join(' AND '))
     limit && (baseParams['limit'] = Number(limit));
     offset && (baseParams['offset'] = Number(offset));
 
