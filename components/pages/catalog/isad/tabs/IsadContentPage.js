@@ -81,6 +81,10 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		}
 
 		const getHighlightedTitleField = (lng = lang) => {
+			if (rec['access_rights'] === 'Confidential') {
+				return <i>[{rec['title']}]</i>
+			}
+
 			if (lng === 'EN') {
 				if (highlights && highlights.hasOwnProperty(rec['id'])) {
 					const elementHighlight = highlights[rec['id']];
@@ -139,7 +143,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		if (isMobile) {
 			return (
 				<div>
-					<a href={`/catalog/${rec['id']}`}>
+					<a href={rec['access_rights'] === 'Confidential' ? undefined : `/catalog/${rec['id']}`}>
 						<div className={style.Title}>
 							{getHighlightedTitleField()}
 							{rec['date_created'] && `, ${rec['date_created']}`}
@@ -166,7 +170,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 				<div>
 					<div className={style.TitleAndDescriptionWrapper}>
 						<div style={{flex: 1}}>
-							<a href={`/catalog/${rec['id']}`}>
+							<a href={rec['access_rights'] === 'Confidential' ? undefined : `/catalog/${rec['id']}`}>
 								<div className={style.Title}>
 									{getHighlightedTitleField( 'EN')}
 									{rec['date_created'] && `, ${rec['date_created']}`}
@@ -178,7 +182,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 						</div>
 						{ detectSecondLanguage() &&
 							<div style={{flex: 1}}>
-								<a href={`/catalog/${rec['id']}`}>
+								<a href={rec['access_rights'] === 'Confidential' ? undefined : `/catalog/${rec['id']}`}>
 									<div className={style.Title}>
 										{
 											getSecondLanguage() === 'RU' ?
@@ -255,7 +259,10 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 			if (!record['digital_version_online']) {
 				return (
 					<div className={style.CartButton}>
-						<CartButton record={record} inCart={inCart(record['id'])} name={record['id']} />
+						{
+							record['access_rights'] !== 'Confidential' &&
+							<CartButton record={record} inCart={inCart(record['id'])} name={record['id']}/>
+						}
 					</div>
 				)
 			}
@@ -265,7 +272,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 			if (isMobile) {
 				return (
 					<div className={isBoxRow(rec, index) ? `${style.Record} ${style.Mobile}` : `${style.Record} ${style.InContainer} ${style.Mobile}`} key={index}>
-						<a href={`/catalog/${rec['id']}`}>
+						<a href={rec['access_rights'] === 'Confidential' ? undefined : `/catalog/${rec['id']}`}>
 							<div className={style.CallNumber}>
 								{rec['call_number']}
 							</div>
@@ -282,7 +289,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 						{
 							renderCartButton(rec)
 						}
-						<a href={`/catalog/${rec['id']}`}>
+						<a href={rec['access_rights'] === 'Confidential' ? undefined : `/catalog/${rec['id']}`}>
 							<div className={rec['digital_version_online'] ? `${style.CallNumber} ${style.Online}` : style.CallNumber}>
 								{renderThumbnail(rec)}
 								{rec['call_number']}
