@@ -3,6 +3,9 @@ export const libraryCollections = [
         'label': 'Donation of Anatole Shub',
         'description': 'Anatole Shub (1928-2006) was an American author, journalist, editor, news director at Radio Free Europe/Radio Liberty and analyst for the United States Information Agency, studying Russian public opinion. His book collection covers 20th century Russian/Soviet and Central European history.'
     }, {
+        'label': 'Donation of Zsuzsa Ferge',
+        'description': 'Zsuzsa Ferge (1931–2024) was a Hungarian sociologist and statistician who is particularly known for her work on poverty reduction.'
+    }, {
         'label': 'Donation of László Varga',
         'description': 'László Varga (1948-2016) was a Hungarian historian, archivist, the director of the Budapest City Archives and the Budapest Holocaust Memorial Center. His book donation comprises German language monographs and sources relating to the activities of the East German state security apparatus.'
     }, {
