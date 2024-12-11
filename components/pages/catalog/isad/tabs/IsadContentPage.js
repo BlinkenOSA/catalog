@@ -248,7 +248,7 @@ const IsadContentPage = ({seriesID, language, containerCount, folderItemCount, o
 		}
 
 		const renderThumbnail = (rec) => {
-			if (rec['digital_version_online']) {
+			if (rec['digital_version_online'] && rec['access_rights'] !== 'Confidential') {
 				return <IsadThumbnail record={rec} />
 			} else {
 				return ''
