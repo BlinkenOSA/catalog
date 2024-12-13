@@ -7,11 +7,8 @@ import {useMeasure} from "react-use";
 import {makeSolrParams, solrFetcher} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
 import GalleryLayout from "../components/layout/GalleryLayout";
-import useSWRInfinite from "swr/infinite";
-import {useRouter} from "next/router";
 import {Media} from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
-import {facetConfig} from "../config/facetConfig";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import {galleryFacetConfig} from "../config/galleryFacetConfig";
 
