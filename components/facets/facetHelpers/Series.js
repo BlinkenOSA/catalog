@@ -11,7 +11,8 @@ import {fetcher} from "../../../utils/fetcherFunctions";
  */
 const Series = ({selectedFacetObject, isMobile=false}) => {
     const {data, error} = useSWR(
-      selectedFacetObject.hasOwnProperty('value') ? [`image-gallery/archival-unit/`,  {'full_title': selectedFacetObject['value']}] : undefined, fetcher
+      selectedFacetObject.hasOwnProperty('value') ? [`image-gallery/archival-unit/`,  {'full_title': selectedFacetObject['value']}] : undefined,
+      ([url, params]) => fetcher(url, params)
     );
 
     const renderData = () => {
