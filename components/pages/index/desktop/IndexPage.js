@@ -115,7 +115,7 @@ const IndexPage = ({isMobile=false}) => {
                           variants={longTextVariants}
                           transition={{ delay: 1 }}>
                             10,000 linear meters, 17,000 hours of audiovisual, and 15 TB of digital records,
-                            as well as 150,000 photographs, 6000+ documentary film titles and 19,000 library items on
+                            as well as 150,000 photographs, 6000+ documentary film titles and 22,000 library items on
                             four main areas of interest:
                             <br/><br/>
                             <span>Communism and Cold War, and their Afterlives in Europe</span>&nbsp;
