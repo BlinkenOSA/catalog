@@ -18,8 +18,6 @@ import {
 import style from "./VideoViewer.module.scss"
 
 const VideoViewer = ({identifier, isMobile}) => {
-    console.log(identifier)
-
     return (
         <div className={isMobile ? `${style.VideoViewer} ${style.Mobile}` : style.VideoViewer}>
             <div className={style.VideoPlayer}>
