@@ -63,6 +63,23 @@
     }
   }
 
+  .RestrictedInfo {
+    padding-bottom: 20px;
+
+    span {
+      font-family: "Suisse Intl", serif;
+      font-weight: 400;
+      font-size: 12px;
+    }
+
+    .Label {
+      font-family: 'Suisse Intl Condensed', serif;
+      font-weight: 400;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+  }
+
   .Registration {
     margin-top: 40px;
 

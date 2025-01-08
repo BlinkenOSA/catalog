@@ -10,6 +10,7 @@ import {useAlert} from "react-alert";
 import dynamic from "next/dynamic";
 import {useState} from "react";
 import ForgotCardNumberForm from "./ForgotCardNumberForm";
+import TextAreaField from "../form/TextAreaField";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
@@ -35,7 +36,9 @@ const CartForm = ({isMobile = false}) => {
     }
 
     const validationSchema = Yup.object().shape({
-        card_number: Yup.string().required('Required'),
+        card_number: Yup.number()
+          .typeError('Card number must be a number')
+          .required('Required'),
         email: Yup.string().email('Invalid email address').required('Required'),
         request_date: Yup.date().required('Required'),
         captcha: Yup.string().required('Required'),
@@ -44,13 +47,26 @@ const CartForm = ({isMobile = false}) => {
                 id: Yup.string(),
                 origin: Yup.string(),
                 type: Yup.string(),
+                restricted: Yup.boolean(),
                 volume: Yup.string()
                     .when('primary_type', {
                         is: 'Continuing Resource',
                         then: Yup.string().required('Required')
                     })
             })
-        )
+        ),
+        research_subject: Yup.string()
+          .when('items', {
+              is: (items) => items.some((item) => item.restricted === true),
+              then: Yup.string().required('Required'),
+              otherwise: Yup.string().notRequired(),
+          }),
+        motivation: Yup.string()
+          .when('items', {
+              is: (items) => items.some((item) => item.restricted === true),
+              then: Yup.string().required('Required'),
+              otherwise: Yup.string().notRequired(),
+          })
     })
 
     const handleSubmit = (values, {resetForm, setErrors}) => {
@@ -77,6 +93,16 @@ const CartForm = ({isMobile = false}) => {
             item['volume'] = ''
             return item
         })
+    }
+
+    const detectRestricted = () => {
+        let restricted = false
+        items.forEach(item => {
+            if (item['restricted']) {
+                restricted = true
+            }
+        })
+        return restricted
     }
 
     const initialValues = {
@@ -122,6 +148,37 @@ const CartForm = ({isMobile = false}) => {
                                     minDate={new Date()}
                                     maxDate={getMaxDate()}
                                 />
+                                { detectRestricted() &&
+                                  <>
+                                      <hr/>
+                                      <div className={style.RestrictedInfo}>
+                                          <div className={style.Label}>Restricted Content Information</div>
+                                          <span>
+                                              Please describe for what purpose you request and how you want to use the
+                                              restricted document (max. 300 characters.) Your explanation may influence
+                                              the clearing process. If you requested a restricted document from an
+                                              Open Society Foundations or Central European University fonds, you will
+                                              be required to sign a Non-Disclosure Agreement prior to starting your
+                                              research.
+                                        </span>
+                                      </div>
+                                      <Field
+                                        name="research_subject"
+                                        label="Research Subject"
+                                        disabled={isEmpty}
+                                        required={true}
+                                        component={InputField}
+                                      />
+                                      <Field
+                                        name="motivation"
+                                        label="Motivation"
+                                        required={true}
+                                        rows={4}
+                                        component={TextAreaField}
+                                      />
+                                      <hr/>
+                                  </>
+                                }
                                 {!isEmpty && <CaptchaField/>}
                                 <div className={style.SubmitButtonWrapper}>
                                     <button className={style.FormButton} type="submit" disabled={isEmpty || isSubmitting}>
