@@ -3,7 +3,7 @@ import style from "./TextAreaField.module.scss";
 const TextAreaField = ({ field, form, label, subLabel, ...props }) => {
     const {name} = field;
     const {touched, errors} = form;
-    const {required, disabled} = props;
+    const {required, disabled, ...rest} = props;
 
     return (
         <div className={style.Field}>
@@ -17,7 +17,7 @@ const TextAreaField = ({ field, form, label, subLabel, ...props }) => {
                     <span className={style.Required}>*</span>
                 }
             </div>
-            <textarea {...field} {...props} />
+            <textarea {...field} {...rest} />
             {
                 !disabled && touched[name] && errors[name] &&
                 <div className={style.Error}>{errors[name]}</div>
