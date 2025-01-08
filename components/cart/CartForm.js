@@ -109,7 +109,9 @@ const CartForm = ({isMobile = false}) => {
         card_number: '',
         email: '',
         request_date: '',
-        items: getInitialValuesForItems()
+        items: getInitialValuesForItems(),
+        research_subject: '',
+        motivation: ''
     }
 
     return (
@@ -173,6 +175,7 @@ const CartForm = ({isMobile = false}) => {
                                         name="motivation"
                                         label="Motivation"
                                         required={true}
+                                        disabled={isEmpty}
                                         rows={4}
                                         component={TextAreaField}
                                       />
