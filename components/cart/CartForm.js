@@ -156,13 +156,11 @@ const CartForm = ({isMobile = false}) => {
                                       <div className={style.RestrictedInfo}>
                                           <div className={style.Label}>Restricted Content Information</div>
                                           <span>
-                                              Please describe for what purpose you request and how you want to use the
-                                              restricted document (max. 300 characters.) Your explanation may influence
-                                              the clearing process. If you requested a restricted document from an
-                                              Open Society Foundations or Central European University fonds, you will
-                                              be required to sign a Non-Disclosure Agreement prior to starting your
-                                              research.
-                                        </span>
+                                              To facilitate the review process of your request to access restricted
+                                              materials, please tell us more about the purpose of your research and,
+                                              specifically, how you want to use the restricted document
+                                              (max. 250 characters.)
+                                          </span>
                                       </div>
                                       <Field
                                         name="research_subject"
