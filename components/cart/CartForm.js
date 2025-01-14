@@ -57,13 +57,13 @@ const CartForm = ({isMobile = false}) => {
         ),
         research_subject: Yup.string()
           .when('items', {
-              is: (items) => items.some((item) => item.restricted === true),
+              is: (items) => items.some((item) => item['restricted'] === true),
               then: Yup.string().required('Required'),
               otherwise: Yup.string().notRequired(),
           }),
         motivation: Yup.string()
           .when('items', {
-              is: (items) => items.some((item) => item.restricted === true),
+              is: (items) => items.some((item) => item['restricted'] === true),
               then: Yup.string().required('Required'),
               otherwise: Yup.string().notRequired(),
           })
