@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
 }
 
 const BiblioRedirect = () => {
-
+	return (<div/>)
 }
 
 export default BiblioRedirect
