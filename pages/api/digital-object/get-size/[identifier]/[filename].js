@@ -9,12 +9,7 @@ export default async function handler(req, res) {
     const url = getPdfURL(identifier, filename)
 
     const getData = () => {
-        return axios.head(url, {
-            auth: {
-                username: CATALOG_DOWNLOAD_USER,
-                password: CATALOG_DOWNLOAD_PASS
-            }
-        }).then(response => response.headers)
+        return axios.head(url).then(response => response.headers)
     }
 
     const data = await getData();
