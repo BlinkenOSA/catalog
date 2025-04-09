@@ -1,18 +1,31 @@
 import { Viewer } from '@react-pdf-viewer/core';
-import { toolbarPlugin } from '@react-pdf-viewer/toolbar';
 import style from "./PDFViewerV2.module.scss"
-import React, {useState} from "react";
-import {BiFullscreen, BiExitFullscreen, BiSearch} from 'react-icons/bi';
-import {getPdfURL, getURL} from '../../../../../../../utils/digitalObjectFunctions';
+import React, {useEffect, useState} from "react";
+import {BiSearch} from 'react-icons/bi';
+import {getPdfURL} from '../../../../../../../utils/digitalObjectFunctions';
 import {defaultLayoutPlugin} from "@react-pdf-viewer/default-layout";
 
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/full-screen/lib/styles/index.css';
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
-
+import Button from "../../../../../search/parts/Button";
+import axios from "axios";
+import {formatBytes} from "../../../../../../../utils/formatBytes";
 
 
 const PDFViewer = ({identifier, fileNames}) => {
+    const [acceptButton, setAcceptButton] = useState(false)
+    const [size, setSize] = useState(0)
+
+    useEffect(() => {
+        const url = getPdfURL(identifier, fileNames[0])
+        axios.head(url).then(
+          response => {
+              setSize(response.headers['content-length'])
+          }
+        )
+    }, [])
+
     const transform = (slot) => {
         const { GoToPreviousPage, GoToNextPage, CurrentPageInput, NumberOfPages, ShowSearchPopover, ZoomIn, ZoomOut } = slot;
 
@@ -103,25 +116,39 @@ const PDFViewer = ({identifier, fileNames}) => {
 
     const { renderDefaultToolbar } = defaultLayoutPluginInstance.toolbarPluginInstance
 
-    return (
-        <div className={"pdf-viewer-wrapper"}>
-            <div className={style.PDFViewer}>
-                <Viewer
+    if (acceptButton) {
+        return (
+          <div className={"pdf-viewer-wrapper"}>
+              <div className={style.PDFViewer}>
+                  <Viewer
                     fileUrl={getPdfURL(identifier, fileNames[0])}
                     plugins={[defaultLayoutPluginInstance]}
                     renderLoader={(percentages) => (
                       <div className={style.Loader}>
-                        Loading {Math.round(percentages)}% ...
+                          Loading {Math.round(percentages)}% ...
                       </div>
                     )}
                     theme={{
                         theme: 'light',
                     }}
                     defaultScale={1.3}
-                />
+                  />
+              </div>
+          </div>
+        )
+    } else {
+        return (
+            <div className={`${style.PDFViewer} ${style.Empty}`}>
+                <div>
+                    <Button
+                      text={`View PDF ${size === 0 ? '' : `(${formatBytes(size)})`}`}
+                      onClick={() => {setAcceptButton(!acceptButton)}}
+                    />
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
 }
 
 export default PDFViewer;

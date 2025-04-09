@@ -6,6 +6,13 @@
   border: unset;
   height: 464px;
 
+  &.Empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: $border-width solid $black;
+  }
+
   :global .rpv-default-layout__container {
     border: unset;
     border-top: $border-width solid $black;
