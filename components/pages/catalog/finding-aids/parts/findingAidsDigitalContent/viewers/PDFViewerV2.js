@@ -9,21 +9,19 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/full-screen/lib/styles/index.css';
 import "@react-pdf-viewer/default-layout/lib/styles/index.css"
 import Button from "../../../../../search/parts/Button";
-import axios from "axios";
 import {formatBytes} from "../../../../../../../utils/formatBytes";
+import axios from "axios";
 
+const CATALOG_API = process.env.NEXT_PUBLIC_CATALOG_APP_API;
 
 const PDFViewer = ({identifier, fileNames}) => {
     const [acceptButton, setAcceptButton] = useState(false)
     const [size, setSize] = useState(0)
 
     useEffect(() => {
-        const url = getPdfURL(identifier, fileNames[0])
-        axios.head(url).then(
-          response => {
-              setSize(response.headers['content-length'])
-          }
-        )
+        axios.get(`${CATALOG_API}digital-object/get-size/${identifier}/${fileNames[0]}`).then((response) => {
+            setSize(response.data.size)
+        })
     }, [])
 
     const transform = (slot) => {

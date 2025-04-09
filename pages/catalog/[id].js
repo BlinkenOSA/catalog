@@ -115,6 +115,7 @@ export async function getServerSideProps(context) {
                     const [metadata, hierarchy, insights] = await Promise.all([
                         metadataRes.json(), hierarchyRes.json()
                     ])
+
                     return {
                         props: {
                             solrData,
