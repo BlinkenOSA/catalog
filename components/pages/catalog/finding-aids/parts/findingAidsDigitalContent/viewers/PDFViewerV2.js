@@ -13,6 +13,8 @@ import {formatBytes} from "../../../../../../../utils/formatBytes";
 import axios from "axios";
 
 const CATALOG_API = process.env.NEXT_PUBLIC_CATALOG_APP_API;
+const CATALOG_DOWNLOAD_USER = process.env.NEXT_PUBLIC_CATALOG_DOWNLOAD_USER;
+const CATALOG_DOWNLOAD_PASS = process.env.NEXT_PUBLIC_CATALOG_DOWNLOAD_PASS;
 
 const PDFViewer = ({identifier, fileNames}) => {
     const [acceptButton, setAcceptButton] = useState(false)
@@ -115,6 +117,8 @@ const PDFViewer = ({identifier, fileNames}) => {
     const { renderDefaultToolbar } = defaultLayoutPluginInstance.toolbarPluginInstance
 
     if (acceptButton) {
+        const header = btoa(`${CATALOG_DOWNLOAD_USER}:${CATALOG_DOWNLOAD_PASS}`)
+
         return (
           <div className={"pdf-viewer-wrapper"}>
               <div className={style.PDFViewer}>
@@ -126,6 +130,10 @@ const PDFViewer = ({identifier, fileNames}) => {
                           Loading {Math.round(percentages)}% ...
                       </div>
                     )}
+                    withCredentials={true}
+                    httpHeaders={{
+                        'Authorization': `Basic ${header}`,
+                    }}
                     theme={{
                         theme: 'light',
                     }}
