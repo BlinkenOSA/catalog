@@ -143,7 +143,7 @@ const CartForm = ({isMobile = false}) => {
                                 />
                                 <DatePickerField
                                     name={"request_date"}
-                                    label={"Request Date"}
+                                    label={"Planned Visit / Access Date"}
                                     filterDate={isWeekday}
                                     disabled={isEmpty}
                                     required={true}
