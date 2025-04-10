@@ -130,6 +130,10 @@ const PDFViewer = ({identifier, fileNames}) => {
                           Loading {Math.round(percentages)}% ...
                       </div>
                     )}
+                    withCredentials={true}
+                    httpHeaders={{
+                        'Authorization': `Basic ${header}`,
+                    }}
                     theme={{
                         theme: 'light',
                     }}
