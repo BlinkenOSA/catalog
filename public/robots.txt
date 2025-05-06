@@ -5,3 +5,7 @@ Crawl-delay: 2
 # Disable MJ12bot
 User-agent: MJ12bot
 Disallow: /
+
+# Disable dotbot
+User-agent: dotbot
+Disallow: /
