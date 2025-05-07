@@ -1,2 +1,10 @@
 User-agent: *
 Disallow: /
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# Yahoo
+User-agent: Slurp
+Allow: /
