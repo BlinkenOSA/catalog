@@ -157,7 +157,6 @@ const CartForm = ({isMobile = false}) => {
                                 </div>
                                 { detectRestricted() &&
                                   <>
-                                      <hr/>
                                       <div className={style.RestrictedInfo}>
                                           <div className={style.Label}>Restricted Content Information</div>
                                           <span>
@@ -182,7 +181,6 @@ const CartForm = ({isMobile = false}) => {
                                         rows={4}
                                         component={TextAreaField}
                                       />
-                                      <hr/>
                                   </>
                                 }
                                 {!isEmpty && <CaptchaField/>}
