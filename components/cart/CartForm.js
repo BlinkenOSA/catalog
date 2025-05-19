@@ -150,6 +150,11 @@ const CartForm = ({isMobile = false}) => {
                                     minDate={new Date()}
                                     maxDate={getMaxDate()}
                                 />
+                                <div className={style.Register}>
+                                    If you would like to visit us in person, please book your seat with the help of
+                                    the <a href={'https://archivum.org/collections/research-room-booking'} target={'_new'}>
+                                    Research Room booking form!</a>
+                                </div>
                                 { detectRestricted() &&
                                   <>
                                       <hr/>
