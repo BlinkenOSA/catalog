@@ -36,7 +36,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                 setDigitalContentHeight(isMobile ? 300 : 500)
                 break;
             case 'Textual':
-                setDigitalContentHeight(isMobile ? 300 : 500)
+                setDigitalContentHeight(isMobile ? 300 : 464)
                 break;
             case 'Moving Image':
                 setDigitalContentHeight(isMobile ? 300 : 400)
