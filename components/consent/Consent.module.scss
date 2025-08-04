@@ -1,0 +1,107 @@
+@import "../../styles/variables";
+
+.Container {
+  font-family: 'Suisse Intl Condensed', serif;
+  font-weight: 400;
+  font-size: 18px !important;
+  align-items: center !important;
+  background-color: rgba($form-background, 0.95) !important;
+  border-top: 1px $black solid;
+  color: $black !important;
+  z-index: 1000 !important;
+
+  @media (max-width: 768px) {
+    padding-bottom: 16px !important;
+    justify-content: center !important;
+  }
+
+  .ConsentText {
+    padding-left: 24px;
+
+    @media (max-width: 768px) {
+      padding-left: 0px;
+      text-align: center;
+    }
+
+    a {
+      position: relative;
+      color: inherit;
+      text-decoration: none;
+      padding: 2px 4px;
+      margin: -2px -4px;
+      white-space: pre;
+
+      &::before {
+        content: "";
+        inset: 0;
+        position: absolute;
+        transform: scaleY(0.05);
+        transform-origin: bottom;
+        transition: transform 0.2s ease-in-out;
+        z-index: -1;
+        background: $black;
+      }
+
+      // Mobile
+      @media (max-width: 768px) {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+        white-space: normal;
+
+        &::before {
+          content: unset;
+        }
+      }
+    }
+  }
+
+  .ButtonWrapper {
+    display: flex;
+    gap: 8px;
+    padding-right: 26px;
+
+    @media (max-width: 768px) {
+      margin: 0;
+      padding-right: 0px;
+    }
+  }
+
+  .Button {
+    width: 150px;
+    height: 36px;
+    background-color: $black;
+    border-radius: 18px !important;
+    font-family: "Suisse Intl", serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    margin: 15px 0 !important;
+  }
+
+  .AcceptButton {
+    @extend .Button;
+    color: $background !important;
+    background-color: $black !important;
+
+    &:hover {
+      color: $black !important;
+      background-color: $yellow !important;
+    }
+  }
+
+  .DeclineButton {
+    @extend .Button;
+    color: $black !important;
+    background-color: $background !important;
+    border: 1px solid $black !important;
+
+    &:hover {
+      color: $background !important;
+      background-color: $button-background !important;
+    }
+  }
+}

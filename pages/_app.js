@@ -6,6 +6,7 @@ import AlertTemplate from "../components/layout/AlertTemplate";
 import { Worker } from '@react-pdf-viewer/core';
 import {MediaContextProvider, mediaStyles} from "../utils/media";
 import Head from 'next/head';
+import Consent from "../components/consent/Consent";
 
 function MyApp({ Component, pageProps }) {
     const options = {
@@ -32,6 +33,7 @@ function MyApp({ Component, pageProps }) {
                     <Worker workerUrl="https://catalog.osaarchivum.org/pdfjs-dist/pdf.worker.js">
                         <MediaContextProvider disableDynamicMediaQueries>
                             <Component {...pageProps} />
+                            <Consent />
                         </MediaContextProvider>
                     </Worker>
                 </AlertProvider>
