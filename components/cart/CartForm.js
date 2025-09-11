@@ -150,9 +150,15 @@ const CartForm = ({isMobile = false}) => {
                                     minDate={new Date()}
                                     maxDate={getMaxDate()}
                                 />
+                                <div className={style.Register}>
+                                    <span>
+                                    If you would like to visit us in person, please book your seat with the help of
+                                    the <a href={'https://archivum.org/collections/research-room-booking'} target={'_new'}>
+                                    Research Room booking form!</a>
+                                        </span>
+                                </div>
                                 { detectRestricted() &&
                                   <>
-                                      <hr/>
                                       <div className={style.RestrictedInfo}>
                                           <div className={style.Label}>Restricted Content Information</div>
                                           <span>
@@ -177,7 +183,6 @@ const CartForm = ({isMobile = false}) => {
                                         rows={4}
                                         component={TextAreaField}
                                       />
-                                      <hr/>
                                   </>
                                 }
                                 {!isEmpty && <CaptchaField/>}
