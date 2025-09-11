@@ -30,6 +30,9 @@ export const filmLibraryFieldConfig = [
             }, {
                 label: 'Series',
                 fieldConfig: ['440', '800', '810', '811', '830']
+            }, {
+                label: 'Film Library Catalog Number',
+                fieldConfig: {'099': ['a', 'f']}
             }
         ]
     }, {
