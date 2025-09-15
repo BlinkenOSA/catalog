@@ -1,5 +1,6 @@
 import React from "react";
 import dynamic from "next/dynamic";
+import WebpageViewer from "./viewers/WebpageViewer";
 
 const PDFViewer = dynamic(() => import("./viewers/PDFViewerV2"), {
     ssr: false
@@ -38,6 +39,11 @@ const FindingAidsDigitalContent = ({id, data, isMobile}) => {
                 data={data}
                 identifier={identifier}
                 isMobile={isMobile} />
+        case 'Webarchive':
+            return <WebpageViewer
+                identifier={identifier}
+                url={data['access_copies'].map(ac => ac['filename'])[0]}
+            />
     }
 }
 

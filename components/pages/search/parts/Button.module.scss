@@ -6,10 +6,8 @@
 
 .Button, .ButtonWithLink {
   height: 25px;
-  background-color: $button-background;
   border-radius: 13px;
   text-align: center;
-  color: $white;
   font-family: 'Suisse Intl', serif;
   font-size: 10px;
   line-height: 25px;
@@ -19,6 +17,21 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+
+  &.normal {
+    background-color: $button-background;
+    color: $white;
+  }
+
+  &.dark {
+    background-color: $black;
+    color: $white;
+
+    &:hover {
+      background-color: $yellow;
+      color: $black;
+    }
+  }
 
   span {
     display: inline-flex;

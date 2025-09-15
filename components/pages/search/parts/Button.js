@@ -1,10 +1,10 @@
 import style from "./Button.module.scss";
 
-const Button = ({link, text, onClick=false, active=false, disabled}) => {
+const Button = ({link, text, onClick=false, active=false, target='_self', theme='normal', disabled}) => {
     if (link) {
         return (
-            <a href={link} className={active ? `${style.Link} ${style.Active}` : style.Link}>
-                <div className={style.ButtonWithLink}>
+            <a href={link} className={active ? `${style.Link} ${style.Active}` : style.Link} target={target}>
+                <div className={`${style.ButtonWithLink} ${style[theme]}`}>
                     <span>{text}</span>
                 </div>
             </a>

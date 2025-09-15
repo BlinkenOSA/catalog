@@ -44,6 +44,9 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
             case 'Audio':
                 setDigitalContentHeight(200)
                 break;
+            case 'Webarchive':
+                setDigitalContentHeight(isMobile ? 300 : 464)
+                break;
         }
     }, [])
 
@@ -119,7 +122,7 @@ const FindingAidsPage = ({solrData, metadata, hierarchy, isMobile}) => {
                             !isMobile &&
                             <PageNavigation primaryType={solrData['primary_type']} onSelect={handleSelectSection}/>
                         }
-                        <div ref={digitalContentRef} className={style.DigitalContent} style={{minHeight: {digitalContentHeight}}}>
+                        <div ref={digitalContentRef} className={style.DigitalContent} style={{minHeight: digitalContentHeight}}>
                             <FindingAidsDigitalContent id={id} data={metadata} isMobile={isMobile}/>
                         </div>
                     </React.Fragment>

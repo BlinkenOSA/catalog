@@ -2,6 +2,7 @@ import style from "./PageNavigation.module.scss";
 import { AiOutlineHome } from 'react-icons/ai';
 import { GrImage, GrDocumentText, GrVideo } from 'react-icons/gr';
 import { GiSoundWaves } from 'react-icons/gi';
+import { CgWebsite } from "react-icons/cg";
 import { BsReverseLayoutTextWindowReverse } from 'react-icons/bs'
 
 const PageNavigation = ({primaryType, onSelect}) => {
@@ -15,6 +16,8 @@ const PageNavigation = ({primaryType, onSelect}) => {
                 return <GrVideo />
             case 'Audio':
                 return <GiSoundWaves />
+            case 'Webarchive':
+                return <CgWebsite />
         }
     }
 
@@ -28,6 +31,8 @@ const PageNavigation = ({primaryType, onSelect}) => {
                 return 'Video'
             case 'Audio':
                 return 'Sound'
+            case 'Webarchive':
+                return 'Website'
         }
     }
 

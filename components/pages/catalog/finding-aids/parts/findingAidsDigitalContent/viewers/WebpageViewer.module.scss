@@ -1,0 +1,23 @@
+@import "../../../../../../../styles/variables";
+
+.WebViewer {
+  flex: 1;
+  border-top: 1px solid $black;
+  overflow: hidden;
+  height: 464px;
+  width: 100%;
+  position: relative;
+
+  .Image {
+    object-fit: contain; /* fills width and height */
+  }
+
+  .Overlay {
+    position: absolute;
+    inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.4); /* optional dimming for readability */
+  }
+}
