@@ -113,6 +113,18 @@ const PrimaryTypeButton = ({origin, primaryType, descriptionLevel}) => {
                     <span className={style.Text}>Audio</span>
                 </div>
             );
+        case 'Webarchive':
+            return(
+                <div className={style.Button}>
+                    <img
+                        alt="WebarchiveIcon"
+                        title={'Webarchive'}
+                        src={'/icons/Website.svg'}
+                        style={{display: 'block'}}
+                    />
+                    <span className={style.Text}>Webarchive</span>
+                </div>
+            );
         default:
             return ''
     }

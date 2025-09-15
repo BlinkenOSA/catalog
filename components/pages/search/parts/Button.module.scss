@@ -7,6 +7,8 @@
 .Button, .ButtonWithLink {
   height: 25px;
   border-radius: 13px;
+  color: $white;
+  background-color: $button-background;
   text-align: center;
   font-family: 'Suisse Intl', serif;
   font-size: 10px;
