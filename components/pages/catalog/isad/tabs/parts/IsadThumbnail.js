@@ -14,6 +14,8 @@ const IsadThumbnail = ({record, isMobile=false}) => {
                 return getURL(archivalReferenceCode, record['digital_version_barcode'], record['primary_type'], true);
             case 'Audio':
                 return getURL(archivalReferenceCode, record['digital_version_barcode'], record['primary_type'], true);
+            case 'Webarchive':
+                return getURL(archivalReferenceCode, record['digital_version_barcode'], record['primary_type'], true);
         }
     }
 

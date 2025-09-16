@@ -18,6 +18,10 @@ export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) 
         case 'Still Image':
             storageURL = 'https://iiif2.osaarchivum.org/iiif/2'
             extension = 'jpg'
+            break;
+        case 'Webarchive':
+            storageURL = 'https://storage.osaarchivum.org/catalog/webarchive'
+            extension = 'jpg'
     }
 
     if (isThumbnail) {
@@ -38,8 +42,10 @@ export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) 
             } else {
                 return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
             }
+        case 'Webarchive':
+            return `${storageURL}/${encodeURIComponent(`catalog/${digitalVersionID}.${extension}`)}`
         default:
-            return `${storageURL}/${seriesCode}/${digitalVersionID}.${extension}`
+            return `${storageURL}/${digitalVersionID}.${extension}`
     }
 }
 
