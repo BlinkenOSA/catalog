@@ -42,8 +42,6 @@ export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) 
             } else {
                 return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
             }
-        case 'Webarchive':
-            return `${storageURL}/${encodeURIComponent(`catalog/${digitalVersionID}.${extension}`)}`
         default:
             return `${storageURL}/${digitalVersionID}.${extension}`
     }
