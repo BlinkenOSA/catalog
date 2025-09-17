@@ -72,14 +72,27 @@ export async function getServerSideProps(context) {
 
         switch (record['record_origin']) {
             case 'Library':
-                const libraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
-                const libraryData = await libraryRes.json();
-                return {
-                    props: {
-                        solrData,
-                        libraryData
+                try {
+                    const libraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
+                    if (!libraryRes.ok) {
+                        throw new Error(`Fetch failed: ${libraryRes.status} ${libraryRes.statusText}`)
                     }
+
+                    const text = await libraryRes.text() // get raw response first
+                    console.log("Raw response:", text)
+
+                    const libraryData = JSON.parse(text)
+                    return {
+                        props: {
+                            solrData,
+                            libraryData
+                        }
+                    }
+                } catch (err) {
+                    console.error("Error fetching/parsing Solr:", err)
+                    throw err
                 }
+
             case 'Film Library':
                 const filmLibraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
                 const filmLibraryData = await filmLibraryRes.json();
