@@ -11,6 +11,7 @@ import LibraryPage from "../../components/pages/catalog/library/LibraryPage";
 import FindingAidsPage from "../../components/pages/catalog/finding-aids/FindingAidsPage";
 import {Buffer} from "buffer";
 import DigitalRepositoryPage from "../../components/pages/digital-repository/DigitalRepositoryPage";
+import {Marc} from "marcjs";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
@@ -39,6 +40,7 @@ export async function getServerSideProps(context) {
     headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
 
     let solrData;
+    let marc;
 
     try {
         const res = await fetch(`${SOLR_API}?` + solrParams, {
@@ -53,8 +55,6 @@ export async function getServerSideProps(context) {
         }
 
         const text = await res.text() // get raw response first
-        console.log("Raw response:", text)
-
         solrData = JSON.parse(text) // safer: manual parse
     } catch (err) {
         console.error("Error fetching/parsing Solr:", err)
@@ -72,30 +72,17 @@ export async function getServerSideProps(context) {
 
         switch (record['record_origin']) {
             case 'Library':
-                try {
-                    const libraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
-                    if (!libraryRes.ok) {
-                        throw new Error(`Fetch failed: ${libraryRes.status} ${libraryRes.statusText}`)
+                marc = Marc.parse(record['marc'], 'mij');
+                const libraryData = marc.mij();
+                return {
+                    props: {
+                        solrData,
+                        libraryData
                     }
-
-                    const text = await libraryRes.text() // get raw response first
-                    console.log("Raw response:", text)
-
-                    const libraryData = JSON.parse(text)
-                    return {
-                        props: {
-                            solrData,
-                            libraryData
-                        }
-                    }
-                } catch (err) {
-                    console.error("Error fetching/parsing Solr:", err)
-                    throw err
                 }
-
             case 'Film Library':
-                const filmLibraryRes = await fetch(`${CATALOG_API}library/record/${id}`)
-                const filmLibraryData = await filmLibraryRes.json();
+                marc = Marc.parse(record['marc'], 'mij');
+                const filmLibraryData = marc.mij();
                 return {
                     props: {
                         solrData,
