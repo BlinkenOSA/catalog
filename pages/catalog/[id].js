@@ -38,17 +38,28 @@ export async function getServerSideProps(context) {
     let headers = new Headers();
     headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
 
-    const res = await fetch(`${SOLR_API}?` + solrParams, {
-        headers: headers
-    })
+    let solrData;
 
-    if (!res.ok) {
-        return {
-            notFound: true
+    try {
+        const res = await fetch(`${SOLR_API}?` + solrParams, {
+            headers: headers
+        })
+
+        if (!res.ok) {
+            throw new Error(`Fetch failed: ${res.status} ${res.statusText}`)
+            return {
+                notFound: true
+            }
         }
-    }
 
-    const solrData = await res.json()
+        const text = await res.text() // get raw response first
+        console.log("Raw response:", text)
+
+        solrData = JSON.parse(text) // safer: manual parse
+    } catch (err) {
+        console.error("Error fetching/parsing Solr:", err)
+        throw err
+    }
 
     if (solrData) {
         if (solrData['response']['numFound'] === 0) {
