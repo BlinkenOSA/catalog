@@ -1,4 +1,4 @@
-import {getPdfURL, getURL, getVideoURL} from "../../../../../../utils/digitalObjectFunctions";
+import {getAudioURL, getPdfURL, getURL, getVideoURL} from "../../../../../../utils/digitalObjectFunctions";
 import style from "./IsadThumbnail.module.scss";
 
 const IsadThumbnail = ({record, isMobile=false}) => {
@@ -13,7 +13,7 @@ const IsadThumbnail = ({record, isMobile=false}) => {
             case 'Still Image':
                 return getURL(archivalReferenceCode, record['digital_version_barcode'], record['primary_type'], true);
             case 'Audio':
-                return getURL(archivalReferenceCode, record['digital_version_barcode'], record['primary_type'], true);
+                return getAudioURL(record['digital_version_barcode'], true)
             case 'Webarchive':
                 return getURL(archivalReferenceCode, record['digital_version_barcode'], record['primary_type'], true);
         }
