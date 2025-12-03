@@ -42,6 +42,8 @@ export const getURL = (archivalID, digitalVersionID, type, isThumbnail = false) 
             } else {
                 return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
             }
+        case 'Audio':
+            return `${storageURL}/${encodeURIComponent(`catalog/${seriesCode}/${digitalVersionID}.${extension}`)}`
         default:
             return `${storageURL}/${digitalVersionID}.${extension}`
     }
