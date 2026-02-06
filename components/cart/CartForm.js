@@ -84,7 +84,11 @@ const CartForm = ({isMobile = false}) => {
         }).catch((error) => {
             alert.remove(a)
             setIsSubmitting(false)
-            setErrors(error.response.data)
+            if (error.response.data.hasOwnProperty('non_field_errors')) {
+              alert.show(error.response.data['non_field_errors'].join(" "))
+            } else {
+              setErrors(error.response.data)
+            }
         })
     }
 
