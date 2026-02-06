@@ -22,7 +22,7 @@ const PrivacyPolicy = () => {
                         <p>
                             At Central European University Private University – CEU GmbH
                             (Quellenstraße 51, 1100 Vienna, Austria, hereinafter „University” or “CEU”)
-                            we place great emphasis on the protection of your personal information and compliance
+                            we place great emphasis on the protection of your personal information and on compliance
                             with the applicable data privacy requirements, including specifically the EU General
                             Data Protection Regulation (GDPR*).
                         </p>
@@ -85,6 +85,7 @@ const PrivacyPolicy = () => {
                             <li>Affiliation</li>
                             <li>Research theme</li>
                             <li>Research project</li>
+                            <li>Planned publication</li>
                         </ul>
                         <h2>5. The Purpose of Data Processing</h2><br/>
                         <p>
@@ -125,7 +126,7 @@ const PrivacyPolicy = () => {
                         <h2>8. Scope of Those Accessing Personal Data</h2><br/>
                         <p>
                             We will not disclose personal data to third parties unless we have a legal obligation or
-                            if the user consented explicitly to doing so.
+                            if the user consented explicitly to it.
                         </p>
                         <p>
                             For the proper performance of the activities set out in section 5, we may need to pass on
