@@ -1,0 +1,140 @@
+@import "../../../styles/variables";
+
+.ListElementWrapper {
+  border-top: $border-width solid $black;
+
+  .ListElement {
+    height: 35px;
+    // border-top: $border-width solid $black;
+    font-size: 16px;
+    line-height: 35px;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    span {
+      padding-left: 10px;
+    }
+
+    div {
+      float: right;
+    }
+
+    .Button {
+      position: relative;
+      top: 17px;
+      right: -10px;
+      width: 30px;
+      height: 30px;
+      transform: translate(-50%, -50%) rotate(0deg);
+      cursor: pointer;
+      z-index: 100;
+      transition: 0.8s cubic-bezier(0.2, 0.6, 0.3, 1.1);
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 1px;
+        width: 50%;
+        background: $black;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 50%;
+        width: 1px;
+        background: $black;
+      }
+    }
+  }
+
+  .ListElement:hover {
+    cursor: pointer;
+    color: $black;
+    background-color: $yellow;
+
+    .Button {
+      &:after {
+        background: $black;
+      }
+
+      &:before {
+        background: $black;
+      }
+    }
+  }
+
+  .ListElement.Accepted {
+    background-color: $form-background;
+  }
+
+  .ListElement.Selected {
+    color: $white;
+    background-color: $black;
+    position: sticky;
+    top: calc($header-height + $breadcrumb-height);
+
+    @media (max-width: $max-width) {
+      top: calc($header-height-mobile + $breadcrumb-height);
+    }
+
+    .Button {
+      &:after {
+        background: $white;
+      }
+
+      &:before {
+        width: 0;
+        background: $white;
+      }
+    }
+  }
+}
+
+
+.AcceptButton {
+  display: flex;
+  justify-content: center;
+  padding: 0 20px 20px 20px;
+  text-align: center;
+
+  .Button {
+    width: fit-content;
+    font-size: 14px;
+    font-family: "Suisse Intl", serif;
+    font-weight: 400;
+    padding: 6px 20px;
+    color: $black;
+    background-color: $background;
+    border-radius: 200px;
+    transition: 0.1s;
+    border: $border-width solid $black;
+    text-transform: uppercase;
+
+    &:hover {
+      cursor: pointer;
+      color: $black;
+      background-color: $yellow;
+    }
+
+    &.Disabled {
+      color: $disabled-label;
+      background-color: $form-background;
+      border-color: $form-background;
+
+      &:hover {
+        cursor: not-allowed;
+        background-color: $form-background;
+        color: $disabled-label;
+      }
+    }
+  }
+}

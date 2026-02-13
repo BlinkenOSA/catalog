@@ -7,6 +7,8 @@ import RegistrationForm from "../components/registration/desktop/RegistrationFor
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import { Media } from "../utils/media";
 import RegistrationFormMobile from "../components/registration/mobile/RegistrationFormMobile";
+import RegistrationFormNew from "../components/registration/desktop/RegistrationFormNew";
+import RegistrationFormMobileNew from "../components/registration/mobile/RegistrationFormMobileNew";
 
 export const getStaticProps = async () => {
   return { props: {} }
@@ -25,7 +27,7 @@ const Registration = () => {
                         <h1>Registration</h1>
                     </div>
                     <div>
-                        <RegistrationFormMobile />
+                        <RegistrationFormMobileNew />
                     </div>
                 </div>
             </Media>
@@ -36,7 +38,7 @@ const Registration = () => {
                         <h1>Registration</h1>
                     </div>
                     <div>
-                        <RegistrationForm />
+                        <RegistrationFormNew />
                     </div>
                 </div>
             </Media>

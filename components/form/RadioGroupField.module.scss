@@ -50,6 +50,16 @@
       font-size: 18px;
       cursor: pointer;
 
+      &.Disabled {
+        color: $button-background;
+
+        .Radio {
+          &:before {
+            background: $button-background;
+          }
+        }
+      }
+
       .Radio {
         position: relative;
         margin: 0 1rem 0 0;

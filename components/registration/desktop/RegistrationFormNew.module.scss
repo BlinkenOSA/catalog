@@ -1,0 +1,47 @@
+@import "../../../styles/variables";
+
+.ContentWrapper {
+  display: flex;
+
+  .Steps {
+    flex: 1;
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+    font-size: 18px;
+    min-height: calc(100vh - (#{$header-height} + #{$page-title-height} + #{$footer-height} - 1px));
+    border-right: 1px solid $black;
+
+    .StepsList {
+      margin: 0;
+      margin-bottom: 20px;
+      padding: 0;
+      list-style: none;
+      border-bottom: 1px solid $black;
+    }
+  }
+}
+
+.RegistrationFormWrapper {
+  flex: 1;
+  min-height: 400px;
+
+  .FormLockedNote {
+    margin: 25px 40px 0px 40px;
+    padding: 10px;
+    color: $black;
+    border: 1px solid $black;
+    font-family: "Suisse Intl Condensed", serif;
+    font-weight: 400;
+    font-size: 18px;
+    background-color: $yellow;
+  }
+
+  .Form {
+    padding: 25px 40px 25px 40px;
+
+    form {
+      display: flex;
+      gap: 30px;
+    }
+  }
+}

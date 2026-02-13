@@ -1,12 +1,13 @@
 export const occupationOptions = [
-    {value: 'ceu', label: 'CEU'},
+    {value: 'ceu_student', label: 'Central European University - Student'},
+    {value: 'ceu_faculty', label: 'Central European University - Faculty'},
     {value: 'other', label: 'Other'}
 ]
 
 export const occupationTypeOptions = [
+    {value: 'faculty', label: 'Faculty'},
     {value: 'student', label: 'Student'},
-    {value: 'staff', label: 'Staff'},
-    {value: 'faculty', label: 'Faculty'}
+    {value: 'other', label: 'Other'},
 ]
 
 export const publishOptions = [

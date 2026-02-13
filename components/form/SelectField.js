@@ -52,7 +52,7 @@ const SelectField = ({label, subLabel, disabled, required, selectAPI, labelPrope
                 {label}
                 {
                     required &&
-                    <span className={style.Required}>*</span>
+                    <span className={disabled ? `${style.Required} ${style.Disabled}` : style.Required}>*</span>
                 }
             </div>
             <Select
@@ -64,6 +64,7 @@ const SelectField = ({label, subLabel, disabled, required, selectAPI, labelPrope
                 dropdownClassName={style.DropDown}
                 removeIcon={''}
                 onSelect={onSelect}
+                disabled={disabled}
             />
             {
                 !disabled && touched[props['name']] && errors[props['name']] &&

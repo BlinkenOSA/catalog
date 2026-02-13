@@ -25,12 +25,13 @@ const RadioGroupField = ({label, subLabel, required, disabled, options, ...props
                 options &&
                 options.map((option, key) => {
                     return (
-                        <label key={key} className={style.RadioLabel}>
+                        <label key={key} className={disabled ? `${style.RadioLabel} ${style.Disabled}` : style.RadioLabel}>
                             <Field
                                 type="radio"
                                 name={field.name}
                                 value={option['value']}
                                 className={style.Radio}
+                                disabled={disabled}
                             />
                             {option['label']}
                         </label>
