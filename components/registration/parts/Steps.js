@@ -28,9 +28,8 @@ const Steps = ({addStep, hasStep}) => {
 
     return helpMenuItems.map((item, index) => {
         return (
-            <div className={style.ListElementWrapper}>
+            <div key={item['key']} className={style.ListElementWrapper}>
                 <li
-                    key={item['key']}
                     className={getListClass(item['key'])}
                     onClick={() => {
                         window.scrollTo({top: 0, behavior: "smooth"})

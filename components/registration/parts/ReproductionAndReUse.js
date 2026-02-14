@@ -14,9 +14,10 @@ const ReproductionAndReUse = () => {
                     its holdings.
                 </li>
                 <li>
-                    It is the responsibility of the researcher to clear IPR and personal rights, and manage royalties.
-                    If a researcher obtained publication rights to archival documents preserved at the Archivum,
-                    they are asked to follow the Citation Guideline available on the institutional website.
+                    It is the responsibility of the researcher to clear intellectual property and personal rights,
+                    and manage royalties. If a researcher obtained publication rights to archival documents
+                    preserved at the Archivum, they are asked to follow the Citation Guideline available on
+                    the institutional website.
                 </li>
                 <li>
                     There may be further legal or donor-defined restrictions on specific materials.

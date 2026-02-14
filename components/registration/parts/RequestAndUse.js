@@ -36,22 +36,19 @@ const RequestAndUse = () => {
                     Return records to their archival box when you leave the Research Room.
                 </li>
                 <li>
-                    If you would like to continue working with a box in the coming days, place it on your designated
-                    shelf in the Preparatory Room. We hold boxes for up to five working days. If you have finished
-                    working with a box, place it on the reshelf trolley.
+                    If you have finished working with a box, place it on the reshelve trolley.
                 </li>
             </ul>
             <p>
                 Specific materials may be subject to additional rules of use.
             </p>
-            <h2>Microfilm and micro-fiches</h2>
+            <h2>Microforms</h2>
             <ul>
                 <li>You may have up to 10 microfiches or 10 microfilm reels at a time.</li>
                 <li>After using a microfilm, rewind it.</li>
-                <li>Remember to switch off the microfiche/microfilm reader after use.</li>
+                <li>Remember to switch off the microform reader after use.</li>
                 <li>
-                    After use, place the reel on your designated shelf in the Preparatory Room, or on the reshelf
-                    trolley.
+                    If you have finished working with the microform, place it on the reshelve trolley.
                 </li>
             </ul>
             <h2>Audiovisual materials</h2>

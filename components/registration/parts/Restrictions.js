@@ -12,11 +12,12 @@ const Restrictions = () => {
                 <li>Access to restricted materials is conditional on approval by the Access Review Committee.</li>
                 <li>
                     When requesting access to restricted material, researchers need to submit the title and topic of
-                    their research subjects, and a concise explanation describing how the restricted content will be
+                    their research, and a concise explanation describing how the restricted content will be
                     used.
                 </li>
                 <li>
-                    If approved by the Access Review Committee, researchers are asked to sign a
+                    If access to documents from an Open Society Foundations or Central European University archival
+                    fonds is approved by the Access Review Committee, researchers are asked to sign a
                     Non Disclosure Agreement.
                 </li>
                 <li>

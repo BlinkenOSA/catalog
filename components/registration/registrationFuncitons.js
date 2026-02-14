@@ -9,13 +9,10 @@ export const validationSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Required'),
     address_abroad: Yup.string().required('Required'),
     city_abroad: Yup.string().required('Required'),
+    house_number: Yup.string().required('Required'),
     country: Yup.string().required('Required'),
-    id_number: Yup.string().required('Required'),
-    citizenship: Yup.string().required('Required'),
     occupation: Yup.string().required('Required'),
-    occupation_type: Yup.string().required('Please select one occupation type'),
-    agree_archival_materials_usage: Yup.boolean().oneOf([true], 'You should accept the conditions'),
-    agree_researcher_statement: Yup.boolean().oneOf([true], "You should accept the researcher's statement"),
+    research_subject: Yup.string().required('Required'),
     captcha: Yup.string().required('Required!')
 })
 
@@ -23,20 +20,14 @@ export const initialValues = {
     first_name: '',
     last_name: '',
     middle_name: '',
-    address_hungary: '',
-    city_hungary: '',
     address_abroad: '',
+    house_number: '',
     city_abroad: '',
     email: '',
     country: '',
-    id_number: '',
-    citizenship: '',
     occupation: '',
-    occupation_type: 'student',
     degree: '',
-    publish: 'no',
-    agree_archival_materials_usage: false,
-    agree_researcher_statement: false
+    research_subject: '',
 }
 
 export const submitData = (formData, actions, router, alert, setIsSubmitting) => {

@@ -5,8 +5,8 @@ const PrivacyPolicy = () => {
     return (
         <div className={style.Part}>
             <p>
-                 I've read and accept Blinken OSA Archivum's <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">
-                Privacy Policy</a>.
+                I have read and understood the <a href="/privacy-policy" target="_blank" rel="noopener noreferrer">privacy
+                notice</a> relating to the use of the Catalog.
             </p>
         </div>
     )

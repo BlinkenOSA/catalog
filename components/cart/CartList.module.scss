@@ -61,6 +61,18 @@
       width: 170px;
     }
   }
+
+  .Disclaimer {
+    padding: 20px;
+    font-family: "Suisse Intl Mono", serif;
+    font-size: 12px;
+    line-height: 16px;
+
+    .DisclaimerLabel {
+      text-decoration: underline;
+      padding-bottom: 20px;
+    }
+  }
 }
 
 .CartListEmptyWrapper {

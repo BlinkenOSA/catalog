@@ -68,7 +68,7 @@ const RegistrationFormFields = ({canFillForm, isSubmitting, values}) => {
                     disabled={!canFillForm}
                 />
                 <Field
-                    name="address_house_number"
+                    name="house_number"
                     label="House No."
                     required={true}
                     component={InputField}
