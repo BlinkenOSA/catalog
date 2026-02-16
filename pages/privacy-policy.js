@@ -74,18 +74,21 @@ const PrivacyPolicy = () => {
                             <li>Name</li>
                             <li>Address</li>
                             <li>E-mail address</li>
-                            <li>Phone number</li>
+                            <li>Affiliation</li>
+                            <li>Employment type (if relevant)</li>
+                            <li>Department and degree course (if relevant)</li>
+                            <li>Research theme</li>
                         </ul>
                         <p>
                             Exceptionally, when following registration further authentication is deemed necessary,
-                            the following data may also be collected from the user following registration, via
-                            email correspondence:
+                            or when users request access to restricted materials, the following data may also be
+                            collected from the user following registration, via email correspondence:
                         </p>
                         <ul>
-                            <li>Affiliation</li>
-                            <li>Research theme</li>
+                            <li>Phone number</li>
                             <li>Research project</li>
                             <li>Planned publication</li>
+                            <li>Supervisor’s contact details</li>
                         </ul>
                         <h2>5. The Purpose of Data Processing</h2><br/>
                         <p>
