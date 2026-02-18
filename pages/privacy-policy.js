@@ -15,7 +15,7 @@ const PrivacyPolicy = () => {
             </Head>
             <div className={style.Page}>
                 <div className={style.PageTitle}>
-                    <h1>Privacy Notice for the Blinken OSA Archivum’s Catalog</h1>
+                    <h1>Privacy Policy for the Blinken OSA Archivum’s Catalog</h1>
                 </div>
                 <div className={style.StaticContent}>
                     <div>

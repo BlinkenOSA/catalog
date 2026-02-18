@@ -64,7 +64,7 @@ const RegistrationFormNew = () => {
             <div className={style.RegistrationFormWrapper} aria-disabled={!canFillForm}>
                 {!canFillForm && (
                     <div className={style.FormLockedNote}>
-                        Please accept all the steps to unlock the form.
+                        Please accept all terms and conditions to unlock the form.
                     </div>
                 )}
                 {renderForm()}

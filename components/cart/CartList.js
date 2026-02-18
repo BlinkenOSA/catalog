@@ -114,7 +114,7 @@ const CartList = ({isMobile=false}) => {
                         <div className={style.DisclaimerLabel}>Disclaimer:</div>
                             Archives collect, preserve, and make accessible historical materials for learning and
                             research.
-                            As the Blinken OSA Archivum preserves records related to Communism and the Cold War to
+                            As the Blinken OSA Archivum preserves records related to Communism and the Cold War, as well as to
                             human rights movements and violations, we recognize that some materials in our holdings may
                             be difficult to view or read; their content may be violent, sexually explicit, or
                             otherwise disturbing, may use offensive or derogatory language, and may include

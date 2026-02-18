@@ -8,14 +8,14 @@ import Disclaimer from "./Disclaimer";
 import PrivacyPolicy from "./PrivacyPolicy";
 
 const Steps = ({addStep, hasStep}) => {
-    const [openStep, setOpenStep] = useState('request_and_use');
+    const [openStep, setOpenStep] = useState('disclaimer');
 
     const helpMenuItems = [
+        {key: 'disclaimer', label: 'Disclaimer', content: <Disclaimer />},
         {key: 'request_and_use', label: 'Request and Use of Materials in the Research Room', content: <RequestAndUse/>},
         {key: 'restrictions', label: 'Restrictions', content: <Restrictions />},
         {key: 'reproduction', label: 'Reproduction and Re-Use', content: <ReproductionAndReUse />},
-        {key: 'disclaimer', label: 'Disclaimer', content: <Disclaimer />},
-        {key: 'privacy_notice', label: 'Privacy Notice for the Blinken OSA Archivum’s Catalog', content: <PrivacyPolicy />},
+        {key: 'privacy_notice', label: 'Privacy Policy for the Blinken OSA Archivum’s Catalog', content: <PrivacyPolicy />},
     ]
 
     const getListClass = (key) => {
