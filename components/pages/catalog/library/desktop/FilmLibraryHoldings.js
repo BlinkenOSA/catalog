@@ -3,14 +3,22 @@ import {getValues} from "../../../../../utils/marcFunctions";
 import {BRANCHES, COLLECTIONS, ITEM_TYPES, SHELVING} from "../config/fieldCodeConfigs";
 
 
-const LibraryHoldings = ({record}) => {
-    const subfields = ['y', 'b', '8', 'o', 'h', 'c', 'z']
+const FilmLibraryHoldings = ({record}) => {
+    const subfields = ['y', 'b', 'p', 'o', 'h', 'c', 'z']
     let values = [];
 
     values = values.concat(getValues(record, "952", subfields))
 
     const getValueFromConfig = (value, config) => {
         return config.hasOwnProperty(value) ? config[value] : value
+    }
+
+    const cleanBarcode = (barcode) => {
+        const extensions = ['.mp3', '.mp4', '.wav', '.avi']
+        if (extensions.some(ext => barcode.endsWith(ext))) {
+            return barcode.slice(0, -4);
+        }
+        return barcode
     }
 
     return (
@@ -21,10 +29,8 @@ const LibraryHoldings = ({record}) => {
                     <thead>
                         <tr>
                             <th>Item Type</th>
-                            <th>Current Location</th>
-                            <th>Collection</th>
                             <th>Call Number</th>
-                            <th>Volume Info</th>
+                            <th>Barcode</th>
                             <th>Shelving Location</th>
                             <th>Public Note</th>
                         </tr>
@@ -34,10 +40,8 @@ const LibraryHoldings = ({record}) => {
                             values.map((value, index) => (
                                 <tr key={index}>
                                     <td>{getValueFromConfig(value[0], ITEM_TYPES)}</td>
-                                    <td>{getValueFromConfig(value[1], BRANCHES)}</td>
-                                    <td>{getValueFromConfig(value[2], COLLECTIONS)}</td>
                                     <td>{value[3]}</td>
-                                    <td>{value[4]}</td>
+                                    <td>{cleanBarcode(value[2])}</td>
                                     <td>{getValueFromConfig(value[5], SHELVING)}</td>
                                     <td>{value[6]}</td>
                                 </tr>
@@ -50,4 +54,4 @@ const LibraryHoldings = ({record}) => {
     )
 };
 
-export default LibraryHoldings;
+export default FilmLibraryHoldings;

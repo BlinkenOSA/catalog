@@ -11,6 +11,8 @@ import {filmLibraryFieldConfig} from "./config/filmLibraryFieldConfig";
 import LibraryHoldings from "./desktop/LibraryHoldings";
 import LibraryHoldingsMobile from "./mobile/LibraryHoldingsMobile";
 import Title from "../../search/results/parts/metadata/Title";
+import FilmLibraryHoldings from "./desktop/FilmLibraryHoldings";
+import FilmLibraryHoldingsMobile from "./mobile/FilmLibraryHoldingsMobile";
 
 
 const LibraryPage = ({solrData, data, type, isMobile}) => {
@@ -81,8 +83,8 @@ const LibraryPage = ({solrData, data, type, isMobile}) => {
                 <div>
                 {
                     isMobile ?
-                    <LibraryHoldingsMobile record={data} type={type} /> :
-                    <LibraryHoldings record={data} type={type} />
+                    type === 'library' ? <LibraryHoldingsMobile record={data} /> : <FilmLibraryHoldingsMobile record={data} /> :
+                    type === 'library' ? <LibraryHoldings record={data} /> : <FilmLibraryHoldings record={data} />
                 }
                 </div>
             </div>

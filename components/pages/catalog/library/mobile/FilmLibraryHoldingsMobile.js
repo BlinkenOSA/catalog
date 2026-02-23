@@ -3,18 +3,17 @@ import {getValues} from "../../../../../utils/marcFunctions";
 import React, {useState} from "react";
 import {Collapse} from "react-collapse";
 import Button from "../../../search/parts/Button";
-import {BRANCHES, ITEM_TYPES, SHELVING} from "../config/fieldCodeConfigs";
+import {ITEM_TYPES, SHELVING} from "../config/fieldCodeConfigs";
 
-const LibraryHoldingsMobile = ({record, type}) => {
-    const subfields = ['y', 'b', '8', 'o', 'h', 'c', 'z']
-    let values = [];
-
+const FilmLibraryHoldingsMobile = ({record, type}) => {
+    const subfields = ['y', 'b', 'p', 'o', 'h', 'c', 'z']
     const [selectedHolding, setSelectedHolding] = useState(0);
+    let values = [];
 
     values = values.concat(getValues(record, "952", subfields))
 
     const getValueFromConfig = (value, config) => {
-        return config.hasOwnProperty(value) ? config[value] : '-'
+        return config.hasOwnProperty(value) ? config[value] : value
     }
 
     const getButtonText = (value) => {
@@ -24,6 +23,15 @@ const LibraryHoldingsMobile = ({record, type}) => {
             return `${getValueFromConfig(value[0], ITEM_TYPES)}`
         }
     }
+
+    const cleanBarcode = (barcode) => {
+        const extensions = ['.mp3', '.mp4', '.wav', '.avi']
+        if (extensions.some(ext => barcode.endsWith(ext))) {
+            return barcode.slice(0, -4);
+        }
+        return barcode
+    }
+
 
     return (
         <div className={style.Row}>
@@ -43,20 +51,12 @@ const LibraryHoldingsMobile = ({record, type}) => {
                                 <div className={style.Value}>{getValueFromConfig(value[0], ITEM_TYPES)}</div>
                             </div>
                             <div className={style.ValueWrapper}>
-                                <div className={style.Label}>Current Location</div>
-                                <div className={style.Value}>{getValueFromConfig(value[1], BRANCHES)}</div>
-                            </div>
-                            <div className={style.ValueWrapper}>
-                                <div className={style.Label}>Current Location</div>
-                                <div className={style.Value}>{getValueFromConfig(value[1], BRANCHES)}</div>
-                            </div>
-                            <div className={style.ValueWrapper}>
                                 <div className={style.Label}>Call Number</div>
                                 <div className={style.Value}>{value[3]}</div>
                             </div>
                             <div className={style.ValueWrapper}>
-                                <div className={style.Label}>Volume Info</div>
-                                <div className={style.Value}>{value[4]}</div>
+                                <div className={style.Label}>Barcode</div>
+                                <div className={style.Value}>{cleanBarcode(value[2])}</div>
                             </div>
                             <div className={style.ValueWrapper}>
                                 <div className={style.Label}>Shelving Location</div>
@@ -74,4 +74,4 @@ const LibraryHoldingsMobile = ({record, type}) => {
     )
 };
 
-export default LibraryHoldingsMobile;
+export default FilmLibraryHoldingsMobile;
