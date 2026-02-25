@@ -17,7 +17,9 @@ const SearchHighglights = ({result, highlights}) => {
     'geo_search': 'Geographic Location',
     'subject_search': 'Subject',
     'contributor_search': 'Contributor',
-    'keyword_search': 'Keyword'
+    'keyword_search': 'Keyword',
+    'digital_version_barcode': 'Barcode',
+    'call_number': 'Call Number'
   }
 
   const renderValue = (key, value) => {
