@@ -25,7 +25,7 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
 export async function getServerSideProps(context) {
     const params = context.query
-    const solrParams = Object.entries(params).length > 0 ? makeSolrParams(params) : makeSolrParams({qf: 'identifier_search'})
+    const solrParams = makeSolrParams(params)
     let data = []
 
     if (Object.entries(params).length > 0) {
