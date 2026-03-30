@@ -19,6 +19,12 @@
         color: $disabled-label;
       }
     }
+
+    .SubLabel {
+      display: block;
+      font-size: 14px;
+      font-style: italic;
+    }
   }
 
   .Disabled {

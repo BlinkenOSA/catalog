@@ -1,7 +1,7 @@
 export const occupationOptions = [
     {value: 'ceu_student', label: 'Central European University - Student'},
-    {value: 'ceu_faculty', label: 'Central European University - Faculty'},
-    {value: 'other', label: 'Other'}
+    {value: 'ceu_faculty', label: 'Central European University - Faculty / Staff'},
+    {value: 'other', label: 'Other / Independent'}
 ]
 
 export const occupationTypeOptions = [

@@ -41,7 +41,6 @@ const RegistrationFormFields = ({canFillForm, isSubmitting, values}) => {
                 <SelectField
                     name="country"
                     label="Country"
-                    subLabel={'Address'}
                     selectAPI={'research/country/select/'}
                     allowClear={true}
                     showSearch={true}
@@ -77,31 +76,34 @@ const RegistrationFormFields = ({canFillForm, isSubmitting, values}) => {
                 />
                 <SelectField
                     name="occupation"
-                    label="Affiliation"
+                    label="Current Affiliation / Employer"
+                    subLabel={"If you are not affiliated with CEU, choose 'Other'."}
                     required={true}
                     selectOptions={occupationOptions}
                     disabled={!canFillForm}
                 />
                 {
                     (values['occupation'] === 'ceu_student' ||  values['occupation'] === 'ceu_faculty') && (
-                        <>
-                            <Field
-                                name="department"
-                                label="Department"
-                                component={InputField}
-                                disabled={!canFillForm}
-                                required={true}
-                            />
-                            <SelectField
-                                name="degree"
-                                label="Current Degree / Course"
-                                selectAPI={'research/degree/select/'}
-                                labelProperty={'degree'}
-                                valueProperty={'id'}
-                                disabled={!canFillForm}
-                                required={true}
-                            />
-                        </>)
+                        <Field
+                            name="department"
+                            label="Department"
+                            component={InputField}
+                            disabled={!canFillForm}
+                            required={true}
+                        />
+                    )
+                }
+                {
+                    values['occupation'] === 'ceu_student' &&
+                        <SelectField
+                            name="degree"
+                            label="Current Degree / Course"
+                            selectAPI={'research/degree/select/'}
+                            labelProperty={'degree'}
+                            valueProperty={'id'}
+                            disabled={!canFillForm}
+                            required={true}
+                        />
                 }
                 {
                     values['occupation'] === 'other' && (

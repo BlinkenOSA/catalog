@@ -54,6 +54,7 @@ const SelectField = ({label, subLabel, disabled, required, selectAPI, labelPrope
                     required &&
                     <span className={disabled ? `${style.Required} ${style.Disabled}` : style.Required}>*</span>
                 }
+                {subLabel && <span className={style.SubLabel}>{subLabel}</span>}
             </div>
             <Select
                 name={field.name}
