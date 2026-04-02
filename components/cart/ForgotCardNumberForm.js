@@ -5,7 +5,7 @@ import style from "./ForgotCardNumberForm.module.scss";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useAlert} from "react-alert";
-import ReCaptchaField from "../form/ReCaptchaField";
+import CaptchaField from "../form/CaptchaField";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
@@ -88,7 +88,7 @@ const ForgotCardNumberForm = ({open, onClose, isMobile}) => {
 										component={InputField}
 									/>
 								<div className={style.Row}>
-									<ReCaptchaField/>
+									<CaptchaField/>
 								</div>
 								<button className={style.FormButton} type="submit" disabled={isSubmitting}>
 									Send Request
