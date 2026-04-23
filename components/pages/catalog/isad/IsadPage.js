@@ -9,7 +9,7 @@ import IsadContentPage from "./tabs/IsadContentPage";
 import isadTabConfig from "./config/isadTabConfig";
 import InsightsPage from "./tabs/InsightsPage";
 import {useRouter} from "next/router";
-import {getURLAnchor, getURLWithoutAnchor} from "../../../../utils/urlAnchorFunctions";
+import {getURLWithoutAnchor} from "../../../../utils/urlAnchorFunctions";
 
 
 const IsadPage = ({solrData, metadata, hierarchy, insights, defaultTab='context', isMobile}) => {
