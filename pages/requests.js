@@ -2,10 +2,8 @@ import React from "react";
 import style from "./pages.module.scss";
 import Layout from "../components/layout/Layout";
 import Head from "next/head";
-import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import dynamic from 'next/dynamic'
 import { Media } from "../utils/media";
-import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 
 
 const RequestsPage = () => {
