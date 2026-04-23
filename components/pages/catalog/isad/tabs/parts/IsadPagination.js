@@ -15,9 +15,9 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 
 	useEffect(() => {
 			if (containerNumber) {
-				setStartingContainer(Number(containerNumber))
+				setStartingContainer(String(containerNumber))
 			}
-	}, [])
+	}, [containerNumber])
 
 	useEffect(() => {
 		if (numFound) {
@@ -25,8 +25,15 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 		}
 	}, [numFound])
 
+	const getContainerNumber = (value) => {
+		const number = Number(value)
+
+		return number > 0 ? number : 1
+	}
+
 	const onContainerChange = (number) => {
-		const num = number > containerCount ? containerCount : number
+		const parsedNumber = getContainerNumber(number)
+		const num = parsedNumber > containerCount ? containerCount : parsedNumber
 
 		window.scrollTo(0, 0)
 		delete router.query['offset']
@@ -69,11 +76,25 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 	}
 
 	const handleMinusButtonClick = () => {
-		startingContainer > 1 && setStartingContainer(startingContainer - 1)
+		const number = getContainerNumber(startingContainer)
+
+		number > 1 && setStartingContainer(String(number - 1))
 	}
 
 	const handlePlusButtonClick = () => {
-		startingContainer < containerCount && setStartingContainer(startingContainer + 1)
+		const number = getContainerNumber(startingContainer)
+
+		number < containerCount && setStartingContainer(String(number + 1))
+	}
+
+	const handleInputChange = (event) => {
+		setStartingContainer(event.target.value.replace(/\D/g, ''))
+	}
+
+	const handleInputBlur = () => {
+		if (startingContainer === '') {
+			setStartingContainer('1')
+		}
 	}
 
 	const handlePreviousClick = () => {
@@ -102,10 +123,11 @@ const IsadPagination = ({containerNumber=1, containerCount, recordsCount, numFou
 					className={style.ContainerNumberInput}
 					value={startingContainer}
 					onKeyDown={handleKeyDown}
-					onChange={(e) => setStartingContainer(Number(e.target.value) === 0 ? 1 : Number(e.target.value))}
-					type={'number'}
-					min="1"
-					max={containerCount}
+					onChange={handleInputChange}
+					onBlur={handleInputBlur}
+					type={'text'}
+					inputMode={'numeric'}
+					pattern={'[0-9]*'}
 				/>
 				<button
 					onClick={handlePlusButtonClick}
