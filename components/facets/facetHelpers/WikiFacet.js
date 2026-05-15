@@ -139,13 +139,13 @@ const WikiFacet = ({selectedFacetObject, type}) => {
     const getMap = () => {
       const coordinates = data['properties']['coordinates'];
 
-      if(data['properties'].hasOwnProperty('geojson')) {
-        const geoJSONData = data['properties']['geojson']['data']['features']
+      if(data['properties'].hasOwnProperty('geoshape')) {
+        const geoJSONData = data['properties']['geoshape']['data']['features']
         return coordinates &&
           <MapWithNoSSR
             lat={coordinates['lat']}
             long={coordinates['long']}
-            zoom={data['properties']['geojson']['zoom'] + 2}
+            zoom={data['properties']['geoshape']['zoom'] + 2}
             geoJSON={true}
             geoJSONData={geoJSONData}
           />
