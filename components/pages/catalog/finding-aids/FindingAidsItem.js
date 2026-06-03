@@ -25,6 +25,8 @@ const FindingAidsItem = ({id, record, language, group, label, field, bilingual, 
         switch (fieldName) {
             case 'archival_unit':
                 return <a href={`/catalog/${record['catalog_id']}`}>{record['archival_unit']['title_full']}</a>
+            case 'ark':
+                return <a href={`https://ark.archivum.org/${record['ark']}`}>https://ark.archivum.org/{record['ark']}</a>
             case 'date_from':
                 let dates = []
 
