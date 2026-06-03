@@ -1,5 +1,6 @@
 import {makeSolrParams, solrFetcher} from "../../../utils/fetcherFunctions";
 import axios from "axios";
+import {filterAcceptedParams, getRejectedParamKeys} from "../../../utils/urlParamFunctions";
 
 const SOLR_FOLDERS_ITEMS_API = process.env.NEXT_PUBLIC_SOLR_FOLDERS_ITEMS;
 
@@ -9,7 +10,16 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS
 export default async function handler(req, res) {
 	let done = false;
 	let index = 1;
-	const {series_id, start, offset, tab, view, ...params} = req.query;
+	const rejectedParams = getRejectedParamKeys(req.query, 'normal', ['series_id', 'start', 'tab', 'view']);
+	if (rejectedParams.length > 0) {
+		return res.status(400).json({
+			error: 'Invalid search parameters',
+			rejectedParams
+		})
+	}
+
+	const {series_id, start, offset, tab, view, ...rawParams} = req.query;
+	const params = filterAcceptedParams(rawParams);
 
 	const containerFrom = start ? Number(start) : 1;
 

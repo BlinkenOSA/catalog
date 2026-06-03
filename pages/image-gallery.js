@@ -11,6 +11,8 @@ import {Media} from "../utils/media";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import {galleryFacetConfig} from "../config/galleryFacetConfig";
+import Error from "next/error";
+import {filterAcceptedParams, getRejectedParamKeys} from "../utils/urlParamFunctions";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
 
@@ -20,8 +22,14 @@ const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 const PER_PAGE = 50;
 
 export async function getServerSideProps(context) {
-	const params = context.query
-	const solrParams = makeSolrParams(params)
+	const rejectedParams = getRejectedParamKeys(context.query, 'gallery')
+	if (rejectedParams.length > 0) {
+		context.res.statusCode = 400
+		return { props: { errorCode: 400 } }
+	}
+
+	const params = filterAcceptedParams(context.query, 'gallery')
+	const solrParams = makeSolrParams(params, 'gallery')
 
 	// SOLR Basic Authentication
 	let headers = new Headers();
@@ -35,7 +43,11 @@ export async function getServerSideProps(context) {
 	return { props: { initialData: data } }
 }
 
-const ImageGallery = ({initialData}) => {
+const ImageGallery = ({initialData, errorCode}) => {
+	if (errorCode) {
+		return <Error statusCode={errorCode} title={'Invalid search parameters'} />
+	}
+
 	const [ref, {height}] = useMeasure();
 	const [selectedFacetGroup, setSelectedFacetGroup] = useState('')
 

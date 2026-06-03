@@ -7,6 +7,8 @@ import LibraryCollectionPage from "../components/pages/library-collections/Libra
 import {makeSolrParams} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
 import LibraryCollectionPageV2 from "../components/pages/library-collections/LibraryCollectionPageV2";
+import Error from "next/error";
+import {filterAcceptedParams, getRejectedParamKeys} from "../utils/urlParamFunctions";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 
@@ -14,7 +16,13 @@ const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
 export async function getServerSideProps(context) {
-  const params = context.query
+  const rejectedParams = getRejectedParamKeys(context.query)
+  if (rejectedParams.length > 0) {
+    context.res.statusCode = 400
+    return { props: { errorCode: 400 } }
+  }
+
+  const params = filterAcceptedParams(context.query)
   const solrParams = makeSolrParams(params)
 
   solrParams.append('facet.sort', 'index')
@@ -32,7 +40,11 @@ export async function getServerSideProps(context) {
   return { props: { data } }
 }
 
-const LibrarySpecialCollections = ({data}) => {
+const LibrarySpecialCollections = ({data, errorCode}) => {
+    if (errorCode) {
+        return <Error statusCode={errorCode} title={'Invalid search parameters'} />
+    }
+
     const libraryCollectionsFacet = data['facet_counts']['facet_fields']['library_collection_facet']
     const total = data['response']['numFound']
 

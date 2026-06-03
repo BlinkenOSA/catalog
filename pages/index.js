@@ -15,6 +15,8 @@ import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import BreadcrumbSearchMobile from "../components/breadcrumbs/mobile/BreadcrumbSearchMobile";
 import {Buffer} from "buffer";
 import {facetConfig} from "../config/facetConfig";
+import Error from "next/error";
+import {filterAcceptedParams, getRejectedParamKeys, hasMeaningfulSearchParams} from "../utils/urlParamFunctions";
 
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
@@ -24,11 +26,17 @@ const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
 
 export async function getServerSideProps(context) {
-    const params = context.query
+    const rejectedParams = getRejectedParamKeys(context.query)
+    if (rejectedParams.length > 0) {
+        context.res.statusCode = 400
+        return {props: {errorCode: 400}}
+    }
+
+    const params = filterAcceptedParams(context.query)
     const solrParams = makeSolrParams(params)
     let data = []
 
-    if (Object.entries(params).length > 0) {
+    if (hasMeaningfulSearchParams(params)) {
         // SOLR Basic Authentication
         let headers = new Headers();
         headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
@@ -45,7 +53,11 @@ export async function getServerSideProps(context) {
 }
 
 
-const Index = ({data, badgeData, newIsadData}) => {
+const Index = ({data, badgeData, newIsadData, errorCode}) => {
+    if (errorCode) {
+        return <Error statusCode={errorCode} title={'Invalid search parameters'} />
+    }
+
     const [ref, {height}] = useMeasure();
 
     const router = useRouter();
