@@ -50,6 +50,13 @@ const IdentityStatementArea = {
             bilingual: true,
             link: {},
             display: 'vertical'
+        }, {
+            label: {
+                'EN': 'Persistent Identifier (ARK)',
+                'HU': 'Állandó Azonosító (ARK)'
+            },
+            field: 'ark',
+            link: {},
         }
     ]
 }
