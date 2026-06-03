@@ -80,6 +80,8 @@ const IsadItem = ({id, record, language, group, label, field, bilingual, links='
             case 'note':
             case 'note_original':
                 return <Markdown>{record[fieldName]}</Markdown>
+            case 'ark':
+                return <a href={`https://ark.archivum.org/${record['ark']}`}>https://ark.archivum.org/{record['ark']}</a>
             default:
                 return renderValue(record[fieldName])
         }
