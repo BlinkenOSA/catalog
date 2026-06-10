@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
             </Head>
             <CartProvider id={'osa-catalog-requests'}>
                 <AlertProvider template={AlertTemplate} {...options}>
-                    <Worker workerUrl="https://catalog.osaarchivum.org/pdfjs-dist/pdf.worker.js">
+                    <Worker workerUrl="https://catalog.archivum.org/pdfjs-dist/pdf.worker.js">
                         <MediaContextProvider disableDynamicMediaQueries>
                             <Component {...pageProps} />
                             <Consent />

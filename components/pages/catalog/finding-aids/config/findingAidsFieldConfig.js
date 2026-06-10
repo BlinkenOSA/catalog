@@ -90,7 +90,14 @@ const GeneralInformationArea = {
             },
             field: 'access_rights_restriction_explanation',
             link: {},
-        },
+        }, {
+            label: {
+                'EN': 'Persistent Identifier (ARK)',
+                'HU': 'Állandó Azonosító (ARK)'
+            },
+            field: 'ark',
+            link: {},
+        }
     ],
 }
 
