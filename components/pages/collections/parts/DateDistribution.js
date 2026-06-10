@@ -10,7 +10,8 @@ const DateDistribution = ({descriptionLevel, archivalUnitID}) => {
 		return (
 			<IsadInsightsDates facets={data['facet_counts']['facet_fields']} isOnDrawer={true}/>
 		)
-
+	} else if (error) {
+		return <div>Search service unavailable. Please try again later.</div>
 	} else {
 		return <Loader/>
 	}

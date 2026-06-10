@@ -3,6 +3,7 @@ import ImageHeader from "./parts/ImageHeader";
 import ImageFooter from "./parts/ImageFooter";
 import useSWR from "swr";
 import {solrFetcher} from "../../../utils/fetcherFunctions";
+import NotFound from "../search/results/NotFound";
 
 const ImageViewerPage = ({selectedImage, isMobile=false}) => {
 	const { data, error } = useSWR({query: `id:${selectedImage}`}, solrFetcher);
@@ -10,6 +11,16 @@ const ImageViewerPage = ({selectedImage, isMobile=false}) => {
 	const ImageViewer = dynamic(() => import('../catalog/finding-aids/parts/findingAidsDigitalContent/viewers/ImageViewerV2'), {
 		ssr: false
 	});
+
+	if (error) {
+		return (
+			<NotFound
+				face={'(x_x)'}
+				mainText={'Search service unavailable'}
+				text={'The search service is currently unavailable. Please try again later.'}
+			/>
+		)
+	}
 
 	return (
 		<>

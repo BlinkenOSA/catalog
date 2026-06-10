@@ -3,12 +3,12 @@ import Head from "next/head";
 import style from "./pages.module.scss";
 import React from "react";
 import { Media } from "../utils/media";
-import LibraryCollectionPage from "../components/pages/library-collections/LibraryCollectionPage";
 import {makeSolrParams} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
 import LibraryCollectionPageV2 from "../components/pages/library-collections/LibraryCollectionPageV2";
 import Error from "next/error";
 import {filterAcceptedParams, getRejectedParamKeys} from "../utils/urlParamFunctions";
+import NotFound from "../components/pages/search/results/NotFound";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_STATS;
 
@@ -28,21 +28,48 @@ export async function getServerSideProps(context) {
   solrParams.append('facet.sort', 'index')
   solrParams.append('fq', 'record_origin_facet:Library')
 
-  // SOLR Basic Authentication
-  let headers = new Headers();
-  headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+  try {
+    // SOLR Basic Authentication
+    let headers = new Headers();
+    headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
 
-  const res = await fetch(`${SOLR_API}?` + solrParams, {
-    headers: headers
-  })
+    const res = await fetch(`${SOLR_API}?` + solrParams, {
+      headers: headers
+    })
 
-  const data = await res.json()
-  return { props: { data } }
+    if (!res.ok) {
+      throw new Error(`SOLR request failed with status ${res.status}`)
+    }
+
+    const data = await res.json()
+    return { props: { data } }
+  } catch (error) {
+    console.error('SOLR library special collections request failed:', error)
+    context.res.statusCode = 503
+    return { props: { data: null, serviceUnavailable: true } }
+  }
 }
 
-const LibrarySpecialCollections = ({data, errorCode}) => {
+const LibrarySpecialCollections = ({data, errorCode, serviceUnavailable}) => {
     if (errorCode) {
         return <Error statusCode={errorCode} title={'Invalid search parameters'} />
+    }
+
+    if (serviceUnavailable) {
+        return (
+            <Layout>
+                <Head>
+                    <title>Blinken OSA Archivum - Library Special Collections</title>
+                </Head>
+                <div className={style.Page}>
+                    <NotFound
+                        face={'(x_x)'}
+                        mainText={'Search service unavailable'}
+                        text={'The search service is currently unavailable. Please try again later.'}
+                    />
+                </div>
+            </Layout>
+        )
     }
 
     const libraryCollectionsFacet = data['facet_counts']['facet_fields']['library_collection_facet']

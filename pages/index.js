@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import IndexPageDesktop from "../components/pages/index/desktop/IndexPage";
 import IndexPageMobile from "../components/pages/index/mobile/IndexPage";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import FacetPage from "../components/facets/desktop/FacetPage";
 import {makeSolrParams} from "../utils/fetcherFunctions";
 import {useRouter} from "next/router";
@@ -17,9 +17,6 @@ import {Buffer} from "buffer";
 import {facetConfig} from "../config/facetConfig";
 import Error from "next/error";
 import {filterAcceptedParams, getRejectedParamKeys, hasMeaningfulSearchParams} from "../utils/urlParamFunctions";
-
-
-const API = process.env.NEXT_PUBLIC_AMS_API;
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR;
 
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
@@ -37,14 +34,25 @@ export async function getServerSideProps(context) {
     let data = []
 
     if (hasMeaningfulSearchParams(params)) {
-        // SOLR Basic Authentication
-        let headers = new Headers();
-        headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+        try {
+            // SOLR Basic Authentication
+            let headers = new Headers();
+            headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
 
-        const res = await fetch(`${SOLR_API}?` + solrParams, {
-            headers: headers
-        })
-        data = await res.json()
+            const res = await fetch(`${SOLR_API}?` + solrParams, {
+                headers: headers
+            })
+
+            if (!res.ok) {
+                throw new Error(`SOLR request failed with status ${res.status}`)
+            }
+
+            data = await res.json()
+        } catch (error) {
+            console.error('SOLR search request failed:', error)
+            context.res.statusCode = 503
+            return {props: {data: null, serviceUnavailable: true}}
+        }
     } else {
         data = []
     }
@@ -53,7 +61,7 @@ export async function getServerSideProps(context) {
 }
 
 
-const Index = ({data, badgeData, newIsadData, errorCode}) => {
+const Index = ({data, badgeData, newIsadData, errorCode, serviceUnavailable}) => {
     if (errorCode) {
         return <Error statusCode={errorCode} title={'Invalid search parameters'} />
     }
@@ -80,6 +88,49 @@ const Index = ({data, badgeData, newIsadData, errorCode}) => {
 
     const onShowButtonClick = () => {
         setSelectedFacetGroup('')
+    }
+
+    if (serviceUnavailable) {
+        return (
+            <Layout>
+                <Head>
+                    <title>Blinken OSA Archivum - Catalog</title>
+                </Head>
+                <Media greaterThanOrEqual="md">
+                    {
+                        (className, renderChildren) => {
+                            return renderChildren ?
+                                <BreadcrumbSearch
+                                    total={0}
+                                    reference={ref}
+                                    inverse={false}
+                                    module={''}
+                                /> : '';
+                        }
+                    }
+                </Media>
+                <Media lessThan="md">
+                    {
+                        (className, renderChildren) => {
+                            return renderChildren ?
+                                <BreadcrumbSearchMobile
+                                    defaultFacetOpen={'primary_type'}
+                                    total={0}
+                                    reference={ref}
+                                    inverse={false}
+                                    module={''}
+                                    onSelectFacetGroup={onSelectFacetGroup}
+                                /> : '';
+                        }
+                    }
+                </Media>
+                <SearchPage
+                    data={null}
+                    error={true}
+                    onSelectFacetGroup={onSelectFacetGroup}
+                />
+            </Layout>
+        )
     }
 
     if (data.length === 0) {
@@ -138,6 +189,7 @@ const Index = ({data, badgeData, newIsadData, errorCode}) => {
                     </Media>
                     <SearchPage
                         data={data}
+                        error={false}
                         onSelectFacetGroup={onSelectFacetGroup}
                     />
                 </Layout>

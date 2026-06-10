@@ -4,7 +4,7 @@ import style from "./pages.module.scss";
 import ImageGalleryPage from "../components/pages/image-gallery/ImageGalleryPage";
 import BreadcrumbSearch from "../components/breadcrumbs/desktop/BreadcrumbSearch";
 import {useMeasure} from "react-use";
-import {makeSolrParams, solrFetcher} from "../utils/fetcherFunctions";
+import {makeSolrParams} from "../utils/fetcherFunctions";
 import {Buffer} from "buffer";
 import GalleryLayout from "../components/layout/GalleryLayout";
 import {Media} from "../utils/media";
@@ -13,13 +13,12 @@ import FacetPageMobile from "../components/facets/mobile/FacetPageMobile";
 import {galleryFacetConfig} from "../config/galleryFacetConfig";
 import Error from "next/error";
 import {filterAcceptedParams, getRejectedParamKeys} from "../utils/urlParamFunctions";
+import NotFound from "../components/pages/search/results/NotFound";
 
 const SOLR_API = process.env.NEXT_PUBLIC_SOLR_IMAGE_GALLERY;
 
 const SOLR_USER = process.env.NEXT_PUBLIC_SOLR_USER;
 const SOLR_PASS = process.env.NEXT_PUBLIC_SOLR_PASS;
-
-const PER_PAGE = 50;
 
 export async function getServerSideProps(context) {
 	const rejectedParams = getRejectedParamKeys(context.query, 'gallery')
@@ -31,19 +30,29 @@ export async function getServerSideProps(context) {
 	const params = filterAcceptedParams(context.query, 'gallery')
 	const solrParams = makeSolrParams(params, 'gallery')
 
-	// SOLR Basic Authentication
-	let headers = new Headers();
-	headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
+	try {
+		// SOLR Basic Authentication
+		let headers = new Headers();
+		headers.set('Authorization', 'Basic ' + Buffer.from(SOLR_USER + ":" + SOLR_PASS).toString('base64'));
 
-	const res = await fetch(`${SOLR_API}?` + solrParams, {
-		headers: headers
-	})
+		const res = await fetch(`${SOLR_API}?` + solrParams, {
+			headers: headers
+		})
 
-	const data = await res.json()
-	return { props: { initialData: data } }
+		if (!res.ok) {
+			throw new Error(`SOLR request failed with status ${res.status}`)
+		}
+
+		const data = await res.json()
+		return { props: { initialData: data } }
+	} catch (error) {
+		console.error('SOLR gallery request failed:', error)
+		context.res.statusCode = 503
+		return { props: { initialData: null, serviceUnavailable: true } }
+	}
 }
 
-const ImageGallery = ({initialData, errorCode}) => {
+const ImageGallery = ({initialData, errorCode, serviceUnavailable}) => {
 	if (errorCode) {
 		return <Error statusCode={errorCode} title={'Invalid search parameters'} />
 	}
@@ -101,7 +110,15 @@ const ImageGallery = ({initialData, errorCode}) => {
 					module={'image-gallery'}
 					onSelectFacetGroup={onSelectFacetGroup}
 				/>
-				{renderGalleryContentMobile()}
+				{
+					serviceUnavailable ?
+						<NotFound
+							face={'(x_x)'}
+							mainText={'Search service unavailable'}
+							text={'The search service is currently unavailable. Please try again later.'}
+						/> :
+						renderGalleryContentMobile()
+				}
 			</Media>
 			<Media greaterThanOrEqual="md">
 				<BreadcrumbSearch
@@ -110,9 +127,17 @@ const ImageGallery = ({initialData, errorCode}) => {
 					module={'image-gallery'}
 				/>
 				<div className={`${style.Page}`}>
-					<ImageGalleryPage
-						breadcrumbHeight={height}
-						initialData={initialData} />
+					{
+						serviceUnavailable ?
+							<NotFound
+								face={'(x_x)'}
+								mainText={'Search service unavailable'}
+								text={'The search service is currently unavailable. Please try again later.'}
+							/> :
+							<ImageGalleryPage
+								breadcrumbHeight={height}
+								initialData={initialData} />
+					}
 				</div>
 			</Media>
 		</GalleryLayout>

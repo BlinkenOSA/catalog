@@ -8,6 +8,7 @@ import React from "react";
 import {useRouter} from "next/router";
 import useSWRInfinite from "swr/infinite";
 import {solrFetcher} from "../../../utils/fetcherFunctions";
+import NotFound from "../search/results/NotFound";
 
 const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect, breadcrumbHeight, isMobile=false}) => {
     const router = useRouter();
@@ -27,9 +28,19 @@ const ImageGalleryThumbnails = ({initialData, selectedImage, onImageSelect, brea
         }
     }
 
-    const { data, size, setSize } = useSWRInfinite(getKey, solrFetcher, {fallbackData: [initialData]})
+    const { data, error, size, setSize } = useSWRInfinite(getKey, solrFetcher, {fallbackData: [initialData]})
     const isEmpty = data?.[0]?.['response']['docs'].length === 0;
     const isReachingEnd = isEmpty || (data && data[data.length - 1]?.['response']['docs'].length < PER_PAGE);
+
+    if (error) {
+        return (
+            <NotFound
+                face={'(x_x)'}
+                mainText={'Search service unavailable'}
+                text={'The search service is currently unavailable. Please try again later.'}
+            />
+        )
+    }
 
     const handleFacetGroupSelect = (facetGroupKey) => {
         if (selectedFacetGroup === facetGroupKey) {

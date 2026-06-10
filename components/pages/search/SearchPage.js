@@ -14,9 +14,39 @@ import {Media} from "../../../utils/media"
  * @param {Object} params
  * @param {func} params.onSelectFacetGroup Handling of selecting a particular group.
  */
-const SearchPage = ({data, onSelectFacetGroup}) => {
+const SearchPage = ({data, error, onSelectFacetGroup}) => {
     const router = useRouter();
     const {limit, offset} = router.query;
+
+    if (error) {
+        return (
+            <React.Fragment>
+                <Media lessThan="md">
+                    <div className={style.ContentMobile}>
+                        <NotFound
+                            face={'(x_x)'}
+                            mainText={'Search service unavailable'}
+                            text={'The search service is currently unavailable. Please try again later.'}
+                        />
+                    </div>
+                </Media>
+                <Media greaterThanOrEqual="md">
+                    <div className={style.ContentSearch}>
+                        <FacetMenu
+                            onSelectFacetGroup={onSelectFacetGroup}
+                        />
+                        <div className={style.Content}>
+                            <NotFound
+                                face={'(x_x)'}
+                                mainText={'Search service unavailable'}
+                                text={'The search service is currently unavailable. Please try again later.'}
+                            />
+                        </div>
+                    </div>
+                </Media>
+            </React.Fragment>
+        )
+    }
 
     const renderResults = (isMobile=false) => {
         const results = data['response']['docs']
