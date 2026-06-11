@@ -25,10 +25,19 @@ const SearchBarMobile = ({type}) => {
     }, [query])
 
     const handleSearch = () => {
-        if (searchValue && searchValue.trim() !== '') {
+        const trimmedSearchValue = searchValue?.trim();
+        const currentQuery = Array.isArray(query) ? query[0] : query;
+        const isNewSearchTerm = trimmedSearchValue !== currentQuery;
+
+        if (trimmedSearchValue) {
             router.replace({
                 pathname: type === 'gallery' ? '/image-gallery' : '/',
-                query: createParams(searchValue, limit, offset, selectedFacets),
+                query: createParams(
+                    trimmedSearchValue,
+                    isNewSearchTerm ? undefined : limit,
+                    isNewSearchTerm ? undefined : offset,
+                    isNewSearchTerm ? {} : selectedFacets
+                ),
             }, undefined, {shallow: false});
         }
     }
