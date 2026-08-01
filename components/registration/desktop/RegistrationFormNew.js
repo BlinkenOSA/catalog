@@ -1,23 +1,11 @@
-import { Field, Form, Formik } from "formik";
+import { Formik } from "formik";
 import style from "./RegistrationFormNew.module.scss";
-import InputField from "../../form/InputField";
-import TextAreaField from "../../form/TextAreaField";
-import SelectField from "../../form/SelectField";
-import RadioGroupField from "../../form/RadioGroupField";
-import CaptchaField from "../../form/CaptchaField";
 import { initialValues, submitData, validationSchema } from "../registrationFuncitons";
-import {occupationOptions, occupationTypeOptions, publishOptions} from "../options";
 import { useAlert } from "react-alert";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { Collapse } from "react-collapse";
 import Terms from "../parts/Terms";
-import RequestAndUse from "../parts/RequestAndUse";
-import Restrictions from "../parts/Restrictions";
-import ReproductionAndReUse from "../parts/ReproductionAndReUse";
-import Disclaimer from "../parts/Disclaimer";
-import PrivacyPolicy from "../parts/PrivacyPolicy";
-import {useList, useSet} from "react-use";
+import {useSet} from "react-use";
 import RegistrationFormFields from "../parts/RegistrationFormFields";
 import Steps from "../parts/Steps";
 
