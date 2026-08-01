@@ -5,6 +5,7 @@ import CartButton from "../cart/CartButton";
 import { FiMeh } from 'react-icons/fi';
 import {Field, FieldArray} from "formik";
 import InputField from "../form/InputField";
+import HolidayClosureNotice from "./HolidayClosureNotice";
 
 const CartList = ({isMobile=false}) => {
     const { removeItem, inCart, items } = useCart();
@@ -107,6 +108,7 @@ const CartList = ({isMobile=false}) => {
         return (
             <>
                 <div className={isMobile ? `${style.CartListWrapper} ${style.Mobile}` : style.CartListWrapper}>
+                    <HolidayClosureNotice from="2026-08-03" to="2026-08-31"/>
                     {displayItems('Archives')}
                     {displayItems('Library')}
                     {displayItems('Film Library')}
@@ -128,6 +130,7 @@ const CartList = ({isMobile=false}) => {
     } else {
         return (
             <div className={style.CartListEmptyWrapper}>
+                <HolidayClosureNotice from="2026-08-03" to="2026-08-31"/>
                 <div className={style.IconWrapper}>
                     <div className={style.Content}>
                         <div className={style.Icon}>
