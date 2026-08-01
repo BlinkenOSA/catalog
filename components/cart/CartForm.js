@@ -4,13 +4,13 @@ import InputField from "../form/InputField";
 import DatePickerField from "../form/DatePickerField";
 import * as Yup from 'yup';
 import {useCart} from "react-use-cart";
-import CaptchaField from "../form/CaptchaField";
 import axios from "axios";
 import {useAlert} from "react-alert";
 import dynamic from "next/dynamic";
 import {useState} from "react";
 import ForgotCardNumberForm from "./ForgotCardNumberForm";
 import TextAreaField from "../form/TextAreaField";
+import ReCaptchaField from "../form/ReCaptchaField";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
@@ -28,6 +28,17 @@ const CartForm = ({isMobile = false}) => {
     const isWeekday = (date) => {
         const day = date.getDay();
         return day !== 0 && day !== 6;
+    };
+
+    const isSummerHoliday = (date) => {
+        const holidayStart = new Date(2026, 7, 3);
+        const holidayEnd = new Date(2026, 7, 31, 23, 59, 59, 999);
+
+        return date >= holidayStart && date <= holidayEnd;
+    };
+
+    const isRequestDateAvailable = (date) => {
+        return isWeekday(date) && !isSummerHoliday(date);
     };
 
     const getMaxDate = () => {
@@ -148,7 +159,7 @@ const CartForm = ({isMobile = false}) => {
                                 <DatePickerField
                                     name={"request_date"}
                                     label={"Planned Visit/Access Date"}
-                                    filterDate={isWeekday}
+                                    filterDate={isRequestDateAvailable}
                                     disabled={isEmpty}
                                     required={true}
                                     minDate={new Date()}
@@ -189,7 +200,7 @@ const CartForm = ({isMobile = false}) => {
                                       />
                                   </>
                                 }
-                                {!isEmpty && <CaptchaField/>}
+                                {!isEmpty && <ReCaptchaField/>}
                                 <div className={style.SubmitButtonWrapper}>
                                     <button className={style.FormButton} type="submit" disabled={isEmpty || isSubmitting}>
                                         Send Request
