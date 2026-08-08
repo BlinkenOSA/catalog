@@ -10,7 +10,8 @@ import dynamic from "next/dynamic";
 import {useState} from "react";
 import ForgotCardNumberForm from "./ForgotCardNumberForm";
 import TextAreaField from "../form/TextAreaField";
-import ReCaptchaField from "../form/ReCaptchaField";
+// import ReCaptchaField from "../form/ReCaptchaField";
+import CaptchaField from "../form/CaptchaField";
 
 const API = process.env.NEXT_PUBLIC_AMS_API;
 
@@ -200,7 +201,7 @@ const CartForm = ({isMobile = false}) => {
                                       />
                                   </>
                                 }
-                                {!isEmpty && <ReCaptchaField/>}
+                                {!isEmpty && <CaptchaField/>}
                                 <div className={style.SubmitButtonWrapper}>
                                     <button className={style.FormButton} type="submit" disabled={isEmpty || isSubmitting}>
                                         Send Request
