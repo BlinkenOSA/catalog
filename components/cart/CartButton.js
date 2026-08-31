@@ -4,6 +4,8 @@ import {useCart} from "react-use-cart";
 import { useAlert } from 'react-alert'
 import countObjectsByProperties from "../../utils/countObjectsByProperty";
 
+const MAX_REQUEST = process.env.NEXT_PUBLIC_MAX_REQUEST_NUMBER;
+
 const CartButton = ({name, record, inCart, onCheckedChange}) => {
     const { addItem, removeItem, items } = useCart();
     const alert = useAlert()
@@ -101,7 +103,7 @@ const CartButton = ({name, record, inCart, onCheckedChange}) => {
                 price: 0
             }
 
-            if (count >= 10) {
+            if (count >= MAX_REQUEST) {
                 if (isFolderItem()) {
                     alert.show(`You have reached the maximum amount of boxes allowed to be requested!`);
                 } else {
