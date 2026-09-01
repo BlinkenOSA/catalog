@@ -7,6 +7,9 @@ import {Field, FieldArray} from "formik";
 import InputField from "../form/InputField";
 import HolidayClosureNotice from "./HolidayClosureNotice";
 
+const HOLIDAY_FROM = process.env.NEXT_PUBLIC_HOLIDAY_FROM_DATE;
+const HOLIDAY_TO = process.env.NEXT_PUBLIC_HOLIDAY_TO_DATE;
+
 const CartList = ({isMobile=false}) => {
     const { removeItem, inCart, items } = useCart();
     const [demoButtonChecked, setDemoButtonChecked] = useState(false);
@@ -130,7 +133,7 @@ const CartList = ({isMobile=false}) => {
     } else {
         return (
             <div className={style.CartListEmptyWrapper}>
-                <HolidayClosureNotice from="2026-08-03" to="2026-08-31"/>
+                <HolidayClosureNotice from={HOLIDAY_FROM} to={HOLIDAY_TO}/>
                 <div className={style.IconWrapper}>
                     <div className={style.Content}>
                         <div className={style.Icon}>
