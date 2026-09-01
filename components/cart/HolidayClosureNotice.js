@@ -6,13 +6,17 @@ const HolidayClosureNotice = ({from, to}) => {
     const [isVisible, setIsVisible] = useState(true);
     const fromDate = dayjs(from);
     const toDate = dayjs(to);
+    const today = dayjs().startOf("day");
     const reopenDate = toDate.add(1, "day");
 
     const fromLabel = fromDate.format("MMMM D");
     const reopenLabel = reopenDate.format("MMMM D");
     const reopenMonthLabel = reopenDate.format("MMMM");
+    const isWithinClosurePeriod = today.isSame(fromDate, "day")
+        || today.isSame(toDate, "day")
+        || (today.isAfter(fromDate, "day") && today.isBefore(toDate, "day"));
 
-    if (!isVisible) {
+    if (!isVisible || !isWithinClosurePeriod) {
         return null;
     }
 
