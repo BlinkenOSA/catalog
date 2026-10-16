@@ -3,6 +3,7 @@
 .Menu {
   position: fixed;
   top: -100vh;
+  left: 0;
   background-color: $black;
   color: $white;
   width: 100vw;
@@ -45,7 +46,10 @@
   right: 10px;
   width: 20px;
   height: 20px;
+  padding: 0;
   color: $white;
+  background: transparent;
+  border: 0;
   z-index: 12;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
@@ -85,6 +89,10 @@
 
   span:nth-child(4) {
     top: 14px;
+  }
+
+  &.Dark span {
+    background-color: $black;
   }
 
   &.Opened span:nth-child(1) {
