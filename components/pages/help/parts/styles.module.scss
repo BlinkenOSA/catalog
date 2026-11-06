@@ -70,6 +70,31 @@
   }
 }
 
+.AccessSteps {
+  margin: 0;
+  padding-left: 24px;
+
+  li {
+    margin-bottom: 30px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h3 {
+    font-family: "Suisse Works", serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 0 10px;
+  }
+}
+
+.AccessScreenshot {
+  width: 100%;
+  margin: 0;
+}
+
 .UnitButtonsWrap {
   display: flex;
   align-items: center;

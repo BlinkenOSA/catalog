@@ -7,31 +7,50 @@ import Identifiers from "./parts/Identifiers";
 import Request from "./parts/Request";
 import Search from "./parts/Search";
 import Record from "./parts/Record";
+import DigitalMaterials from "./parts/DigitalMaterials";
+
+const helpMenuItems = [
+    {key: 'catalog', label: 'Blinken OSA Archivum’s Catalog', anchor: 'blinken-osa-archivums-catalog'},
+    {key: 'organisation', label: 'Organization of Records', anchor: 'organization-of-records'},
+    {key: 'identifiers', label: 'Identifying records', anchor: 'identifying-records'},
+    {key: 'request', label: 'Request and access', anchor: 'request-and-access'},
+    {key: 'digital-materials', label: 'Accessing digital materials', anchor: 'accessing-digital-materials'},
+    {key: 'search', label: 'Refining your search', anchor: 'refining-your-search'},
+    {key: 'record', label: 'Interpreting your search results', anchor: 'interpreting-your-search-results'},
+    {key: 'terminology', label: 'Terminology', anchor: 'terminology'},
+]
 
 const HelpPage = ({defaultSelected, isMobile}) => {
     const [selectedQuestion, setSelectedQuestion] = useState(defaultSelected)
     const [drawerOpen, setDrawerOpen] = useState(false)
 
-    const helpMenuItems = [
-        {key: 'catalog', label: 'Blinken OSA Archivum’s Catalog'},
-        {key: 'organisation', label: 'Organization of Records'},
-        {key: 'identifiers', label: 'Identifying records'},
-        {key: 'request', label: 'Request and access'},
-        {key: 'search', label: 'Refining your search'},
-        {key: 'record', label: 'Interpreting your search results'},
-        {key: 'terminology', label: 'Terminology'},
-    ]
+    useEffect(() => {
+        const syncSectionFromHash = () => {
+            const item = helpMenuItems.find(item => `#${item.anchor}` === window.location.hash)
+            setSelectedQuestion(item ? item.key : defaultSelected)
+            setDrawerOpen(Boolean(item))
+        }
+
+        syncSectionFromHash()
+        window.addEventListener('hashchange', syncSectionFromHash)
+        return () => window.removeEventListener('hashchange', syncSectionFromHash)
+    }, [defaultSelected])
 
     const renderQuestions = () => {
         return helpMenuItems.map(item => {
             return (
                 <li
                     key={item['key']}
-                    onClick={() => onClickQuestion(item['key'])}
                     className={selectedQuestion === item['key'] ? style.Selected : ''}
                 >
-                    <span>{item['label']}</span>
-                    <div className={style.Button}/>
+                    <a
+                        href={`#${item.anchor}`}
+                        onClick={() => onClickQuestion(item['key'])}
+                        aria-current={selectedQuestion === item['key'] ? 'true' : undefined}
+                    >
+                        <span>{item['label']}</span>
+                        <div className={style.Button}/>
+                    </a>
                 </li>
             )
         })
@@ -54,6 +73,8 @@ const HelpPage = ({defaultSelected, isMobile}) => {
                 return <Identifiers isMobile={isMobile}/>
             case 'request':
                 return <Request isMobile={isMobile} />
+            case 'digital-materials':
+                return <DigitalMaterials />
             case 'search':
                 return <Search isMobile={isMobile} />
             case 'record':
