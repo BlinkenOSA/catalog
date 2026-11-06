@@ -143,7 +143,7 @@ const DigitalMaterials = () => {
             <h2 className={style.Title}>Access period</h2>
             <div className={style.Text}>
                 <p>
-                    Access to shared digital materials is usually granted for 60 days. If you need more time,
+                    Access to shared digital materials is usually granted for 30 days. If you need more time,
                     contact Research Room staff at <a href="mailto:archivum@ceu.edu">archivum@ceu.edu</a> to request
                     an extension. You can also contact staff to confirm when your access ends.
                 </p>
