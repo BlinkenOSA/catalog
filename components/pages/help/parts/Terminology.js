@@ -4,68 +4,74 @@ import React from "react";
 const Terminology = () => {
     return (
         <>
-            <div className={style.Title}>The following terms are used throughout our system</div>
+            <div className={style.Title}>Terms used in the catalog</div>
             <div className={style.Text}>
                 <h2>Fonds</h2>
                 <p>
-                    The entire body of records of an organization, family, or individual that have been created and
-                    accumulated as the result of an organic process reflecting the functions of the creator
+                    The records created or accumulated by a person, family or organization in the course of their
+                    activities, kept together as a whole.
                 </p>
                 <h2>Subfonds</h2>
                 <p>
-                    A body of documents within a fond readily distinguished from the whole by filing arrangement,
-                    type, form, or content.
+                    A subdivision of a fonds, distinguished by factors such as the part of an organization that
+                    created the records, their arrangement or their content. Not every fonds has subfonds.
                 </p>
                 <h2>Series</h2>
                 <p>
-                    A group of similar records that are arranged according to a filing system and that are related as the
-                    result of being created, received, or used in the same activity; a file group; a record series.
+                    A group of related records within a fonds or subfonds, brought together because they result
+                    from the same activity, share a format or follow the same filing system.
                 </p>
                 <h2>ISAD(G)</h2>
                 <p>
-                    A standard published by the International Council on Archives that establishes general rules for
-                    the description of archival materials, regardless of format, to promote consistent and sufficient
-                    descriptions, and to facilitate exchange and integration of those descriptions.
+                    The General International Standard Archival Description, published by the International Council
+                    on Archives. It provides guidance for describing archival materials consistently, from a fonds
+                    as a whole to its individual parts.
                 </p>
-                <h2>Finding Aids</h2>
+                <h2>Finding aid</h2>
                 <p>
-                    A description that typically consists of contextual and structural information about an
-                    archival resource.
+                    A guide to archival materials that explains their contents, context and arrangement and helps
+                    you identify materials relevant to your research.
                 </p>
                 <h2>Container</h2>
                 <p>
-                    A package or housing used to hold materials; a receptacle.
+                    A physical storage unit or carrier, such as an archival box or a videotape. Container numbers
+                    help you locate folders or items within a series.
                 </p>
                 <h2>Folder</h2>
-                <p>A sheet of heavy paper stock or cardboard, scored near the middle, its halves bent so they rest
-                    side by side, and used as a loose cover to keep documents and other flat materials together,
-                    especially for purposes of filing</p>
+                <p>
+                    A physical folder holds a group of documents. In the catalog, a folder description tells you
+                    about the documents grouped together, rather than the enclosure itself.
+                </p>
                 <h2>Item</h2>
                 <p>
-                    thing that can be distinguished from a group and that is complete in itself.
+                    An individual document, photograph or recording described as a single unit. An item may be
+                    physical or digital.
                 </p>
-                <h2>Folder / Item list</h2>
+                <h2>Folder / item list</h2>
                 <p>
-                    That part of a completed finding aid or a rudimentary finding aid that lists the folder titles
-                    in a collection.
+                    A list of the folders and items within a series, arranged in archival order. It helps you
+                    identify individual descriptions and locate materials within the series.
                 </p>
                 <h2>Subject</h2>
                 <p>
-                    A person, corporation / institution or a term is being discussed, described, or dealt with in a
-                    described archival holding.
+                    A person, organization or topic that the material concerns. Subject entries in the catalog help
+                    you find related materials.
                 </p>
                 <h2>Contributor</h2>
                 <p>
-                    A person, corporation / institution who took part in creating the archival holding.
-                    Authors, crew members, publishers, producers.
+                    A person or organization involved in creating the material, such as an author, crew member,
+                    publisher or producer.
                 </p>
-                <h2>Geo Location</h2>
+                <h2>Geographical location</h2>
                 <p>
-                    The spatial coverage of a record. It can be a country, a city or any other geographical location.
+                    A place associated with the material, such as a country or city. These entries appear under
+                    ‘Geo Locations’ in the catalog filters.
                 </p>
                 <h2>Request</h2>
                 <p>
-                    A single reference transaction, although more than one item may be retrieved.
+                    A submission asking staff to prepare selected materials for consultation. A request can include
+                    more than one item, subject to the applicable limits. See
+                    {' '}<a href="#request-and-access">Request and access</a> for instructions.
                 </p>
             </div>
         </>

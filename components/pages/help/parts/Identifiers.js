@@ -5,59 +5,59 @@ import style from "./styles.module.scss"
 const Identifiers = ({isMobile}) => {
     return (
         <React.Fragment>
-            <div className={style.Title}>Identifiying archival records</div>
+            <div className={style.Title}>Identifying archival records</div>
             <div className={style.Text}>
               <p>
-                Each record in an archive has a unique identifier that helps to uniquely identify the material.
-                These identifiers are called 'call number' or 'reference code'. Blinken OSA Archivum uses
-                the following scheme for archival material:
+                Each archival description has a reference code that identifies the material and its place in the
+                archival hierarchy. Blinken OSA Archivum uses the following scheme for archival materials:
               </p>
               <p>
-                Take for example the following archival record:
+                For example, the following item belongs to the series ‘Interviews with Chernobyl Survivors’ in
+                the fonds ‘Interviews Relating to Chernobyl’:
               </p>
               <p style={{textAlign: 'center'}}>
-                <a href={'/catalog/KxYz0dP9'}>
-                  <span className={style.Identifier}>HU OSA 331-0-2:7/2</span> - The Degovtsev Family
-                </a>
+                Item title: <a href={'/catalog/KxYz0dP9'}>The Degovtsev Family</a><br/>
+                Reference code: <span className={style.Identifier}>HU OSA 331-0-2:7/2</span>
               </p>
               <p>
                   The reference code <span className={style.Identifier}>HU OSA 331-0-2:7/2 </span>
                   consists of the following parts:
               </p>
-              <p>
+              <div>
                 <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA</div>
-                  <div style={{flex: 1}}>Identifier suffix consisting of the country code of Hungary (HU) and the institutional abbreviation
-                    of Blinken OSA Archivum.</div>
+                  <div style={{flex: 1}}>Reference code prefix: the country code for Hungary (HU) and the institutional
+                    abbreviation for Blinken OSA Archivum (OSA).</div>
                 </div>
                 <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331</div>
-                  <div style={{flex: 1}}>Fonds number. The name of the fonds: Interviews Relating to Chernobyl</div>
+                  <div style={{flex: 1}}>Fonds 331: Interviews Relating to Chernobyl.</div>
                 </div>
                 <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0</div>
-                  <div style={{flex: 1}}>Subfonds number.</div>
+                  <div style={{flex: 1}}>Subfonds component: 0. In this example, the series belongs directly to the
+                    fonds, without a separate subfonds.</div>
                 </div>
                 <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0-2</div>
-                  <div style={{flex: 1}}>Series number. The name of the series: Interviews with Chernobyl Survivors</div>
+                  <div style={{flex: 1}}>Series 2: Interviews with Chernobyl Survivors.</div>
                 </div>
                 <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0-2:7</div>
-                  <div style={{flex: 1}}>Container number. The 7th container of the series. In this case the original containers were VHS tapes.</div>
+                  <div style={{flex: 1}}>Container 7 in this series. In this example, the container is a VHS PAL tape.</div>
                 </div>
                 <div className={isMobile ? `${style.IdentifierParts} ${style.Mobile}` : style.IdentifierParts}>
                   <div className={style.Identifier}>HU OSA 331-0-2:7/2</div>
-                  <div style={{flex: 1}}>Folder or item number. These are the smallest archival units. In this case, since these are programs
-                  on VHS tape, this refers to the 2nd recording on that particular tape.</div>
+                  <div style={{flex: 1}}>Folder or item 2 within container 7. Here it identifies the recording
+                    ‘The Degovtsev Family’.</div>
                 </div>
-              </p>
+              </div>
             </div>
-            <div className={style.Title}>Identifiying library records</div>
+            <div className={style.Title}>Identifying library records</div>
             <div className={style.Text}>
               <p>
-                Library records (books and periodicals) are identified with call number, which is a unique combination of
-                letters and numbers used to identify an item and to facilitate storage and retrieval.
+                Library materials, including books and periodicals, are identified by a call number. This combination
+                of letters and numbers identifies the material and helps staff locate it.
               </p>
               <p>
                 See, for example, the book record:
@@ -67,11 +67,11 @@ const Identifiers = ({isMobile}) => {
                 with call number <span className={style.Identifier}>947.084/1/092 SHU</span>
               </p>
             </div>
-            <div className={style.Title}>Identifiying film library records</div>
+            <div className={style.Title}>Identifying film library records</div>
             <div className={style.Text}>
               <p>
-                Film Library records are identified with their own call number, which is a combination of
-                the suffix 'FL Record' and a unique number.
+                Film library materials are identified by a call number made up of the prefix ‘FL Record’ and a
+                unique number.
               </p>
               <p>
                 For example, see the documentary film:

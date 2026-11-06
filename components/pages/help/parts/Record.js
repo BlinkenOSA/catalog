@@ -1,8 +1,6 @@
 import React from 'react';
 import style from "./styles.module.scss"
 import {FiInfo} from "react-icons/fi";
-import {facetConfig} from "../../../../config/facetConfig";
-import {AiOutlineClose, AiOutlineRight} from "react-icons/ai";
 
 const Record = () => {
     return (
@@ -13,80 +11,104 @@ const Record = () => {
                     Your search results may include the following:
                 </p>
                 <ul>
-                    <li>Archival fonds, subfonds, or series description pages</li>
-                    <li>Archival folder or item level record pages</li>
-                    <li>Library record (books and periodicals) pages</li>
-                    <li>Film library record pages</li>
+                    <li>Descriptions of archival fonds, subfonds and series</li>
+                    <li>Descriptions of archival folders and items</li>
+                    <li>Library records for books and periodicals</li>
+                    <li>Film library records</li>
                 </ul>
                 <p>
-                    Clicking an item shown in your hit list will take you to a page that, depending on the type/format
-                    of your record, typically contains the following building blocks:
+                    Select a search result to open its description page. The sections you see depend on the type of
+                    material and the information available. The following guide explains the main sections for each
+                    type of record.
                 </p>
             </div>
             <div className={style.Title}>Fonds, subfonds or series description page</div>
             <div className={style.Text}>
                 <h2>Header</h2>
-                <p>Shows you the main title, the language selection switch (if applicable), and the primary type
-                    indicator.</p>
-                <h2>Context tab</h2>
-                <p>The contextual information metadata. The descripion follows
-                    the <a target='_blank'
-                           href={'https://www.ica.org/en/isadg-general-international-standard-archival-description-second-edition'}>ISAD(G)</a>
-                    format.</p>
-                <h2>Hierarchy tab</h2>
-                <p>Shows you the place of the selected description record in the archival hierarchy starting from the
-                    top-level fonds description.</p>
-                <h2>Statistics tab</h2>
-                <p>Statistical information about the underlying folder or item records.</p>
-                <h2>Folder / Items in this series tab</h2>
                 <p>
-                    Only visible on series level. List of the underlying folder or item level records, sorted by their
-                    physical order. Here you can search among these records, or filter further by creation date,
-                    subject, and/or geographic location.
+                    Shows the reference code, title and description level. A language selector appears when a
+                    description is available in another language.
+                </p>
+                <h2>Context tab</h2>
+                <p>
+                    Explains what the records contain, who created them and their archival context. It also provides
+                    information about their arrangement and access conditions, where recorded. The description follows
+                    the <a target="_blank" rel="noopener noreferrer"
+                           href="https://www.ica.org/app/uploads/2024/01/CBPS_2000_Guidelines_ISADG_Second-edition_EN.pdf">ISAD(G)</a>
+                    {' '}standard for archival description.
+                </p>
+                <h2>Hierarchy tab</h2>
+                <p>
+                    Shows where the records belong in the archival hierarchy, starting with the fonds. Use the tree
+                    to explore related descriptions.
+                </p>
+                <h2>Statistics tab</h2>
+                <p>
+                    Summarizes information recorded for the folders and items within the selected fonds, subfonds or
+                    series, such as creation dates, material types and availability.
+                </p>
+                <h2>Folders / Items in this series tab</h2>
+                <p>
+                    Appears on series pages and lists the folders and items in their archival order. Search within
+                    the series or narrow the list by creation year, subject or geographical location. On mobile, the
+                    tab is labelled ‘Folders / Items’.
                 </p>
             </div>
-            <div className={style.Title}>Folder or item level record page</div>
+            <div className={style.Title}>Folder or item description page</div>
             <div className={style.Text}>
                 <h2>Header</h2>
-                <p>Shows you the main title, the request selector, the availability badge, a language selection switch
-                    (if applicable), and the primary type indicator.</p>
+                <p>
+                    Shows the reference code, title and material type, along with an availability label. A request
+                    selector and language selector appear where applicable.
+                </p>
                 <h2>Citation</h2>
-                <p>Suggests the citation format you should use in your publications. By clicking the button, you can
-                    copy the citation text to the clipboard.</p>
+                <p>
+                    Provides a suggested citation for the material. Click ‘Copy citation to clipboard’ to copy it
+                    for use in your research or publications.
+                </p>
                 <h2>Metadata</h2>
-                <p>Metadata of the record. If an <FiInfo/> is visible, clicking on it will open an
-                    information box with data collected from Wikidata.</p>
+                <p>
+                    Describes the material, including its dates, contents and other recorded details. Where an
+                    {' '}<FiInfo/> icon appears, select it to open additional information from Wikidata.
+                </p>
                 <h2>Hierarchy</h2>
-                <p>Shows you the hierarchical placement of the currently shown folder or item level record. You can
-                    navigate to the next and previous records in the hierarchy or jump up to the parent series, subfonds
-                    or fonds level descriptions.</p>
+                <p>
+                    Shows the folder or item in its archival context. Use it to explore nearby records and open the
+                    descriptions of the series, subfonds or fonds it belongs to.
+                </p>
             </div>
             <div className={style.Title}>Library record page</div>
             <div className={style.Text}>
                 <h2>Header</h2>
-                <p>Shows you the main title, the request selector, the availability badge,
-                    and the primary type indicator.</p>
+                <p>Shows the title, request selector, availability label and material type.</p>
                 <h2>Metadata</h2>
-                <p>Library record metadata. In our library system we are using the
-                    international <a href={'https://www.loc.gov/marc/bibliographic/'}
-                                     target={'_blank'}>MARC21</a> standard
-                    to describe library materials.</p>
+                <p>
+                    Provides bibliographic information, such as the author, publication details and subjects.
+                    These records come from our library system, which uses the
+                    {' '}<a href="https://www.loc.gov/marc/bibliographic/index.html" target="_blank"
+                            rel="noopener noreferrer">MARC 21</a> format for bibliographic data.
+                </p>
                 <h2>Holdings</h2>
-                <p>Shows you the different physical (or digital) instances of a library record.
+                <p>
+                    Lists the available copies and formats of the material, with call numbers, locations, volume
+                    information and notes, where recorded.
                 </p>
             </div>
             <div className={style.Title}>Film library record page</div>
             <div className={style.Text}>
                 <h2>Header</h2>
-                <p>Shows you the main title, the request selector, the availability badge,
-                    and the primary type indicator.</p>
+                <p>Shows the title, request selector, availability label and material type.</p>
                 <h2>Metadata</h2>
-                <p>Film library metadata part. In our library system we are using
-                    the international <a href={'https://www.loc.gov/marc/bibliographic/'}
-                                         target={'_blank'}>MARC21</a> standard to describe film library materials.</p>
+                <p>
+                    Describes the film, including its creators, production details, languages and contents, where
+                    recorded. Film library records also come from our library system and use the
+                    {' '}<a href="https://www.loc.gov/marc/bibliographic/index.html" target="_blank"
+                            rel="noopener noreferrer">MARC 21</a> format.
+                </p>
                 <h2>Holdings</h2>
-                <p>Shows you the different physical (or digital) instances
-                    of a film library record.
+                <p>
+                    Lists the available physical and digital copies of the film, with their formats, call numbers,
+                    barcodes, locations and notes, where recorded.
                 </p>
             </div>
         </React.Fragment>

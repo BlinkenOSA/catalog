@@ -1,89 +1,99 @@
 import React from 'react';
+import Link from "next/link";
 import style from "./styles.module.scss"
 
 const Catalog = () => {
     return (
         <React.Fragment>
-            <div className={style.Title}>Blinken OSA Catalog</div>
+            <div className={style.Title}>Blinken OSA Archivum’s Catalog</div>
             <div className={style.Text}>
                 <p>
-                    The catalog offers integrated search among the cross-referenced archival, library and film library
-                    records held at the Archivum. Where available, digital content is presented along rich contextual
-                    descriptions. While the primary language of the catalog is English, some collections are described
-                    in their original language including Hungarian, Russian, Polish and Italian.
+                    Search archival, library and film library records together in Blinken OSA Archivum’s catalog.
+                    Where available, digital content is presented alongside detailed contextual descriptions.
+                    Most descriptions are in English, while some are also available in the original language of the
+                    materials, including Hungarian, Russian, Polish and Italian.
                 </p>
                 <p>
-                    For a better overview of the holdings of Blinken OSA Archivum, we created the following entry points
-                    to our catalog:
+                    You can also explore the holdings through the following pages:
                 </p>
                 <h2>Archival Collections</h2>
                 <p>
-                    A page displaying a full, tree-like structure of the hierarchical description levels (fonds,
-                    subfonds, series) of the archives. If you click on the main themes, on the top level, you can filter
-                    the tree with the selected value. Clicking on one element of the tree will show you a short
-                    description of the selected record, with the possibility of navigating to the fonds, subfonds, or
-                    series description page.
+                    Browse fonds, subfonds and series in a tree showing the archival hierarchy. Select a theme to
+                    narrow the tree, then select an entry to read a summary and open its description page. Visit
+                    {' '}<Link href="/archival-collections"><a>Archival Collections</a></Link> to begin.
                 </p>
-                <h2>Library special collections</h2>
-                <p>To render your research easier and to track back the origin of library documents, most of the
-                    publications are organized in browsable special thematic collections, which are displayed on this
-                    page.</p>
-                <h2>Digital image gallery</h2>
-                <p>To see all our digitized image files as an image gallery, rather than going through the whole
-                    archival context, a digital image gallery was created. Here you can find the same content that is
-                    shown in the regular catalog. You can search among the images using the search box on the top of the
-                    page, or you can apply filters in the same way as in the catalog.</p>
+                <h2>Library Special Collections</h2>
+                <p>
+                    Browse library materials by theme, donation or provenance on the
+                    {' '}<Link href="/library-special-collections"><a>Library Special Collections</a></Link> page.
+                    Select a collection to see its materials in the catalog.
+                </p>
+                <h2>Digital Image Gallery</h2>
+                <p>
+                    Browse images available through the catalog in the
+                    {' '}<Link href="/image-gallery"><a>Digital Image Gallery</a></Link>. Use its search box and
+                    filters for collection, year of creation, tags and geographical locations to narrow the results.
+                </p>
             </div>
             <div className={style.Title}>Archival records and descriptions</div>
             <div className={style.Text}>
                 <p>
-                    The Archivum’s textual and audiovisual sources come in analog and digital format and in 40+
-                    languages. Altogether they comprise 10,000 linear meters, 17,000 hours of audiovisual, and 15 TB of
-                    digital records, as well as 150,000 photographs on three main themes:
+                    The Archivum preserves textual records, audiovisual recordings, photographs and digital materials
+                    in many languages. Our <a href="https://www.archivum.org/external/catalog">published catalog overview</a>
+                    {' '}provides figures for the extent of the holdings. The archival collections cover the following
+                    main themes:
                 </p>
                 <h2>Communism, the Cold War, and their Afterlives</h2>
-                <p>The largest collection in this area is that of the Radio Free Europe/Radio Liberty (RFE/RL) Research
-                    Institute and its successor, the Open Media Research Institute, consisting of background and
-                    reference materials accumulated over 45 years of activity. It is an essential source on the
-                    post-WWII political, social, economic, and cultural history of the Central and Southeast European
-                    region, which includes, among others, Radio Liberty broadcasts, Soviet television monitoring and
-                    unique Soviet, Polish and Hungarian samizdat materials</p>
+                <p>
+                    The largest collection in this area contains the records of the Radio Free Europe/Radio Liberty
+                    (RFE/RL) Research Institute and its successor, the Open Media Research Institute. Their background
+                    and reference materials document the political, social, economic and cultural history of Central
+                    and Southeastern Europe after the Second World War. The collections include Radio Liberty
+                    broadcasts, Soviet television monitoring and Soviet, Polish and Hungarian samizdat materials.
+                </p>
                 <h2>Human Rights and Social Justice</h2>
-                <p>Collections comprise records from international and local agencies and non-governmental
-                    organizations, as well as individuals active in documenting the history of human rights movements
-                    and violations worldwide, including but not limited to genocide, war crimes, torture, rape, and
-                    crimes against humanity, as well as of the rights and representation of marginalized, disadvantaged
-                    groups, such as refugees, the Roma, and other ethnic minorities, the LGBTQI+ community or people
-                    with disabilities.</p>
+                <p>
+                    These collections document human rights movements, violations and social justice worldwide.
+                    They include records from international and local agencies, nongovernmental organizations and
+                    individuals. Topics include genocide, war crimes, torture, rape and crimes against humanity,
+                    as well as the rights and representation of refugees, Roma and other ethnic minorities,
+                    LGBTQI+ communities and people with disabilities.
+                </p>
                 <h2>Central European University (CEU) and the Open Society Foundations (OSF) Network</h2>
-                <p>The Archivum, the official repository and historical archives of the Central European University
-                    (CEU) in Budapest and Vienna, as well as of the Open Society Foundations (OSF) network globally, is
-                    responsible for the long-term preservation of the permanent records of these entities.</p>
+                <p>
+                    The Archivum is the official repository and historical archive of Central European University
+                    (CEU) in Budapest and Vienna and the Open Society Foundations (OSF) network worldwide.
+                    It preserves their permanent records.
+                </p>
             </div>
             <div className={style.Title}>Library records</div>
             <div className={style.Text}>
                 <p>
-                    Blinken OSA Library houses a non-circulating reference library of books related to the Cold War,
-                    Communism, international human rights, history of broadcasting and the archival profession, as well
-                    as
-
-                    a collection of more than 7,300 dailies and journals published from the 1950s onwards in 40
-                    languages. It also offers special thematic collections on microforms and rare publications from the
-                    region including numerous titles of informal and regional press and ephemera
+                    Blinken OSA Library is a reference library whose materials are available for consultation and
+                    are not lent out. Its books cover the Cold War, Communism, international human rights, the history
+                    of broadcasting and the archival profession. The library also holds newspapers and journals in
+                    many languages, microforms and rare publications, including informal and regional press and
+                    ephemera.
+                </p>
+                <p>
+                    Library records come from our library system. Use the ‘Library Special Collection’ grouping to
+                    explore materials from a particular donation, source or thematic collection. See
+                    {' '}<a href="#organization-of-records">Organization of Records</a> for more about how library
+                    and film library materials are organized.
                 </p>
             </div>
             <div className={style.Title}>Film library records</div>
             <div className={style.Text}>
                 <p>
-                    Blinken OSA’s non-circulating Film Library holds an unparalleled range of classic and rare fiction
-                    and nonfiction works in almost 100 languages, among them documentary, propaganda, and educational
-                    films related to Soviet and East European history and culture, focusing on the Cold War, Communism,
-                    and totalitarianism, as well as international human rights abuses and war crimes. The Library also
-                    holds all films submitted to the Verzio International Human Rights Documentary Film
-                    Festival.<br/><br/>
-                    Our films come from various sources, from individual donors, national film and television archives,
-                    and public vendors. Some have English subtitles, while others are available only in their original
-                    languages.
+                    Blinken OSA’s Film Library holds fiction and nonfiction works, including documentary, propaganda
+                    and educational films, in almost 100 languages. Its main subjects include Soviet and East European
+                    history and culture, the Cold War, Communism, totalitarianism, human rights abuses and war crimes.
+                    The collection also includes films submitted to the Verzió International Human Rights Documentary
+                    Film Festival. Materials are available for consultation and are not lent out.
+                </p>
+                <p>
+                    Films come from individual donors, national film and television archives, and commercial
+                    suppliers. Some have English subtitles; others are available only in their original languages.
                 </p>
             </div>
         </React.Fragment>

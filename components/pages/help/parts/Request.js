@@ -23,8 +23,7 @@ const Request = ({isMobile}) => {
             <div className={style.Title}>Request documents</div>
             <div className={style.Text}>
                 <p>
-                    You can request documents in the same way as you would buy items from an online store. With the
-                    slider iconbelow you can add items to, or remove items from, your request list:
+                    Use the selector below to add materials to, or remove them from, your request list:
                 </p>
                 <p style={{textAlign: 'center'}}>
                     <CartButton
@@ -34,9 +33,12 @@ const Request = ({isMobile}) => {
                     />
                 </p>
                 <p>
-                    The maximum amount of material you can request is limited by record type. You can request a maximum
-                    of 10 containers (archival boxes, VHS tapes, etc.), 10 library materials and 10 film library items
-                    in one request package.
+                    The catalog limits the number of materials you can add to your request list by record type.
+                    A message will appear if you reach a selection limit. For the current limits on materials that
+                    can be supplied for consultation at one time, see the
+                    {' '}<a href="https://www.archivum.org/collections/help-with-your-research">Research Room rules</a>.
+                    Materials are supplied in batches, and staff can advise you on requesting further materials
+                    once you have finished with the previous batch.
                 </p>
                 <p style={{fontSize: '14px'}}>
                     (Please note that fonds, subfonds, and series descriptions cannot be added to the request list.)
@@ -47,13 +49,12 @@ const Request = ({isMobile}) => {
                     below:
                 </p>
                 <p style={{textAlign: 'center'}}>
-                    <Image src="/icons/Cart.svg" height={20} width={20}/>
+                    <Image src="/icons/Cart.svg" alt="Request list" height={20} width={20}/>
                 </p>
                 <p>
                     Clicking the same icon takes you to the requests page. You can submit your request by entering your
-                    email address, your virtual research card number, and the date by which you would like the material
-                    to be prepared. You will be notified by email as soon as your request is processed and the requested
-                    documents can be accessed.
+                    registered email address, your virtual research card number, and your planned visit or access
+                    date. You will be notified by email when the requested materials are ready for consultation.
                 </p>
             </div>
             <div className={style.Title}>Access requested documents</div>
@@ -61,26 +62,40 @@ const Request = ({isMobile}) => {
                 <p>
                     There are two factors determining whether and how you can access requested documents:
                 </p>
-                <p>
-                    <ul>
-                        <li>Whether the documents have already been digitized, or whether they are still in their
-                            original analogue format.
-                        </li>
-                        <li>The rules on access rights.</li>
-                    </ul>
-                </p>
+                <ul>
+                    <li>Whether a digital copy is available or the materials must be consulted in their physical form.</li>
+                    <li>The access conditions that apply to the materials.</li>
+                </ul>
                 <h2>Analog or Digital</h2>
                 <p>
                     Blinken OSA Archivum aims to digitize the majority of its holdings in order to make it easier for
                     researchers to access them without having to visit the research room in person.
                 </p>
+                <h2>Digitization on Demand</h2>
+                <p>
+                    If you need a digital copy of materials that are not already available digitally, you can apply
+                    through our <a href="https://www.archivum.org/collections/digitization-on-demand">Digitization on Demand service</a>.
+                    Complete the request form linked on the service page and email it to
+                    {' '}<a href="mailto:archivum@ceu.edu">archivum@ceu.edu</a>, including the reference codes or call
+                    numbers of the materials you need. The service page explains the request limits, expected
+                    processing times and any applicable fees.
+                </p>
+                <p>
+                    If your request can be fulfilled, the digital copies will be shared through our Research Cloud.
+                    See <a href="#accessing-digital-materials">Accessing digital materials</a> for instructions on
+                    opening your shared folder and viewing the files.
+                </p>
                 <h2>Access rights</h2>
                 <p>
-                    Depending on their legal status or the donor's permission, documents may be available with or
-                    without restrictions. Non-restricted documents are available for research purposes either in person
-                    or digitally.
-                    Restricted documents can be accessed in person in the research room at Blinken OSA Archivum. Where
-                    possible, we provide sanitized copies of restricted documents digitally.
+                    Access conditions depend on the legal status of the materials and any restrictions set by the
+                    donor. Unrestricted materials can be consulted in the Research Room or, where available, as
+                    digital viewing copies.
+                </p>
+                <p>
+                    Access to restricted materials requires approval by the Access Review Committee. When submitting
+                    your request, provide the title and topic of your research and explain how you intend to use the
+                    restricted materials. If approved, access is provided in the Research Room under the conditions
+                    specified by staff. Where permitted, redacted digital copies may be provided.
                 </p>
                 <h2>Access use cases</h2>
                 <p>
@@ -92,7 +107,7 @@ const Request = ({isMobile}) => {
                     </div>
                     <p>
                         These materials are only available in analog form and can only be accessed in person
-                        in our research room..
+                        in our Research Room.
                     </p>
                 </div>
 
@@ -104,9 +119,8 @@ const Request = ({isMobile}) => {
                         </div>
                     </div>
                     <p>
-                        Access to these documents is restricted due to their content or for legal reasons. You can
-                        access them personally in our research room once certain conditions are met. Research room staff
-                        will provide assistance in these cases
+                        Access to these materials requires approval by the Access Review Committee. If approved,
+                        you can consult them in the Research Room under the conditions specified by staff.
                     </p>
                 </div>
 
@@ -119,9 +133,9 @@ const Request = ({isMobile}) => {
                         }}/>
                     </div>
                     <p>
-                        These materials are available in analog form, but they are also digitized. If you request these
-                        types of documents, you will be able to
-                        access them as digital files via our Research Cloud
+                        Digital copies of these materials are available on request through our Research Cloud,
+                        subject to the applicable access conditions. See
+                        {' '}<a href="#accessing-digital-materials">Accessing digital materials</a> for instructions.
                     </p>
                 </div>
 

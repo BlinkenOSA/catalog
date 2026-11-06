@@ -29,21 +29,21 @@ const DigitalMaterials = () => {
             <h2 className={style.Title}>Signing in for the first time</h2>
             <div className={style.Text}>
                 <p>
-                    When you first open the link, you will be asked to register your email address as an external
-                    user in the Microsoft 365 environment of Central European University (CEU), of which Blinken
-                    OSA Archivum is a part. If you have already completed this process, you may be taken directly
-                    to your folder.
+                    On your first visit, follow the prompts to accept guest access to Central European University’s
+                    (CEU) Microsoft 365 environment and sign in using your registered email address. Blinken OSA
+                    Archivum is part of CEU and uses this environment to share materials. If you have already
+                    accepted guest access and are signed in, you may be taken directly to your folder.
                 </p>
                 <p>
-                    The example below uses a Gmail address. The screens you see may vary depending on your email
-                    provider and whether you are already signed in.
+                    The example below shows first-time access with a Gmail address. The screens and sign-in prompts
+                    may vary depending on your email provider, account settings and whether you are already signed in.
                 </p>
                 <ol className={style.AccessSteps}>
                     <li>
                         <h3>Validate the sharing link</h3>
                         <p>
-                            Open the link in the notification email. On the ‘Sharing Link Validation’ screen,
-                            click <strong>Next</strong>.
+                            Open the link in the notification email. If the ‘Sharing Link Validation’ screen
+                            appears, click <strong>Next</strong>.
                         </p>
                         <figure className={style.AccessScreenshot} style={{maxWidth: 356}}>
                             <Image
@@ -75,8 +75,9 @@ const DigitalMaterials = () => {
                     <li>
                         <h3>Continue with Google</h3>
                         <p>
-                            If you are using Gmail, Google will ask you to allow microsoftonline.com to access
-                            your email address. Click <strong>Continue</strong> to proceed.
+                            In this Gmail example, Google asks you to allow microsoftonline.com to access your
+                            email address. If this screen appears, review the information and click
+                            {' '}<strong>Continue</strong> to proceed.
                         </p>
                         <figure className={style.AccessScreenshot} style={{maxWidth: 1078}}>
                             <Image
@@ -123,11 +124,28 @@ const DigitalMaterials = () => {
             <h2 className={style.Title}>Problems signing in</h2>
             <div className={style.Text}>
                 <p>
+                    If the sharing notification has not arrived, check your spam or junk folder and make sure you
+                    are checking the email account you used to register with Blinken OSA Archivum.
+                </p>
+                <p>
                     If your email address belongs to another institution’s Microsoft 365 account and you have
                     difficulty opening your folder, try signing out of that account first. You can also open
                     the sharing link in an Incognito window in Chrome or a Private Browsing window in Safari
                     or Firefox to avoid conflicts with an existing sign-in session. Use your registered email
                     address when signing in to the Research Cloud.
+                </p>
+                <p>
+                    If you still cannot open your folder or view the files, contact Research Room staff at
+                    {' '}<a href="mailto:archivum@ceu.edu">archivum@ceu.edu</a>. Include the reference codes or call
+                    numbers of the requested materials and a brief description of the problem or error message.
+                </p>
+            </div>
+            <h2 className={style.Title}>Access period</h2>
+            <div className={style.Text}>
+                <p>
+                    Access to shared digital materials is usually granted for 60 days. If you need more time,
+                    contact Research Room staff at <a href="mailto:archivum@ceu.edu">archivum@ceu.edu</a> to request
+                    an extension. You can also contact staff to confirm when your access ends.
                 </p>
             </div>
         </React.Fragment>
