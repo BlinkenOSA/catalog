@@ -2,6 +2,11 @@
 
 .Link {
   text-decoration: none;
+
+  &:focus-visible .ButtonWithLink.dark {
+    background-color: $yellow;
+    color: $black;
+  }
 }
 
 .Button, .ButtonWithLink {

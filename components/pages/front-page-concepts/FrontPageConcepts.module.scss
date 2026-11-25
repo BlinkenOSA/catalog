@@ -13,6 +13,14 @@
   a {
     color: inherit;
   }
+
+  main a:not(.ButtonLink) {
+    &:hover,
+    &:focus-visible {
+      color: $black;
+      background: $yellow;
+    }
+  }
 }
 
 .Header {
@@ -37,13 +45,6 @@
   nav a {
     font-size: 18px;
     text-decoration: none;
-
-    &:hover,
-    &:focus-visible {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 4px;
-    }
   }
 }
 
@@ -136,7 +137,6 @@
 }
 
 .HierarchyLevel {
-  position: relative;
   display: grid;
   grid-template-columns: 38px 1fr;
   gap: 15px;
@@ -167,25 +167,10 @@
 }
 
 .HierarchyMarker {
-  position: relative;
-  z-index: 2;
   width: 38px;
   height: 38px;
   display: grid;
   place-items: center;
-  background: $yellow;
-  border: 1px solid $black;
-  border-radius: 50%;
-  font-family: "Suisse Intl Mono", monospace;
-  font-size: 11px;
-}
-
-.HierarchyLine {
-  position: absolute;
-  top: 37px;
-  bottom: -1px;
-  left: 18px;
-  border-left: 1px solid $black;
 }
 
 .HierarchyCompact {
@@ -198,11 +183,6 @@
   .HierarchyMarker {
     width: 30px;
     height: 30px;
-  }
-
-  .HierarchyLine {
-    top: 29px;
-    left: 14px;
   }
 
   .HierarchyLevel strong {
@@ -218,15 +198,16 @@
 .GuidedHero {
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(330px, 0.7fr);
-  min-height: calc(100vh - 78px);
 }
 
 .GuidedIntro {
+  --guided-intro-padding: clamp(34px, 5vw, 56px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  gap: 28px;
   min-width: 0;
-  padding: clamp(34px, 5vw, 56px);
+  padding: var(--guided-intro-padding);
   border-right: 1px solid $black;
 }
 
@@ -243,10 +224,10 @@
   max-width: 820px;
   margin: 0;
   font-family: "Suisse Intl Condensed", sans-serif;
-  font-size: clamp(70px, 8.6vw, 136px);
+  font-size: clamp(40px, 5.5vw, 82px);
   font-weight: 400;
   letter-spacing: -0.025em;
-  line-height: 0.82;
+  line-height: 1;
 
   em {
     position: relative;
@@ -266,36 +247,14 @@
   }
 }
 
-.GuidedLead {
-  max-width: 680px;
-  margin: 28px 0 38px;
-  font-family: "Suisse Intl", sans-serif;
-  font-size: clamp(16px, 1.4vw, 20px);
-  line-height: 1.38;
-}
-
-.SuggestedSearches {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 12px;
-  font-size: 13px;
-
-  span {
-    padding: 7px 0;
-  }
+.GuidedBrowse {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
 
   a {
-    padding: 7px 12px;
-    background: $white;
-    border: 1px solid $black;
-    border-radius: 999px;
-    text-decoration: none;
-
-    &:hover,
-    &:focus-visible {
-      background: $yellow;
-    }
+    font-weight: 600;
+    text-decoration: underline;
   }
 }
 
@@ -309,7 +268,7 @@
     max-width: 360px;
     margin: 0 0 14px;
     font-family: "Suisse Intl Condensed", sans-serif;
-    font-size: clamp(34px, 3.5vw, 50px);
+    font-size: clamp(28px, 2.5vw, 38px);
     font-weight: 400;
     line-height: 1.02;
   }
@@ -324,69 +283,44 @@
 }
 
 .GuideLink {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  align-self: flex-start;
   margin-top: auto;
-  padding-top: 18px;
-  border-top: 1px solid $black;
-  font-size: 15px;
-  font-weight: 700;
-  text-underline-offset: 4px;
-
-  span {
-    font-size: 22px;
-  }
 }
 
 .BrowseSection {
   border-top: 1px solid $black;
+}
 
-  > header {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(520px, 700px);
-    grid-template-rows: auto auto auto;
-    column-gap: 20px;
-    align-items: start;
-    padding: 34px clamp(28px, 5vw, 56px);
-    border-bottom: 1px solid $black;
-  }
+.BrowseHeader {
+  border-top: 1px solid $black;
+  margin: 24px calc(-1 * var(--guided-intro-padding)) 0;
+  padding: 40px var(--guided-intro-padding) 0;
 
   h2 {
-    grid-column: 1;
-    grid-row: 2;
     margin: 0;
     font-family: "Suisse Intl Condensed", sans-serif;
-    font-size: clamp(42px, 5vw, 72px);
+    font-size: clamp(32px, 3vw, 48px);
     font-weight: 400;
     letter-spacing: -0.015em;
   }
 
-  > header > .BrowseIntro {
-    grid-column: 1;
-    grid-row: 3;
+  .BrowseIntro {
     max-width: 630px;
     margin: 16px 0 0;
     font-size: 15px;
     line-height: 1.45;
   }
 
-  > header .Eyebrow {
-    grid-column: 1;
-    grid-row: 1;
+  .Eyebrow {
     margin-bottom: 10px;
   }
 }
 
 .QuickFacts {
-  grid-column: 2;
-  grid-row: 1 / span 3;
   display: grid;
   grid-template-columns: 1.2fr 0.65fr 1.15fr 1fr;
   align-self: stretch;
-  margin: 0;
-  border-left: 1px solid $black;
+  margin: 24px 0 0;
 
   > div {
     min-width: 0;
@@ -395,7 +329,13 @@
     justify-content: space-evenly;
     gap: 18px;
     padding: 4px 16px;
-    border-right: 1px solid $black;
+    & + div {
+      border-inline-start: 1px solid rgba($black, 0.25);
+    }
+
+    &:first-child {
+      padding-inline-start: 0;
+    }
   }
 
   dt {
@@ -412,7 +352,7 @@
     font-size: clamp(26px, 1.8vw, 36px);
     font-weight: 400;
     line-height: 0.9;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -436,7 +376,7 @@
   h3 {
     max-width: 360px;
     margin: 52px 0 14px;
-    font-family: "Suisse Works", serif;
+    font-family: "Suisse Intl Condensed", sans-serif;
     font-size: clamp(27px, 3vw, 44px);
     font-weight: 400;
     line-height: 1;
@@ -476,12 +416,6 @@
   }
 }
 
-.PathCard .PathNote {
-  margin-top: 14px;
-  color: #555;
-  font-size: 13px;
-}
-
 .PathActions {
   display: flex;
   flex-direction: column;
@@ -489,36 +423,38 @@
   gap: 10px;
   margin-top: auto;
   padding-top: 30px;
-
-  a {
-    font-family: "Suisse Intl Mono", monospace;
-    font-size: 12px;
-    text-transform: uppercase;
-    text-underline-offset: 4px;
-  }
 }
 
-.PathPrimaryAction {
-  display: inline-block;
-  padding: 11px 13px;
-  background: $black;
-  color: $white !important;
-  border: 1px solid $black;
-  text-decoration: none;
-
-  &:hover,
-  &:focus-visible {
-    color: $black !important;
-    background: $yellow;
-  }
+.PathSecondaryAction {
+  font-family: "Suisse Intl Mono", monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-underline-offset: 4px;
 }
 
 .PathSecondaryAction {
   padding: 4px 0;
+}
 
-  &:hover,
-  &:focus-visible {
-    text-decoration-thickness: 3px;
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 901px) {
+    .PathGrid {
+      grid-template-rows: auto auto 1fr auto auto;
+    }
+
+    .PathCard {
+      display: grid;
+      grid-row: span 5;
+      grid-template-rows: subgrid;
+    }
+
+    .PathActions {
+      display: grid;
+      grid-row: span 2;
+      grid-template-rows: subgrid;
+      justify-items: start;
+      margin-top: 0;
+    }
   }
 }
 
@@ -547,10 +483,6 @@
 
 @media (max-width: 900px) {
 
-  .BrowseSection > header {
-    grid-template-columns: 1fr;
-  }
-
   .GuidedHero {
     grid-template-columns: 1fr;
   }
@@ -559,8 +491,7 @@
     border-right: 0;
     border-bottom: 1px solid currentColor;
 
-    .GuidedTitle,
-    .GuidedLead {
+    .GuidedTitle {
       max-width: none;
     }
   }
@@ -588,56 +519,29 @@
     }
   }
 
-  .BrowseSection > header > .BrowseIntro {
-    grid-column: 1;
-    grid-row: 3;
-    max-width: none;
-  }
-
-  .QuickFacts {
-    grid-column: 1;
-    grid-row: 4;
-    margin-top: 30px;
-
-    > div {
-      min-height: 90px;
-    }
-  }
 }
 
 @media (max-width: 620px) {
+  .GuidedIntro {
+    --guided-intro-padding: 18px;
+  }
+
   .GuidedIntro,
   .GuidedAside {
     padding: 28px 18px;
   }
 
-  .GuidedTitle {
-    font-size: clamp(52px, 18vw, 84px);
-  }
-
-  .SuggestedSearches span {
-    flex-basis: 100%;
-  }
-
-  .BrowseSection > header {
-    display: block;
-    padding: 28px 18px;
-
-    .BrowseIntro {
-      margin-top: 16px;
-    }
-  }
-
   .QuickFacts {
     grid-template-columns: 1fr;
-    border-top: 1px solid $black;
-    border-left: 0;
 
     > div {
       min-height: 0;
       padding: 16px 0;
-      border-right: 0;
-      border-bottom: 1px solid $black;
+
+      & + div {
+        border-inline-start: 0;
+        border-top: 1px solid rgba($black, 0.25);
+      }
     }
   }
 
